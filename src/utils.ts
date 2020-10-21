@@ -17,7 +17,7 @@ export const getLayerUrl = (layer: any, serviceId: string, objective: string, cl
   const varsObj = { serviceId, region, modelTime }
   let newrl = layer.urlTemplate
 
-  Object.entries(varsObj).forEach((key, value) => {
+  Object.entries(varsObj).forEach(([key, value]) => {
     newrl = newrl.replace(`{${key}}`, value)
   })
 

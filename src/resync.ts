@@ -1,4 +1,4 @@
-import uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import { get, post, put, ioDelete } from './io'
 
 class Request {
@@ -11,7 +11,7 @@ class Request {
       if (promiseUUID === this.promiseUUID) {
         return response
       }
-
+      debugger
       return Promise.reject()
     })
   }
@@ -48,7 +48,7 @@ export default (
       const previousState = currentState
 
       currentState = nextState
-      io.promiseUUID = uuid.v4()
+      io.promiseUUID = uuidv4()
 
       fetchData(currentState, io, store.dispatch, previousState)
     }

@@ -38,6 +38,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'func-names': 'off',
     'no-alert': 'off',
+    'import/no-extraneous-dependencies': 'off',
 
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',

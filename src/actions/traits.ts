@@ -17,7 +17,7 @@ export const removeTrait = (index: number) => {
   }
 }
 
-export const setTraitValue = (index: number, value: number) => {
+export const setTraitValue = (index: number, value: number | null) => {
   return {
     type: SET_TRAIT_VALUE,
     index,

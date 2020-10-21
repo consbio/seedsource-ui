@@ -19,10 +19,11 @@ const connector = connect(
 )
 
 type SidebarProps = ConnectedProps<typeof connector> & {
+  aboutNode: ReactNode
   children: ReactNode
 }
 
-const Sidebar = ({ activeTab, children, onSelect }: SidebarProps) => (
+const Sidebar = ({ activeTab, aboutNode, children, onSelect }: SidebarProps) => (
   <div className="sidebar-inner">
     <div className="tabs is-boxed is-fullwidth">
       <ul>
@@ -47,13 +48,13 @@ const Sidebar = ({ activeTab, children, onSelect }: SidebarProps) => (
         </li>
       </ul>
     </div>
-    <div className={`tab-content ${activeTab !== 'about' ? 'is-hidden' : ''}`}>{children}</div>
+    <div className={`tab-content ${activeTab !== 'about' ? 'is-hidden' : ''}`}>{aboutNode}</div>
     <div
       className={`tab-content ${activeTab === 'map' ? 'is-hidden-mobile' : ''} ${
         activeTab !== 'map' && activeTab !== 'tool' ? 'is-hidden' : ''
       }`}
     >
-      <RunConfiguration />
+      {children}
     </div>
     <div className={`tab-content ${activeTab !== 'layers' ? 'is-hidden' : ''}`}>
       <Layers />

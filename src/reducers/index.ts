@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 import auth from './auth'
 import runConfiguration, { lastRun, activeStep, reportIsFetching } from './runConfiguration'
 import report from './report'
@@ -10,7 +11,7 @@ import error from './error'
 import popup from './popup'
 import layers from './layers'
 
-export default {
+export default combineReducers({
   auth,
   activeTab: tabs,
   activeStep,
@@ -25,4 +26,4 @@ export default {
   error,
   popup,
   layers,
-}
+})

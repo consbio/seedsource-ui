@@ -2,9 +2,6 @@ import React from 'react'
 import config from '../config'
 import AccountMenu from '../containers/AccountMenu'
 
-const { logo, runtime, navbarClass = '' } = config
-const { title } = runtime
-
 type NavbarState = {
   isActive: boolean
 }
@@ -16,6 +13,8 @@ class Navbar extends React.Component<{}, NavbarState> {
   }
 
   render() {
+    const { logo, runtime, navbarClass = '' } = config
+    const { title } = runtime
     const { children } = this.props
     const { isActive } = this.state
     const active = isActive ? 'is-active' : ''

@@ -107,7 +107,7 @@ ClimateStep.defaultProps = {
 
 ClimateStep.shouldRender = () => true
 
-const container = connect(
+export default connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
     const { climate } = runConfiguration
     return { climate }
@@ -125,6 +125,4 @@ const container = connect(
       }
     },
   }),
-)
-
-export default container
+)(ClimateStep)

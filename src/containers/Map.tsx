@@ -5,7 +5,7 @@
 
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import L, { LeafletMouseEvent } from 'leaflet'
+import L, { LeafletMouseEvent, Popup } from 'leaflet'
 import { topojson } from 'leaflet-omnivore'
 import { Lethargy } from 'lethargy'
 import 'leaflet-basemaps'
@@ -23,6 +23,15 @@ import { setPoint, addUserSite } from '../actions/point'
 import { LegendControl, ButtonControl } from '../leaflet-controls'
 
 import 'leaflet.vectorgrid'
+
+type PopupInfo = {
+  popup: Popup
+  location: HTMLElement
+  elevationLabel: HTMLElement
+  values: HTMLElement
+  point: { x: number; y: number }
+  button: HTMLElement
+}
 
 const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png')
 const iconUrl = require('leaflet/dist/images/marker-icon.png')
@@ -162,7 +171,7 @@ class Map extends React.Component<MapProps> {
 
   boundaryName: any
 
-  popup: any
+  popup: PopupInfo | null
 
   mapIsMoving: boolean
 
@@ -698,7 +707,7 @@ class Map extends React.Component<MapProps> {
           .openOn(this.map)
 
         L.DomEvent.on(button, 'click', () => {
-          const { point: newPoint } = this.popup
+          const { point: newPoint } = this.popup!
           const { mode: newMode } = this.props
 
           this.cancelBoundaryPreview()
@@ -714,7 +723,7 @@ class Map extends React.Component<MapProps> {
         })
 
         this.popup = {
-          newPopup,
+          popup: newPopup,
           location,
           elevationLabel,
           values,
@@ -727,7 +736,7 @@ class Map extends React.Component<MapProps> {
         this.popup.point = point
       }
 
-      const latlng = this.popup.popup.getLatLng()
+      const latlng = this.popup.popup.getLatLng()!
       if (latlng.lat !== point.y || latlng.lng !== point.x) {
         this.popup.popup.setLatLng([point.y, point.x])
       }

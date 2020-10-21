@@ -1,11 +1,9 @@
-// Placeholders
-const ElevationConstraint = null
-const PhotoperiodConstraint = null
-const LatitudeConstraint = null
-const LongitudeConstraint = null
-const DistanceConstraint = null
-const ShapefileConstraint = null
-const logo = ''
+import ElevationConstraint from "./containers/ElevationConstraint";
+import PhotoperiodConstraint from "./containers/PhotoperiodConstraint";
+import LatitudeConstraint from "./containers/LatitudeConstraint";
+import LongitudeConstraint from "./containers/LongitudeConstraint";
+import DistanceConstraint from "./containers/DistanceConstraint";
+import ShapefileConstraint from "./containers/ShapefileConstraint";
 
 interface RuntimeConfig {
   title: string
@@ -16,13 +14,22 @@ interface RuntimeConfig {
 export interface Config {
   apiRoot: string
   logo: string
-  navbarClass?: string
-  labels: [any?]
-  functions: [any?]
-  species: [any?]
+  navbarClass: string
+  labels: any[]
+  functions: any[]
+  species: any[]
   text: any
   constraints: { objects: any; categories: any }
   runtime: RuntimeConfig
+}
+
+export interface PartialConfig {
+  apiRoot: string
+  logo?: string
+  navbarClass?: string
+  species: any[]
+  constraints: { objects: any; categories: any }
+  runtime?: RuntimeConfig
 }
 
 interface Window {
@@ -33,7 +40,8 @@ declare const window: Window
 
 const config: Config = {
   apiRoot: '/sst/',
-  logo,
+  logo: '',
+  navbarClass: '',
   labels: [],
   functions: [],
   species: [],
@@ -150,7 +158,7 @@ const config: Config = {
 
 export default config
 
-export const updateConfig = (newConfig: Config) => {
+export const updateConfig = (newConfig: PartialConfig) => {
   Object.assign(config, newConfig)
 }
 
@@ -508,7 +516,7 @@ export const constraints = {
   },
 }
 
-export const timeLabels: {[name: string]: string} = {
+export const timeLabels: { [name: string]: string } = {
   '1961_1990': '1961 - 1990',
   '1981_2010': '1981 - 2010',
   '2025rcp45': '2025 RCP 4.5',

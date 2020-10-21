@@ -63,9 +63,12 @@ export default (state: [any?] = [], action: any) => {
 
     case TOGGLE_LAYER:
       index = state.findIndex((layer: any) => layer.name === action.name)
-      return state
-        .slice(0, index)
-        .concat([{ ...state[index], displayed: !state[index].displayed, ...state.slice(index + 1) }])
+      if (index >= 0) {
+        return state
+          .slice(0, index)
+          .concat([{ ...state[index], displayed: !state[index].displayed }, ...state.slice(index + 1)])
+      }
+      break
 
     case START_JOB:
       index = state.findIndex(layer => layer.name === 'results')

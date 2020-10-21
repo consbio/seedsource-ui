@@ -28,7 +28,7 @@ export const setPoint = (lat: number, lon: number) => {
   }
 }
 
-export const setElevation = (elevation: number) => {
+export const setElevation = (elevation: number | null) => {
   return {
     type: SET_ELEVATION,
     elevation,

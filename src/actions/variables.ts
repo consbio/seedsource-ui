@@ -90,7 +90,12 @@ export const requestValue = (variable: string) => {
   }
 }
 
-export const receiveTransfer = (variable: string, transfer: number, avgTransfer: number, center: number) => {
+export const receiveTransfer = (
+  variable: string,
+  transfer: number | null,
+  avgTransfer: number | null,
+  center: number | null,
+) => {
   return {
     type: RECEIVE_TRANSFER,
     transfer,

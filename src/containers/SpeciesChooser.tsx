@@ -3,10 +3,9 @@ import { connect, ConnectedProps } from 'react-redux'
 import { selectSpecies } from '../actions/species'
 import config from '../config'
 
-const { species: speciesList, functions } = config
-
 const connector = connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
+    const { species: speciesList, functions } = config
     let { availableSpecies } = runConfiguration
     const { species, method } = runConfiguration
 
@@ -36,6 +35,7 @@ type SpeciesChooserProps = ConnectedProps<typeof connector> & {
 }
 
 const SpeciesChooser = ({ species, generic, onSpeciesChange, availableSpecies }: SpeciesChooserProps) => {
+  const { species: speciesList } = config
   const availableSpeciesList = speciesList.filter(item => availableSpecies.includes(item.name))
 
   return (

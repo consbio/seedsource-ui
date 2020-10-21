@@ -11,7 +11,6 @@ class Request {
       if (promiseUUID === this.promiseUUID) {
         return response
       }
-      debugger
       return Promise.reject()
     })
   }

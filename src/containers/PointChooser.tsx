@@ -52,7 +52,7 @@ class PointChooser extends React.Component<PointChooserProps, PointChooserState>
         </label>
 
         <label className={flag ? 'column is-narrow' : ''}>
-          {flag ? <div>Lon</div> : <strong>Lon: </strong>}
+          {flag ? <div>Lon</div> : <strong> Lon: </strong>}
           <input
             type="text"
             data-lpignore="true"

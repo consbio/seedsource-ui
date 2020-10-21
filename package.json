@@ -1,15 +1,13 @@
 {
   "name": "seedsource-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React component library for seedsource-based applications (e.g., Seedlot Selection Tool)",
   "module": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json && copyfiles -u 1 src/**/*.jison lib/"
   },
-  "directories": {
-    "lib": "lib"
-  },
+  "files": ["./lib"],
   "author": "Conservation Biology Institute",
   "license": "MIT",
   "devDependencies": {

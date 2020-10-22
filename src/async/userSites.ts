@@ -30,23 +30,27 @@ export default (store: any) => {
       sitesToUpdate = userSites.slice(0, Math.max(0, userSites.length - prevUserSites.length))
     }
 
-    sitesToUpdate.forEach(({ lat, lon }) => {
-      const point = { x: lon, y: lat }
-      const url = `/arcgis/rest/services/${serviceId}/MapServer/identify/?${urlEncode({
-        f: 'json',
-        tolerance: 2,
-        imageDisplay: '1600,1031,96',
-        geometryType: 'esriGeometryPoint',
-        mapExtent: '0,0,0,0',
-        geometry: JSON.stringify(point),
-      })}`
+    Promise.all(
+      sitesToUpdate.map(({ lat, lon }) => {
+        const point = { x: lon, y: lat }
+        const url = `/arcgis/rest/services/${serviceId}/MapServer/identify/?${urlEncode({
+          f: 'json',
+          tolerance: 2,
+          imageDisplay: '1600,1031,96',
+          geometryType: 'esriGeometryPoint',
+          mapExtent: '0,0,0,0',
+          geometry: JSON.stringify(point),
+        })}`
 
-      io.get(url).then(response =>
-        response.json().then(json => {
-          const score = json.results[0].attributes['Pixel value']
-          dispatch(setUserSiteScore({ lat, lon }, score || 0))
-        }),
-      )
+        return io.get(url).then(response =>
+          response.json().then(json => {
+            const score = json.results[0].attributes['Pixel value']
+            return { lat, lon, score }
+          }),
+        )
+      }),
+    ).then(values => {
+      values.forEach(({ lat, lon, score }) => dispatch(setUserSiteScore({ lat, lon }, score || 0)))
     })
   })
 }

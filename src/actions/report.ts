@@ -3,8 +3,6 @@ import { setError } from './error'
 import { dumpConfiguration } from './saves'
 import config, { reports } from '../config'
 
-const { species = [] } = config
-
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 export const REQUEST_REPORT = 'REQUEST_REPORT'
@@ -31,6 +29,8 @@ export const failReport = () => {
 }
 
 export const createReport = (name: string) => {
+  const { species = [] } = config
+
   return (dispatch: (event: any) => any, getState: () => any) => {
     const { lastRun, job, map } = getState()
     const { basemap, zoom, center, opacity } = map

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { removeUserSite, setActiveUserSite } from '../actions/point'
+import { UserSite as UserSiteType } from '../reducers/runConfiguration'
 
 type UserSitesProps = {
   userSites: any[]
@@ -22,8 +23,13 @@ const UserSite = ({ userSites, removeSite, setActiveSite }: UserSitesProps) => {
       }}
       onBlur={() => setActiveSite(null)}
     >
+      <thead>
+        <td />
+        <th>Location</th>
+        <th>Similarity</th>
+      </thead>
       <tbody>
-        {userSites.map(({ lat, lon }, index) => (
+        {userSites.map(({ lat, lon, score }, index) => (
           <tr
             key={`${lat}-${lon}`}
             onMouseOver={() => {
@@ -39,6 +45,7 @@ const UserSite = ({ userSites, removeSite, setActiveSite }: UserSitesProps) => {
                 {lat}, {lon}
               </strong>
             </td>
+            <td>{score === undefined ? 'N/A' : `${score}%`}</td>
           </tr>
         ))}
       </tbody>
@@ -50,9 +57,10 @@ export default connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
     const { userSites } = runConfiguration
     return {
-      userSites: userSites.map(({ lat, lon }: { lat: number; lon: number }) => ({
+      userSites: userSites.map(({ lat, lon, score }: UserSiteType) => ({
         lat: lat.toFixed(2),
         lon: lon.toFixed(2),
+        score,
       })),
     }
   },

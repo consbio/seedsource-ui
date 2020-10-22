@@ -3,8 +3,6 @@ import { REMOVE_VARIABLE, SET_VARIABLES_REGION } from '../actions/variables'
 import { FINISH_JOB, START_JOB } from '../actions/job'
 import { TOGGLE_LAYER, LOAD_TILES } from '../actions/layers'
 
-const { labels } = config
-
 const defaultLayer = {
   name: null,
   label: null,
@@ -16,6 +14,7 @@ const defaultLayer = {
 }
 
 export default (state: [any?] = [], action: any) => {
+  const { labels } = config
   let index = null
 
   if (action.type === LOAD_TILES) {
@@ -98,4 +97,6 @@ export default (state: [any?] = [], action: any) => {
     default:
       return state
   }
+
+  return state
 }

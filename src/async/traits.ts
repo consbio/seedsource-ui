@@ -6,8 +6,6 @@ import { setTraitValue } from '../actions/traits'
 import parser, { getNames } from '../parser'
 import { urlEncode } from '../io'
 
-const { functions } = config
-
 const valueSelect = ({ runConfiguration }: any) => {
   const { objective, climate, traits, region, species } = runConfiguration
   let { point } = runConfiguration
@@ -27,6 +25,8 @@ const valueSelect = ({ runConfiguration }: any) => {
 }
 
 export default (store: any) => {
+  const { functions } = config
+
   resync(store, valueSelect, (state, io, dispatch, previousState) => {
     const { objective, point, climate, region } = state
     let { traits } = store.getState().runConfiguration

@@ -2,8 +2,6 @@ import React from 'react'
 import ConstraintChooserItem from './ConstraintChooserItem'
 import config from '../config'
 
-const { constraints } = config
-
 type ConstraintChooserProps = {
   onAdd: (selection: any) => any
 }
@@ -19,6 +17,7 @@ class ConstraintChooser extends React.Component<ConstraintChooserProps, Constrai
   }
 
   render() {
+    const { constraints } = config
     const { selections } = this.state
     const { onAdd } = this.props
 

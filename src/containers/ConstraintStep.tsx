@@ -5,8 +5,6 @@ import ConfigurationStep from './ConfigurationStep'
 import config from '../config'
 import { addConstraint } from '../actions/constraints'
 
-const { constraints: constraintsConfig } = config
-
 type ConstraintStepProps = {
   number: number
   constraints: any[]
@@ -14,6 +12,7 @@ type ConstraintStepProps = {
 }
 
 const ConstraintStep = ({ number, constraints, onChange }: ConstraintStepProps) => {
+  const { constraints: constraintsConfig } = config
   let table = null
 
   if (constraints.length) {

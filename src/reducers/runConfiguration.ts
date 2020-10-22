@@ -13,6 +13,7 @@ import {
   SET_ELEVATION,
   ADD_USER_SITE,
   REMOVE_USER_SITE,
+  SET_USER_SITE_SCORE,
   SET_ACTIVE_USER_SITE,
 } from '../actions/point'
 import { SELECT_SPECIES, RECEIVE_AVAILABLE_SPECIES } from '../actions/species'
@@ -22,6 +23,12 @@ import { FINISH_JOB } from '../actions/job'
 import { SELECT_STEP } from '../actions/step'
 import { REQUEST_REPORT, RECEIVE_REPORT, FAIL_REPORT } from '../actions/report'
 import { SELECT_REGION_METHOD, SET_REGION, RECEIVE_REGIONS } from '../actions/region'
+
+export type UserSite = {
+  lat: number
+  lon: number
+  score?: number
+}
 
 const defaultConfiguration = {
   objective: 'seedlots',
@@ -39,7 +46,7 @@ const defaultConfiguration = {
   variables: [],
   traits: [],
   constraints: [],
-  userSites: [],
+  userSites: [] as UserSite[],
   activeUserSite: null,
 }
 
@@ -108,13 +115,26 @@ export default (state: any = defaultConfiguration, action: any) => {
         return { ...state, validRegions: action.regions }
 
       case ADD_USER_SITE:
-        return { ...state, userSites: [action.latlon, ...state.userSites] }
+        return { ...state, userSites: [action.latlon as UserSite, ...state.userSites] }
 
       case REMOVE_USER_SITE:
         return {
           ...state,
           userSites: [...state.userSites.slice(0, action.index), ...state.userSites.slice(action.index + 1)],
           activeUserSite: null,
+        }
+
+      case SET_USER_SITE_SCORE:
+        return {
+          ...state,
+          userSites: state.userSites.map((site: UserSite) => {
+            const { lat, lon } = action.latlon
+            if (site.lat === lat && site.lon === lon) {
+              const { score } = action
+              return { ...site, score }
+            }
+            return { ...site }
+          }),
         }
 
       case SET_ACTIVE_USER_SITE:

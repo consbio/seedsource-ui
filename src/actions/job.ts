@@ -3,8 +3,6 @@ import { executeGPTask } from '../io'
 import { setError } from './error'
 import { selectTab } from './tabs'
 
-const { functions, constraints: constraintsConfig } = config
-
 export const START_JOB = 'START_JOB'
 export const FAIL_JOB = 'FAIL_JOB'
 export const RECEIVE_JOB_STATUS = 'RECEIVE_JOB_STATUS'
@@ -39,6 +37,8 @@ export const finishJob = (configuration: any) => {
 }
 
 export const runJob = (configuration: any) => {
+  const { functions, constraints: constraintsConfig } = config
+
   return (dispatch: (action: any) => any) => {
     const { variables, traits, objective, climate, region, constraints } = configuration
 

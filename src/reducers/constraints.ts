@@ -1,9 +1,9 @@
 import config from '../config'
 import { ADD_CONSTRAINT, REMOVE_CONSTRAINT, UPDATE_CONSTRAINT_VALUES } from '../actions/constraints'
 
-const { constraints } = config
-
 export default (state = [], action: any) => {
+  const { constraints } = config
+
   switch (action.type) {
     case ADD_CONSTRAINT:
       return [

@@ -92,6 +92,31 @@ $icons: eye eye-closed crop contrast save load file trash clock chevron-top chev
   padding: .5em .5em;
 }
 
+.hr-label {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 10px;
+  align-items: center;
+  font-weight: bold;
+
+  &::before, &::after {
+    content: '';
+    display: block;
+    flex-grow: 1;
+    background-color: $grey;
+    height: 1px;
+  }
+
+  &::before {
+    margin-right: 10px;
+  }
+
+  &::after {
+    margin-left: 10px;
+  }
+}
+
 .navbar {
   position: fixed;
   width: 100%;

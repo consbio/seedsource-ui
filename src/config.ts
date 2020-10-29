@@ -1,14 +1,19 @@
-import ElevationConstraint from "./containers/ElevationConstraint";
-import PhotoperiodConstraint from "./containers/PhotoperiodConstraint";
-import LatitudeConstraint from "./containers/LatitudeConstraint";
-import LongitudeConstraint from "./containers/LongitudeConstraint";
-import DistanceConstraint from "./containers/DistanceConstraint";
-import ShapefileConstraint from "./containers/ShapefileConstraint";
+import ElevationConstraint from './containers/ElevationConstraint'
+import PhotoperiodConstraint from './containers/PhotoperiodConstraint'
+import LatitudeConstraint from './containers/LatitudeConstraint'
+import LongitudeConstraint from './containers/LongitudeConstraint'
+import DistanceConstraint from './containers/DistanceConstraint'
+import ShapefileConstraint from './containers/ShapefileConstraint'
 
 interface RuntimeConfig {
   title: string
   staticRoot: string
   mbtileserverRoot: string
+}
+
+export interface DefaultVariable {
+  variable: string
+  getValue: (dispatch: (action: any) => any, point: { x: number; y: number }, region: string) => any
 }
 
 export interface Config {
@@ -18,6 +23,7 @@ export interface Config {
   labels: any[]
   functions: any[]
   species: any[]
+  defaultVariables: DefaultVariable[]
   text: any
   constraints: { objects: any; categories: any }
   runtime: RuntimeConfig
@@ -28,6 +34,7 @@ export interface PartialConfig {
   logo?: string
   navbarClass?: string
   species: any[]
+  defaultVariables?: DefaultVariable[]
   constraints: { objects: any; categories: any }
   runtime?: RuntimeConfig
 }
@@ -45,6 +52,7 @@ const config: Config = {
   labels: [],
   functions: [],
   species: [],
+  defaultVariables: [],
   text: {},
   constraints: {
     objects: {

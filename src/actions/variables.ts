@@ -3,6 +3,7 @@ export const SELECT_METHOD = 'SELECT_METHOD'
 export const SELECT_CENTER = 'SELECT_CENTER'
 export const SELECT_SEEDZONE = 'SELECT_SEEDZONE'
 export const ADD_VARIABLE = 'ADD_VARIABLE'
+export const ADD_VARIABLES = 'ADD_VARIABLES'
 export const REMOVE_VARIABLE = 'REMOVE_VARIABLE'
 export const MODIFY_VARIABLE = 'MODIFY_VARIABLE'
 export const RESET_TRANSFER = 'RESET_TRANSFER'
@@ -46,6 +47,11 @@ export const addVariable = (variable: string) => {
     variable,
   }
 }
+
+export const addVariables = (variables: string[]) => ({
+  type: ADD_VARIABLES,
+  variables,
+})
 
 export const removeVariable = (variable: string, index: number) => {
   return {

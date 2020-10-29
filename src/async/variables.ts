@@ -3,11 +3,11 @@ import { requestTransfer, receiveTransfer, requestValue, receiveValue, setVariab
 import { requestPopupValue, receivePopupValue } from '../actions/popup'
 import { urlEncode } from '../io'
 import { getServiceName } from '../utils'
-import config from '../config'
+import config, { DefaultVariable } from '../config'
 
 const transferSelect = ({ runConfiguration }: any) => {
   let { point } = runConfiguration
-  const { method, zones, climate, variables } = runConfiguration
+  const { method, zones, climate, variables, region } = runConfiguration
 
   if (point) {
     point = { x: point.x, y: point.y }
@@ -19,6 +19,7 @@ const transferSelect = ({ runConfiguration }: any) => {
     zone: zones.selected,
     year: climate.seedlot.time,
     variables: variables.map((item: any) => item.name),
+    region,
   }
 }
 
@@ -92,7 +93,7 @@ export const fetchValues = (
   const variablesOnly =
     JSON.stringify({ ...state, variables: null }) === JSON.stringify({ ...previousState, variables: null })
   if (variablesOnly) {
-    variables = variables.filter((item: any) => item.defaultTransfer === null)
+    variables = variables.filter((item: any) => item.value === null)
   }
 
   const requests = variables.map((item: any) => {
@@ -115,12 +116,24 @@ export const fetchValues = (
 export default (store: any) => {
   // Transfer limit information
   resync(store, transferSelect, (state, io, dispatch, previousState) => {
-    const { method, point, zone, year } = state
+    const flag = (window as any).waffle.flag_is_active('default-vars')
+
+    const { method, point, zone, year, region } = state
     const pointIsValid = point !== null && point.x && point.y
     const { runConfiguration } = store.getState()
     let { variables } = runConfiguration
 
     if (!(pointIsValid && method === 'seedzone')) {
+      if (pointIsValid && region) {
+        const { defaultVariables } = config
+
+        if (flag) {
+          variables
+            .map(({ name }: { name: string }) => defaultVariables.find(({ variable }) => variable === name))
+            .filter((item?: DefaultVariable) => !!item)
+            .forEach(({ getValue }: DefaultVariable) => getValue(dispatch, point, region))
+        }
+      }
       return
     }
 

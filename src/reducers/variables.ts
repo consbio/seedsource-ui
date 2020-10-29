@@ -1,6 +1,7 @@
 import { variables as allVariables } from '../config'
 import {
   ADD_VARIABLE,
+  ADD_VARIABLES,
   REMOVE_VARIABLE,
   MODIFY_VARIABLE,
   RESET_TRANSFER,
@@ -49,6 +50,22 @@ export default (state: any = [], action: any) => {
           isFetching: false,
           isFetchingTransfer: false,
         },
+      ]
+
+    case ADD_VARIABLES:
+      return [
+        ...state,
+        ...action.variables.map((name: string) => ({
+          name,
+          value: null,
+          transfer: null,
+          defaultTransfer: null,
+          avgTransfer: null,
+          zoneCenter: null,
+          transferIsModified: false,
+          isFetching: false,
+          isFetchingTransfer: false,
+        })),
       ]
 
     case REMOVE_VARIABLE:

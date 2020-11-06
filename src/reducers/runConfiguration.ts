@@ -17,7 +17,7 @@ import {
   SET_ACTIVE_USER_SITE,
 } from '../actions/point'
 import { SELECT_SPECIES, RECEIVE_AVAILABLE_SPECIES } from '../actions/species'
-import { SELECT_UNIT, SELECT_METHOD, SELECT_CENTER } from '../actions/variables'
+import { SELECT_UNIT, SELECT_METHOD, SELECT_CENTER, REMOVE_VARIABLE, SET_DEFAULT_VARIABLES } from '../actions/variables'
 import { LOAD_CONFIGURATION, RESET_CONFIGURATION } from '../actions/saves'
 import { FINISH_JOB } from '../actions/job'
 import { SELECT_STEP } from '../actions/step'
@@ -43,6 +43,7 @@ const defaultConfiguration = {
   unit: 'metric',
   zones: null,
   regionMethod: 'auto',
+  useDefaultVariables: false,
   variables: [],
   traits: [],
   constraints: [],
@@ -142,6 +143,12 @@ export default (state: any = defaultConfiguration, action: any) => {
           ...state,
           activeUserSite: action.index,
         }
+
+      case SET_DEFAULT_VARIABLES:
+        return { ...state, useDefaultVariables: action.useDefault }
+
+      case REMOVE_VARIABLE:
+        return { ...state, useDefaultVariables: false }
 
       case RESET_CONFIGURATION:
         return defaultConfiguration

@@ -2,7 +2,6 @@ export const SELECT_UNIT = 'SELECT_UNIT'
 export const SELECT_METHOD = 'SELECT_METHOD'
 export const SELECT_CENTER = 'SELECT_CENTER'
 export const SELECT_SEEDZONE = 'SELECT_SEEDZONE'
-export const ADD_VARIABLE = 'ADD_VARIABLE'
 export const ADD_VARIABLES = 'ADD_VARIABLES'
 export const REMOVE_VARIABLE = 'REMOVE_VARIABLE'
 export const MODIFY_VARIABLE = 'MODIFY_VARIABLE'
@@ -12,6 +11,7 @@ export const REQUEST_VALUE = 'REQUEST_VALUE'
 export const RECEIVE_TRANSFER = 'RECEIVE_TRANSFER'
 export const REQUEST_TRANSFER = 'REQUEST_TRANSFER'
 export const SET_VARIABLES_REGION = 'SET_VARIABLES_REGION'
+export const SET_DEFAULT_VARIABLES = 'SET_DEFAULT_VARIABLES'
 
 export const selectUnit = (unit: string) => {
   return {
@@ -43,8 +43,8 @@ export const selectSeedzone = (seedzone: number) => {
 
 export const addVariable = (variable: string) => {
   return {
-    type: ADD_VARIABLE,
-    variable,
+    type: ADD_VARIABLES,
+    variables: [variable],
   }
 }
 
@@ -122,5 +122,12 @@ export const setVariablesRegion = (region: string) => {
   return {
     type: SET_VARIABLES_REGION,
     region,
+  }
+}
+
+export const setDefaultVariables = (useDefault: boolean) => {
+  return {
+    type: SET_DEFAULT_VARIABLES,
+    useDefault,
   }
 }

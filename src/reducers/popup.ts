@@ -7,7 +7,7 @@ import {
   REQUEST_POPUP_REGION,
   RECEIVE_POPUP_REGION,
 } from '../actions/popup'
-import { REMOVE_VARIABLE, ADD_VARIABLE } from '../actions/variables'
+import { REMOVE_VARIABLE, ADD_VARIABLES } from '../actions/variables'
 import { LOAD_CONFIGURATION } from '../actions/saves'
 
 const defaultState = {
@@ -59,8 +59,11 @@ export default (state: any = defaultState, action: any) => {
     case REMOVE_VARIABLE:
       return { ...state, values: state.values.slice(0, action.index).concat(state.values.slice(action.index + 1)) }
 
-    case ADD_VARIABLE:
-      return { ...state, values: [...state.values, { name: action.variable, value: null }] }
+    case ADD_VARIABLES:
+      return {
+        ...state,
+        values: [...state.values, ...action.variables.map((variable: string) => ({ name: variable, value: null }))],
+      }
 
     case RECEIVE_POPUP_ELEVATION:
       return { ...state, elevation: action.elevation }

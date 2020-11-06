@@ -4,7 +4,7 @@ import ConfigurationStep from './ConfigurationStep'
 import UnitButton from './UnitButton'
 import Variables from './Variables'
 import config from '../config'
-import { addVariables } from '../actions/variables'
+import { addVariables, setDefaultVariables } from '../actions/variables'
 
 const connector = connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
@@ -17,6 +17,7 @@ const connector = connect(
       const { defaultVariables } = config
 
       dispatch(addVariables(defaultVariables.map(({ variable }) => variable)))
+      dispatch(setDefaultVariables(true))
     },
   }),
 )

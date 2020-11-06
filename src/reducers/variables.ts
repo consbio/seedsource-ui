@@ -1,6 +1,5 @@
 import { variables as allVariables } from '../config'
 import {
-  ADD_VARIABLE,
   ADD_VARIABLES,
   REMOVE_VARIABLE,
   MODIFY_VARIABLE,
@@ -34,24 +33,6 @@ export default (state: any = [], action: any) => {
   }
 
   switch (action.type) {
-    case ADD_VARIABLE:
-      variable = allVariables.find(item => item.name === action.variable)
-
-      return [
-        ...state,
-        {
-          name: variable.name,
-          value: null,
-          transfer: null,
-          defaultTransfer: null,
-          avgTransfer: null,
-          zoneCenter: null,
-          transferIsModified: false,
-          isFetching: false,
-          isFetchingTransfer: false,
-        },
-      ]
-
     case ADD_VARIABLES:
       return [
         ...state,

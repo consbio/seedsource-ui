@@ -7,7 +7,7 @@ import config, { DefaultVariable } from '../config'
 
 const transferSelect = ({ runConfiguration }: any) => {
   let { point } = runConfiguration
-  const { method, zones, climate, variables, region } = runConfiguration
+  const { method, zones, climate, useDefaultVariables, variables, region } = runConfiguration
 
   if (point) {
     point = { x: point.x, y: point.y }
@@ -18,6 +18,7 @@ const transferSelect = ({ runConfiguration }: any) => {
     point,
     zone: zones.selected,
     year: climate.seedlot.time,
+    useDefaultVariables,
     variables: variables.map((item: any) => item.name),
     region,
   }
@@ -118,13 +119,13 @@ export default (store: any) => {
   resync(store, transferSelect, (state, io, dispatch, previousState) => {
     const flag = (window as any).waffle.flag_is_active('default-vars')
 
-    const { method, point, zone, year, region } = state
+    const { method, point, zone, year, region, useDefaultVariables } = state
     const pointIsValid = point !== null && point.x && point.y
     const { runConfiguration } = store.getState()
     let { variables } = runConfiguration
 
     if (!(pointIsValid && method === 'seedzone')) {
-      if (pointIsValid && region) {
+      if (pointIsValid && region && useDefaultVariables) {
         const { defaultVariables } = config
 
         if (flag) {

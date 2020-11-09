@@ -57,7 +57,7 @@ const LocationStep = ({ objective, number, elevation, mode, setMapMode, addUserS
           <div className="columns">
             <div className="column is-narrow" style={{ width: '185px' }}>
               <h4 className="title is-6" style={{ marginBottom: '0' }}>
-                Map {objective === 'seedlots' ? 'Planting Sites' : 'Seedlots'}
+                Map {objective === 'seedlots' ? 'Seedlots' : 'Planting Sites'}
               </h4>
               <div className="is-size-7 is-italic">
                 Optional. Plot {objective === 'seedlots' ? 'planting sites' : 'seedlots'} on the map for comparison.

@@ -32,6 +32,16 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'error',
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-expressions': 'error',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'no-underscore-dangle': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/static-property-placement': 'off',

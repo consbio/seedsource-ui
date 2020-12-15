@@ -5,6 +5,7 @@ export const RECEIVE_POPUP_VALUE = 'RECEIVE_POPUP_VALUE'
 export const RECEIVE_POPUP_ELEVATION = 'RECEIVE_POPUP_ELEVATION'
 export const REQUEST_POPUP_REGION = 'REQUEST_POPUP_REGION'
 export const RECEIVE_POPUP_REGION = 'RECEIVE_POPUP_REGION'
+export const RECEIVE_POPUP_ZONES = 'RECEIVE_POPUP_ZONES'
 
 export const setPopupLocation = (lat: number, lon: number) => {
   return {
@@ -57,5 +58,12 @@ export const receivePopupRegion = (region: string) => {
   return {
     type: RECEIVE_POPUP_REGION,
     region,
+  }
+}
+
+export const receivePopupZones = (zones: any[]) => {
+  return {
+    type: RECEIVE_POPUP_ZONES,
+    zones,
   }
 }

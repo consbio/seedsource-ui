@@ -6,6 +6,7 @@ import {
   RECEIVE_POPUP_ELEVATION,
   REQUEST_POPUP_REGION,
   RECEIVE_POPUP_REGION,
+  RECEIVE_POPUP_ZONES,
 } from '../actions/popup'
 import { REMOVE_VARIABLE, ADD_VARIABLES } from '../actions/variables'
 import { LOAD_CONFIGURATION } from '../actions/saves'
@@ -15,6 +16,7 @@ const defaultState = {
   isFetchingElevation: false,
   elevation: null,
   values: [],
+  zones: [],
   region: null,
 }
 
@@ -73,6 +75,9 @@ export default (state: any = defaultState, action: any) => {
 
     case RECEIVE_POPUP_REGION:
       return { ...state, region: action.region }
+
+    case RECEIVE_POPUP_ZONES:
+      return { ...state, zones: action.zones }
 
     case LOAD_CONFIGURATION:
       return defaultState

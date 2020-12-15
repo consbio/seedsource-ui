@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { connect, ConnectedProps } from 'react-redux'
 import L, { LeafletMouseEvent, Popup } from 'leaflet'
 import { topojson } from 'leaflet-omnivore'
@@ -26,11 +27,8 @@ import 'leaflet.vectorgrid'
 
 type PopupInfo = {
   popup: Popup
-  location: HTMLElement
-  elevationLabel: HTMLElement
-  values: HTMLElement
   point: { x: number; y: number }
-  button: HTMLElement
+  content: HTMLElement
 }
 
 const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png')
@@ -679,111 +677,117 @@ class Map extends React.Component<MapProps> {
 
   updatePopup(popup: any, unit: any) {
     const { mode } = this.props
-    const { point, elevation: popupElevation } = popup
+    const { point, elevation, values, zones } = popup
 
     if (point !== null) {
       if (this.popup === null) {
-        const container = L.DomUtil.create('div', 'map-info-popup')
-
-        const location = L.DomUtil.create('div', '', container)
-
-        const elevation = L.DomUtil.create('div', '', container)
-        const elevationTitle = L.DomUtil.create('span', '', elevation)
-        elevationTitle.innerHTML = 'Elevation: '
-        const elevationLabel = L.DomUtil.create('strong', '', elevation)
-
-        const values = L.DomUtil.create('div', '', container)
-
-        L.DomUtil.create('div', '', container).innerHTML = '&nbsp;'
-
-        const button = L.DomUtil.create('button', 'button is-primary is-fullwidth', container)
-        button.innerHTML = mode === 'add_sites' ? 'Add Location' : 'Set Point'
-
-        const newPopup = L.popup({
-          closeOnClick: false,
-        })
-          .setLatLng([point.y, point.x])
-          .setContent(container)
-          .openOn(this.map)
-
-        L.DomEvent.on(button, 'click', () => {
-          const { point: newPoint } = this.popup!
-          const { mode: newMode } = this.props
-
-          this.cancelBoundaryPreview()
-          this.map.closePopup(newPopup)
-
-          if (newMode === 'add_sites') {
-            const { onAddSite } = this.props
-            onAddSite(newPoint.y, newPoint.x)
-          } else {
-            const { onMapClick } = this.props
-            onMapClick(newPoint.y, newPoint.x)
-          }
-        })
-
         this.popup = {
-          popup: newPopup,
-          location,
-          elevationLabel,
-          values,
+          popup: L.popup({ closeOnClick: false }).setLatLng([point.y, point.x]).addTo(this.map),
           point,
-          button,
+          content: document.createElement('div'),
         }
       }
 
-      if (JSON.stringify(point) !== JSON.stringify(this.popup.point)) {
-        this.popup.point = point
-      }
+      setTimeout(() => {
+        if (this.popup) {
+          ReactDOM.render(
+            <>
+              <div className="map-info-popup">
+                <div className="columns is-mobile">
+                  <div className="column">
+                    <div>Location</div>
+                    <div className="has-text-weight-bold">
+                      {point.y.toFixed(2)}, {point.x.toFixed(2)}
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div>Elevation</div>
+                    <div className="has-text-weight-bold">
+                      {`${Math.round(elevation / 0.3048)} ft (${Math.round(elevation)} m)`}
+                    </div>
+                  </div>
+                </div>
 
-      const latlng = this.popup.popup.getLatLng()!
-      if (latlng.lat !== point.y || latlng.lng !== point.x) {
-        this.popup.popup.setLatLng([point.y, point.x])
-      }
+                {!!values.length && (
+                  <>
+                    <h6 className="title is-6">Climate</h6>
+                    <table>
+                      <tbody>
+                        {values.map((item: any) => {
+                          const variableConfig = allVariables.find(variable => variable.name === item.name)
+                          const { multiplier, units }: { multiplier: number; units: any } = variableConfig!
+                          let value: string | number = 'N/A'
+                          let unitLabel = units.metric.label
 
-      const locationLabel = `Lat: <strong>${point.y.toFixed(2)}</strong> Lon: <strong>${point.x.toFixed(2)}</strong>`
-      if (locationLabel !== this.popup.location.innerHTML) {
-        this.popup.location.innerHTML = locationLabel
-      }
+                          if (item.value !== null) {
+                            value = item.value / multiplier
 
-      let elevationLabel = 'N/A'
-      if (popupElevation !== null) {
-        elevationLabel = `${Math.round(popupElevation / 0.3048)} ft (${Math.round(popupElevation)} m)`
-      }
-      if (elevationLabel !== this.popup.elevationLabel.innerHTML) {
-        this.popup.elevationLabel.innerHTML = elevationLabel
-      }
+                            let { precision } = units.metric
+                            if (unit === 'imperial') {
+                              precision = units.imperial.precision
+                              unitLabel = units.imperial.label
+                              value = units.imperial.convert(value)
+                            }
 
-      this.popup.button.innerHTML = mode === 'add_sites' ? 'Add Location' : 'Set Point'
+                            value = (value as number).toFixed(precision)
+                          }
 
-      const valueRows = popup.values.map((item: any) => {
-        const variableConfig = allVariables.find(variable => variable.name === item.name)
-        const { multiplier, units }: { multiplier: number; units: any } = variableConfig!
-        let value: string | number = 'N/A'
-        let unitLabel = units.metric.label
+                          return (
+                            <tr key={item.name}>
+                              <td>{item.name}</td>
+                              <td className="has-text-weight-bold">
+                                {value} {unitLabel}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </>
+                )}
 
-        if (item.value !== null) {
-          value = item.value / multiplier
+                {!!zones.length && (
+                  <>
+                    <h6 className="title is-6">Available Zones</h6>
+                    <ul>
+                      {zones.map(({ name }: { name: string }) => (
+                        <li>{name}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
 
-          let { precision } = units.metric
+                <button
+                  type="button"
+                  className="button is-primary is-fullwidth"
+                  onClick={() => {
+                    const { point: newPoint } = this.popup!
+                    const { mode: newMode } = this.props
 
-          if (unit === 'imperial') {
-            precision = units.imperial.precision
-            unitLabel = units.imperial.label
-            value = units.imperial.convert(value)
-          }
+                    this.cancelBoundaryPreview()
+                    this.map.closePopup(this.popup!.popup)
 
-          value = (value as number).toFixed(precision)
+                    if (newMode === 'add_sites') {
+                      const { onAddSite } = this.props
+                      onAddSite(newPoint.y, newPoint.x)
+                    } else {
+                      const { onMapClick } = this.props
+                      onMapClick(newPoint.y, newPoint.x)
+                    }
+                  }}
+                >
+                  {mode === 'add_sites' ? 'Add Location' : 'Set Point'}
+                </button>
+              </div>
+            </>,
+            this.popup!.content,
+          )
+
+          this.popup!.popup.setContent(this.popup!.content)
         }
+      }, 1)
 
-        return `<div><span>${item.name}: </span><strong>${value} ${unitLabel}</strong></div>`
-      })
-
-      const values = valueRows.join('')
-
-      if (values !== this.popup.values.innerHTML) {
-        this.popup.values.innerHTML = values
-      }
+      this.popup.popup.setLatLng([point.y, point.x])
     } else if (this.popup) {
       this.cancelBoundaryPreview()
       this.map.closePopup(this.popup.popup)

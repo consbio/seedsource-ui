@@ -67,7 +67,7 @@ class Layers extends React.Component<LayersProps> {
         .map(layer => {
           return (
             <li className="layer-list" key={layer.name}>
-              <input className="is-checkradio" type="checkbox" value={layer.name} checked={layer.displayed} />
+              <input className="is-checkradio" type="checkbox" value={layer.name} checked={layer.displayed} readOnly />
               <label onClick={() => onToggleLayer(layer.name)}>{layer.label}</label>
             </li>
           )

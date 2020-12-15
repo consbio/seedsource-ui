@@ -491,7 +491,32 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
 }
 
 .map-info-popup {
-  min-width: 150px;
+  min-width: 250px;
+
+  .title.is-6 {
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+  .button {
+    margin-top: 10px;
+  }
+
+  .columns {
+    margin-bottom: 0;
+
+    .column {
+      padding-bottom: 0;
+    }
+  }
+
+  td:first-child {
+    padding-right: 10px;
+  }
+
+  td:last-child {
+    text-align: right;
+  }
 }
 
 .leaflet-button {

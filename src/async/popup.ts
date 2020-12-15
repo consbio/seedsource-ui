@@ -6,9 +6,11 @@ import {
   receivePopupValue,
   requestPopupRegion,
   receivePopupRegion,
+  receivePopupZones,
 } from '../actions/popup'
 import { fetchValues } from './variables'
 import config from '../config'
+import { receiveAvailableSpecies } from '../actions/species'
 
 const popupSelect = ({ popup }: any) => {
   const { point } = popup
@@ -34,10 +36,7 @@ export default (store: any) =>
           const { results } = json
           const validRegions = results.map((region: any) => region.name)
 
-          let region = null
-          if (validRegions.length) {
-            ;[region] = validRegions
-          }
+          const region = validRegions.length ? validRegions[0] : null
           dispatch(receivePopupRegion(region))
           return region
         })
@@ -78,6 +77,23 @@ export default (store: any) =>
                 request.promise.then((json: any) => dispatch(receivePopupValue(request.item.name, json)))
               })
             }
+
+            // Find seedzones at point
+            const zonesUrl = `${config.apiRoot}seedzones/?${urlEncode({ point: `${point.x},${point.y}` })}`
+
+            io.get(zonesUrl)
+              .then(response => response.json())
+              .then((json: any) =>
+                dispatch(
+                  receivePopupZones(
+                    // eslint-disable-next-line camelcase
+                    json.results.map((zone: { zone_uid: string; name: string }) => ({
+                      id: zone.zone_uid,
+                      name: zone.name,
+                    })),
+                  ),
+                ),
+              )
           }
         })
     }

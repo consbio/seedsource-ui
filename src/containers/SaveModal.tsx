@@ -1,21 +1,22 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t, c, jt } from 'ttag'
 import ModalCard from '../components/ModalCard'
 import { hideSaveModal, createSave, updateSave } from '../actions/saves'
 
 const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  t`January`,
+  t`February`,
+  c('month').t`March`,
+  c('month').t`April`,
+  c('month').t`May`,
+  t`June`,
+  t`July`,
+  t`August`,
+  t`September`,
+  t`October`,
+  t`November`,
+  t`December`,
 ]
 
 const connector = connect(
@@ -63,7 +64,7 @@ class SaveModal extends React.Component<SaveModalProps, SaveModalState> {
 
     if (showModal && !prevProps.showModal) {
       const today = new Date()
-      const title = `Saved run - ${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`
+      const title = `${t`Saved run`} - ${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`
 
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ overwrite: false, title })
@@ -91,7 +92,7 @@ class SaveModal extends React.Component<SaveModalProps, SaveModalState> {
             }
           }}
         >
-          <label className="control-label">Title</label>
+          <label className="control-label">{t`Title`}</label>
           <input
             type="text"
             data-lpignore="true"
@@ -109,16 +110,16 @@ class SaveModal extends React.Component<SaveModalProps, SaveModalState> {
           />
           <div>&nbsp;</div>
           <button className="button is-primary" type="submit">
-            Save
+            {t`Save`}
           </button>
         </form>
       )
     } else {
+      const saveTitle = <strong>{lastSave.title}</strong>
       body = (
         <div>
           <div>
-            Do you want to update the current configuration,
-            <strong>{lastSave.title}</strong>, or save as a new configuration?
+            {jt`Do you want to update the current configuration, ${saveTitle}, or save as a new configuration?`}
           </div>
           <div>&nbsp;</div>
           <div>
@@ -129,7 +130,7 @@ class SaveModal extends React.Component<SaveModalProps, SaveModalState> {
                 this.setState({ overwrite: true })
               }}
             >
-              Save as new
+              {t`Save as new`}
             </button>
 
             <button
@@ -139,7 +140,7 @@ class SaveModal extends React.Component<SaveModalProps, SaveModalState> {
                 onUpdate(runConfiguration, lastSave)
               }}
             >
-              Update current
+              {t`Update current`}
             </button>
           </div>
           <div style={{ clear: 'both' }} />
@@ -148,7 +149,7 @@ class SaveModal extends React.Component<SaveModalProps, SaveModalState> {
     }
 
     return (
-      <ModalCard title="Save Run Configuration" active={showModal} onHide={() => onHide()}>
+      <ModalCard title={t`Save Run Configuration`} active={showModal} onHide={() => onHide()}>
         {body}
       </ModalCard>
     )

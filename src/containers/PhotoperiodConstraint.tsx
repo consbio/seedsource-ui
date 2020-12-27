@@ -1,10 +1,24 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t, c, jt } from 'ttag'
 import Constraint from './Constraint'
 import EditableLabel from '../components/EditableLabel'
 import { updateConstraintValues } from '../actions/constraints'
 
-const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const monthNames = [
+  c('January').t`Jan`,
+  c('February').t`Feb`,
+  c('March (month)').t`Mar`,
+  c('April (month)').t`Apr`,
+  c('May (month)').t`May`,
+  c('June').t`Jun`,
+  c('July').t`Jul`,
+  c('August').t`Aug`,
+  c('September').t`Sep`,
+  c('October').t`Oct`,
+  c('November').t`Nov`,
+  c('December').t`Dec`,
+]
 
 const getJulianDay = (year: number, month: number, day: number) => {
   const a = Math.floor((14 - month) / 12)
@@ -59,7 +73,8 @@ const connector = connect(
 
     let value = '--'
     if (x !== '' && y !== '') {
-      value = `${daylight(year, month, day, y, x).toFixed(1)} hours`
+      const numberOfHours = daylight(year, month, day, y, x).toFixed(1)
+      value = jt`${numberOfHours} hours` as string
     }
 
     return { value, hours, month, day }
@@ -101,11 +116,11 @@ const PhotoperiodConstraint = ({
   const dayOptions = Array.from(Array(daysInMonth).keys())
 
   return (
-    <Constraint index={index} value={value} title="Photoperiod" className="photoperiod-constraint">
+    <Constraint index={index} value={value} title={t`Photoperiod`} className="photoperiod-constraint">
       <div>
         <div>
           <EditableLabel value={hours} onChange={hoursValue => onHoursChange(index, hoursValue)}>
-            &nbsp;hours
+            &nbsp;{t`hours`}
           </EditableLabel>
         </div>
         <div className="photoperiod-date">

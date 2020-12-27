@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import { connect } from 'react-redux'
 import ConfigurationStep from './ConfigurationStep'
 import { timeLabels } from '../config'
@@ -27,11 +28,11 @@ const ClimateStep = ({ title, seedlotHelpText, siteHelpText, climate, number, ac
     return (
       <ConfigurationStep title={title!} number={number} name="climate" active={false}>
         <div>
-          <strong>Seedlot climate: </strong>
+          <strong>{t`Seedlot climate:`} </strong>
           {timeLabels[seedlot.time]}
         </div>
         <div>
-          <strong>Planting site climate: </strong>
+          <strong>{t`Planting site climate:`} </strong>
           {timeLabels[siteKey]}
         </div>
       </ConfigurationStep>
@@ -100,9 +101,9 @@ const ClimateStep = ({ title, seedlotHelpText, siteHelpText, climate, number, ac
 }
 
 ClimateStep.defaultProps = {
-  title: 'Select climate scenarios',
-  seedlotHelpText: 'Which climate are the seedlots adapted to?',
-  siteHelpText: 'When should trees be best adapted to the planting site?',
+  title: t`Select climate scenarios`,
+  seedlotHelpText: t`Which climate are the seedlots adapted to?`,
+  siteHelpText: t`When should trees be best adapted to the planting site?`,
 }
 
 ClimateStep.shouldRender = () => true

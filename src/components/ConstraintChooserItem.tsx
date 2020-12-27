@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 
 type ConstraintChooserItemProps = {
   constraints: any[]
@@ -27,7 +28,7 @@ const ConstraintChooserItem = ({ constraints, selections, onSelect }: Constraint
           }
         }}
       >
-        <option value="">Select...</option>
+        <option value="">{t`Select...`}</option>
         {constraints.map(constraint => {
           const { name, label } = constraint
           return (

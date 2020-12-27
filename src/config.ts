@@ -1,3 +1,4 @@
+import { t, c } from 'ttag'
 import ElevationConstraint from './containers/ElevationConstraint'
 import PhotoperiodConstraint from './containers/PhotoperiodConstraint'
 import LatitudeConstraint from './containers/LatitudeConstraint'
@@ -123,38 +124,38 @@ const config: Config = {
     categories: [
       {
         name: 'geographic',
-        label: 'Geographic',
+        label: t`Geographic`,
         type: 'category',
         items: [
           {
             type: 'constraint',
             name: 'elevation',
-            label: 'Elevation',
+            label: t`Elevation`,
           },
           {
             type: 'constraint',
             name: 'photoperiod',
-            label: 'Photoperiod',
+            label: t`Photoperiod`,
           },
           {
             type: 'constraint',
             name: 'latitude',
-            label: 'Latitude',
+            label: t`Latitude`,
           },
           {
             type: 'constraint',
             name: 'longitude',
-            label: 'Longitude',
+            label: t`Longitude`,
           },
           {
             type: 'constraint',
             name: 'distance',
-            label: 'Distance',
+            label: t`Distance`,
           },
           {
             type: 'constraint',
             name: 'shapefile',
-            label: 'Shapefile',
+            label: 'Shapefile', // Do not localize
           },
         ],
       },
@@ -176,14 +177,14 @@ export const collapsibleSteps = false
 
 const celsiusUnits = {
   metric: {
-    label: '°C',
+    label: `°${c("Abbreviation of 'Celsius'").t`C`}`,
     convert: (value: number) => (value - 32) / 1.8, // Convert to celsius
     convertTransfer: (value: number) => value / 1.8, // Convert difference to celsuis
     precision: 1,
     transferPrecision: 2,
   },
   imperial: {
-    label: '°F',
+    label: `°${c("Abbreviation of 'Fahrenheit'").t`F`}`,
     convert: (value: number) => value * 1.8 + 32, // Convert to fahrenheit
     convertTransfer: (value: number) => value * 1.8, // Convert difference to fahrenheit
     precision: 1,
@@ -193,13 +194,13 @@ const celsiusUnits = {
 
 const mmUnits = {
   metric: {
-    label: 'mm',
+    label: c("Abbreviation of 'millimeters'").t`mm`,
     convert: (value: number) => value * 25.4, // Convert to millimeters
     precision: 0,
     transferPrecision: 0,
   },
   imperial: {
-    label: 'in',
+    label: c("Abbreviation of 'inches'").t`in`,
     convert: (value: number) => value / 25.4, // Convert to inches
     precision: 1,
     transferPrecision: 1,
@@ -208,13 +209,13 @@ const mmUnits = {
 
 const daysUnits = {
   metric: {
-    label: 'days',
+    label: t`days`,
     convert: (value: number) => value,
     precision: 0,
     transferPrecision: 0,
   },
   imperial: {
-    label: 'days',
+    label: t`days`,
     convert: (value: number) => value,
     precision: 0,
     transferPrecision: 0,
@@ -223,13 +224,13 @@ const daysUnits = {
 
 const degreeDaysUnits = {
   metric: {
-    label: 'dd',
+    label: 'dd', // Do not translate
     convert: (value: number) => value,
     precision: 0,
     transferPrecision: 0,
   },
   imperial: {
-    label: 'dd',
+    label: 'dd', // Do not translate
     convert: (value: number) => value,
     precision: 0,
     transferPrecision: 0,
@@ -254,35 +255,35 @@ const heatMoistureUnits = {
 export const variables = [
   {
     name: 'MAT',
-    label: 'Mean annual temperature',
+    label: t`Mean annual temperature`,
     multiplier: 10,
     units: celsiusUnits,
   },
   {
     name: 'MWMT',
-    label: 'Mean warmest month temperature',
+    label: t`Mean warmest month temperature`,
     multiplier: 10,
     units: celsiusUnits,
   },
   {
     name: 'MCMT',
-    label: 'Mean coldest month temperature',
+    label: t`Mean coldest month temperature`,
     multiplier: 10,
     units: celsiusUnits,
   },
   {
     name: 'TD',
-    label: 'Temperature difference between MWMT and MCMT, or continentality',
+    label: `Temperature difference between MWMT and MCMT, or continentality`,
     multiplier: 10,
     units: {
       metric: {
-        label: '°C',
+        label: `°${c("Abbreviation of 'Celsius'").t`C`}`,
         convert: (value: number) => value / 1.8, // Convert temp difference to C
         precision: 1,
         transferPrecision: 2,
       },
       imperial: {
-        label: '°F',
+        label: `°${c("Abbreviation of 'Fahrenheit'").t`F`}`,
         convert: (value: number) => value * 1.8, // Convert temp difference to F
         precision: 1,
         transferPrecision: 2,
@@ -291,73 +292,73 @@ export const variables = [
   },
   {
     name: 'MAP',
-    label: 'Mean annual precipitation',
+    label: t`Mean annual precipitation`,
     multiplier: 1,
     units: mmUnits,
   },
   {
     name: 'MSP',
-    label: 'Mean summer precipitation, May to September',
+    label: t`Mean summer precipitation, May to September`,
     multiplier: 1,
     units: mmUnits,
   },
   {
     name: 'AHM',
-    label: 'Annual heat-moisture index',
+    label: t`Annual heat-moisture index`,
     multiplier: 10,
     units: heatMoistureUnits,
   },
   {
     name: 'SHM',
-    label: 'Summer heat-moisture index',
+    label: t`Summer heat-moisture index`,
     multiplier: 10,
     units: heatMoistureUnits,
   },
   {
     name: 'DD_0',
-    label: 'Degree-days below 0°C',
+    label: t`Degree-days below 0° C`,
     multiplier: 1,
     units: degreeDaysUnits,
   },
   {
     name: 'DD5',
-    label: 'Degree-days above 5°C',
+    label: t`Degree-days above 5° C`,
     multiplier: 1,
     units: degreeDaysUnits,
   },
   {
     name: 'FFP',
-    label: 'Frost-free period',
+    label: t`Frost-free period`,
     multiplier: 1,
     units: daysUnits,
   },
   {
     name: 'PAS',
-    label: 'Precipitation as snow, August to July',
+    label: t`Precipitation as snow, August to July`,
     multiplier: 1,
     units: mmUnits,
   },
   {
     name: 'EMT',
-    label: 'Extreme minimum temperature over 30 years',
+    label: t`Extreme minimum temperature over 30 years`,
     multiplier: 10,
     units: celsiusUnits,
   },
   {
     name: 'EXT',
-    label: 'Extreme maximum temperature over 30 years',
+    label: t`Extreme maximum temperature over 30 years`,
     multiplier: 10,
     units: celsiusUnits,
   },
   {
     name: 'Eref',
-    label: 'Hargreaves reference evaporation',
+    label: t`Hargreaves reference evaporation`,
     multiplier: 1,
     units: mmUnits,
   },
   {
     name: 'CMD',
-    label: 'Hargreaves climatic moisture deficit',
+    label: t`Hargreaves climatic moisture deficit`,
     multiplier: 1,
     units: mmUnits,
   },
@@ -366,99 +367,99 @@ export const variables = [
 export const species = [
   {
     name: 'psme',
-    label: 'Douglas-fir',
+    label: t`Douglas-fir`,
   },
   {
     name: 'pico',
-    label: 'Lodgepole pine',
+    label: t`Lodgepole pine`,
   },
   {
     name: 'piba',
-    label: 'Jack pine',
+    label: t`Jack pine`,
   },
   {
     name: 'pipo',
-    label: 'Ponderosa pine',
+    label: t`Ponderosa pine`,
   },
   {
     name: 'pima',
-    label: 'Black spruce',
+    label: t`Black spruce`,
   },
   {
     name: 'thpl',
-    label: 'Western red cedar',
+    label: t`Western red cedar`,
   },
   {
     name: 'pimo',
-    label: 'Western white pine',
+    label: t`Western white pine`,
   },
   {
     name: 'abam',
-    label: 'Pacific silver fir',
+    label: t`Pacific silver fir`,
   },
   {
     name: 'abco',
-    label: 'White fir',
+    label: t`White fir`,
   },
   {
     name: 'abgr',
-    label: 'Grand fir',
+    label: t`Grand fir`,
   },
   {
     name: 'abpr',
-    label: 'Grand fir',
+    label: t`Grand fir`,
   },
   {
     name: 'absh',
-    label: 'Shasta red fir',
+    label: t`Shasta red fir`,
   },
   {
     name: 'alru2',
-    label: 'Red alder',
+    label: t`Red alder`,
   },
   {
     name: 'cade27',
-    label: 'Incense cedar',
+    label: t`Incense cedar`,
   },
   {
     name: 'chla',
-    label: 'Port orford cedar',
+    label: t`Port orford cedar`,
   },
   {
     name: 'chno',
-    label: 'Alaska yellow cedar',
+    label: t`Alaska yellow cedar`,
   },
   {
     name: 'laoc',
-    label: 'Western larch',
+    label: t`Western larch`,
   },
   {
     name: 'pial',
-    label: 'Whitebark pine',
+    label: t`Whitebark pine`,
   },
   {
     name: 'pien',
-    label: 'Engelmann spruce',
+    label: t`Engelmann spruce`,
   },
   {
     name: 'pije',
-    label: 'Jeffrey pine',
+    label: t`Jeffrey pine`,
   },
   {
     name: 'pila',
-    label: 'Sugar pine',
+    label: t`Sugar pine`,
   },
   {
     name: 'tabr2',
-    label: 'Pacific yew',
+    label: t`Pacific yew`,
   },
   {
     name: 'tshe',
-    label: 'Western red cedar',
+    label: t`Western red cedar`,
   },
   {
     name: 'tsme',
-    label: 'Mountain hemlock',
+    label: t`Mountain hemlock`,
   },
 ]
 
@@ -538,31 +539,31 @@ export const timeLabels: { [name: string]: string } = {
 export const regions = [
   {
     name: 'ak2',
-    label: 'Alaska',
+    label: t`Alaska`,
   },
   {
     name: 'west2',
-    label: 'Western US',
+    label: c('Western United States').t`Western US`,
   },
   {
     name: 'nc1',
-    label: 'North Central',
+    label: t`North Central`,
   },
   {
     name: 'uscentral1',
-    label: 'Central US',
+    label: c('Central United States').t`Central US`,
   },
   {
     name: 'ne1',
-    label: 'North East',
+    label: t`North East`,
   },
   {
     name: 'useast1',
-    label: 'Eastern US',
+    label: c('Eastern United States').t`Eastern US`,
   },
   {
     name: 'mexico1',
-    label: 'Mexico',
+    label: t`Mexico`,
   },
 ]
 

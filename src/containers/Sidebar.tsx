@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import RunConfiguration from './RunConfiguration'
 import SavedRuns from './SavedRuns'
 import Layers from './Layers'
 import { selectTab } from '../actions/tabs'

@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import ModalCard from './ModalCard'
 import { put } from '../io'
 
@@ -65,7 +66,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
           }
 
           if (status < 200 || status >= 300) {
-            throw new Error('Sorry, there was an unexpected error changing your email address.')
+            throw new Error(t`Sorry, there was an unexpected error changing your email address`)
           }
 
           onChangeEmail(emailText)
@@ -79,7 +80,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
               throw new Error(json.email)
             }
 
-            throw new Error('Sorry, there was an unexpected error changing your email address.')
+            throw new Error(t`Sorry, there was an unexpected error changing your email address`)
           }
         })
         .catch(err => {
@@ -92,7 +93,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
     const { passwordText, confirmText } = this.state
 
     if (passwordText !== confirmText) {
-      this.setState({ passwordError: "Passwords don't match" })
+      this.setState({ passwordError: t`Passwords don't match` })
       return
     }
 
@@ -106,7 +107,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
           }
 
           if (status < 200 || status >= 300) {
-            throw new Error('Sorry, there was an unexpected error changing your email address.')
+            throw new Error(t`Sorry, there was an unexpected error changing your email address`)
           }
 
           this.hide()
@@ -119,7 +120,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
               throw new Error(json.password)
             }
 
-            throw new Error('Sorry, there was an unexpected error changing your email address.')
+            throw new Error(t`Sorry, there was an unexpected error changing your email address`)
           }
         })
         .catch(err => {
@@ -169,7 +170,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
               <input
                 className={`${emailError !== null ? 'is-danger' : ''} input`}
                 type="text"
-                placeholder="Email address"
+                placeholder={t`Email address`}
                 name="username"
                 value={emailText || ''}
                 onChange={e => {
@@ -187,7 +188,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
                 onClick={() => this.submitEmail()}
                 disabled={loading || !emailText}
               >
-                Change email
+                {t`Change email`}
               </button>
             </div>
           </div>
@@ -201,12 +202,12 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
         >
           {passwordErrorNode}
           <div className="field">
-            <label className="label">Password</label>
+            <label className="label">{t`Password`}</label>
             <div className="control">
               <input
                 className={`${passwordError !== null ? 'is-danger' : ''} input`}
                 type="password"
-                placeholder="Password"
+                placeholder={t`Password`}
                 name="password"
                 value={passwordText || ''}
                 onChange={e => {
@@ -221,7 +222,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
               <input
                 className="input"
                 type="password"
-                placeholder="Confirm password"
+                placeholder={t`Confirm password`}
                 name="password"
                 value={confirmText || ''}
                 onChange={e => {
@@ -239,7 +240,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
                 onClick={() => this.submitPassword()}
                 disabled={loading || !passwordText || !confirmText}
               >
-                Change password
+                {t`Change password`}
               </button>
             </div>
           </div>

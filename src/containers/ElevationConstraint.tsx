@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c } from 'ttag'
 import Constraint from './Constraint'
 import EditableLabel from '../components/EditableLabel'
 import { updateConstraintValues } from '../actions/constraints'
@@ -13,10 +14,11 @@ type ElevationConstraintProps = {
 }
 
 const ElevationConstraint = ({ index, value, range, unit, onRangeChange }: ElevationConstraintProps) => {
-  const unitLabel = unit === 'metric' ? 'm' : 'ft'
+  const unitLabel =
+    unit === 'metric' ? c("Abbreviation of 'meters'").t`m` : c("Abbreviation of 'feet' (measurement)").t`ft`
 
   return (
-    <Constraint index={index} value={value} unit={unitLabel} title="Elevation">
+    <Constraint index={index} value={value} unit={unitLabel} title={t`Elevation`}>
       <EditableLabel value={range} onChange={newRange => onRangeChange(index, newRange, unit)}>
         &nbsp;
         {unitLabel}

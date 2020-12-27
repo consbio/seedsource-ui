@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c } from 'ttag'
 import Constraint from './Constraint'
 import EditableLabel from '../components/EditableLabel'
 import { updateConstraintValues } from '../actions/constraints'
@@ -12,7 +13,7 @@ type LatitudeConstraintProps = {
 }
 
 const LatitudeConstraint = ({ index, value, range, onRangeChange }: LatitudeConstraintProps) => (
-  <Constraint index={index} value={value} unit="&deg;N" title="Latitude">
+  <Constraint index={index} value={value} unit={`&deg;${c("Abbreviation of 'North'").t`N`}`} title={t`Latitude`}>
     <EditableLabel value={range} onChange={newRange => onRangeChange(index, newRange)}>
       <span>&nbsp;&deg;</span>
     </EditableLabel>

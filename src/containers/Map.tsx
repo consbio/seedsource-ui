@@ -13,6 +13,7 @@ import 'leaflet-basemaps'
 import 'leaflet-geonames/L.Control.Geonames'
 import 'leaflet-zoombox/L.Control.ZoomBox'
 import 'leaflet-range/L.Control.Range'
+import { t, c } from 'ttag'
 
 import * as io from '../io'
 import { getLayerUrl, isClose } from '../utils'
@@ -578,7 +579,7 @@ class Map extends React.Component<MapProps> {
         }
       }
       return {
-        label: 'Match',
+        label: c('as in same or similar objects').t`Match`,
         elements: legend.legend,
       }
     })
@@ -658,7 +659,7 @@ class Map extends React.Component<MapProps> {
   }
 
   updateShapefileLayer(constraints: any[]) {
-    const data = constraints.map(c => c.values.geoJSON).filter(geojson => !!geojson)
+    const data = constraints.map(cn => cn.values.geoJSON).filter(geojson => !!geojson)
     if (JSON.stringify(data) === JSON.stringify(this.shpConstraintData)) {
       return
     }
@@ -703,20 +704,21 @@ class Map extends React.Component<MapProps> {
                   <div className="column">
                     <div>Elevation</div>
                     <div className="has-text-weight-bold">
-                      {`${Math.round(elevation / 0.3048)} ft (${Math.round(elevation)} m)`}
+                      {`${Math.round(elevation / 0.3048)} ${c("Abbreviation of 'feet' (measurement)")
+                        .t`ft`} (${Math.round(elevation)} ${c("Abbreviation of 'meters'").t`m`})`}
                     </div>
                   </div>
                 </div>
 
                 {!!values.length && (
                   <>
-                    <h6 className="title is-6">Climate</h6>
+                    <h6 className="title is-6">{t`Climate`}</h6>
                     <table>
                       <tbody>
                         {values.map((item: any) => {
                           const variableConfig = allVariables.find(variable => variable.name === item.name)
                           const { multiplier, units }: { multiplier: number; units: any } = variableConfig!
-                          let value: string | number = 'N/A'
+                          let value: string | number = c('i.e., Not Applicable').t`N/A`
                           let unitLabel = units.metric.label
 
                           if (item.value !== null) {
@@ -748,7 +750,7 @@ class Map extends React.Component<MapProps> {
 
                 {!!zones.length && (
                   <>
-                    <h6 className="title is-6">Available Zones</h6>
+                    <h6 className="title is-6">{t`Available Zones`}</h6>
                     <ul>
                       {zones.map(({ name }: { name: string }) => (
                         <li>{name}</li>
@@ -782,7 +784,6 @@ class Map extends React.Component<MapProps> {
             </>,
             this.popup!.content,
           )
-
           this.popup!.popup.setContent(this.popup!.content)
         }
       }, 1)

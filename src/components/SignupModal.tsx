@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import ModalCard from './ModalCard'
 import SocialLogin from './SocialLogin'
 import { post } from '../io'
@@ -63,7 +64,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
     const { onSignup } = this.props
 
     if (passwordText !== confirmText) {
-      this.setState({ error: "Passwords don't match" })
+      this.setState({ error: t`Passwords don't match` })
       return
     }
 
@@ -79,7 +80,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
           }
 
           if (status < 200 || status >= 300) {
-            throw new Error('Sorry, there was an unexpected error while creating your account.')
+            throw new Error(t`There was an unexpected error while creating your account`)
           }
 
           onSignup(emailText)
@@ -94,7 +95,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
               throw new Error(json.email)
             }
 
-            throw new Error('Sorry, there was an unexpected error while creating your account.')
+            throw new Error(t`There was an unexpected error while creating your account`)
           }
         })
         .catch(err => {
@@ -120,7 +121,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
         ref={(input: ModalCard) => {
           this.modal = input
         }}
-        title="Create Account"
+        title={t`Create Account`}
       >
         {errorNode}
         <form
@@ -137,7 +138,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
                 }}
                 className={`${emailError ? 'is-danger' : ''} input`}
                 type="text"
-                placeholder="Email address"
+                placeholder={t`Email address`}
                 name="username"
                 value={emailText || ''}
                 onChange={e => {
@@ -152,7 +153,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
               <input
                 className="input"
                 type="password"
-                placeholder="Password"
+                placeholder={t`Password`}
                 name="password"
                 value={passwordText || ''}
                 onChange={e => {
@@ -167,7 +168,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
               <input
                 className="input"
                 type="password"
-                placeholder="Confirm password"
+                placeholder={t`Confirm password`}
                 name="password"
                 value={confirmText || ''}
                 onChange={e => {
@@ -185,7 +186,7 @@ class SignupModal extends React.Component<SignupModalProps, SignupModalState> {
                 onClick={() => this.submit()}
                 disabled={loading}
               >
-                Create Account
+                {t`Create Account`}
               </button>
             </div>
           </div>

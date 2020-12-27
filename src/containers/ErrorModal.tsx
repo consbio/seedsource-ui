@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c, jt } from 'ttag'
 import ModalCard from '../components/ModalCard'
 import { clearError } from '../actions/error'
 
@@ -19,15 +20,15 @@ const ErrorModal = ({ show, title, message, debugInfo, onHide }: ErrorModalProps
   let debug = null
 
   if (debugInfo !== null) {
+    const reportAnIssue = (
+      <a href="https://github.com/consbio/seedsource/issues" target="_blank" rel="noreferrer">
+        {c('reportAnIssue').t`report an issue`}
+      </a>
+    )
+
     debug = (
       <div>
-        <p>
-          If the problem persists, please{' '}
-          <a href="https://github.com/consbio/seedsource/issues" target="_blank" rel="noreferrer">
-            report an issue
-          </a>{' '}
-          and include the following information:
-        </p>
+        <p>{jt`If the problem persists, please ${reportAnIssue} and include the following information:`}</p>
         <pre className="error-debug-info">{debugInfo}</pre>
       </div>
     )

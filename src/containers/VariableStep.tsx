@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t, c } from 'ttag'
 import ConfigurationStep from './ConfigurationStep'
 import UnitButton from './UnitButton'
 import Variables from './Variables'
@@ -34,7 +35,7 @@ const VariableStep = ({ number, active, variables, setDefaultVariables }: Variab
   if (!active) {
     let content = (
       <div>
-        <em>Click to add variables</em>
+        <em>{t`Click to add variables`}</em>
       </div>
     )
 
@@ -43,20 +44,20 @@ const VariableStep = ({ number, active, variables, setDefaultVariables }: Variab
     }
 
     return (
-      <ConfigurationStep title="Select climate variables" number={number} name="variables" active={false}>
+      <ConfigurationStep title={t`Select climate variables`} number={number} name="variables" active={false}>
         {content}
       </ConfigurationStep>
     )
   }
 
   return (
-    <ConfigurationStep title="Select climate variables" number={number} name="variables" active>
+    <ConfigurationStep title={t`Select climate variables`} number={number} name="variables" active>
       <div className="margin-bottom-10">
-        <strong>Units: </strong>
+        <strong>{t`Units:`} </strong>
         <div className="tabs is-toggle is-inline-block is-small align-middle">
           <ul>
-            <UnitButton name="metric">Metric</UnitButton>
-            <UnitButton name="imperial">Imperial</UnitButton>
+            <UnitButton name="metric">{t`Metric`}</UnitButton>
+            <UnitButton name="imperial">{t`Imperial`}</UnitButton>
           </ul>
         </div>
       </div>
@@ -66,7 +67,7 @@ const VariableStep = ({ number, active, variables, setDefaultVariables }: Variab
       {flag && defaultVariables && !variables.length && (
         <>
           <div className="hr-label" style={{ margin: '10px 0' }}>
-            OR
+            {c('e.g., this OR that').t`OR`}
           </div>
           <button
             type="button"
@@ -74,7 +75,7 @@ const VariableStep = ({ number, active, variables, setDefaultVariables }: Variab
             style={{ marginBottom: '10px' }}
             onClick={() => setDefaultVariables()}
           >
-            Choose automatically
+            {t`Choose automatically`}
           </button>
         </>
       )}

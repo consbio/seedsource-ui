@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import config from '../config'
 import Trait from './Trait'
 import { addTrait } from '../actions/traits'
@@ -37,9 +38,9 @@ class Traits extends React.Component<ConnectedProps<typeof connector>> {
           <thead className="align-bottom is-size-7 has-text-weight-bold">
             <tr>
               <td />
-              <th>Name</th>
-              <th>Value</th>
-              <th>Transfer Limit (+/-)</th>
+              <th>{t`Name`}</th>
+              <th>{t`Value`}</th>
+              <th>{t`Transfer Limit (+/-)`}</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +57,7 @@ class Traits extends React.Component<ConnectedProps<typeof connector>> {
               onChange(e.target.value)
             }}
           >
-            <option value="none">Add a trait...</option>
+            <option value="none">{t`Add a trait...`}</option>
             {unusedTraits.map(item => (
               <option value={item.name} key={item.name}>
                 {item.name}: {item.label}

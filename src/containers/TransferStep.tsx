@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import { selectCenter } from '../actions/variables'
 import ConfigurationStep from './ConfigurationStep'
 import MethodButton from './MethodButton'
@@ -32,17 +33,17 @@ const TransferStep = ({ number, active, objective, method, center, onCenterChang
     let label
 
     if (method === 'seedzone') {
-      label = 'Transfer limits based on seed zone, climatic center based on the selected location'
+      label = t`Transfer limits based on seed zone, climatic center based on the selected location`
 
       if (center === 'zone') {
-        label = 'Transfer limits and climatic center based on seed zone'
+        label = t`Transfer limits and climatic center based on seed zone`
       }
     } else {
-      label = 'Custom transfer limits, climatic center based on the selected location'
+      label = t`Custom transfer limits, climatic center based on the selected location`
     }
 
     return (
-      <ConfigurationStep title="Select transfer limit method" number={number} name="transfer" active={false}>
+      <ConfigurationStep title={t`Select transfer limit method`} number={number} name="transfer" active={false}>
         <div>{label}</div>
       </ConfigurationStep>
     )
@@ -54,19 +55,19 @@ const TransferStep = ({ number, active, objective, method, center, onCenterChang
     centerNode = (
       <div>
         <div className="is-size-7">
-          <em>Which should be used as the climatic center?</em>
+          <em>{t`Which should be used as the climatic center?`}</em>
         </div>
         <div className="control">
           <div>
             <label className="radio">
               <input type="radio" checked={center === 'point'} onChange={() => onCenterChange('point')} />
-              The value at the selected location
+              {t`The value at the selected location`}
             </label>
           </div>
           <div>
             <label className="radio">
               <input type="radio" checked={center === 'zone'} onChange={() => onCenterChange('zone')} />
-              The climatic center of the zone
+              {t`The climatic center of the zone`}
             </label>
           </div>
         </div>
@@ -81,9 +82,9 @@ const TransferStep = ({ number, active, objective, method, center, onCenterChang
     <ConfigurationStep title="Select transfer limit method" number={number} name="transfer" active>
       <div className="tabs is-toggle is-small">
         <ul>
-          <MethodButton name="custom">Custom</MethodButton>
-          <MethodButton name="seedzone">Zone</MethodButton>
-          {hasFunctions ? <MethodButton name="function">Function</MethodButton> : null}
+          <MethodButton name="custom">{t`Custom`}</MethodButton>
+          <MethodButton name="seedzone">{t`Zone`}</MethodButton>
+          {hasFunctions ? <MethodButton name="function">{t`Function`}</MethodButton> : null}
         </ul>
       </div>
       {centerNode}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import { selectSpecies } from '../actions/species'
 import config from '../config'
 
@@ -40,7 +41,7 @@ const SpeciesChooser = ({ species, generic, onSpeciesChange, availableSpecies }:
 
   return (
     <div>
-      <h5 className="title is-5 is-marginless">Select a species</h5>
+      <h5 className="title is-5 is-marginless">{t`Select a species`}</h5>
       <div className="select">
         <select
           value={species}
@@ -49,7 +50,7 @@ const SpeciesChooser = ({ species, generic, onSpeciesChange, availableSpecies }:
             onSpeciesChange(e.target.value)
           }}
         >
-          {generic ? <option value="generic">Generic</option> : null}
+          {generic ? <option value="generic">{t`Generic`}</option> : null}
 
           {availableSpeciesList.map(item => (
             <option value={item.name} key={item.name}>

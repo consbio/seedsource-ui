@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c } from 'ttag'
 import ConstraintChooser from '../components/ConstraintChooser'
 import ConfigurationStep from './ConfigurationStep'
 import config from '../config'
@@ -21,9 +22,9 @@ const ConstraintStep = ({ number, constraints, onChange }: ConstraintStepProps) 
         <thead className="is-size-7">
           <tr>
             <td />
-            <th>Name</th>
-            <th>Value</th>
-            <th>Range (+/-)</th>
+            <th>{t`Name`}</th>
+            <th>{t`Value`}</th>
+            <th>{c('i.e., Range of values (e.g., from 5 to 10)').t`Range (+/-)`}</th>
           </tr>
         </thead>
         <tbody>

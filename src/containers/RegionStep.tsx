@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import ConfigurationStep from './ConfigurationStep'
 import RegionButton from './RegionButton'
 import { setRegion } from '../actions/region'
@@ -28,8 +29,8 @@ const RegionStep = ({ number, region, regionMethod, onChange }: RegionStepProps)
   const buttons = (
     <div className="tabs is-toggle is-small">
       <ul>
-        <RegionButton name="auto">Automatic</RegionButton>
-        <RegionButton name="custom">Custom</RegionButton>
+        <RegionButton name="auto">{t`Automatic`}</RegionButton>
+        <RegionButton name="custom">{t`Custom`}</RegionButton>
       </ul>
     </div>
   )
@@ -37,18 +38,18 @@ const RegionStep = ({ number, region, regionMethod, onChange }: RegionStepProps)
   if (regionMethod === 'auto') {
     const regionLabel = region !== null ? regions.find(r => r.name === region)?.label : 'N/A'
     return (
-      <ConfigurationStep title="Select region" number={number} name="region" active>
+      <ConfigurationStep title={t`Select region`} number={number} name="region" active>
         {buttons}
-        <strong>Region:</strong> {regionLabel}
+        <strong>{t`Region:`}</strong> {regionLabel}
       </ConfigurationStep>
     )
   }
   return (
-    <ConfigurationStep title="Select region" number={number} name="region" active>
+    <ConfigurationStep title={t`Select region`} number={number} name="region" active>
       {buttons}
       <div style={{ marginTop: '3px' }}>
         <div className="align-middle is-inline-block">
-          <strong>Region: </strong>
+          <strong>{t`Region:`}</strong>
         </div>
         <div className="select align-middle is-inline-block">
           <select

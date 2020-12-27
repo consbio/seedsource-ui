@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import { connect, ConnectedProps } from 'react-redux'
 import ConfigurationStep from './ConfigurationStep'
 import ObjectiveButton from './ObjectiveButton'
@@ -17,18 +18,18 @@ type ObjectiveStepProps = ConnectedProps<typeof connector> & {
 const ObjectiveStep = ({ number, active, objective }: ObjectiveStepProps) => {
   if (!active) {
     return (
-      <ConfigurationStep title="Select objective" number={number} name="objective" active={false}>
-        <div>{objective === 'seedlots' ? 'Find seedlots' : 'Find planting sites'}</div>
+      <ConfigurationStep title={t`Select objective`} number={number} name="objective" active={false}>
+        <div>{objective === 'seedlots' ? t`Find seedlots` : t`Find planting sites`}</div>
       </ConfigurationStep>
     )
   }
 
   return (
-    <ConfigurationStep title="Select objective" number={number} name="objective" active>
+    <ConfigurationStep title={t`Select objective`} number={number} name="objective" active>
       <div className="tabs is-toggle is-small">
         <ul>
-          <ObjectiveButton name="seedlots">Find seedlots</ObjectiveButton>
-          <ObjectiveButton name="sites">Find planting sites</ObjectiveButton>
+          <ObjectiveButton name="seedlots">{t`Find seedlots`}</ObjectiveButton>
+          <ObjectiveButton name="sites">{t`Find planting sites`}</ObjectiveButton>
         </ul>
       </div>
     </ConfigurationStep>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { c, t } from 'ttag'
 
 type AddUserSiteProps = {
   onClose: () => any
@@ -11,7 +12,7 @@ type AddUserSiteState = {
   label: string
 }
 
-export default class AddUserSite extends React.Component<AddUserSiteProps, AddUserSiteState> {
+class AddUserSite extends React.Component<AddUserSiteProps, AddUserSiteState> {
   constructor(props: any) {
     super(props)
 
@@ -43,7 +44,7 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
       >
         <div className="columns is-mobile" style={{ marginBottom: '0' }}>
           <label className="column is-narrow">
-            <div>Lat</div>
+            <div>{c("Abbreviation of 'Latitude'").t`Lat`}</div>
             <input
               className="input is-small"
               type="text"
@@ -54,7 +55,7 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
             />
           </label>
           <label className="column is-narrow">
-            <div>Lon</div>
+            <div>{c("Abbreviation of 'Longitude'").t`Lon`}</div>
             <input
               className="input is-small"
               type="text"
@@ -86,7 +87,7 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
               onClose()
             }}
           >
-            Cancel
+            {t`Cancel`}
           </button>
 
           <button
@@ -95,10 +96,12 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
             style={{ marginLeft: '10px' }}
             disabled={!(parseFloat(lat) && parseFloat(lon))}
           >
-            Add
+            {c("e.g., 'Add to list'").t`Add`}
           </button>
         </div>
       </form>
     )
   }
 }
+
+export default AddUserSite

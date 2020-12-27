@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { t } from 'ttag'
 
 type ModalProps = {
   active?: boolean
@@ -45,7 +46,7 @@ class Modal extends React.Component<ModalProps, ModalState> {
     let closeButtonNode = null
     if (closeButton) {
       closeButtonNode = (
-        <button type="button" className="modal-close is-large" aria-label="close" onClick={this.hide.bind(this)} />
+        <button type="button" className="modal-close is-large" aria-label={t`close`} onClick={this.hide.bind(this)} />
       )
     }
 

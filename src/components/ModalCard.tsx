@@ -1,4 +1,5 @@
-import React, {ReactNode} from 'react'
+import React, { ReactNode } from 'react'
+import { t } from 'ttag'
 import Modal from './Modal'
 
 type ModalCardProps = {
@@ -42,7 +43,7 @@ class ModalCard extends React.Component<ModalCardProps> {
         <div className={`modal-card ${className}`}>
           <header className="modal-card-head">
             <p className="modal-card-title">{title}</p>
-            <button type="button" className="delete" aria-label="close" onClick={() => this.modal?.hide()} />
+            <button type="button" className="delete" aria-label={t`close`} onClick={() => this.modal?.hide()} />
           </header>
           <section className="modal-card-body">
             <div className="content">{children}</div>

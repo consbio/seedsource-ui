@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c, jt } from 'ttag'
 import ConfigurationStep from './ConfigurationStep'
 import PointChooser from './PointChooser'
 import AddUserSite from '../components/AddUserSite'
@@ -23,16 +24,20 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
     elevation !== null ? (
       <div>
         <div>
-          <strong>Elevation:</strong> {Math.round(elevation.ft)} ft ({Math.round(elevation.m)} m)
+          <strong>{t`Elevation:`}</strong> {Math.round(elevation.ft)} ft ({Math.round(elevation.m)} m)
         </div>
       </div>
     ) : (
       elevation
     )
 
+  const siteLabel =
+    objective === 'sites' ? c('siteLabel').t`seedlot (its climatic center)` : c('siteLabel').t`planting site`
+  const locationLabel = objective === 'seedlots' ? c('locationLabel').t`Seedlots` : c('locationLabel').t`Planting Sites`
+
   return (
     <ConfigurationStep
-      title={objective === 'seedlots' ? 'Select planting site location' : 'Select seedlot location'}
+      title={objective === 'seedlots' ? t`Select planting site location` : t`Select seedlot location`}
       number={number}
       name="location"
       active
@@ -42,11 +47,10 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
           <div className="columns">
             <div className="column is-narrow" style={{ width: '185px' }}>
               <h4 className="title is-6" style={{ marginBottom: '0' }}>
-                Location
+                {t`Location`}
               </h4>
               <div className="is-size-7 is-italic">
-                Locate your {objective === 'sites' ? 'seedlot (its climatic center)' : 'planting site'} by using the map
-                or entering coordinates.
+                {jt`Locate your ${siteLabel} by using the map or entering coordinates.`}
               </div>
             </div>
             <div className="column">
@@ -57,10 +61,15 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
           <div className="columns">
             <div className="column is-narrow" style={{ width: '185px' }}>
               <h4 className="title is-6" style={{ marginBottom: '0' }}>
-                Map {objective === 'seedlots' ? 'Seedlots' : 'Planting Sites'}
+                {jt`Map ${locationLabel}`}
               </h4>
               <div className="is-size-7 is-italic">
-                Optional. Plot {objective === 'seedlots' ? 'planting sites' : 'seedlots'} on the map for comparison.
+                {(() => {
+                  const plotLabel =
+                    objective === 'seedlots' ? c('plotLabel').t`planting sites` : c('plotLabel').t`seedlots`
+
+                  return jt`Optional. Plot ${plotLabel} on the map for comparison.`
+                })()}
               </div>
             </div>
             <div className="column">
@@ -79,7 +88,7 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
                     onSetMapMode('add_sites')
                   }}
                 >
-                  Add {objective === 'seedlots' ? 'Seedlots' : 'Planting Sites'}
+                  {jt`Add ${locationLabel}`}
                 </button>
               )}
             </div>
@@ -90,10 +99,10 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
         <>
           <div className="is-size-7">
             <div>
-              <em>Locate your {objective === 'sites' ? 'seedlot (its climatic center' : 'planting site'}</em>
+              <em>{jt`Locate your ${siteLabel}`}</em>
             </div>
             <div>
-              <em>Use the map or enter coordinates</em>
+              <em>{t`Use the map or enter coordinates`}</em>
             </div>
           </div>
 

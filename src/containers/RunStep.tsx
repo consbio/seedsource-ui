@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import parse from 'csv-parse'
+import { t } from 'ttag'
 import ConfigurationStep from './ConfigurationStep'
 import SaveModal from './SaveModal'
 import ModalCard from '../components/ModalCard'
@@ -62,8 +63,8 @@ const connector = connect(
       if (variables.some((item: any) => item.transfer === null)) {
         dispatch(
           setError(
-            'Configuration error',
-            'Cannot calculate scores: one or more of your variables has no transfer limit, or a limit of 0.',
+            t`Configuration error`,
+            t`Cannot calculate scores: one or more of your variables has no transfer limit, or a limit of 0.`,
           ),
         )
         return
@@ -72,8 +73,8 @@ const connector = connect(
       if (constraints.some((item: any) => Object.keys(item.values).some(key => item.values[key] === null))) {
         dispatch(
           setError(
-            'Configuration error',
-            'Cannot calculate scores: one or more of your constraints is missing a value.',
+            t`Configuration error`,
+            t`Cannot calculate scores: one or more of your constraints is missing a value.`,
           ),
         )
         return
@@ -84,7 +85,7 @@ const connector = connect(
 
     onSave: (isLoggedIn: boolean) => {
       if (!isLoggedIn) {
-        dispatch(setError('Login required', 'Please login to save your run.'))
+        dispatch(setError(t`Login required`, t`Please login to save your run.`))
         return
       }
 
@@ -250,7 +251,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
               onRun(configuration)
             }}
           >
-            Run Tool
+            {t`Run Tool`}
           </button>
         </div>
         <div className="margin-top-10">
@@ -264,12 +265,12 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                 onSave(isLoggedIn)
               }}
             >
-              <span className="icon12 icon-save" aria-hidden="true" /> Save Last Run
+              <span className="icon12 icon-save" aria-hidden="true" /> {t`Save Last Run`}
             </button>
             <Dropdown
               className="is-pulled-right is-right is-hidden-mobile"
               up
-              title="Export As..."
+              title={t`Export As...`}
               disabled={!canSave || reportIsFetching}
             >
               {reports.map(r => (
@@ -294,7 +295,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                   onExportTIF()
                 }}
               >
-                GeoTIFF
+                {t`GeoTIFF`}
               </a>
             </Dropdown>
             {previewModal ? (
@@ -304,7 +305,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                 onHide={() => {
                   this.setState({ previewModal: false })
                 }}
-                title="Position the map for export:"
+                title={t`Move and zoom the map to position it how it should appear in the report`}
                 footer={(
                   <button
                     type="button"

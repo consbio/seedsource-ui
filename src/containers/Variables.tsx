@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import Variable from './Variable'
 import { variables as allVariables } from '../config'
 import { addVariable } from '../actions/variables'
@@ -20,9 +21,9 @@ const connector = connect(
         if (variables.length >= 6) {
           dispatch(
             setError(
-              'Configuration error',
-              'You may only add 6 variables to your configuration. Please remove an ' +
-                'exiting variable before adding another.',
+              t`Configuration error`,
+              t`You may only add 6 variables to your configuration. 
+                Please remove an exiting variable before adding another.`,
             ),
           )
 
@@ -50,10 +51,10 @@ const Variables = ({ variables, unusedVariables, edit, onChange }: VariablesProp
             <td />
             <th>
               <div className="modify-status">&nbsp;</div>
-              Name
+              {t`Name`}
             </th>
-            <th>Center</th>
-            <th>Transfer limit (+/-)</th>
+            <th>{t`Center`}</th>
+            <th>{t`Transfer limit (+/-)`}</th>
             <td />
           </tr>
         </thead>
@@ -78,7 +79,7 @@ const Variables = ({ variables, unusedVariables, edit, onChange }: VariablesProp
             onChange(e.target.value, variables)
           }}
         >
-          <option value="none">Add a variable...</option>
+          <option value="none">{t`Add a variable...`}</option>
           {unusedVariables.map(item => (
             <option value={item.name} key={item.name}>
               {item.name}: {item.label}

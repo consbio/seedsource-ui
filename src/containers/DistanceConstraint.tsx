@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c } from 'ttag'
 import Constraint from './Constraint'
 import EditableLabel from '../components/EditableLabel'
 import { updateConstraintValues } from '../actions/constraints'
@@ -13,10 +14,10 @@ type DistanceConstraintProps = {
 }
 
 const DistanceConstraint = ({ index, value, range, unit, onRangeChange }: DistanceConstraintProps) => {
-  const unitLabel = unit === 'metric' ? 'km' : 'mi'
+  const unitLabel = unit === 'metric' ? c("Abbreviation of 'kilometer'").t`km` : c("Abbreviation of 'mile'").t`mi`
 
   return (
-    <Constraint index={index} value={value} title="Distance">
+    <Constraint index={index} value={value} title={t`Distance`}>
       <EditableLabel value={range} onChange={newRange => onRangeChange(index, newRange, unit)}>
         &nbsp;
         {unitLabel}

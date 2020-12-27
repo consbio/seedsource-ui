@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import ModalCard from './ModalCard'
 import SocialLogin from './SocialLogin'
 import { post } from '../io'
@@ -58,11 +59,11 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
             onLogin(emailText)
             this.hide()
           } else {
-            throw new Error('Login failed.')
+            throw new Error('Login failed')
           }
         })
         .catch(() => {
-          this.setState({ loading: false, error: 'Login failed.' })
+          this.setState({ loading: false, error: t`Login failed` })
         })
     }
   }
@@ -85,7 +86,7 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
         ref={input => {
           this.modal = input
         }}
-        title="Sign In"
+        title={t`Sign In`}
       >
         {errorNode}
         <form
@@ -102,7 +103,7 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
                 }}
                 className="input"
                 type="text"
-                placeholder="Email address"
+                placeholder={t`Email address`}
                 name="username"
                 value={emailText || ''}
                 onChange={e => {
@@ -117,7 +118,7 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
               <input
                 className="input"
                 type="password"
-                placeholder="Password"
+                placeholder={t`Password`}
                 name="password"
                 value={passwordText || ''}
                 onChange={e => {
@@ -127,7 +128,7 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
               />
             </div>
             <a className="is-pulled-right is-size-7 is-clearfix" onClick={() => onResetPassword()}>
-              Forgot your password?
+              {t`Forgot your password?`}
             </a>
             <div className="is-clearfix" />
           </div>
@@ -139,7 +140,7 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
                 onClick={() => this.submit()}
                 disabled={loading}
               >
-                Sign In
+                {t`Sign In`}
               </button>
             </div>
           </div>

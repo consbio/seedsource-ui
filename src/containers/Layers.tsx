@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t } from 'ttag'
 import config from '../config'
 import { get } from '../io'
 import { toggleLayer, loadTiles } from '../actions/layers'
@@ -51,14 +52,14 @@ class Layers extends React.Component<LayersProps> {
     const { state }: { state: any } = this
 
     const categories: any = {
-      results: { name: 'Results', urlIdentifier: '{serviceId}', awayMessage: 'Run the tool to view results' },
+      results: { name: t`Results`, urlIdentifier: '{serviceId}', awayMessage: t`Run the tool to view results` },
       variables: {
-        name: 'Variables',
+        name: t`Variables`,
         urlIdentifier: '{region}_{modelTime}',
-        awayMessage: 'Select a region and climate scenario to view variables',
+        awayMessage: t`Select a region and climate scenario to view variables`,
       },
-      seedZones: { name: 'Seed Zones', urlIdentifier: 'seedzones', awayMessage: null },
-      layers: { name: 'Layers', urlIdentifier: 'layers', awayMessage: null },
+      seedZones: { name: t`Seed Zones`, urlIdentifier: 'seedzones', awayMessage: null },
+      layers: { name: t`Layers`, urlIdentifier: 'layers', awayMessage: null },
     }
 
     const layerList = (urlIdentifier: string) =>

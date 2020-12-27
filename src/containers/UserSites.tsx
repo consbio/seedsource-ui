@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { t, c } from 'ttag'
 import { removeUserSite, setActiveUserSite, setUserSiteLabel } from '../actions/point'
 import { UserSite as UserSiteType } from '../reducers/runConfiguration'
 
@@ -101,7 +102,7 @@ const UserSite = ({ userSites, removeSite, setActiveSite, setUserSiteLabel }: Us
                 {lat}, {lon}
               </strong>
             </td>
-            <td>{score === undefined ? 'N/A' : `${score}%`}</td>
+            <td>{score === undefined ? c('i.e., Not Applicable').t`N/A` : `${score}%`}</td>
           </tr>
         ))}
       </tbody>

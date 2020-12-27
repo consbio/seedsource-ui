@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import config from '../config'
 import AccountMenu from '../containers/AccountMenu'
 
@@ -23,7 +24,7 @@ class Navbar extends React.Component<{}, NavbarState> {
       <nav
         className={[active, 'navbar', navbarClass || 'is-dark'].join(' ')}
         role="navigation"
-        aria-label="main navigation"
+        aria-label={t`main navigation`}
       >
         <div className="navbar-brand">
           <div className="navbar-item">

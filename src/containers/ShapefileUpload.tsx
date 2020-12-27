@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import shp from 'shpjs'
+import { t } from 'ttag'
 import { updateConstraintValues } from '../actions/constraints'
 import { setError } from '../actions/error'
 
@@ -54,7 +55,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
       const { sendError } = this.props
 
       this.setState({ isLoading: false })
-      sendError('Error', 'Cannot process shapefiles larger than 2MB')
+      sendError(t`Error`, t`Cannot process shapefiles larger than 2MB`)
     }
 
     const zipFile = files.find(file => file.name.match(/\.zip/i))
@@ -66,7 +67,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
       reader.onerror = (e: any) => {
         const { sendError } = this.props
         this.setState({ isLoading: false })
-        sendError('Error', 'Could not read the zip file.', e.message)
+        sendError(t`Error`, t`Could not read the zip file`, e.message)
       }
       reader.onload = (e: any) => {
         shp(e.target.result)
@@ -80,7 +81,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
             const { sendError } = this.props
 
             this.setState({ isLoading: false })
-            sendError('Error', 'Could not read the zip file.', error.message)
+            sendError(t`Error`, t`Could not read the zip file`, error.message)
           })
       }
       reader.readAsArrayBuffer(zipFile)
@@ -111,8 +112,8 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
         } else {
           resolve({
             prj: null,
-            warning:
-              'No projection file found. Assuming WGS84. If you see the wrong projection, try including the prj file.',
+            warning: t`No projection file found. Assuming WGS84. 
+              If you see the wrong projection, try including the prj file.`,
           })
         }
       })
@@ -124,7 +125,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
           const geojson = shp.combine([parsedShp, []])
           this.setState({ isLoading: false })
           if (prjResult.warning) {
-            sendError('Warning', prjResult.warning)
+            sendError(t`Warning`, prjResult.warning)
           }
           onFileUpload(index, geojson, shpResult.name)
         })
@@ -132,13 +133,13 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
           const { sendError } = this.props
 
           this.setState({ isLoading: false })
-          sendError('Error', 'Shapefile not loaded', error.message)
+          sendError(t`Error`, t`Shapefile not loaded`, error.message)
         })
     } else {
       const { sendError } = this.props
 
       this.setState({ isLoading: false })
-      sendError('Error', 'File(s) not supported')
+      sendError(t`Error`, t`File not supported`)
     }
   }
 
@@ -151,7 +152,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
         {isLoading ? (
           <div className="overlay">
             <div className="progress-container">
-              Processing...
+              {t`Processing...`}
               <progress />
             </div>
           </div>

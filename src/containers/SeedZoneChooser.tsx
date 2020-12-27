@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import { selectZone } from '../actions/zones'
 
 const connector = connect(
@@ -55,7 +56,7 @@ const SeedZoneChooser = ({
     return null
   }
 
-  const noZoneLabel = pointIsValid ? 'No zones at this location...' : 'Select a location...'
+  const noZoneLabel = pointIsValid ? t`No zones at this location...` : t`Select a location...`
 
   let content = (
     <div className="select">
@@ -88,7 +89,7 @@ const SeedZoneChooser = ({
 
   return (
     <div>
-      <h5 className="title is-5 is-marginless">Select zone</h5>
+      <h5 className="title is-5 is-marginless">{t`Select zone`}</h5>
       {content}
     </div>
   )

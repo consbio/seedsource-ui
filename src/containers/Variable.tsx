@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import ReactTooltip from 'react-tooltip'
+import { t } from 'ttag'
 import EditableLabel from '../components/EditableLabel'
 import { modifyVariable, resetTransfer, removeVariable } from '../actions/variables'
 import { toggleLayer } from '../actions/layers'
@@ -153,7 +154,7 @@ const Variable = (props: ConnectedProps<typeof connector>) => {
   if (zoneCenter !== null) {
     climaticCenter = (
       <div>
-        <span className="tooltip-label">Zone climatic center:</span>
+        <span className="tooltip-label">{t`Zone climatic center:`}</span>
         <strong>
           {zoneCenter} {units[unit].label}
         </strong>
@@ -202,16 +203,16 @@ const Variable = (props: ConnectedProps<typeof connector>) => {
             {name}: {label}
           </h5>
           <div>
-            <span className="tooltip-label">Value at point:</span> <strong>{value}</strong>
+            <span className="tooltip-label">{t`Value at point:`}</span> <strong>{value}</strong>
           </div>
           <div>
-            <span className="tooltip-label">Transfer limit (+/-):</span>
+            <span className="tooltip-label">{t`Transfer limit (+/-):`}</span>
             <strong>
-              {transfer} {units[unit].label} {transferIsModified ? '(modified)' : ''}
+              {transfer} {units[unit].label} {transferIsModified ? `(${t`modified`})` : ''}
             </strong>
           </div>
           <div>
-            <span className="tooltip-label">Avg. transfer limit for zone set:</span>
+            <span className="tooltip-label">{t`Avg.transfer limit for zone set:`}</span>
             <strong>
               {avgTransfer} {units[unit].label}
             </strong>

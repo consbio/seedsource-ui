@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import SavedRun from './SavedRun'
 import { fetchSaves } from '../actions/saves'
 
@@ -51,15 +52,15 @@ class SavedRuns extends React.Component<SavedRunsProps, SavedRunsState> {
       return (
         <article className="message is-dark">
           <div className="message-body">
-            You may create an account to save and retrieve your runs. Click on the &quot;Account&quot; tab in the upper
-            right to login or create an account..
+            {t`You may create an account to save and retrieve your runs. 
+              Click on the "Account" tab in the upper right to login or create an account..`}
           </div>
         </article>
       )
     }
 
     if (saves.length === 0) {
-      return <div>You currently have no saved runs.</div>
+      return <div>{t`You currently have no saved runs.`}</div>
     }
 
     return (

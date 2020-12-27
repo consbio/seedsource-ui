@@ -1,0 +1,840 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals = 2; plural = (n != 1);\n"
+"Language: es\n"
+"mime-version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/components/AccountSettingsModal.tsx:96
+#: src/components/SignupModal.tsx:67
+msgid "Passwords don't match"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:173
+#: src/components/LoginModal.tsx:106
+#: src/components/ResetPasswordModal.tsx:118
+#: src/components/SignupModal.tsx:141
+msgid "Email address"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:191
+msgid "Change email"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:205
+#: src/components/AccountSettingsModal.tsx:210
+#: src/components/LoginModal.tsx:121
+#: src/components/SignupModal.tsx:156
+msgid "Password"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:225
+#: src/components/SignupModal.tsx:171
+msgid "Confirm password"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:243
+msgid "Change password"
+msgstr ""
+
+#: src/components/AddUserSite.tsx:59
+msgid "Cancel"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:69
+#: src/components/AccountSettingsModal.tsx:83
+#: src/components/AccountSettingsModal.tsx:110
+#: src/components/AccountSettingsModal.tsx:123
+msgid "Sorry, there was an unexpected error changing your email address"
+msgstr ""
+
+#: src/components/ConstraintChooserItem.tsx:31
+msgid "Select..."
+msgstr ""
+
+#: src/components/LoginModal.tsx:66
+msgid "Login failed"
+msgstr ""
+
+#: src/components/LoginModal.tsx:89
+#: src/components/LoginModal.tsx:143
+#: src/containers/AccountMenu.tsx:62
+msgid "Sign In"
+msgstr ""
+
+#: src/components/LoginModal.tsx:131
+msgid "Forgot your password?"
+msgstr ""
+
+#: src/components/Modal.tsx:48
+#: src/components/ModalCard.tsx:46
+msgid "close"
+msgstr ""
+
+#: src/components/Navbar.tsx:27
+msgid "main navigation"
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:52
+msgid "Sorry, there was an error resetting your password"
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:82
+msgid ""
+"An email has been sent with a link to reset your password. \n"
+"If you don't receive this email, please check your Spam folder."
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:106
+msgid ""
+"Enter your email address to receive an email with a link to reset your "
+"password."
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:149
+msgid "Reset Password"
+msgstr ""
+
+#: src/components/SignupModal.tsx:83
+#: src/components/SignupModal.tsx:98
+msgid "There was an unexpected error while creating your account"
+msgstr ""
+
+#: src/components/SignupModal.tsx:124
+#: src/components/SignupModal.tsx:189
+#: src/containers/AccountMenu.tsx:59
+msgid "Create Account"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:9
+msgid "Or sign in with:"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:12
+msgid "Sign in using a Google account"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:15
+msgid "Sign in using a Facebook account"
+msgstr ""
+
+#: src/components/TraitStep.tsx:7
+msgid "Select traits"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:18
+msgid "Sign in using a Twitter account"
+msgstr ""
+
+#: src/containers/AccountMenu.tsx:72
+msgid "Account Settings"
+msgstr ""
+
+#: src/containers/AccountMenu.tsx:75
+msgid "Sign Out"
+msgstr ""
+
+#: src/containers/AccountMenu.tsx:110
+msgid "Account"
+msgstr ""
+
+#: src/containers/ClimateStep.tsx:31
+msgid "Seedlot climate:"
+msgstr ""
+
+#: src/containers/ClimateStep.tsx:35
+msgid "Planting site climate:"
+msgstr ""
+
+#: src/containers/ClimateStep.tsx:104
+msgid "Select climate scenarios"
+msgstr ""
+
+#: src/containers/ClimateStep.tsx:105
+msgid "Which climate are the seedlots adapted to?"
+msgstr ""
+
+#: src/containers/ClimateStep.tsx:106
+msgid "When should trees be best adapted to the planting site?"
+msgstr ""
+
+#: src/containers/ConstraintStep.tsx:25
+#: src/containers/Traits.tsx:41
+#: src/containers/Variables.tsx:54
+msgid "Name"
+msgstr ""
+
+#: src/containers/ConstraintStep.tsx:26
+#: src/containers/Traits.tsx:42
+msgid "Value"
+msgstr ""
+
+#: src/containers/DistanceConstraint.tsx:20
+msgid "Distance"
+msgstr ""
+
+#: src/containers/ElevationConstraint.tsx:21
+msgid "Elevation"
+msgstr ""
+
+#: src/containers/ErrorModal.tsx:31
+#, javascript-format
+msgid ""
+"If the problem persists, please ${ reportAnIssue } and include the "
+"following information:"
+msgstr ""
+
+#: src/containers/LatitudeConstraint.tsx:16
+msgid "Latitude"
+msgstr ""
+
+#: src/containers/Layers.tsx:55
+msgid "Results"
+msgstr ""
+
+#: src/containers/Layers.tsx:55
+msgid "Run the tool to view results"
+msgstr ""
+
+#: src/containers/Layers.tsx:57
+msgid "Variables"
+msgstr ""
+
+#: src/containers/Layers.tsx:59
+msgid "Select a region and climate scenario to view variables"
+msgstr ""
+
+#: src/containers/Layers.tsx:61
+msgid "Seed Zones"
+msgstr ""
+
+#: src/containers/Layers.tsx:62
+msgid "Layers"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:27
+msgid "Elevation:"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:40
+msgid "Select planting site location"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:40
+msgid "Select seedlot location"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:50
+#: src/containers/UserSites.tsx:29
+msgid "Location"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:53
+#, javascript-format
+msgid "Locate your ${ siteLabel } by using the map or entering coordinates."
+msgstr ""
+
+#: src/containers/LocationStep.tsx:64
+msgid "Map ${ locationLabel }"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:71
+#, javascript-format
+msgid "Optional. Plot ${ plotLabel } on the map for comparison."
+msgstr ""
+
+#: src/containers/LocationStep.tsx:91
+#, javascript-format
+msgid "Add ${ locationLabel }"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:102
+#, javascript-format
+msgid "Locate your ${ siteLabel }"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:105
+msgid "Use the map or enter coordinates"
+msgstr ""
+
+#: src/containers/LongitudeConstraint.tsx:16
+msgid "Longitude"
+msgstr ""
+
+#: src/containers/Map.tsx:715
+msgid "Climate"
+msgstr ""
+
+#: src/containers/Map.tsx:753
+msgid "Available Zones"
+msgstr ""
+
+#: src/containers/ObjectiveStep.tsx:21
+#: src/containers/ObjectiveStep.tsx:28
+msgid "Select objective"
+msgstr ""
+
+#: src/containers/ObjectiveStep.tsx:22
+#: src/containers/ObjectiveStep.tsx:31
+msgid "Find seedlots"
+msgstr ""
+
+#: src/containers/ObjectiveStep.tsx:22
+#: src/containers/ObjectiveStep.tsx:32
+msgid "Find planting sites"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:77
+#, javascript-format
+msgid "${ numberOfHours } hours"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:119
+msgid "Photoperiod"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:123
+msgid "hours"
+msgstr ""
+
+#: src/containers/RegionStep.tsx:32
+msgid "Automatic"
+msgstr ""
+
+#: src/containers/RegionStep.tsx:33
+#: src/containers/TransferStep.tsx:85
+msgid "Custom"
+msgstr ""
+
+#: src/containers/RegionStep.tsx:41
+#: src/containers/RegionStep.tsx:48
+msgid "Select region"
+msgstr ""
+
+#: src/containers/RegionStep.tsx:43
+#: src/containers/RegionStep.tsx:52
+msgid "Region:"
+msgstr ""
+
+#: src/containers/RunConfiguration.tsx:14
+msgid "Calculating scores..."
+msgstr ""
+
+#: src/containers/RunConfiguration.tsx:19
+msgid "Waiting for other jobs to finish..."
+msgstr ""
+
+#: src/containers/RunConfiguration.tsx:21
+msgid ""
+"Another job is currently running. Your job is queued and will run as soon "
+"as other jobs are finished."
+msgstr ""
+
+#: src/containers/RunStep.tsx:59
+#: src/containers/RunStep.tsx:69
+#: src/containers/Variables.tsx:24
+msgid "Configuration error"
+msgstr ""
+
+#: src/containers/RunStep.tsx:60
+msgid ""
+"Cannot calculate scores: one or more of your variables has no transfer "
+"limit, or a limit of 0."
+msgstr ""
+
+#: src/containers/RunStep.tsx:70
+msgid "Cannot calculate scores: one or more of your constraints is missing a value."
+msgstr ""
+
+#: src/containers/RunStep.tsx:81
+msgid "Login required"
+msgstr ""
+
+#: src/containers/RunStep.tsx:81
+msgid "Please login to save your run."
+msgstr ""
+
+#: src/containers/RunStep.tsx:149
+msgid "Map your Results"
+msgstr ""
+
+#: src/containers/RunStep.tsx:159
+msgid "Run Tool"
+msgstr ""
+
+#: src/containers/RunStep.tsx:173
+msgid "Save Last Run"
+msgstr ""
+
+#: src/containers/RunStep.tsx:178
+msgid "Export As..."
+msgstr ""
+
+#: src/containers/RunStep.tsx:203
+msgid "GeoTIFF"
+msgstr ""
+
+#: src/containers/RunStep.tsx:213
+msgid "Move and zoom the map to position it how it should appear in the report"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:8
+msgid "January"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:9
+msgid "February"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:13
+msgid "June"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:14
+msgid "July"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:15
+msgid "August"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:16
+msgid "September"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:17
+msgid "October"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:18
+msgid "November"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:19
+msgid "December"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:67
+msgid "Saved run"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:95
+msgid "Title"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:113
+msgid "Save"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:122
+#, javascript-format
+msgid ""
+"Do you want to update the current configuration, ${ saveTitle }, or save as "
+"a new configuration?"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:133
+msgid "Save as new"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:143
+msgid "Update current"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:152
+msgid "Save Run Configuration"
+msgstr ""
+
+#: src/containers/SavedRun.tsx:51
+msgid "Load this saved configuration? This will replace your current settings."
+msgstr ""
+
+#: src/containers/SavedRun.tsx:62
+msgid "Delete this saved configuration?"
+msgstr ""
+
+#: src/containers/SavedRun.tsx:68
+msgid "Delete"
+msgstr ""
+
+#: src/containers/SavedRun.tsx:73
+msgid "Last modified:"
+msgstr ""
+
+#: src/containers/SavedRuns.tsx:55
+msgid ""
+"You may create an account to save and retrieve your runs. \n"
+"Click on the \"Account\" tab in the upper right to login or create an "
+"account.."
+msgstr ""
+
+#: src/containers/SavedRuns.tsx:63
+msgid "You currently have no saved runs."
+msgstr ""
+
+#: src/containers/SeedZoneChooser.tsx:59
+msgid "No zones at this location..."
+msgstr ""
+
+#: src/containers/SeedZoneChooser.tsx:59
+msgid "Select a location..."
+msgstr ""
+
+#: src/containers/SeedZoneChooser.tsx:92
+msgid "Select zone"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:58
+#: src/containers/ShapefileUpload.tsx:70
+#: src/containers/ShapefileUpload.tsx:84
+#: src/containers/ShapefileUpload.tsx:136
+#: src/containers/ShapefileUpload.tsx:142
+msgid "Error"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:58
+msgid "Cannot process shapefiles larger than 2MB"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:70
+#: src/containers/ShapefileUpload.tsx:84
+msgid "Could not read the zip file"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:115
+msgid ""
+"No projection file found. Assuming WGS84. \n"
+"If you see the wrong projection, try including the prj file."
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:128
+msgid "Warning"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:136
+msgid "Shapefile not loaded"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:142
+msgid "File not supported"
+msgstr ""
+
+#: src/containers/ShapefileUpload.tsx:155
+msgid "Processing..."
+msgstr ""
+
+#: src/containers/SpeciesChooser.tsx:44
+msgid "Select a species"
+msgstr ""
+
+#: src/containers/SpeciesChooser.tsx:53
+msgid "Generic"
+msgstr ""
+
+#: src/containers/Trait.tsx:60
+#: src/containers/Variable.tsx:206
+msgid "Value at point:"
+msgstr ""
+
+#: src/containers/Trait.tsx:66
+#: src/containers/Variable.tsx:209
+msgid "Transfer limit (+/-):"
+msgstr ""
+
+#: src/containers/Traits.tsx:43
+msgid "Transfer Limit (+/-)"
+msgstr ""
+
+#: src/containers/Traits.tsx:60
+msgid "Add a trait..."
+msgstr ""
+
+#: src/containers/TransferStep.tsx:36
+msgid ""
+"Transfer limits based on seed zone, climatic center based on the selected "
+"location"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:39
+msgid "Transfer limits and climatic center based on seed zone"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:42
+msgid "Custom transfer limits, climatic center based on the selected location"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:46
+msgid "Select transfer limit method"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:58
+msgid "Which should be used as the climatic center?"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:64
+msgid "The value at the selected location"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:70
+msgid "The climatic center of the zone"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:86
+msgid "Zone"
+msgstr ""
+
+#: src/containers/TransferStep.tsx:87
+msgid "Function"
+msgstr ""
+
+#: src/containers/UserSites.tsx:30
+msgid "Similarity"
+msgstr ""
+
+#: src/containers/UserSites.tsx:42
+msgid "Remove site"
+msgstr ""
+
+#: src/containers/Variable.tsx:157
+msgid "Zone climatic center:"
+msgstr ""
+
+#: src/containers/Variable.tsx:211
+msgid "modified"
+msgstr ""
+
+#: src/containers/Variable.tsx:215
+msgid "Avg.transfer limit for zone set:"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:38
+msgid "Click to add variables"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:47
+#: src/containers/VariableStep.tsx:54
+msgid "Select climate variables"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:56
+msgid "Units:"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:59
+msgid "Metric"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:60
+msgid "Imperial"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:78
+msgid "Choose automatically"
+msgstr ""
+
+#: src/containers/Variables.tsx:25
+msgid ""
+"You may only add 6 variables to your configuration. \n"
+"Please remove an exiting variable before adding another."
+msgstr ""
+
+#: src/containers/Variables.tsx:56
+msgid "Center"
+msgstr ""
+
+#: src/containers/Variables.tsx:57
+msgid "Transfer limit (+/-)"
+msgstr ""
+
+#: src/containers/Variables.tsx:82
+msgid "Add a variable..."
+msgstr ""
+
+#: src/containers/ConstraintStep.tsx:27
+msgctxt "i.e., Range of values (e.g., from 5 to 10)"
+msgid "Range (+/-)"
+msgstr ""
+
+#: src/containers/DistanceConstraint.tsx:17
+msgctxt "Abbreviation of 'kilometer'"
+msgid "km"
+msgstr ""
+
+#: src/containers/DistanceConstraint.tsx:17
+msgctxt "Abbreviation of 'mile'"
+msgid "mi"
+msgstr ""
+
+#: src/containers/ElevationConstraint.tsx:18
+#: src/containers/Map.tsx:708
+msgctxt "Abbreviation of 'meters'"
+msgid "m"
+msgstr ""
+
+#: src/containers/ElevationConstraint.tsx:18
+#: src/containers/Map.tsx:707
+msgctxt "Abbreviation of 'feet' (measurement)"
+msgid "ft"
+msgstr ""
+
+#: src/containers/ErrorModal.tsx:25
+msgctxt "reportAnIssue"
+msgid "report an issue"
+msgstr ""
+
+#: src/containers/LatitudeConstraint.tsx:16
+msgctxt "Abbreviation of 'North'"
+msgid "N"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:35
+msgctxt "siteLabel"
+msgid "seedlot (its climatic center)"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:35
+msgctxt "siteLabel"
+msgid "planting site"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:36
+msgctxt "locationLabel"
+msgid "Seedlots"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:36
+msgctxt "locationLabel"
+msgid "Planting Sites"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:69
+msgctxt "plotLabel"
+msgid "planting sites"
+msgstr ""
+
+#: src/containers/LocationStep.tsx:69
+msgctxt "plotLabel"
+msgid "seedlots"
+msgstr ""
+
+#: src/containers/LongitudeConstraint.tsx:16
+msgctxt "Abbreviation of 'East'"
+msgid "E"
+msgstr ""
+
+#: src/containers/Map.tsx:582
+msgctxt "as in same or similar objects"
+msgid "Match"
+msgstr ""
+
+#: src/containers/Map.tsx:721
+#: src/containers/UserSites.tsx:49
+msgctxt "i.e., Not Applicable"
+msgid "N/A"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:9
+msgctxt "January"
+msgid "Jan"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:10
+msgctxt "February"
+msgid "Feb"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:11
+msgctxt "March (month)"
+msgid "Mar"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:12
+msgctxt "April (month)"
+msgid "Apr"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:13
+msgctxt "May (month)"
+msgid "May"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:14
+msgctxt "June"
+msgid "Jun"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:15
+msgctxt "July"
+msgid "Jul"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:16
+msgctxt "August"
+msgid "Aug"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:17
+msgctxt "September"
+msgid "Sep"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:18
+msgctxt "October"
+msgid "Oct"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:19
+msgctxt "November"
+msgid "Nov"
+msgstr ""
+
+#: src/containers/PhotoperiodConstraint.tsx:20
+msgctxt "December"
+msgid "Dec"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:10
+msgctxt "month"
+msgid "March"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:11
+msgctxt "month"
+msgid "April"
+msgstr ""
+
+#: src/containers/SaveModal.tsx:12
+msgctxt "month"
+msgid "May"
+msgstr ""
+
+#: src/containers/SavedRun.tsx:57
+msgctxt "e.g., Load configuration"
+msgid "Load"
+msgstr ""
+
+#: src/containers/VariableStep.tsx:70
+msgctxt "e.g., this OR that"
+msgid "OR"
+msgstr ""
+
+#: src/components/AddUserSite.tsx:29
+msgctxt "Abbreviation of 'Latitude'"
+msgid "Lat"
+msgstr ""
+
+#: src/components/AddUserSite.tsx:40
+msgctxt "Abbreviation of 'Longitude'"
+msgid "Lon"
+msgstr ""
+
+#: src/components/AddUserSite.tsx:76
+msgctxt "e.g., 'Add to list'"
+msgid "Add"
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:136
+msgctxt "i.e., hyperlink"
+msgid "Send link"
+msgstr ""

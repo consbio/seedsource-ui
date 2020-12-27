@@ -6,7 +6,8 @@
   "main": "./lib/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json && copyfiles -u 1 src/**/*.jison lib/",
-    "start": "tsc -w -p tsconfig.json"
+    "start": "tsc -w -p tsconfig.json",
+    "localize": "ttag update locales/es/seedsource-ui.po src"
   },
   "author": "Conservation Biology Institute",
   "license": "MIT",
@@ -31,6 +32,7 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.0.0",
     "prettier": "^2.1.2",
+    "ttag-cli": "^1.9.0",
     "react": "16.9.x",
     "react-dom": "16.9.x",
     "react-redux": "7.2.x",
@@ -56,6 +58,7 @@
     "prop-types": "^15.7.2",
     "react-tooltip": "^4.2.10",
     "shpjs": "^3.6.0",
+    "ttag": "^1.7.23",
     "uuid": "^8.3.1"
   }
 }

@@ -30,6 +30,7 @@ const ShapefileConstraint = ({ index, onRemove }: ShapefileConstraintProps) => {
         />
       </td>
       <td>
+        {/* Do not localize */}
         <strong>Shapefile</strong>
       </td>
       <td colSpan={2}>

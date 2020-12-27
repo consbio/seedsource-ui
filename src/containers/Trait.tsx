@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import ReactTooltip from 'react-tooltip'
+import { t } from 'ttag'
 import EditableLabel from '../components/EditableLabel'
 import config from '../config'
 import { removeTrait, setTraitTransfer } from '../actions/traits'
@@ -56,13 +57,13 @@ const Trait = ({ index, trait, traitConfig, onRemove, onTransferChange }: TraitP
           <h5 className="title is-5 margin-bottom-5">{label}</h5>
           {description !== null ? <div className="is-size-7 has-text-grey-lighter">{description}</div> : null}
           <div>
-            <span className="tooltip-label">Value at point:</span>
+            <span className="tooltip-label">{t`Value at point:`}</span>
             <strong>
               {value !== null ? value.toFixed(2) : '--'} {units}
             </strong>
           </div>
           <div>
-            <span className="tooltip-label">Transfer limit (+/-):</span>
+            <span className="tooltip-label">{t`Transfer limit (+/-):`}</span>
             <strong>
               {transfer} {units}
             </strong>

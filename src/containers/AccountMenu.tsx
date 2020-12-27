@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { t } from 'ttag'
 import NavItemDropdown from '../components/NavItemDropdown'
 import SignupModal from '../components/SignupModal'
 import LoginModal from '../components/LoginModal'
@@ -55,10 +56,10 @@ class AccountMenu extends React.Component<ConnectedProps<typeof connector>> {
 
     let dropdown = [
       <a className="navbar-item" onClick={() => this.accountModal?.show()} key="signup">
-        Create Account
+        {t`Create Account`}
       </a>,
       <a className="navbar-item" onClick={() => this.loginModal?.show()} key="signin">
-        Sign In
+        {t`Sign In`}
       </a>,
     ]
 
@@ -68,10 +69,10 @@ class AccountMenu extends React.Component<ConnectedProps<typeof connector>> {
           {email}
         </div>,
         <a className="navbar-item" onClick={() => this.settingsModal?.show()} key="settings">
-          Account Settings
+          {t`Account Settings`}
         </a>,
         <a className="navbar-item" onClick={() => onLogout()} key="signout">
-          Sign Out
+          {t`Sign Out`}
         </a>,
       ]
     }
@@ -106,7 +107,7 @@ class AccountMenu extends React.Component<ConnectedProps<typeof connector>> {
           onChangeEmail={loginEmail => onLogin(loginEmail)}
         />
       </div>,
-      <NavItemDropdown title="Account" right key="menu">
+      <NavItemDropdown title={t`Account`} right key="menu">
         {dropdown}
       </NavItemDropdown>,
     ]

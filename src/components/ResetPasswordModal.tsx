@@ -1,4 +1,5 @@
 import React from 'react'
+import { c, t } from 'ttag'
 import ModalCard from './ModalCard'
 import { post } from '../io'
 
@@ -48,7 +49,7 @@ class ResetPasswordModal extends React.Component<{}, ResetPasswordModalState> {
           }
 
           if (status < 200 || status >= 300) {
-            throw new Error('Sorry, there was an error resetting your password.')
+            throw new Error(t`Sorry, there was an error resetting your password`)
           }
 
           this.setState({ submitted: true, loading: false })
@@ -78,8 +79,8 @@ class ResetPasswordModal extends React.Component<{}, ResetPasswordModalState> {
       content = (
         <article className="message is-success">
           <div className="message-body">
-            An email has been sent with a link to reset your password. If you don&apos;t receive this email, please
-            check your Spam folder.
+            {t`An email has been sent with a link to reset your password. 
+            If you don't receive this email, please check your Spam folder.`}
           </div>
         </article>
       )
@@ -102,7 +103,7 @@ class ResetPasswordModal extends React.Component<{}, ResetPasswordModalState> {
         >
           <article className="message is-dark">
             <div className="message-body">
-              Enter your email address to receive an email with a link to reset your password.
+              {t`Enter your email address to receive an email with a link to reset your password.`}
             </div>
           </article>
           {errorNode}
@@ -114,7 +115,7 @@ class ResetPasswordModal extends React.Component<{}, ResetPasswordModalState> {
                 }}
                 className="input"
                 type="text"
-                placeholder="Email address"
+                placeholder={t`Email address`}
                 name="username"
                 value={emailText || ''}
                 onChange={e => {
@@ -132,7 +133,7 @@ class ResetPasswordModal extends React.Component<{}, ResetPasswordModalState> {
                 onClick={() => this.submit()}
                 disabled={loading || !(emailText || '').trim()}
               >
-                Send link
+                {c('i.e., hyperlink').t`Send link`}
               </button>
             </div>
           </div>
@@ -145,7 +146,7 @@ class ResetPasswordModal extends React.Component<{}, ResetPasswordModalState> {
         ref={input => {
           this.modal = input
         }}
-        title="Reset Password"
+        title={t`Reset Password`}
       >
         {content}
       </ModalCard>

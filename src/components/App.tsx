@@ -14,6 +14,7 @@ const App = ({
   className?: string
 }) => (
   <div className={`seedsource-app ${className}`}>
+    <div id="modal-portal" />
     <ErrorModal />
     <Navbar>{navContent}</Navbar>
 

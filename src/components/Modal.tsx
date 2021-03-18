@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 type ModalProps = {
   active?: boolean
@@ -48,13 +49,19 @@ class Modal extends React.Component<ModalProps, ModalState> {
       )
     }
 
-    return (
-      <div className={`${activeClass} modal`}>
-        <div className="modal-background" onClick={this.hide.bind(this)} />
-        {children}
-        {closeButtonNode}
-      </div>
-    )
+    const portalNode = document.getElementById('modal-portal')
+
+    if (portalNode) {
+      return ReactDOM.createPortal(
+        <div className={`${activeClass} modal`}>
+          <div className="modal-background" onClick={this.hide.bind(this)} />
+          {children}
+          {closeButtonNode}
+        </div>,
+        portalNode,
+      )
+    }
+    return null
   }
 }
 

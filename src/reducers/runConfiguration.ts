@@ -118,7 +118,7 @@ export default (state: any = defaultConfiguration, action: any) => {
         return { ...state, validRegions: action.regions }
 
       case ADD_USER_SITE:
-        return { ...state, userSites: [action.latlonlbl as UserSite, ...state.userSites] }
+        return { ...state, userSites: [{ ...action.latlon, label: action.label } as UserSite, ...state.userSites] }
 
       case REMOVE_USER_SITE:
         return {

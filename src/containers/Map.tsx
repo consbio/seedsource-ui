@@ -110,7 +110,7 @@ const connector = connect(
       },
 
       onAddSite: (lat: number, lon: number, label: string) => {
-        dispatch(addUserSite({ lat, lon, label }))
+        dispatch(addUserSite({ lat, lon }, label))
         dispatch(setMapMode('normal'))
       },
 

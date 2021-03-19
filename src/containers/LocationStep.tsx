@@ -128,6 +128,6 @@ export default connect(
   },
   dispatch => ({
     setMapMode: (mode: string) => dispatch(_setMapMode(mode)),
-    addUserSite: (lat: number, lon: number, label: string) => dispatch(_addUserSite({ lat, lon, label })),
+    addUserSite: (lat: number, lon: number, label: string) => dispatch(_addUserSite({ lat, lon }, label )),
   }),
 )(LocationStep)

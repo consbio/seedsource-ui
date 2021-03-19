@@ -52,12 +52,12 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
           <label>
             <div>Name</div>
             <input
-                className="input is-small"
-                type="text"
-                data-lpignore="true"
-                value={label}
-                style={{width: '183px', textAlign: 'right', marginBottom: '24px'}}
-                onChange={e => this.setState({label: e.target.value})}
+              className="input is-small"
+              type="text"
+              data-lpignore="true"
+              value={label}
+              style={{ width: '183px', textAlign: 'right', marginBottom: '24px' }}
+              onChange={e => this.setState({ label: e.target.value })}
             />
           </label>
         </div>

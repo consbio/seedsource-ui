@@ -37,7 +37,7 @@ export const setElevation = (elevation: number | null) => {
   }
 }
 
-export const addUserSite = (latlonlbl: { lat: number; lon: number, label: string }) => {
+export const addUserSite = (latlonlbl: { lat: number; lon: number; label: string }) => {
   return {
     type: ADD_USER_SITE,
     latlonlbl,
@@ -63,7 +63,7 @@ export const setUserSiteLabel = (label: string, index: number) => {
   return {
     type: SET_USER_SITE_LABEL,
     label,
-    index
+    index,
   }
 }
 

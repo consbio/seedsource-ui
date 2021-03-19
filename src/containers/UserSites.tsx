@@ -11,7 +11,17 @@ type UserSitesProps = {
 }
 
 // custom input element gets focus when mounted
-const NameInput = ({label, index, setUserSiteLabel, setIsEditingName}: {label: string, index: number, setUserSiteLabel: (label: string, index: number) => any, setIsEditingName: (nameIndex: number | null) => any }) => {
+const NameInput = ({
+  label,
+  index,
+  setUserSiteLabel,
+  setIsEditingName,
+}: {
+  label: string
+  index: number
+  setUserSiteLabel: (label: string, index: number) => any
+  setIsEditingName: (nameIndex: number | null) => any
+}) => {
   const nameInputRef = React.useRef<HTMLInputElement>(null)
   React.useEffect(() => {
     if (nameInputRef.current) nameInputRef.current.focus()
@@ -21,7 +31,7 @@ const NameInput = ({label, index, setUserSiteLabel, setIsEditingName}: {label: s
       ref={nameInputRef}
       className="input is-small"
       type="text"
-      value={label ? label : ''}
+      value={label || ''}
       onChange={e => setUserSiteLabel(e.target.value, index)}
       onKeyDown={(e: any) => {
         if (e.key === 'Enter') {
@@ -68,19 +78,24 @@ const UserSite = ({ userSites, removeSite, setActiveSite, setUserSiteLabel }: Us
             <td className="is-narrow">
               <button type="button" className="delete" onClick={() => removeSite(index)} aria-label="Remove site" />
             </td>
-            {isEditingName === index ?
+            {isEditingName === index ? (
               <td>
-                <NameInput label={label} index={index} setUserSiteLabel={setUserSiteLabel} setIsEditingName={setIsEditingName}/>
+                <NameInput
+                  label={label}
+                  index={index}
+                  setUserSiteLabel={setUserSiteLabel}
+                  setIsEditingName={setIsEditingName}
+                />
               </td>
-              :
-              <td style={{cursor: 'pointer'}} onClick={() => setIsEditingName(index)}>
-                {label ?
+            ) : (
+              <td style={{ cursor: 'pointer' }} onClick={() => setIsEditingName(index)}>
+                {label ? (
                   <div style={{ maxWidth: '134px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{label}</div>
-                  :
+                ) : (
                   <div style={{ fontStyle: 'italic', color: 'gray' }}>click to add</div>
-                }
+                )}
               </td>
-            }
+            )}
             <td>
               <strong>
                 {lat}, {lon}
@@ -102,13 +117,13 @@ export default connect(
         lat: lat.toFixed(2),
         lon: lon.toFixed(2),
         score,
-        label
+        label,
       })),
     }
   },
   dispatch => ({
     removeSite: (index: number) => dispatch(removeUserSite(index)),
     setActiveSite: (index: number | null) => dispatch(setActiveUserSite(index)),
-    setUserSiteLabel: (label: string, index: number) => dispatch(setUserSiteLabel(label, index))
+    setUserSiteLabel: (label: string, index: number) => dispatch(setUserSiteLabel(label, index)),
   }),
 )(UserSite)

@@ -141,14 +141,13 @@ export default (state: any = defaultConfiguration, action: any) => {
         }
 
       case SET_USER_SITE_LABEL:
-        const {index, label} = action
         return {
           ...state,
           userSites: [
-            ...state.userSites.slice(0, index),
-            {...state.userSites[index], ...{label}},
-            ...state.userSites.slice(index + 1)
-          ]
+            ...state.userSites.slice(0, action.index),
+            { ...state.userSites[action.index], ...{ label: action.label } },
+            ...state.userSites.slice(action.index + 1),
+          ],
         }
 
       case SET_ACTIVE_USER_SITE:

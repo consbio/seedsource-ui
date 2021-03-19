@@ -84,6 +84,18 @@ $icons: eye eye-closed crop contrast save load file trash clock chevron-top chev
   }
 }
 
+button.is-link {
+  cursor: pointer;
+  border: 0;
+  background: 0;
+  color: $primary-dark;
+  font-size: inherit;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
 .table th {
   vertical-align: bottom;
 }
@@ -317,15 +329,39 @@ $icons: eye eye-closed crop contrast save load file trash clock chevron-top chev
 
 .configuration-step {
   margin-bottom: 14px;
-}
 
-.configuration-step>h4 {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
+  > h4 {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: bold;
 
-.configuration-step .step-content {
-  margin: 10px 0px 0px 35px;
+    .spacer {
+      flex-grow: 1;
+    }
+
+    .dropdown {
+      > button {
+        border: 0;
+        outline: none;
+        background: none;
+        cursor: pointer;
+
+        &:hover, &.active {
+          opacity: .6;
+        }
+
+        img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  .step-content {
+    margin: 10px 0px 0px 35px;
+  }
 }
 
 .constraint-arrow {

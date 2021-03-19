@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import parse from 'csv-parse'
 import ConfigurationStep from './ConfigurationStep'
 import SaveModal from './SaveModal'
 import ModalCard from '../components/ModalCard'
@@ -10,6 +11,7 @@ import { runJob } from '../actions/job'
 import { showSaveModal } from '../actions/saves'
 import { createReport, runTIFJob } from '../actions/report'
 import { reports } from '../config'
+import { clearUploadedPoints, setUploadedPoints } from '../actions/point'
 
 const configurationCanRun = ({ point, variables, traits }: { point: any; variables: any[]; traits: any[] }) => {
   if (point === null || point.x === null || point.y === null) {
@@ -49,6 +51,11 @@ const connector = connect(
     }
   },
   (dispatch: (event: any) => any) => ({
+    onUploadCsv: (headers: { x: string; y: string }, columnOrder: string[], points: { [key: string]: any }[]) =>
+      dispatch(setUploadedPoints(headers, columnOrder, points)),
+
+    onClearCsv: () => dispatch(clearUploadedPoints()),
+
     onRun: (configuration: any) => {
       const { variables, constraints } = configuration
 
@@ -101,17 +108,46 @@ type RunStepProps = ConnectedProps<typeof connector> & {
 type RunStepState = {
   previewModal: boolean
   exportType: string | null
+  processingCsv: boolean
+  csvError: string | null
 }
 
 class RunStep extends React.Component<RunStepProps, RunStepState> {
   static shouldRender = () => true
 
+  fileInputRef?: RefObject<HTMLInputElement>
+
   constructor(props: RunStepProps) {
     super(props)
+
+    this.fileInputRef = React.createRef()
+
     this.state = {
       previewModal: false,
       exportType: null,
+      processingCsv: false,
+      csvError: null,
     }
+  }
+
+  processCSV = (rows: [{ [key: string]: string }]) => {
+    if (!rows.length) {
+      this.setState({ csvError: 'The file is empty.' })
+      return
+    }
+
+    const columns = Object.keys(rows[0])
+    const xCol = ['x', 'lon', 'long', 'longitude'].find(name => columns.includes(name))
+    const yCol = ['y', 'lat', 'latitude'].find(name => columns.includes(name))
+
+    if (!(xCol && yCol)) {
+      this.setState({ csvError: 'The CSV has no latitude and/or longitude column.' })
+      return
+    }
+
+    const points = rows.map(row => ({ ...row, [xCol]: parseFloat(row[xCol]), [yCol]: parseFloat(row[yCol]) }))
+    const { onUploadCsv } = this.props
+    onUploadCsv({ x: xCol, y: yCol }, columns, points)
   }
 
   render() {
@@ -122,30 +158,89 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
       canSave,
       isLoggedIn,
       reportIsFetching,
+      onClearCsv,
       onRun,
       onSave,
       onExport,
       onExportTIF,
     } = this.props
-    const { previewModal } = this.state
-
-    const exportButton = (
-      <button
-        type="button"
-        onClick={() => {
-          const { exportType } = this.state
-
-          this.setState({ previewModal: false })
-          onExport(exportType!)
-        }}
-        className="button is-primary is-large"
-      >
-        Export
-      </button>
-    )
+    const { uploadedPoints } = configuration
+    const { previewModal, processingCsv, csvError } = this.state
 
     return (
-      <ConfigurationStep title="Map your Results" number={number} name="run" active={false}>
+      <ConfigurationStep
+        title="Map your Results"
+        number={number}
+        name="run"
+        active={false}
+        extraOptions={[
+          { label: 'Upload locations to evaluate...', callback: () => this.fileInputRef?.current?.click() },
+          ...(uploadedPoints ? [{ label: 'Clear uploaded locations', callback: () => onClearCsv() }] : []),
+        ]}
+      >
+        <input
+          type="file"
+          className="is-hidden"
+          aria-hidden="true"
+          ref={this.fileInputRef}
+          onChange={({ target: { files } }) => {
+            if (files?.length) {
+              this.setState({ processingCsv: true })
+
+              const file = files[0]
+              const reader = new FileReader()
+
+              reader.onload = e => {
+                if (e.target?.result) {
+                  parse(e.target.result as string, { columns: true }, (err, result) => {
+                    if (err) {
+                      this.setState({ csvError: err.message })
+                    } else {
+                      this.processCSV(result)
+                      this.setState({ processingCsv: false })
+                    }
+                  })
+                }
+              }
+
+              reader.readAsText(file)
+            }
+          }}
+        />
+
+        {(processingCsv || csvError) && (
+          <>
+            <ModalCard
+              title="Uploading CSV"
+              active
+              footer={
+                csvError && (
+                  <div style={{ textAlign: 'right', width: '100%' }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.setState({ csvError: null })
+                      }}
+                      className="button is-primary is-pulled-right"
+                    >
+                      Done
+                    </button>
+                  </div>
+                )
+              }
+            >
+              {csvError ? (
+                <div>{csvError}</div>
+              ) : (
+                <>
+                  <div>Uploading CSV data...</div>
+                  <progress />
+                </>
+              )}
+            </ModalCard>
+          </>
+        )}
+
         <div>
           <button
             type="button"
@@ -210,7 +305,20 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                   this.setState({ previewModal: false })
                 }}
                 title="Position the map for export:"
-                footer={exportButton}
+                footer={(
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const { exportType } = this.state
+
+                      this.setState({ previewModal: false })
+                      onExport(exportType!)
+                    }}
+                    className="button is-primary is-large"
+                  >
+                    Export
+                  </button>
+                )}
               >
                 <div className="map preview-map">
                   <Map simple />

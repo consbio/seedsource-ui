@@ -1,3 +1,4 @@
+import stringify from 'csv-stringify'
 import config from '../config'
 import { executeGPTask } from '../io'
 import { setError } from './error'
@@ -40,7 +41,7 @@ export const runJob = (configuration: any) => {
   const { functions, constraints: constraintsConfig } = config
 
   return (dispatch: (action: any) => any) => {
-    const { variables, traits, objective, climate, region, constraints } = configuration
+    const { variables, traits, objective, climate, region, constraints, uploadedPoints } = configuration
 
     /* Run the tool against the seedlot climate when looking for seedlots, otherwise run against the
      * planting site climate.
@@ -74,14 +75,46 @@ export const runJob = (configuration: any) => {
         const { constraint, serialize } = constraintsConfig.objects[name]
         return { name: constraint, args: serialize(configuration, values) }
       }),
+    } as { region: string; year: string; variables: any; traits: any; constraints: any; points?: any }
+
+    if (uploadedPoints?.points.length) {
+      const { headers, points } = uploadedPoints
+      inputs.points = { headers, points }
     }
 
     dispatch(startJob(configuration))
 
     return executeGPTask('generate_scores', inputs, json => dispatch(receiveJobStatus(json)))
-      .then(() => {
+      .then((json: any) => {
         dispatch(finishJob(configuration))
         dispatch(selectTab('map'))
+
+        const { points } = JSON.parse(json.outputs)
+        if (points?.length) {
+          const { columnOrder } = uploadedPoints
+          const data = [
+            [...columnOrder, 'Climate Match %'],
+            ...points.map((point: any) => [...columnOrder.map((col: string) => point[col] || ''), point.score]),
+          ]
+
+          stringify(data, (err, output) => {
+            const blob = new Blob([output], { type: 'text/csv' })
+            const supportsDownloadAttr = 'download' in document.createElement('a')
+            if (supportsDownloadAttr) {
+              const url = window.URL.createObjectURL(blob)
+              const node = document.createElement('a')
+
+              node.href = url
+              node.download = 'points.csv'
+
+              document.body.appendChild(node)
+              node.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+              document.body.removeChild(node)
+            } else {
+              window.navigator.msSaveBlob(blob, 'points.csv')
+            }
+          })
+        }
       })
       .catch(err => {
         const data = { action: 'runJob' } as { action: string; response?: any }

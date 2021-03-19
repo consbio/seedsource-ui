@@ -16,6 +16,8 @@ import {
   SET_USER_SITE_SCORE,
   SET_USER_SITE_LABEL,
   SET_ACTIVE_USER_SITE,
+  SET_UPLOADED_POINTS,
+  CLEAR_UPLOADED_POINTS,
 } from '../actions/point'
 import { SELECT_SPECIES, RECEIVE_AVAILABLE_SPECIES } from '../actions/species'
 import { SELECT_UNIT, SELECT_METHOD, SELECT_CENTER, REMOVE_VARIABLE, SET_DEFAULT_VARIABLES } from '../actions/variables'
@@ -51,6 +53,7 @@ const defaultConfiguration = {
   constraints: [],
   userSites: [] as UserSite[],
   activeUserSite: null,
+  uploadedPoints: null,
 }
 
 export default (state: any = defaultConfiguration, action: any) => {
@@ -154,6 +157,18 @@ export default (state: any = defaultConfiguration, action: any) => {
         return {
           ...state,
           activeUserSite: action.index,
+        }
+
+      case SET_UPLOADED_POINTS:
+        return {
+          ...state,
+          uploadedPoints: { headers: action.headers, columnOrder: action.columnOrder, points: action.points },
+        }
+
+      case CLEAR_UPLOADED_POINTS:
+        return {
+          ...state,
+          uploadedPoints: null,
         }
 
       case SET_DEFAULT_VARIABLES:

@@ -109,8 +109,8 @@ const connector = connect(
         dispatch(setPoint(lat, lon))
       },
 
-      onAddSite: (lat: number, lon: number) => {
-        dispatch(addUserSite({ lat, lon }))
+      onAddSite: (lat: number, lon: number, label: string) => {
+        dispatch(addUserSite({ lat, lon }, label))
         dispatch(setMapMode('normal'))
       },
 
@@ -769,7 +769,7 @@ class Map extends React.Component<MapProps> {
 
                     if (newMode === 'add_sites') {
                       const { onAddSite } = this.props
-                      onAddSite(newPoint.y, newPoint.x)
+                      onAddSite(newPoint.y, newPoint.x, '')
                     } else {
                       const { onMapClick } = this.props
                       onMapClick(newPoint.y, newPoint.x)

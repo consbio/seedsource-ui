@@ -13,7 +13,7 @@ type LocationStepProps = {
   elevation?: any
   mode: string
   setMapMode: (mode: string) => any
-  addUserSite: (lat: number, lon: number) => any
+  addUserSite: (lat: number, lon: number, label: string) => any
 }
 
 const LocationStep = ({ objective, number, elevation, mode, setMapMode, addUserSite }: LocationStepProps) => {
@@ -128,6 +128,6 @@ export default connect(
   },
   dispatch => ({
     setMapMode: (mode: string) => dispatch(_setMapMode(mode)),
-    addUserSite: (lat: number, lon: number) => dispatch(_addUserSite({ lat, lon })),
+    addUserSite: (lat: number, lon: number, label: string) => dispatch(_addUserSite({ lat, lon }, label )),
   }),
 )(LocationStep)

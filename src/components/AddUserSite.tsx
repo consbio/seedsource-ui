@@ -18,12 +18,29 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
     this.state = { lat: '', lon: '', label: '' }
   }
 
+  submit = () => {
+    const { lat, lon, label } = this.state
+    const { onAddUserSite } = this.props
+
+    const latF = parseFloat(lat)
+    const lonF = parseFloat(lon)
+
+    if (latF && lonF) {
+      onAddUserSite(latF, lonF, label)
+    }
+  }
+
   render() {
-    const { onClose, onAddUserSite } = this.props
+    const { onClose } = this.props
     const { lat, lon, label } = this.state
 
     return (
-      <>
+      <form
+        onSubmit={() => {
+          this.submit()
+          return false
+        }}
+      >
         <div className="columns is-mobile" style={{ marginBottom: '0' }}>
           <label className="column is-narrow">
             <div>Lat</div>
@@ -56,7 +73,7 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
               type="text"
               data-lpignore="true"
               value={label}
-              style={{ width: '183px', textAlign: 'right', marginBottom: '24px' }}
+              style={{ width: '183px', marginBottom: '24px' }}
               onChange={e => this.setState({ label: e.target.value })}
             />
           </label>
@@ -74,22 +91,14 @@ export default class AddUserSite extends React.Component<AddUserSiteProps, AddUs
 
           <button
             className="button is-primary"
-            type="button"
+            type="submit"
             style={{ marginLeft: '10px' }}
             disabled={!(parseFloat(lat) && parseFloat(lon))}
-            onClick={() => {
-              const latF = parseFloat(lat)
-              const lonF = parseFloat(lon)
-
-              if (latF && lonF) {
-                onAddUserSite(latF, lonF, label)
-              }
-            }}
           >
             Add
           </button>
         </div>
-      </>
+      </form>
     )
   }
 }

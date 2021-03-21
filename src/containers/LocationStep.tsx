@@ -4,19 +4,19 @@ import ConfigurationStep from './ConfigurationStep'
 import PointChooser from './PointChooser'
 import AddUserSite from '../components/AddUserSite'
 import UserSites from './UserSites'
-import { setMapMode as _setMapMode } from '../actions/map'
-import { addUserSite as _addUserSite } from '../actions/point'
+import { setMapMode } from '../actions/map'
+import { addUserSite } from '../actions/point'
 
 type LocationStepProps = {
   objective: string
   number: number
   elevation?: any
   mode: string
-  setMapMode: (mode: string) => any
-  addUserSite: (lat: number, lon: number, label: string) => any
+  onSetMapMode: (mode: string) => any
+  onAddUserSite: (lat: number, lon: number, label: string) => any
 }
 
-const LocationStep = ({ objective, number, elevation, mode, setMapMode, addUserSite }: LocationStepProps) => {
+const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddUserSite }: LocationStepProps) => {
   const flag = (window as any).waffle.flag_is_active('map-seedlots')
 
   const elevationNode =
@@ -67,16 +67,16 @@ const LocationStep = ({ objective, number, elevation, mode, setMapMode, addUserS
               {mode === 'add_sites' ? (
                 <AddUserSite
                   onClose={() => {
-                    setMapMode('normal')
+                    onSetMapMode('normal')
                   }}
-                  onAddUserSite={addUserSite}
+                  onAddUserSite={onAddUserSite}
                 />
               ) : (
                 <button
                   className="button is-primary"
                   type="button"
                   onClick={() => {
-                    setMapMode('add_sites')
+                    onSetMapMode('add_sites')
                   }}
                 >
                   Add {objective === 'seedlots' ? 'Seedlots' : 'Planting Sites'}
@@ -127,7 +127,10 @@ export default connect(
     return { objective, point, elevation, mode }
   },
   dispatch => ({
-    setMapMode: (mode: string) => dispatch(_setMapMode(mode)),
-    addUserSite: (lat: number, lon: number, label: string) => dispatch(_addUserSite({ lat, lon }, label )),
+    onSetMapMode: (mode: string) => dispatch(setMapMode(mode)),
+    onAddUserSite: (lat: number, lon: number, label: string) => {
+      dispatch(addUserSite({ lat, lon }, label))
+      dispatch(setMapMode('normal'))
+    },
   }),
 )(LocationStep)

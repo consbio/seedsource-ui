@@ -66,7 +66,7 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
               <div className="is-size-7 is-italic">
                 {(() => {
                   const plotLabel =
-                    objective === 'seedlots' ? c('plotLabel').t`planting sites` : c('plotLabel').t`seedlots`
+                    objective === 'seedlots' ? c('plotLabel').t`seedlots` : c('plotLabel').t`planting sites`
 
                   return jt`Optional. Plot ${plotLabel} on the map for comparison.`
                 })()}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { t } from 'ttag'
+import { t, jt } from 'ttag'
 import { selectSpecies } from '../actions/species'
 import config from '../config'
 
@@ -36,12 +36,12 @@ type SpeciesChooserProps = ConnectedProps<typeof connector> & {
 }
 
 const SpeciesChooser = ({ species, generic, onSpeciesChange, availableSpecies }: SpeciesChooserProps) => {
-  const { species: speciesList } = config
+  const { species: speciesList, speciesLabel: label } = config
   const availableSpeciesList = speciesList.filter(item => availableSpecies.includes(item.name))
 
   return (
     <div>
-      <h5 className="title is-5 is-marginless">{t`Select a species`}</h5>
+      <h5 className="title is-5 is-marginless">{jt`Select a ${label}`}</h5>
       <div className="select">
         <select
           value={species}

@@ -21,6 +21,7 @@ export interface Config {
   apiRoot: string
   logo: string
   navbarClass: string
+  speciesLabel: string
   labels: any[]
   functions: any[]
   species: any[]
@@ -34,6 +35,7 @@ export interface PartialConfig {
   apiRoot: string
   logo?: string
   navbarClass?: string
+  speciesLabel?: string
   labels?: any[]
   functions?: any[]
   species: any[]
@@ -54,6 +56,7 @@ if (!window.SEEDSOURCE_UI_CONFIG) {
     apiRoot: '/sst/',
     logo: '',
     navbarClass: '',
+    speciesLabel: 'species',
     labels: [],
     functions: [],
     species: [],

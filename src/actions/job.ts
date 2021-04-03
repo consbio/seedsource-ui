@@ -62,7 +62,7 @@ export const runJob = (configuration: any) => {
       }),
       traits: traits.map((item: any) => {
         const { name, value, transfer: customTransfer } = item
-        const traitConfig = functions.find((trait: any) => trait.name === trait)
+        const traitConfig = functions.find((trait: any) => trait.name === name)
         const { transfer: defaultTransfer, fn } = traitConfig
         const transfer = customTransfer === null ? defaultTransfer : customTransfer
         return {

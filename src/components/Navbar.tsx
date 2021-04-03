@@ -28,7 +28,7 @@ class Navbar extends React.Component<{}, NavbarState> {
       >
         <div className="navbar-brand">
           <div className="navbar-item">
-            {logo !== null ? <img src={logo} className="image is-24x24 margin-right-5" alt={title} /> : null}
+            {logo && <img src={logo} className="image is-24x24 margin-right-5" alt={title} />}
             <span className="is-size-4 is-size-5-mobile has-text-weight-bold">{title}</span>
           </div>
           <div

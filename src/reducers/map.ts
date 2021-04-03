@@ -23,7 +23,7 @@ export default (state = defaultState, action: any) => {
       return { ...state, center: action.center }
 
     case LOAD_CONFIGURATION:
-      return { ...state, center: [action.configruation.point.y, action.configuration.point.x] }
+      return { ...state, center: [action.configuration.point.y, action.configuration.point.x] }
 
     case SET_MAP_MODE:
       return { ...state, mode: action.mode }

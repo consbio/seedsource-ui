@@ -1,14 +1,31 @@
 import React from 'react'
 import { t } from 'ttag'
+import { connect, ConnectedProps } from 'react-redux'
 import ConfigurationStep from '../containers/ConfigurationStep'
 import Traits from '../containers/Traits'
 
-const TraitStep = ({ number }: { number: number }) => (
-  <ConfigurationStep title={t`Select traits`} number={number} name="traits" active>
-    <Traits />
-  </ConfigurationStep>
-)
+const connector = connect(({ runConfiguration }: { runConfiguration: any }) => {
+  const { method } = runConfiguration
+
+  return { method }
+})
+
+type TraitStepProps = ConnectedProps<typeof connector> & {
+  number: number
+}
+
+const TraitStep = ({ number, method }: TraitStepProps) => {
+  if (method !== 'function') {
+    return null
+  }
+
+  return (
+    <ConfigurationStep title={t`Select traits`} number={number} name="traits" active>
+      <Traits />
+    </ConfigurationStep>
+  )
+}
 
 TraitStep.shouldRender = ({ runConfiguration }: { runConfiguration: any }) => runConfiguration.method === 'function'
 
-export default TraitStep
+export default connector(TraitStep)

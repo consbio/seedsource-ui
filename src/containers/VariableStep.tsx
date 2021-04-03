@@ -9,9 +9,9 @@ import { addVariables, setDefaultVariables } from '../actions/variables'
 
 const connector = connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
-    const { variables } = runConfiguration
+    const { variables, method } = runConfiguration
 
-    return { variables }
+    return { variables, method }
   },
   dispatch => ({
     setDefaultVariables: () => {
@@ -28,7 +28,11 @@ type VariableStepProps = ConnectedProps<typeof connector> & {
   active: boolean
 }
 
-const VariableStep = ({ number, active, variables, setDefaultVariables }: VariableStepProps) => {
+const VariableStep = ({ number, active, variables, method, setDefaultVariables }: VariableStepProps) => {
+  if (method === 'function') {
+    return null
+  }
+
   const { defaultVariables } = config
   const flag = (window as any).waffle.flag_is_active('default-vars')
 
@@ -82,7 +86,5 @@ const VariableStep = ({ number, active, variables, setDefaultVariables }: Variab
     </ConfigurationStep>
   )
 }
-
-VariableStep.shouldRender = ({ runConfiguration }: any) => runConfiguration.method !== 'function'
 
 export default connector(VariableStep)

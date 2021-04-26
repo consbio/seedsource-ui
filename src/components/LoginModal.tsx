@@ -145,8 +145,6 @@ class LoginModal extends React.Component<LoginModalProps, LoginModalState> {
             </div>
           </div>
         </form>
-        <hr />
-        <SocialLogin />
       </ModalCard>
     )
   }

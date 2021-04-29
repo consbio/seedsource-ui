@@ -80,19 +80,24 @@ const Comparisons = ({
                 parse(e.target.result as string, { columns: true }, (err, rows: [{ [key: string]: string }]) => {
                   if (err) {
                     setCSVError(err.message)
+                    setProcessingCSV(false)
                   } else {
                     if (!rows.length) {
                       setCSVError('The file is empty.')
+                      setProcessingCSV(false)
                       return
                     }
 
                     const columns = Object.keys(rows[0])
-                    const xCol = ['x', 'lon', 'long', 'longitude'].find(name => columns.includes(name))
-                    const yCol = ['y', 'lat', 'latitude'].find(name => columns.includes(name))
-                    const labelCol = ['name', 'label'].find(name => columns.includes(name))
+                    const xCol = columns.find(name =>
+                      ['x', 'lon', 'long', 'longitude'].includes(name.toLowerCase().trim()),
+                    )
+                    const yCol = columns.find(name => ['y', 'lat', 'latitude'].includes(name.toLowerCase().trim()))
+                    const labelCol = columns.find(name => ['name', 'label'].includes(name.toLowerCase().trim()))
 
                     if (!(xCol && yCol)) {
                       setCSVError('The CSV has no latitude and/or longitude column.')
+                      setProcessingCSV(false)
                       return
                     }
 
@@ -409,6 +414,7 @@ const Comparisons = ({
                     type="button"
                     onClick={() => {
                       setCSVError(null)
+                      setProcessingCSV(false)
                     }}
                     className="button is-primary is-pulled-right"
                   >

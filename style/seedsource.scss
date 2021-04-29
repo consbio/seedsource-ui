@@ -567,6 +567,14 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
         position: sticky;
         top: 0;
         background: white;
+        z-index: 1;
+      }
+
+      tbody tr:last-child td {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        z-index: 1;
       }
     }
   }

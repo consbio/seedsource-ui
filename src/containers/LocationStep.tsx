@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { t, c, jt } from 'ttag'
 import ConfigurationStep from './ConfigurationStep'
 import PointChooser from './PointChooser'
-import AddUserSite from '../components/AddUserSite'
-import UserSites from './UserSites'
 import { setMapMode } from '../actions/map'
 import { addUserSite } from '../actions/point'
 
@@ -12,14 +10,9 @@ type LocationStepProps = {
   objective: string
   number: number
   elevation?: any
-  mode: string
-  onSetMapMode: (mode: string) => any
-  onAddUserSite: (lat: number, lon: number, label: string) => any
 }
 
-const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddUserSite }: LocationStepProps) => {
-  const flag = (window as any).waffle.flag_is_active('map-seedlots')
-
+const LocationStep = ({ objective, number, elevation }: LocationStepProps) => {
   const elevationNode =
     elevation !== null ? (
       <div>
@@ -33,7 +26,6 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
 
   const siteLabel =
     objective === 'sites' ? c('siteLabel').t`seedlot (its climatic center)` : c('siteLabel').t`planting site`
-  const locationLabel = objective === 'seedlots' ? c('locationLabel').t`Seedlots` : c('locationLabel').t`Planting Sites`
 
   return (
     <ConfigurationStep
@@ -42,77 +34,20 @@ const LocationStep = ({ objective, number, elevation, mode, onSetMapMode, onAddU
       name="location"
       active
     >
-      {flag ? (
-        <>
-          <div className="columns">
-            <div className="column is-narrow" style={{ width: '185px' }}>
-              <h4 className="title is-6" style={{ marginBottom: '0' }}>
-                {t`Location`}
-              </h4>
-              <div className="is-size-7 is-italic">
-                {jt`Locate your ${siteLabel} by using the map or entering coordinates.`}
-              </div>
-            </div>
-            <div className="column">
-              <PointChooser />
-              {elevationNode}
-            </div>
+      <div className="columns">
+        <div className="column is-narrow" style={{ width: '185px' }}>
+          <h4 className="title is-6" style={{ marginBottom: '0' }}>
+            {t`Location`}
+          </h4>
+          <div className="is-size-7 is-italic">
+            {jt`Locate your ${siteLabel} by using the map or entering coordinates.`}
           </div>
-          <div className="columns">
-            <div className="column is-narrow" style={{ width: '185px' }}>
-              <h4 className="title is-6" style={{ marginBottom: '0' }}>
-                {jt`Map ${locationLabel}`}
-              </h4>
-              <div className="is-size-7 is-italic">
-                {(() => {
-                  const plotLabel =
-                    objective === 'seedlots' ? c('plotLabel').t`seedlots` : c('plotLabel').t`planting sites`
-
-                  return jt`Optional. Plot ${plotLabel} on the map for comparison.`
-                })()}
-              </div>
-            </div>
-            <div className="column">
-              {mode === 'add_sites' ? (
-                <AddUserSite
-                  onClose={() => {
-                    onSetMapMode('normal')
-                  }}
-                  onAddUserSite={onAddUserSite}
-                />
-              ) : (
-                <button
-                  className="button is-primary"
-                  type="button"
-                  onClick={() => {
-                    onSetMapMode('add_sites')
-                  }}
-                >
-                  {jt`Add ${locationLabel}`}
-                </button>
-              )}
-            </div>
-          </div>
-          <UserSites />
-        </>
-      ) : (
-        <>
-          <div className="is-size-7">
-            <div>
-              <em>{jt`Locate your ${siteLabel}`}</em>
-            </div>
-            <div>
-              <em>{t`Use the map or enter coordinates`}</em>
-            </div>
-          </div>
-
-          <div>&nbsp;</div>
-
+        </div>
+        <div className="column">
           <PointChooser />
-          {elevationNode !== null ? <div>&nbsp;</div> : null}
           {elevationNode}
-        </>
-      )}
+        </div>
+      </div>
     </ConfigurationStep>
   )
 }

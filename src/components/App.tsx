@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ErrorModal from '../containers/ErrorModal'
 import Navbar from './Navbar'
 import Map from '../containers/Map'
+import Comparisons from '../containers/Comparisons'
 
 const App = ({
   navContent,
@@ -22,6 +23,7 @@ const App = ({
       <div className="column is-narrow sidebar">{children}</div>
       <div className="column map">
         <Map />
+        <Comparisons />
       </div>
     </div>
   </div>

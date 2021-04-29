@@ -1,6 +1,5 @@
 import React, { RefObject } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import parse from 'csv-parse'
 import { t } from 'ttag'
 import ConfigurationStep from './ConfigurationStep'
 import SaveModal from './SaveModal'
@@ -12,7 +11,6 @@ import { runJob } from '../actions/job'
 import { showSaveModal } from '../actions/saves'
 import { createReport, runTIFJob } from '../actions/report'
 import { reports } from '../config'
-import { clearUploadedPoints, setUploadedPoints } from '../actions/point'
 
 const configurationCanRun = ({ point, variables, traits }: { point: any; variables: any[]; traits: any[] }) => {
   if (point === null || point.x === null || point.y === null) {
@@ -52,11 +50,6 @@ const connector = connect(
     }
   },
   (dispatch: (event: any) => any) => ({
-    onUploadCsv: (headers: { x: string; y: string }, columnOrder: string[], points: { [key: string]: any }[]) =>
-      dispatch(setUploadedPoints(headers, columnOrder, points)),
-
-    onClearCsv: () => dispatch(clearUploadedPoints()),
-
     onRun: (configuration: any) => {
       const { variables, constraints } = configuration
 
@@ -131,26 +124,6 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
     }
   }
 
-  processCSV = (rows: [{ [key: string]: string }]) => {
-    if (!rows.length) {
-      this.setState({ csvError: 'The file is empty.' })
-      return
-    }
-
-    const columns = Object.keys(rows[0])
-    const xCol = ['x', 'lon', 'long', 'longitude'].find(name => columns.includes(name))
-    const yCol = ['y', 'lat', 'latitude'].find(name => columns.includes(name))
-
-    if (!(xCol && yCol)) {
-      this.setState({ csvError: 'The CSV has no latitude and/or longitude column.' })
-      return
-    }
-
-    const points = rows.map(row => ({ ...row, [xCol]: parseFloat(row[xCol]), [yCol]: parseFloat(row[yCol]) }))
-    const { onUploadCsv } = this.props
-    onUploadCsv({ x: xCol, y: yCol }, columns, points)
-  }
-
   render() {
     const {
       number,
@@ -159,56 +132,15 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
       canSave,
       isLoggedIn,
       reportIsFetching,
-      onClearCsv,
       onRun,
       onSave,
       onExport,
       onExportTIF,
     } = this.props
-    const { uploadedPoints } = configuration
     const { previewModal, processingCsv, csvError } = this.state
 
     return (
-      <ConfigurationStep
-        title="Map your Results"
-        number={number}
-        name="run"
-        active={false}
-        extraOptions={[
-          { label: 'Upload locations to evaluate...', callback: () => this.fileInputRef?.current?.click() },
-          ...(uploadedPoints ? [{ label: 'Clear uploaded locations', callback: () => onClearCsv() }] : []),
-        ]}
-      >
-        <input
-          type="file"
-          className="is-hidden"
-          aria-hidden="true"
-          ref={this.fileInputRef}
-          onChange={({ target: { files } }) => {
-            if (files?.length) {
-              this.setState({ processingCsv: true })
-
-              const file = files[0]
-              const reader = new FileReader()
-
-              reader.onload = e => {
-                if (e.target?.result) {
-                  parse(e.target.result as string, { columns: true }, (err, result) => {
-                    if (err) {
-                      this.setState({ csvError: err.message })
-                    } else {
-                      this.processCSV(result)
-                      this.setState({ processingCsv: false })
-                    }
-                  })
-                }
-              }
-
-              reader.readAsText(file)
-            }
-          }}
-        />
-
+      <ConfigurationStep title="Map your Results" number={number} name="run" active={false}>
         {(processingCsv || csvError) && (
           <>
             <ModalCard

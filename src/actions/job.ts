@@ -1,8 +1,9 @@
-import stringify from 'csv-stringify'
 import config from '../config'
 import { executeGPTask } from '../io'
 import { setError } from './error'
 import { selectTab } from './tabs'
+import { UserSite } from '../reducers/runConfiguration'
+import { setUserSiteScore } from './point'
 
 export const START_JOB = 'START_JOB'
 export const FAIL_JOB = 'FAIL_JOB'
@@ -41,7 +42,7 @@ export const runJob = (configuration: any) => {
   const { functions, constraints: constraintsConfig } = config
 
   return (dispatch: (action: any) => any) => {
-    const { variables, traits, objective, climate, region, constraints, uploadedPoints } = configuration
+    const { variables, traits, objective, climate, region, constraints, userSites } = configuration
 
     /* Run the tool against the seedlot climate when looking for seedlots, otherwise run against the
      * planting site climate.
@@ -77,9 +78,11 @@ export const runJob = (configuration: any) => {
       }),
     } as { region: string; year: string; variables: any; traits: any; constraints: any; points?: any }
 
-    if (uploadedPoints?.points.length) {
-      const { headers, points } = uploadedPoints
-      inputs.points = { headers, points }
+    if (userSites.length) {
+      inputs.points = {
+        headers: { x: 'lon', y: 'lat' },
+        points: userSites.map(({ lat, lon }: UserSite) => ({ lat, lon })),
+      }
     }
 
     dispatch(startJob(configuration))
@@ -91,28 +94,8 @@ export const runJob = (configuration: any) => {
 
         const { points } = JSON.parse(json.outputs)
         if (points?.length) {
-          const { columnOrder } = uploadedPoints
-          const data = [
-            [...columnOrder, 'Climate Match %'],
-            ...points.map((point: any) => [...columnOrder.map((col: string) => point[col] || ''), point.score]),
-          ]
-
-          stringify(data, (err, output) => {
-            const blob = new Blob([output], { type: 'text/csv' })
-            const supportsDownloadAttr = 'download' in document.createElement('a')
-            if (supportsDownloadAttr) {
-              const url = window.URL.createObjectURL(blob)
-              const node = document.createElement('a')
-
-              node.href = url
-              node.download = 'points.csv'
-
-              document.body.appendChild(node)
-              node.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
-              document.body.removeChild(node)
-            } else {
-              window.navigator.msSaveBlob(blob, 'points.csv')
-            }
+          points.forEach(({ lat, lon, score, deltas }: { lat: number; lon: number; score: number; deltas?: any }) => {
+            dispatch(setUserSiteScore({ lat, lon }, score, deltas))
           })
         }
       })

@@ -4,7 +4,7 @@ import stringify from 'csv-stringify'
 import { t } from 'ttag'
 import parse from 'csv-parse'
 import { UserSite } from '../reducers/runConfiguration'
-import { addUserSite, addUserSites, removeUserSite, setUserSiteLabel } from '../actions/point'
+import { addUserSite, addUserSites, removeUserSite, setUserSiteLabel, setActiveUserSite } from '../actions/point'
 import { setMapMode } from '../actions/map'
 import ModalCard from '../components/ModalCard'
 import { variables } from '../config'
@@ -33,6 +33,7 @@ const connector = connect(
     },
     onAddUserSites: (sites: { latlon: { lat: number; lon: number }; label: string }[]) => dispatch(addUserSites(sites)),
     onSetUserSiteLabel: (label: string, index: number) => dispatch(setUserSiteLabel(label, index)),
+    onMouseOverSite: (index: number | null) => dispatch(setActiveUserSite(index)),
     onSetMapMode: (mode: string) => dispatch(setMapMode(mode)),
   }),
 )
@@ -47,6 +48,7 @@ const Comparisons = ({
   onAddUserSite,
   onAddUserSites,
   onSetUserSiteLabel,
+  onMouseOverSite,
   onSetMapMode,
 }: ComparisonsProps) => {
   const [active, setActive] = React.useState(false)
@@ -150,7 +152,13 @@ const Comparisons = ({
             {userSites.map((site, index) => {
               const editRow = activeEdit && activeEdit.lat === site.lat && activeEdit.lon === site.lon
               return (
-                <tr key={`${site.lat},${site.lon}`}>
+                <tr
+                  key={`${site.lat},${site.lon}`}
+                  onFocus={() => onMouseOverSite(index)}
+                  onBlur={() => onMouseOverSite(null)}
+                  onMouseOver={() => onMouseOverSite(index)}
+                  onMouseOut={() => onMouseOverSite(null)}
+                >
                   <td>
                     <button
                       type="button"

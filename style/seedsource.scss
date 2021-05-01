@@ -530,6 +530,7 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
     height: 60px;
     background-color: white;
     overflow: hidden;
+    transition: height .5s;
 
     &.active {
       height: 67%;

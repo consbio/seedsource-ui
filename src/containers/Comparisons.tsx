@@ -230,7 +230,7 @@ const Comparisons = ({
                         value /= variableConfig.multiplier
                       }
 
-                      return <td>{value}</td>
+                      return <td>{Number(value.toFixed(1))}</td>
                     }
 
                     return <td>N/A</td>

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { t } from 'ttag'
 import { selectZone } from '../actions/zones'
+import { getZoneLabel } from '../utils'
 
 const connector = connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
@@ -27,22 +28,6 @@ const connector = connect(
     }
   },
 )
-
-const getZoneLabel = (zone?: any) => {
-  if (zone === undefined) {
-    return null
-  }
-
-  let label = zone.name
-
-  if (zone.elevation_band && zone.elevation_band.length > 2) {
-    label += ` ${zone.elevation_band[2]}`
-  } else if (zone.elevation_band) {
-    label += `, ${zone.elevation_band[0]}' - ${zone.elevation_band[1]}'`
-  }
-
-  return label
-}
 
 const SeedZoneChooser = ({
   method,

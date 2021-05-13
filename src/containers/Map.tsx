@@ -16,7 +16,7 @@ import 'leaflet-range/L.Control.Range'
 import { t, c } from 'ttag'
 
 import * as io from '../io'
-import { getLayerUrl, isClose } from '../utils'
+import { getLayerUrl, isClose, getZoneLabel } from '../utils'
 import config, { variables as allVariables, timeLabels, regions, regionsBoundariesUrl } from '../config'
 import { setMapOpacity, setBasemap, setZoom, setMapCenter, setMapMode } from '../actions/map'
 import { toggleLayer } from '../actions/layers'
@@ -751,9 +751,9 @@ class Map extends React.Component<MapProps> {
                 {!!zones.length && (
                   <>
                     <h6 className="title is-6">{t`Available Zones`}</h6>
-                    <ul>
-                      {zones.map(({ name }: { name: string }) => (
-                        <li>{name}</li>
+                    <ul className="popup-zones">
+                      {zones.map((item: any) => (
+                        <li key={item.id}>{getZoneLabel(item)}</li>
                       ))}
                     </ul>
                   </>

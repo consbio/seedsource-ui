@@ -621,6 +621,12 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
   td:last-child {
     text-align: right;
   }
+
+  .popup-zones li {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .leaflet-button {

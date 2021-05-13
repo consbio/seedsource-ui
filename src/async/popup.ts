@@ -87,9 +87,10 @@ export default (store: any) =>
                 dispatch(
                   receivePopupZones(
                     // eslint-disable-next-line camelcase
-                    json.results.map((zone: { zone_uid: string; name: string }) => ({
+                    json.results.map((zone: any) => ({
                       id: zone.zone_uid,
                       name: zone.name,
+                      elevation_band: zone.elevation_band,
                     })),
                   ),
                 ),

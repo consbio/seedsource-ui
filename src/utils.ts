@@ -90,3 +90,19 @@ export const formatClimate = (year: string, model: string) => {
   }
   return label
 }
+
+export const getZoneLabel = (zone?: any) => {
+  if (zone === undefined) {
+    return null
+  }
+
+  let label = zone.name
+
+  if (zone.elevation_band && zone.elevation_band.length > 2 && zone.elevation_band[2].trim()) {
+    label += ` ${zone.elevation_band[2]}`
+  } else if (zone.elevation_band) {
+    label += `, ${zone.elevation_band[0]}' - ${zone.elevation_band[1]}'`
+  }
+
+  return label
+}

@@ -237,7 +237,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                 onHide={() => {
                   this.setState({ previewModal: false })
                 }}
-                title={t`Move and zoom the map to position it how it should appear in the report`}
+                title={t`Position Map`}
                 footer={(
                   <button
                     type="button"
@@ -254,6 +254,9 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                 )}
               >
                 <div className="map preview-map">
+                  <div style={{ margin: '10px' }}>
+                    {t`Move and zoom the map to set how it will appear in the report.`}
+                  </div>
                   <Map simple />
                 </div>
               </ModalCard>

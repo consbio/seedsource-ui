@@ -4,15 +4,13 @@ import { t } from 'ttag'
 import config from '../config'
 import { get } from '../io'
 import { toggleLayer, loadTiles } from '../actions/layers'
-import { toggleCustomLayer, removeCustomLayer } from '../actions/customLayers'
 import ShapefileUpload from './ShapefileUpload'
+import CustomLayer from './CustomLayer'
 
 type LayersProps = {
   layers: any[]
   customLayers: any[]
   onToggleLayer: (name: string) => any
-  onToggleCustomLayer: (index: number) => any
-  onRemoveCustomLayer: (index: number) => any
   onLoadTiles: (tiles: any) => any
 }
 
@@ -54,7 +52,7 @@ class Layers extends React.Component<LayersProps> {
   }
 
   render() {
-    const { onToggleLayer, layers, customLayers, onToggleCustomLayer, onRemoveCustomLayer } = this.props
+    const { onToggleLayer, layers, customLayers } = this.props
     const { state }: { state: any } = this
 
     const categories: any = {
@@ -95,31 +93,7 @@ class Layers extends React.Component<LayersProps> {
               </div>
             </ShapefileUpload>
           </div>,
-          customLayers.map((layer, index) => (
-            <li className="layer-list" key={`${layer.filename}_${index}`}>
-              <input
-                className="is-checkradio"
-                type="checkbox"
-                value={layer.filename}
-                checked={layer.displayed}
-                readOnly
-              />
-              <label onClick={() => onToggleCustomLayer(index)}>{layer.filename}</label>
-              <div
-                className="delete"
-                style={{
-                  display: 'inline-block',
-                  borderRadius: '100%',
-                  background: 'rgba(10, 10, 10, 0.2)',
-                  float: 'right',
-                }}
-                onClick={e => {
-                  e.stopPropagation()
-                  onRemoveCustomLayer(index)
-                }}
-              />
-            </li>
-          )),
+          customLayers.map((layer, index) => <CustomLayer layer={layer} index={index} />),
         ]
       }
       return layers
@@ -178,12 +152,6 @@ export default connect(
     return {
       onToggleLayer: (name: string) => {
         dispatch(toggleLayer(name))
-      },
-      onToggleCustomLayer: (index: number) => {
-        dispatch(toggleCustomLayer(index))
-      },
-      onRemoveCustomLayer: (index: number) => {
-        dispatch(removeCustomLayer(index))
       },
       onLoadTiles: (tiles: any) => {
         dispatch(loadTiles(tiles))

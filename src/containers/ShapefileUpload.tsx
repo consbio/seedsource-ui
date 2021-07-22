@@ -23,7 +23,7 @@ const connector = connect(null, dispatch => {
 type ShapefileUploadProps = ConnectedProps<typeof connector> & {
   index?: number
   storeTo: 'constraints' | 'customLayers'
-  children: any
+  children?: any
 }
 
 type ShapefileUploadState = {

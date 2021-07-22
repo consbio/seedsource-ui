@@ -1,4 +1,5 @@
 import { ADD_CUSTOM_LAYER, REMOVE_CUSTOM_LAYER, TOGGLE_CUSTOM_LAYER } from '../actions/customLayers'
+import { LOAD_CONFIGURATION, RESET_CONFIGURATION } from '../actions/saves'
 
 const defaultLayer = {
   filename: '',
@@ -22,6 +23,15 @@ export default (state: [any?] = [], action: any) => {
         }
         return layer
       })
+
+    case RESET_CONFIGURATION:
+      return []
+
+    case LOAD_CONFIGURATION:
+      if (action.configuration.customLayers) {
+        return action.configuration.customLayers
+      }
+      return state
 
     default:
       return state

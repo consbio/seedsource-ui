@@ -2,13 +2,17 @@ import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import shp from 'shpjs'
 import { t } from 'ttag'
-import { updateConstraintValues } from '../actions/constraints'
+import { updateConstraintValues as updateConstraintValuesConnect } from '../actions/constraints'
 import { setError } from '../actions/error'
+import { addCustomLayer as addCustomLayerConnect } from '../actions/customLayers'
 
 const connector = connect(null, dispatch => {
   return {
-    onFileUpload: (index: number, geoJSON: any, filename: string) => {
-      dispatch(updateConstraintValues(index, { geoJSON, filename }))
+    updateConstraintValues: (index: number, geoJSON: any, filename: string) => {
+      dispatch(updateConstraintValuesConnect(index, { geoJSON, filename }))
+    },
+    addCustomLayer: (geoJSON: any, filename: string) => {
+      dispatch(addCustomLayerConnect(geoJSON, filename))
     },
     sendError: (title: string, message: string, debugInfo: any = null) => {
       dispatch(setError(title, message, debugInfo))
@@ -17,7 +21,9 @@ const connector = connect(null, dispatch => {
 })
 
 type ShapefileUploadProps = ConnectedProps<typeof connector> & {
-  index: number
+  index?: number
+  storeTo: 'constraints' | 'customLayers'
+  children: any
 }
 
 type ShapefileUploadState = {
@@ -72,10 +78,15 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
       reader.onload = (e: any) => {
         shp(e.target.result)
           .then(geojson => {
-            const { index, onFileUpload } = this.props
+            const { index, storeTo, updateConstraintValues, addCustomLayer } = this.props
 
             this.setState({ isLoading: false })
-            onFileUpload(index, geojson, zipFile.name)
+            if (storeTo === 'constraints') {
+              updateConstraintValues(index as number, geojson, zipFile.name)
+            }
+            if (storeTo === 'customLayers') {
+              addCustomLayer(geojson, zipFile.name)
+            }
           })
           .catch(error => {
             const { sendError } = this.props
@@ -119,7 +130,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
       })
       Promise.all([shpPromise, prjPromise])
         .then((results: any) => {
-          const { index, sendError, onFileUpload } = this.props
+          const { index, sendError, storeTo, updateConstraintValues, addCustomLayer } = this.props
           const [shpResult, prjResult] = results
           const parsedShp = shp.parseShp(shpResult.shp, prjResult.prj)
           const geojson = shp.combine([parsedShp, []])
@@ -127,7 +138,12 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
           if (prjResult.warning) {
             sendError(t`Warning`, prjResult.warning)
           }
-          onFileUpload(index, geojson, shpResult.name)
+          if (storeTo === 'constraints') {
+            updateConstraintValues(index as number, geojson, shpResult.name)
+          }
+          if (storeTo === 'customLayers') {
+            addCustomLayer(geojson, shpResult.name)
+          }
         })
         .catch(error => {
           const { sendError } = this.props
@@ -145,10 +161,18 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
 
   render() {
     const { isLoading } = this.state
+    const { children } = this.props
 
     return (
       <div>
-        <input type="file" onChange={this.handleFileUpload} multiple />
+        {children ? <label htmlFor="shapefile-upload">{children}</label> : null}
+        <input
+          type="file"
+          id="shapefile-upload"
+          style={{ display: children ? 'none' : 'initial' }}
+          onChange={this.handleFileUpload}
+          multiple
+        />
         {isLoading ? (
           <div className="overlay">
             <div className="progress-container">

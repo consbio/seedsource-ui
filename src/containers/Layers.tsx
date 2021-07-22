@@ -4,10 +4,15 @@ import { t } from 'ttag'
 import config from '../config'
 import { get } from '../io'
 import { toggleLayer, loadTiles } from '../actions/layers'
+import { toggleCustomLayer, removeCustomLayer } from '../actions/customLayers'
+import ShapefileUpload from './ShapefileUpload'
 
 type LayersProps = {
   layers: any[]
+  customLayers: any[]
   onToggleLayer: (name: string) => any
+  onToggleCustomLayer: (index: number) => any
+  onRemoveCustomLayer: (index: number) => any
   onLoadTiles: (tiles: any) => any
 }
 
@@ -20,6 +25,7 @@ class Layers extends React.Component<LayersProps> {
       variables: true,
       seedzones: false,
       layers: false,
+      custom: true,
     }
   }
 
@@ -48,7 +54,7 @@ class Layers extends React.Component<LayersProps> {
   }
 
   render() {
-    const { onToggleLayer, layers } = this.props
+    const { onToggleLayer, layers, customLayers, onToggleCustomLayer, onRemoveCustomLayer } = this.props
     const { state }: { state: any } = this
 
     const categories: any = {
@@ -60,10 +66,63 @@ class Layers extends React.Component<LayersProps> {
       },
       seedZones: { name: t`Seed Zones`, urlIdentifier: 'seedzones', awayMessage: null },
       layers: { name: t`Layers`, urlIdentifier: 'layers', awayMessage: null },
+      custom: {
+        name: t`Custom`,
+        urlIdentifier: 'custom',
+        awayMessage: null,
+      },
     }
 
-    const layerList = (urlIdentifier: string) =>
-      layers
+    const layerList = (urlIdentifier: string) => {
+      if (urlIdentifier === 'custom') {
+        return [
+          <div className="layer-list" key="shapeUpload">
+            <ShapefileUpload storeTo="customLayers">
+              <div className="is-clickable">
+                <span
+                  style={{
+                    margin: '2px',
+                    padding: '0px 4px 2px 4px',
+                    borderRadius: '100%',
+                    border: '1px solid #505050',
+                  }}
+                >
+                  +
+                </span>
+                &nbsp;&nbsp;
+                {/* do not localize "shapefile" */}
+                {t`Upload a`} shapefile
+              </div>
+            </ShapefileUpload>
+          </div>,
+          customLayers.map((layer, index) => (
+            <li className="layer-list" key={`${layer.filename}_${index}`}>
+              <input
+                className="is-checkradio"
+                type="checkbox"
+                value={layer.filename}
+                checked={layer.displayed}
+                readOnly
+              />
+              <label onClick={() => onToggleCustomLayer(index)}>{layer.filename}</label>
+              <div
+                className="delete"
+                style={{
+                  display: 'inline-block',
+                  borderRadius: '100%',
+                  background: 'rgba(10, 10, 10, 0.2)',
+                  float: 'right',
+                }}
+                onClick={e => {
+                  e.stopPropagation()
+                  onRemoveCustomLayer(index)
+                }}
+              />
+            </li>
+          )),
+        ]
+      }
+      return layers
         .filter(layer => layer.urlTemplate.includes(urlIdentifier))
         .map(layer => {
           return (
@@ -73,6 +132,7 @@ class Layers extends React.Component<LayersProps> {
             </li>
           )
         })
+    }
 
     const sections = Object.keys(categories).map((key: string) => {
       if (layerList(categories[key].urlIdentifier).length < 1 && categories[key].awayMessage === null) {
@@ -110,16 +170,21 @@ class Layers extends React.Component<LayersProps> {
 
 export default connect(
   (state: any) => {
-    const { layers } = state
+    const { layers, customLayers } = state
 
-    return { layers }
+    return { layers, customLayers }
   },
   (dispatch: (action: any) => any) => {
     return {
       onToggleLayer: (name: string) => {
         dispatch(toggleLayer(name))
       },
-
+      onToggleCustomLayer: (index: number) => {
+        dispatch(toggleCustomLayer(index))
+      },
+      onRemoveCustomLayer: (index: number) => {
+        dispatch(removeCustomLayer(index))
+      },
       onLoadTiles: (tiles: any) => {
         dispatch(loadTiles(tiles))
       },

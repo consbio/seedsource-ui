@@ -93,7 +93,9 @@ class Layers extends React.Component<LayersProps> {
               </div>
             </ShapefileUpload>
           </div>,
-          customLayers.map((layer, index) => <CustomLayer layer={layer} index={index} />),
+          customLayers.map((layer, index) => (
+            <CustomLayer layer={layer} index={index} key={`${layer.filename}_${index}`} />
+          )),
         ]
       }
       return layers

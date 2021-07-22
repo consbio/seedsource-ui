@@ -18,7 +18,7 @@ interface CustomLayerProps {
 
 const CustomLayer = ({ layer, index, onToggleCustomLayer, onRemoveCustomLayer }: CustomLayerProps) => {
   return (
-    <li className="layer-list" key={`${layer.filename}_${index}`}>
+    <li className="layer-list">
       <input className="is-checkradio" type="checkbox" value={layer.filename} checked={layer.displayed} readOnly />
       <label onClick={() => onToggleCustomLayer(index)}>{layer.filename}</label>
       <div

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {ReactChild, ReactChildren, ReactNode} from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import shp from 'shpjs'
 import { t } from 'ttag'
+import { GeoJSON } from 'geojson'
 import { updateConstraintValues as updateConstraintValuesConnect } from '../actions/constraints'
 import { setError } from '../actions/error'
 import { addCustomLayer as addCustomLayerConnect } from '../actions/customLayers'
@@ -11,7 +12,7 @@ const connector = connect(null, dispatch => {
     updateConstraintValues: (index: number, geoJSON: any, filename: string) => {
       dispatch(updateConstraintValuesConnect(index, { geoJSON, filename }))
     },
-    addCustomLayer: (geoJSON: any, filename: string) => {
+    addCustomLayer: (geoJSON: GeoJSON, filename: string) => {
       dispatch(addCustomLayerConnect(geoJSON, filename))
     },
     sendError: (title: string, message: string, debugInfo: any = null) => {
@@ -23,7 +24,7 @@ const connector = connect(null, dispatch => {
 type ShapefileUploadProps = ConnectedProps<typeof connector> & {
   index?: number
   storeTo: 'constraints' | 'customLayers'
-  children?: any
+  children?: ReactChild
 }
 
 type ShapefileUploadState = {
@@ -85,7 +86,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
               updateConstraintValues(index as number, geojson, zipFile.name)
             }
             if (storeTo === 'customLayers') {
-              addCustomLayer(geojson, zipFile.name)
+              addCustomLayer(geojson as GeoJSON, zipFile.name)
             }
           })
           .catch(error => {

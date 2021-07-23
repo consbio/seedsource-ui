@@ -32,15 +32,16 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.0.0",
     "prettier": "^2.1.2",
-    "ttag-cli": "^1.9.0",
     "react": "16.9.x",
     "react-dom": "16.9.x",
     "react-redux": "7.2.x",
     "redux": "4.0.x",
     "redux-thunk": "2.3.x",
+    "ttag-cli": "^1.9.0",
     "typescript": "^4.0.3"
   },
   "dependencies": {
+    "@types/geojson": "^7946.0.8",
     "bulma": "^0.9.1",
     "bulma-checkradio": "^1.1.1",
     "csv-parse": "^4.15.3",

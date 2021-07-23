@@ -1,22 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleCustomLayer, removeCustomLayer } from '../actions/customLayers'
+import { CustomLayer } from '../reducers/customLayers'
 
-interface customLayer {
-  filename: string
-  geoJSON: {}
-  zIndex: number
-  displayed: boolean
-}
-
-interface CustomLayerProps {
-  layer: customLayer
+interface CustomLayerListItemProps {
+  layer: CustomLayer
   index: number
   onToggleCustomLayer: (index: number) => any
   onRemoveCustomLayer: (index: number) => any
 }
 
-const CustomLayer = ({ layer, index, onToggleCustomLayer, onRemoveCustomLayer }: CustomLayerProps) => {
+const CustomLayerListItem = ({ layer, index, onToggleCustomLayer, onRemoveCustomLayer }: CustomLayerListItemProps) => {
   return (
     <li className="layer-list">
       <input className="is-checkradio" type="checkbox" value={layer.filename} checked={layer.displayed} readOnly />
@@ -47,4 +41,4 @@ export default connect(null, (dispatch: (action: any) => any) => {
       dispatch(removeCustomLayer(index))
     },
   }
-})(CustomLayer)
+})(CustomLayerListItem)

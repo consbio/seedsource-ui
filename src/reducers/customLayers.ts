@@ -1,14 +1,22 @@
+import { GeoJSON } from 'geojson'
 import { ADD_CUSTOM_LAYER, REMOVE_CUSTOM_LAYER, TOGGLE_CUSTOM_LAYER } from '../actions/customLayers'
 import { LOAD_CONFIGURATION, RESET_CONFIGURATION } from '../actions/saves'
 
-const defaultLayer = {
+export interface CustomLayer {
+  filename: string
+  geoJSON: GeoJSON
+  zIndex: number
+  displayed: boolean
+}
+
+const defaultLayer: CustomLayer = {
   filename: '',
-  geoJSON: {},
+  geoJSON: { type: 'Polygon', coordinates: [] },
   zIndex: 2,
   displayed: true,
 }
 
-export default (state: [any?] = [], action: any) => {
+export default (state: CustomLayer[] = [], action: any) => {
   switch (action.type) {
     case ADD_CUSTOM_LAYER:
       return [{ ...defaultLayer, filename: action.filename, geoJSON: action.geoJSON }, ...state]

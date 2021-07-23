@@ -1,8 +1,10 @@
+import { GeoJSON } from 'geojson'
+
 export const TOGGLE_CUSTOM_LAYER = 'TOGGLE_CUSTOM_LAYER'
 export const ADD_CUSTOM_LAYER = 'ADD_CUSTOM_LAYER'
 export const REMOVE_CUSTOM_LAYER = 'REMOVE_CUSTOM_LAYER'
 
-export const addCustomLayer = (geoJSON: any, filename: string) => {
+export const addCustomLayer = (geoJSON: GeoJSON, filename: string) => {
   return {
     type: ADD_CUSTOM_LAYER,
     geoJSON,

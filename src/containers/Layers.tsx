@@ -5,11 +5,12 @@ import config from '../config'
 import { get } from '../io'
 import { toggleLayer, loadTiles } from '../actions/layers'
 import ShapefileUpload from './ShapefileUpload'
-import CustomLayer from './CustomLayer'
+import { CustomLayer } from '../reducers/customLayers'
+import CustomLayerListItem from './CustomLayerListItem'
 
 type LayersProps = {
   layers: any[]
-  customLayers: any[]
+  customLayers: CustomLayer[]
   onToggleLayer: (name: string) => any
   onLoadTiles: (tiles: any) => any
 }
@@ -94,7 +95,7 @@ class Layers extends React.Component<LayersProps> {
             </ShapefileUpload>
           </div>,
           customLayers.map((layer, index) => (
-            <CustomLayer layer={layer} index={index} key={`${layer.filename}_${index}`} />
+            <CustomLayerListItem layer={layer} index={index} key={`${layer.filename}_${index}`} />
           )),
         ]
       }

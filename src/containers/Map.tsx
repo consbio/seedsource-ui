@@ -25,6 +25,8 @@ import { setPoint, addUserSite } from '../actions/point'
 import { LegendControl, ButtonControl } from '../leaflet-controls'
 
 import 'leaflet.vectorgrid'
+import { GeoJSON } from 'geojson'
+import { CustomLayer } from '../reducers/customLayers'
 
 type PopupInfo = {
   popup: Popup
@@ -175,9 +177,9 @@ class Map extends React.Component<MapProps> {
 
   mapIsMoving: boolean
 
-  shpLayers: any[]
+  shpLayers: L.GeoJSON[]
 
-  shpData: any[]
+  shpData: GeoJSON[]
 
   displayedRasterLayers: any[]
 
@@ -659,7 +661,7 @@ class Map extends React.Component<MapProps> {
     }
   }
 
-  updateShapefileLayer(constraints: any[], custom: any[]) {
+  updateShapefileLayer(constraints: any[], custom: CustomLayer[]) {
     const constraintData = constraints.map(cn => cn.values.geoJSON).filter(geojson => !!geojson)
     const customData = custom.filter(cl => !!cl.geoJSON && cl.displayed).map(cl => cl.geoJSON)
     const data = [...constraintData, ...customData]

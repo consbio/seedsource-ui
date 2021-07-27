@@ -1,5 +1,5 @@
 import { GeoJSON } from 'geojson'
-import { ADD_CUSTOM_LAYER, REMOVE_CUSTOM_LAYER, TOGGLE_CUSTOM_LAYER } from '../actions/customLayers'
+import { ADD_CUSTOM_LAYER, REMOVE_CUSTOM_LAYER, TOGGLE_CUSTOM_LAYER, SET_CUSTOM_COLOR } from '../actions/customLayers'
 import { LOAD_CONFIGURATION, RESET_CONFIGURATION } from '../actions/saves'
 
 export interface CustomLayer {
@@ -7,19 +7,37 @@ export interface CustomLayer {
   geoJSON: GeoJSON
   zIndex: number
   displayed: boolean
+  color: string
 }
+
+// Named colors used so screen readers can read them in ColorPicker
+export const customLayerColors = ['MediumAquaMarine', 'Salmon', 'CornflowerBlue', 'Orchid', 'YellowGreen']
 
 const defaultLayer: CustomLayer = {
   filename: '',
   geoJSON: { type: 'Polygon', coordinates: [] },
   zIndex: 2,
   displayed: true,
+  color: customLayerColors[0],
+}
+
+const findLeastUsedColor = (state: any) => {
+  const colorsCount = new Array(customLayerColors.length).fill(0)
+  state.forEach((layer: CustomLayer) => {
+    const colorIndex = customLayerColors.indexOf(layer.color)
+    colorsCount[colorIndex] += 1
+  })
+  const indexMin = colorsCount.indexOf(Math.min(...colorsCount))
+  return customLayerColors[indexMin]
 }
 
 export default (state: CustomLayer[] = [], action: any) => {
   switch (action.type) {
     case ADD_CUSTOM_LAYER:
-      return [{ ...defaultLayer, filename: action.filename, geoJSON: action.geoJSON }, ...state]
+      return [
+        { ...defaultLayer, filename: action.filename, geoJSON: action.geoJSON, color: findLeastUsedColor(state) },
+        ...state,
+      ]
 
     case REMOVE_CUSTOM_LAYER:
       return state.filter((layer, idx) => idx !== action.index)
@@ -40,6 +58,14 @@ export default (state: CustomLayer[] = [], action: any) => {
         return action.configuration.customLayers
       }
       return state
+
+    case SET_CUSTOM_COLOR:
+      return state.map((layer, idx) => {
+        if (idx === action.index) {
+          return { ...layer, color: action.color }
+        }
+        return layer
+      })
 
     default:
       return state

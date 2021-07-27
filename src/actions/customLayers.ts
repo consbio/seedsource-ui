@@ -3,6 +3,7 @@ import { GeoJSON } from 'geojson'
 export const TOGGLE_CUSTOM_LAYER = 'TOGGLE_CUSTOM_LAYER'
 export const ADD_CUSTOM_LAYER = 'ADD_CUSTOM_LAYER'
 export const REMOVE_CUSTOM_LAYER = 'REMOVE_CUSTOM_LAYER'
+export const SET_CUSTOM_COLOR = 'SET_CUSTOM_COLOR'
 
 export const addCustomLayer = (geoJSON: GeoJSON, filename: string) => {
   return {
@@ -23,5 +24,13 @@ export const toggleCustomLayer = (index: number) => {
   return {
     type: TOGGLE_CUSTOM_LAYER,
     index,
+  }
+}
+
+export const setCustomColor = (index: number, color: string) => {
+  return {
+    type: SET_CUSTOM_COLOR,
+    index,
+    color,
   }
 }

@@ -663,7 +663,7 @@ class Map extends React.Component<MapProps> {
 
   updateShapefileLayer(constraints: any[], custom: CustomLayer[]) {
     const constraintData = constraints.map(cn => cn.values.geoJSON).filter(geojson => !!geojson)
-    const customData = custom.filter(cl => !!cl.geoJSON && cl.displayed).map(cl => cl.geoJSON)
+    const customData = custom.filter(cl => !!cl.geoJSON && cl.displayed).map(cl => ({ ...cl.geoJSON, color: cl.color }))
     const data = [...constraintData, ...customData]
     if (JSON.stringify(data) === JSON.stringify(this.shpData)) {
       return
@@ -673,8 +673,8 @@ class Map extends React.Component<MapProps> {
     const constraintLayers = constraintData.map(geojson =>
       L.geoJSON(geojson, { style: { fill: false, color: '#a50f15', weight: 1.5 } }).addTo(this.map),
     )
-    const customLayers = customData.map(geojson =>
-      L.geoJSON(geojson, { style: { fill: false, color: '#0f64a5', weight: 1.5 } }).addTo(this.map),
+    const customLayers = customData.map(datum =>
+      L.geoJSON(datum, { style: { fill: false, color: datum.color, weight: 1.5 } }).addTo(this.map),
     )
     const layers = [...constraintLayers, ...customLayers]
 

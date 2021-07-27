@@ -31,7 +31,7 @@ class CustomLayerListItem extends React.Component<CustomLayerListItemProps, Cust
         <div
           tabIndex={0}
           role="button"
-          aria-label="pick new color"
+          aria-label="Button to pick a new color for the custom layer."
           onClick={() =>
             this.setState(() => {
               return { colorPicker: !colorPicker }
@@ -56,7 +56,7 @@ class CustomLayerListItem extends React.Component<CustomLayerListItemProps, Cust
         <input
           className="is-checkradio"
           type="checkbox"
-          aria-label="toggle layer"
+          aria-label="Checkbox to show or hide custom layer on map."
           value={layer.filename}
           checked={layer.displayed}
           readOnly
@@ -65,7 +65,7 @@ class CustomLayerListItem extends React.Component<CustomLayerListItemProps, Cust
         <div
           tabIndex={0}
           role="button"
-          aria-label="delete layer"
+          aria-label="Button to delete custom layer."
           className="delete"
           style={{
             display: 'inline-block',

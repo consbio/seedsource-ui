@@ -11,7 +11,7 @@ export interface CustomLayer {
 }
 
 // Named colors used so screen readers can read them in ColorPicker
-export const customLayerColors = ['MediumAquaMarine', 'Salmon', 'CornflowerBlue', 'Orchid', 'YellowGreen']
+export const customLayerColors = ['mediumSeaGreen', 'salmon', 'cornflowerBlue', 'orchid', 'hotPink']
 
 const defaultLayer: CustomLayer = {
   filename: '',
@@ -21,7 +21,7 @@ const defaultLayer: CustomLayer = {
   color: customLayerColors[0],
 }
 
-const findLeastUsedColor = (state: any) => {
+const getLeastUsedColor = (state: CustomLayer[]) => {
   const colorsCount = new Array(customLayerColors.length).fill(0)
   state.forEach((layer: CustomLayer) => {
     const colorIndex = customLayerColors.indexOf(layer.color)
@@ -35,7 +35,7 @@ export default (state: CustomLayer[] = [], action: any) => {
   switch (action.type) {
     case ADD_CUSTOM_LAYER:
       return [
-        { ...defaultLayer, filename: action.filename, geoJSON: action.geoJSON, color: findLeastUsedColor(state) },
+        { ...defaultLayer, filename: action.filename, geoJSON: action.geoJSON, color: getLeastUsedColor(state) },
         ...state,
       ]
 

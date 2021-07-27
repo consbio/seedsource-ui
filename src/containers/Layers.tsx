@@ -77,7 +77,7 @@ class Layers extends React.Component<LayersProps> {
         return [
           <div className="layer-list" key="shapeUpload">
             <ShapefileUpload storeTo="customLayers">
-              <div className="is-clickable">
+              <div className="is-clickable" tabIndex={0} role="button">
                 <span
                   style={{
                     margin: '2px',

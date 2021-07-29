@@ -13,24 +13,24 @@ export const addCustomLayer = (geoJSON: GeoJSON, filename: string) => {
   }
 }
 
-export const removeCustomLayer = (index: number) => {
+export const removeCustomLayer = (id: string) => {
   return {
     type: REMOVE_CUSTOM_LAYER,
-    index,
+    id,
   }
 }
 
-export const toggleCustomLayer = (index: number) => {
+export const toggleCustomLayer = (id: string) => {
   return {
     type: TOGGLE_CUSTOM_LAYER,
-    index,
+    id,
   }
 }
 
-export const setCustomColor = (index: number, color: string) => {
+export const setCustomColor = (id: string, color: string) => {
   return {
     type: SET_CUSTOM_COLOR,
-    index,
+    id,
     color,
   }
 }

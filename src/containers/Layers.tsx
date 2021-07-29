@@ -25,6 +25,7 @@ class Layers extends React.Component<LayersProps> {
       seedzones: false,
       layers: false,
       custom: true,
+      showColorPicker: '',
     }
   }
 
@@ -78,24 +79,36 @@ class Layers extends React.Component<LayersProps> {
           <div className="layer-list" key="shapeUpload">
             <ShapefileUpload storeTo="customLayers">
               <div className="is-clickable" tabIndex={0} role="button">
-                <span
+                <div
                   style={{
-                    margin: '2px',
-                    padding: '0px 4px 2px 4px',
+                    display: 'inline-block',
+                    height: '25px',
+                    width: '25px',
+                    padding: '1px 0 0px 6px',
                     borderRadius: '100%',
                     border: '1px solid #505050',
                   }}
                 >
                   +
-                </span>
+                </div>
                 &nbsp;&nbsp;
                 {/* do not localize "shapefile" */}
                 {t`Upload a`} shapefile
               </div>
             </ShapefileUpload>
           </div>,
-          customLayers.map((layer, index) => (
-            <CustomLayerListItem layer={layer} index={index} key={`${layer.filename}_${index}`} />
+          customLayers.map(layer => (
+            <CustomLayerListItem
+              layer={layer}
+              key={`${layer.id}`}
+              showColorPicker={state.showColorPicker === layer.id}
+              toggleColorPicker={layerId => {
+                if (state.showColorPicker === layerId) {
+                  return this.setState({ showColorPicker: '' })
+                }
+                this.setState({ showColorPicker: layerId })
+              }}
+            />
           )),
         ]
       }

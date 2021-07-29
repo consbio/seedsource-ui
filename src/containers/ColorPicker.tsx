@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 
 interface ColorPickerProps {
   colors: string[]
@@ -14,13 +15,13 @@ export default ({ colors, onPick }: ColorPickerProps) => {
             key={color}
             tabIndex={0}
             role="button"
-            aria-label={`color-picker color ${color}`}
+            aria-label={t`Button to select color ${color}.`}
             className="is-clickable color"
             style={{ background: color }}
             onClick={() => onPick(color)}
-            onKeyPress={(event => {
+            onKeyPress={event => {
               if (event.key === 'Enter') onPick(color)
-            })}
+            }}
           />
         )
       })}

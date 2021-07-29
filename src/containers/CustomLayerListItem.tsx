@@ -1,4 +1,5 @@
 import React from 'react'
+import { t } from 'ttag'
 import { connect } from 'react-redux'
 import ColorPicker from './ColorPicker'
 import { toggleCustomLayer, removeCustomLayer, setCustomColor } from '../actions/customLayers'
@@ -6,104 +7,92 @@ import { CustomLayer, customLayerColors } from '../reducers/customLayers'
 
 interface CustomLayerListItemProps {
   layer: CustomLayer
-  index: number
-  onToggleCustomLayer: (index: number) => any
-  onRemoveCustomLayer: (index: number) => any
-  onSetCustomColor: (index: number, color: string) => any
+  onToggleCustomLayer: (id: string) => any
+  onRemoveCustomLayer: (id: string) => any
+  onSetCustomColor: (id: string, color: string) => any
+  showColorPicker: boolean
+  toggleColorPicker: (id: string) => void
 }
 
-interface CustomLayerListItemState {
-  colorPicker: boolean
-}
-
-class CustomLayerListItem extends React.Component<CustomLayerListItemProps, CustomLayerListItemState> {
-  constructor(props: any) {
-    super(props)
-
-    this.state = { colorPicker: false }
-  }
-
-  render() {
-    const { layer, index, onToggleCustomLayer, onRemoveCustomLayer, onSetCustomColor } = this.props
-    const { colorPicker } = this.state
-    return (
-      <li className="layer-list" style={{ marginTop: '10px' }}>
-        <div
-          tabIndex={0}
-          role="button"
-          aria-label="Button to pick a new color for the custom layer."
-          onClick={() =>
-            this.setState(() => {
-              return { colorPicker: !colorPicker }
-            })}
-          onKeyPress={event => {
-            if (event.key === 'Enter') {
-              this.setState(() => {
-                return { colorPicker: !colorPicker }
-              })
-            }
-          }}
-          className="is-clickable"
-          style={{
-            float: 'left',
-            height: '20px',
-            width: '20px',
-            borderRadius: '100%',
-            background: layer.color,
-            marginRight: '12px',
-          }}
-        />
-        <input
-          className="is-checkradio"
-          type="checkbox"
-          aria-label="Checkbox to show or hide custom layer on map."
-          value={layer.filename}
-          checked={layer.displayed}
-          readOnly
-        />
-        <label onClick={() => onToggleCustomLayer(index)}>{layer.filename}</label>
-        <div
-          tabIndex={0}
-          role="button"
-          aria-label="Button to delete custom layer."
-          className="delete"
-          style={{
-            display: 'inline-block',
-            borderRadius: '100%',
-            background: 'rgba(10, 10, 10, 0.2)',
-            float: 'right',
-          }}
-          onClick={() => {
-            onRemoveCustomLayer(index)
-          }}
-          onKeyPress={event => {
-            if (event.key === 'Enter') onRemoveCustomLayer(index)
+const CustomLayerListItem = ({
+  layer,
+  onToggleCustomLayer,
+  onRemoveCustomLayer,
+  onSetCustomColor,
+  showColorPicker,
+  toggleColorPicker,
+}: CustomLayerListItemProps) => {
+  return (
+    <li className="layer-list" style={{ marginTop: '10px' }}>
+      <div
+        tabIndex={0}
+        role="button"
+        aria-label={t`Button to pick a new color for the custom layer.`}
+        onClick={() => toggleColorPicker(layer.id)}
+        onKeyPress={event => {
+          if (event.key === 'Enter') {
+            toggleColorPicker(layer.id)
+          }
+        }}
+        className="is-clickable"
+        style={{
+          float: 'left',
+          height: '20px',
+          width: '20px',
+          borderRadius: '100%',
+          background: layer.color,
+          marginRight: '12px',
+        }}
+      />
+      <input
+        className="is-checkradio"
+        type="checkbox"
+        aria-label={t`Checkbox to show or hide custom layer on map.`}
+        value={layer.filename}
+        checked={layer.displayed}
+        readOnly
+      />
+      <label onClick={() => onToggleCustomLayer(layer.id)}>{layer.filename}</label>
+      <div
+        tabIndex={0}
+        role="button"
+        aria-label={t`Button to delete custom layer."`}
+        className="delete"
+        style={{
+          display: 'inline-block',
+          borderRadius: '100%',
+          background: 'rgba(10, 10, 10, 0.2)',
+          float: 'right',
+        }}
+        onClick={() => {
+          onRemoveCustomLayer(layer.id)
+        }}
+        onKeyPress={event => {
+          if (event.key === 'Enter') onRemoveCustomLayer(layer.id)
+        }}
+      />
+      {showColorPicker ? (
+        <ColorPicker
+          colors={customLayerColors}
+          onPick={(color: string) => {
+            onSetCustomColor(layer.id, color)
           }}
         />
-        {colorPicker ? (
-          <ColorPicker
-            colors={customLayerColors}
-            onPick={(color: string) => {
-              onSetCustomColor(index, color)
-              this.setState({ colorPicker: false })
-            }}
-          />
-        ) : null}
-      </li>
-    )
-  }
+      ) : null}
+    </li>
+  )
 }
 
 export default connect(null, (dispatch: (action: any) => any) => {
   return {
-    onToggleCustomLayer: (index: number) => {
-      dispatch(toggleCustomLayer(index))
+    onToggleCustomLayer: (id: string) => {
+      dispatch(toggleCustomLayer(id))
     },
-    onRemoveCustomLayer: (index: number) => {
-      dispatch(removeCustomLayer(index))
+    onRemoveCustomLayer: (id: string) => {
+      dispatch(removeCustomLayer(id))
     },
-    onSetCustomColor: (index: number, color: string) => {
-      dispatch(setCustomColor(index, color))
+    onSetCustomColor: (id: string, color: string) => {
+      dispatch(setCustomColor(id, color))
     },
   }
 })(CustomLayerListItem)

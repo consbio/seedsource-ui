@@ -1,4 +1,5 @@
 import { GeoJSON } from 'geojson'
+import { v4 as uuidv4 } from 'uuid'
 import { ADD_CUSTOM_LAYER, REMOVE_CUSTOM_LAYER, TOGGLE_CUSTOM_LAYER, SET_CUSTOM_COLOR } from '../actions/customLayers'
 import { LOAD_CONFIGURATION, RESET_CONFIGURATION } from '../actions/saves'
 
@@ -8,10 +9,11 @@ export interface CustomLayer {
   zIndex: number
   displayed: boolean
   color: string
+  id: string
 }
 
 // Named colors used so screen readers can read them in ColorPicker
-export const customLayerColors = ['mediumSeaGreen', 'salmon', 'cornflowerBlue', 'orchid', 'hotPink']
+export const customLayerColors = ['CornflowerBlue', 'blueViolet', 'mediumVioletRed', 'chocolate', 'orange']
 
 const defaultLayer: CustomLayer = {
   filename: '',
@@ -19,11 +21,12 @@ const defaultLayer: CustomLayer = {
   zIndex: 2,
   displayed: true,
   color: customLayerColors[0],
+  id: '',
 }
 
 const getLeastUsedColor = (state: CustomLayer[]) => {
   const colorsCount = new Array(customLayerColors.length).fill(0)
-  state.forEach((layer: CustomLayer) => {
+  state.forEach(layer => {
     const colorIndex = customLayerColors.indexOf(layer.color)
     colorsCount[colorIndex] += 1
   })
@@ -35,17 +38,33 @@ export default (state: CustomLayer[] = [], action: any) => {
   switch (action.type) {
     case ADD_CUSTOM_LAYER:
       return [
-        { ...defaultLayer, filename: action.filename, geoJSON: action.geoJSON, color: getLeastUsedColor(state) },
         ...state,
+        {
+          ...defaultLayer,
+          filename: ['.zip', '.shp'].some(ext => action.filename.endsWith(ext))
+            ? action.filename.slice(0, -4)
+            : action.filename,
+          geoJSON: action.geoJSON,
+          color: getLeastUsedColor(state),
+          id: uuidv4(),
+        },
       ]
 
     case REMOVE_CUSTOM_LAYER:
-      return state.filter((layer, idx) => idx !== action.index)
+      return state.filter(layer => layer.id !== action.id)
 
     case TOGGLE_CUSTOM_LAYER:
-      return state.map((layer, idx) => {
-        if (idx === action.index) {
+      return state.map(layer => {
+        if (layer.id === action.id) {
           return { ...layer, displayed: !layer.displayed }
+        }
+        return layer
+      })
+
+    case SET_CUSTOM_COLOR:
+      return state.map(layer => {
+        if (layer.id === action.id) {
+          return { ...layer, color: action.color }
         }
         return layer
       })
@@ -58,14 +77,6 @@ export default (state: CustomLayer[] = [], action: any) => {
         return action.configuration.customLayers
       }
       return state
-
-    case SET_CUSTOM_COLOR:
-      return state.map((layer, idx) => {
-        if (idx === action.index) {
-          return { ...layer, color: action.color }
-        }
-        return layer
-      })
 
     default:
       return state

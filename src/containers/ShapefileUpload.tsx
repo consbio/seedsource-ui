@@ -83,7 +83,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
 
             this.setState({ isLoading: false })
             if (storeTo === 'constraints') {
-              updateConstraintValues(index as number, geojson, zipFile.name)
+              updateConstraintValues(index!, geojson, zipFile.name)
             }
             if (storeTo === 'customLayers') {
               addCustomLayer(geojson as GeoJSON, zipFile.name)
@@ -140,9 +140,10 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
             sendError(t`Warning`, prjResult.warning)
           }
           if (storeTo === 'constraints') {
-            updateConstraintValues(index as number, geojson, shpResult.name)
+            updateConstraintValues(index!, geojson, shpResult.name)
           }
           if (storeTo === 'customLayers') {
+            console.log(geojson)
             addCustomLayer(geojson, shpResult.name)
           }
         })

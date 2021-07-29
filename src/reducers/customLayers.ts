@@ -13,7 +13,7 @@ export interface CustomLayer {
 }
 
 // Named colors used so screen readers can read them in ColorPicker
-export const customLayerColors = ['CornflowerBlue', 'blueViolet', 'mediumVioletRed', 'chocolate', 'orange']
+export const customLayerColors = ['CornflowerBlue', 'darkSlateBlue', 'mediumVioletRed', 'chocolate', 'orange']
 
 const defaultLayer: CustomLayer = {
   filename: '',

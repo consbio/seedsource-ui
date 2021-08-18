@@ -63,6 +63,7 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
 
       this.setState({ isLoading: false })
       sendError(t`Error`, t`Cannot process shapefiles larger than 2MB`)
+      return
     }
 
     const zipFile = files.find(file => file.name.match(/\.zip/i))
@@ -143,7 +144,6 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
             updateConstraintValues(index!, geojson, shpResult.name)
           }
           if (storeTo === 'customLayers') {
-            console.log(geojson)
             addCustomLayer(geojson, shpResult.name)
           }
         })

@@ -2,103 +2,211 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Plural-Forms: nplurals = 2; plural = (n != 1);\n"
-"Language: es\n"
+"Language: es_MX\n"
 "mime-version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/components/AccountSettingsModal.tsx:96
-#: src/components/SignupModal.tsx:67
-msgid "Passwords don't match"
+#: src/config.ts:137
+msgid "Geographic"
 msgstr ""
 
-#: src/components/AccountSettingsModal.tsx:173
-#: src/components/LoginModal.tsx:106
-#: src/components/ResetPasswordModal.tsx:118
-#: src/components/SignupModal.tsx:141
-msgid "Email address"
+#: src/config.ts:143
+#: src/containers/ElevationConstraint.tsx:21
+#: src/containers/Map.tsx:705
+msgid "Elevation"
 msgstr ""
 
-#: src/components/AccountSettingsModal.tsx:191
-msgid "Change email"
+#: src/config.ts:148
+#: src/containers/PhotoperiodConstraint.tsx:119
+msgid "Photoperiod"
 msgstr ""
 
-#: src/components/AccountSettingsModal.tsx:205
-#: src/components/AccountSettingsModal.tsx:210
-#: src/components/LoginModal.tsx:121
-#: src/components/SignupModal.tsx:156
-msgid "Password"
+#: src/config.ts:153
+#: src/containers/Comparisons.tsx:351
+#: src/containers/LatitudeConstraint.tsx:16
+msgid "Latitude"
 msgstr ""
 
-#: src/components/AccountSettingsModal.tsx:225
-#: src/components/SignupModal.tsx:171
-msgid "Confirm password"
+#: src/config.ts:158
+#: src/containers/Comparisons.tsx:352
+#: src/containers/LongitudeConstraint.tsx:16
+msgid "Longitude"
 msgstr ""
 
-#: src/components/AccountSettingsModal.tsx:243
-msgid "Change password"
+#: src/config.ts:163
+#: src/containers/DistanceConstraint.tsx:20
+msgid "Distance"
 msgstr ""
 
-#: src/components/AddUserSite.tsx:59
-msgid "Cancel"
+#: src/config.ts:241
+#: src/config.ts:247
+msgid "days"
 msgstr ""
 
-#: src/components/AccountSettingsModal.tsx:69
-#: src/components/AccountSettingsModal.tsx:83
-#: src/components/AccountSettingsModal.tsx:110
-#: src/components/AccountSettingsModal.tsx:123
-msgid "Sorry, there was an unexpected error changing your email address"
+#: src/config.ts:287
+msgid "Mean annual temperature"
 msgstr ""
 
-#: src/components/ConstraintChooserItem.tsx:31
-msgid "Select..."
+#: src/config.ts:293
+msgid "Mean warmest month temperature"
 msgstr ""
 
-#: src/components/LoginModal.tsx:66
-msgid "Login failed"
+#: src/config.ts:299
+msgid "Mean coldest month temperature"
 msgstr ""
 
-#: src/components/LoginModal.tsx:89
-#: src/components/LoginModal.tsx:143
-#: src/containers/AccountMenu.tsx:62
-msgid "Sign In"
+#: src/config.ts:324
+msgid "Mean annual precipitation"
 msgstr ""
 
-#: src/components/LoginModal.tsx:131
-msgid "Forgot your password?"
+#: src/config.ts:330
+msgid "Mean summer precipitation, May to September"
 msgstr ""
 
-#: src/components/Modal.tsx:48
-#: src/components/ModalCard.tsx:46
-msgid "close"
+#: src/config.ts:336
+msgid "Annual heat-moisture index"
 msgstr ""
 
-#: src/components/Navbar.tsx:27
-msgid "main navigation"
+#: src/config.ts:342
+msgid "Summer heat-moisture index"
 msgstr ""
 
-#: src/components/ResetPasswordModal.tsx:52
-msgid "Sorry, there was an error resetting your password"
+#: src/config.ts:348
+msgid "Degree-days below 0° C"
 msgstr ""
 
-#: src/components/ResetPasswordModal.tsx:82
-msgid ""
-"An email has been sent with a link to reset your password. \n"
-"If you don't receive this email, please check your Spam folder."
+#: src/config.ts:354
+msgid "Degree-days above 5° C"
 msgstr ""
 
-#: src/components/ResetPasswordModal.tsx:106
-msgid ""
-"Enter your email address to receive an email with a link to reset your "
-"password."
+#: src/config.ts:360
+msgid "Frost-free period"
 msgstr ""
 
-#: src/components/ResetPasswordModal.tsx:149
-msgid "Reset Password"
+#: src/config.ts:366
+msgid "Precipitation as snow, August to July"
 msgstr ""
 
-#: src/components/SignupModal.tsx:83
-#: src/components/SignupModal.tsx:98
-msgid "There was an unexpected error while creating your account"
+#: src/config.ts:372
+msgid "Extreme minimum temperature over 30 years"
+msgstr ""
+
+#: src/config.ts:378
+msgid "Extreme maximum temperature over 30 years"
+msgstr ""
+
+#: src/config.ts:384
+msgid "Hargreaves reference evaporation"
+msgstr ""
+
+#: src/config.ts:390
+msgid "Hargreaves climatic moisture deficit"
+msgstr ""
+
+#: src/config.ts:399
+msgid "Douglas-fir"
+msgstr ""
+
+#: src/config.ts:403
+msgid "Lodgepole pine"
+msgstr ""
+
+#: src/config.ts:407
+msgid "Jack pine"
+msgstr ""
+
+#: src/config.ts:411
+msgid "Ponderosa pine"
+msgstr ""
+
+#: src/config.ts:415
+msgid "Black spruce"
+msgstr ""
+
+#: src/config.ts:419
+#: src/config.ts:487
+msgid "Western red cedar"
+msgstr ""
+
+#: src/config.ts:423
+msgid "Western white pine"
+msgstr ""
+
+#: src/config.ts:427
+msgid "Pacific silver fir"
+msgstr ""
+
+#: src/config.ts:431
+msgid "White fir"
+msgstr ""
+
+#: src/config.ts:435
+#: src/config.ts:439
+msgid "Grand fir"
+msgstr ""
+
+#: src/config.ts:443
+msgid "Shasta red fir"
+msgstr ""
+
+#: src/config.ts:447
+msgid "Red alder"
+msgstr ""
+
+#: src/config.ts:451
+msgid "Incense cedar"
+msgstr ""
+
+#: src/config.ts:455
+msgid "Port orford cedar"
+msgstr ""
+
+#: src/config.ts:459
+msgid "Alaska yellow cedar"
+msgstr ""
+
+#: src/config.ts:463
+msgid "Western larch"
+msgstr ""
+
+#: src/config.ts:467
+msgid "Whitebark pine"
+msgstr ""
+
+#: src/config.ts:471
+msgid "Engelmann spruce"
+msgstr ""
+
+#: src/config.ts:475
+msgid "Jeffrey pine"
+msgstr ""
+
+#: src/config.ts:479
+msgid "Sugar pine"
+msgstr ""
+
+#: src/config.ts:483
+msgid "Pacific yew"
+msgstr ""
+
+#: src/config.ts:491
+msgid "Mountain hemlock"
+msgstr ""
+
+#: src/config.ts:571
+msgid "Alaska"
+msgstr ""
+
+#: src/config.ts:579
+msgid "North Central"
+msgstr ""
+
+#: src/config.ts:587
+msgid "North East"
+msgstr ""
+
+#: src/config.ts:595
+msgid "Mexico"
 msgstr ""
 
 #: src/components/SignupModal.tsx:124
@@ -107,26 +215,13 @@ msgstr ""
 msgid "Create Account"
 msgstr ""
 
-#: src/components/SocialLogin.tsx:9
-msgid "Or sign in with:"
+#: src/components/LoginModal.tsx:89
+#: src/components/LoginModal.tsx:143
+#: src/containers/AccountMenu.tsx:62
+msgid "Sign In"
 msgstr ""
 
-#: src/components/SocialLogin.tsx:12
-msgid "Sign in using a Google account"
-msgstr ""
-
-#: src/components/SocialLogin.tsx:15
-msgid "Sign in using a Facebook account"
-msgstr ""
-
-#: src/components/TraitStep.tsx:7
-msgid "Select traits"
-msgstr ""
-
-#: src/components/SocialLogin.tsx:18
-msgid "Sign in using a Twitter account"
-msgstr ""
-
+#: src/components/AccountSettingsModal.tsx:158
 #: src/containers/AccountMenu.tsx:72
 msgid "Account Settings"
 msgstr ""
@@ -159,10 +254,102 @@ msgstr ""
 msgid "When should trees be best adapted to the planting site?"
 msgstr ""
 
+#: src/containers/Comparisons.tsx:88
+msgid "The file is empty."
+msgstr ""
+
+#: src/containers/Comparisons.tsx:101
+msgid "The CSV has no latitude and/or longitude column."
+msgstr ""
+
+#: src/containers/Comparisons.tsx:133
+msgid "Compare Seedlots"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:133
+msgid "Compare Planting Sites"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:134
+msgid "Click to hide"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:134
+msgid "Click to show"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:142
+#: src/containers/LocationStep.tsx:42
+#: src/containers/Map.tsx:699
+msgid "Location"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:143
+#: src/containers/Comparisons.tsx:293
 #: src/containers/ConstraintStep.tsx:25
 #: src/containers/Traits.tsx:41
 #: src/containers/Variables.tsx:54
 msgid "Name"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:144
+msgid "Match"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:167
+msgid "Remove site"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:220
+msgid "click to add"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:310
+msgid "cancel"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:317
+msgid "Add"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:332
+msgid "Add Seedlot"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:332
+msgid "Add Planting Site"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:340
+msgid "Upload CSV"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:353
+msgid "Label"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:354
+msgid "Climate Match"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:355
+msgid "delta"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:399
+msgid "Download CSV"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:416
+msgid "Uploading CSV"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:429
+msgid "Done"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:439
+msgid "Uploading CSV data..."
 msgstr ""
 
 #: src/containers/ConstraintStep.tsx:26
@@ -170,12 +357,8 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
-#: src/containers/DistanceConstraint.tsx:20
-msgid "Distance"
-msgstr ""
-
-#: src/containers/ElevationConstraint.tsx:21
-msgid "Elevation"
+#: src/containers/ConstraintStep.tsx:42
+msgid "Apply constraints"
 msgstr ""
 
 #: src/containers/ErrorModal.tsx:31
@@ -183,10 +366,6 @@ msgstr ""
 msgid ""
 "If the problem persists, please ${ reportAnIssue } and include the "
 "following information:"
-msgstr ""
-
-#: src/containers/LatitudeConstraint.tsx:16
-msgid "Latitude"
 msgstr ""
 
 #: src/containers/Layers.tsx:55
@@ -210,56 +389,25 @@ msgid "Seed Zones"
 msgstr ""
 
 #: src/containers/Layers.tsx:62
+#: src/containers/Sidebar.tsx:41
 msgid "Layers"
 msgstr ""
 
-#: src/containers/LocationStep.tsx:27
+#: src/containers/LocationStep.tsx:20
 msgid "Elevation:"
 msgstr ""
 
-#: src/containers/LocationStep.tsx:40
+#: src/containers/LocationStep.tsx:34
 msgid "Select planting site location"
 msgstr ""
 
-#: src/containers/LocationStep.tsx:40
+#: src/containers/LocationStep.tsx:34
 msgid "Select seedlot location"
 msgstr ""
 
-#: src/containers/LocationStep.tsx:50
-#: src/containers/UserSites.tsx:29
-msgid "Location"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:53
+#: src/containers/LocationStep.tsx:45
 #, javascript-format
 msgid "Locate your ${ siteLabel } by using the map or entering coordinates."
-msgstr ""
-
-#: src/containers/LocationStep.tsx:64
-msgid "Map ${ locationLabel }"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:71
-#, javascript-format
-msgid "Optional. Plot ${ plotLabel } on the map for comparison."
-msgstr ""
-
-#: src/containers/LocationStep.tsx:91
-#, javascript-format
-msgid "Add ${ locationLabel }"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:102
-#, javascript-format
-msgid "Locate your ${ siteLabel }"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:105
-msgid "Use the map or enter coordinates"
-msgstr ""
-
-#: src/containers/LongitudeConstraint.tsx:16
-msgid "Longitude"
 msgstr ""
 
 #: src/containers/Map.tsx:715
@@ -268,6 +416,14 @@ msgstr ""
 
 #: src/containers/Map.tsx:753
 msgid "Available Zones"
+msgstr ""
+
+#: src/containers/Map.tsx:781
+msgid "Add Location"
+msgstr ""
+
+#: src/containers/Map.tsx:781
+msgid "Set Point"
 msgstr ""
 
 #: src/containers/ObjectiveStep.tsx:21
@@ -288,10 +444,6 @@ msgstr ""
 #: src/containers/PhotoperiodConstraint.tsx:77
 #, javascript-format
 msgid "${ numberOfHours } hours"
-msgstr ""
-
-#: src/containers/PhotoperiodConstraint.tsx:119
-msgid "Photoperiod"
 msgstr ""
 
 #: src/containers/PhotoperiodConstraint.tsx:123
@@ -355,28 +507,32 @@ msgstr ""
 msgid "Please login to save your run."
 msgstr ""
 
-#: src/containers/RunStep.tsx:149
+#: src/containers/RunStep.tsx:143
 msgid "Map your Results"
 msgstr ""
 
-#: src/containers/RunStep.tsx:159
+#: src/containers/RunStep.tsx:186
 msgid "Run Tool"
 msgstr ""
 
-#: src/containers/RunStep.tsx:173
+#: src/containers/RunStep.tsx:200
 msgid "Save Last Run"
 msgstr ""
 
-#: src/containers/RunStep.tsx:178
+#: src/containers/RunStep.tsx:205
 msgid "Export As..."
 msgstr ""
 
-#: src/containers/RunStep.tsx:203
+#: src/containers/RunStep.tsx:230
 msgid "GeoTIFF"
 msgstr ""
 
-#: src/containers/RunStep.tsx:213
-msgid "Move and zoom the map to position it how it should appear in the report"
+#: src/containers/RunStep.tsx:240
+msgid "Position Map"
+msgstr ""
+
+#: src/containers/RunStep.tsx:258
+msgid "Move and zoom the map to set how it will appear in the report."
 msgstr ""
 
 #: src/containers/SaveModal.tsx:8
@@ -473,15 +629,15 @@ msgstr ""
 msgid "You currently have no saved runs."
 msgstr ""
 
-#: src/containers/SeedZoneChooser.tsx:59
+#: src/containers/SeedZoneChooser.tsx:44
 msgid "No zones at this location..."
 msgstr ""
 
-#: src/containers/SeedZoneChooser.tsx:59
+#: src/containers/SeedZoneChooser.tsx:44
 msgid "Select a location..."
 msgstr ""
 
-#: src/containers/SeedZoneChooser.tsx:92
+#: src/containers/SeedZoneChooser.tsx:77
 msgid "Select zone"
 msgstr ""
 
@@ -524,8 +680,25 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
+#: src/containers/Sidebar.tsx:31
+msgid "About"
+msgstr ""
+
+#: src/containers/Sidebar.tsx:38
+msgid "Tool"
+msgstr ""
+
+#: src/containers/Sidebar.tsx:44
+msgid "Saved Runs"
+msgstr ""
+
+#: src/containers/Sidebar.tsx:47
+msgid "Map"
+msgstr ""
+
 #: src/containers/SpeciesChooser.tsx:44
-msgid "Select a species"
+#, javascript-format
+msgid "Select a ${ label }"
 msgstr ""
 
 #: src/containers/SpeciesChooser.tsx:53
@@ -588,14 +761,6 @@ msgstr ""
 msgid "Function"
 msgstr ""
 
-#: src/containers/UserSites.tsx:30
-msgid "Similarity"
-msgstr ""
-
-#: src/containers/UserSites.tsx:42
-msgid "Remove site"
-msgstr ""
-
 #: src/containers/Variable.tsx:157
 msgid "Zone climatic center:"
 msgstr ""
@@ -608,28 +773,28 @@ msgstr ""
 msgid "Avg.transfer limit for zone set:"
 msgstr ""
 
-#: src/containers/VariableStep.tsx:38
+#: src/containers/VariableStep.tsx:42
 msgid "Click to add variables"
 msgstr ""
 
-#: src/containers/VariableStep.tsx:47
-#: src/containers/VariableStep.tsx:54
+#: src/containers/VariableStep.tsx:51
+#: src/containers/VariableStep.tsx:58
 msgid "Select climate variables"
 msgstr ""
 
-#: src/containers/VariableStep.tsx:56
+#: src/containers/VariableStep.tsx:60
 msgid "Units:"
 msgstr ""
 
-#: src/containers/VariableStep.tsx:59
+#: src/containers/VariableStep.tsx:63
 msgid "Metric"
 msgstr ""
 
-#: src/containers/VariableStep.tsx:60
+#: src/containers/VariableStep.tsx:64
 msgid "Imperial"
 msgstr ""
 
-#: src/containers/VariableStep.tsx:78
+#: src/containers/VariableStep.tsx:82
 msgid "Choose automatically"
 msgstr ""
 
@@ -649,6 +814,190 @@ msgstr ""
 
 #: src/containers/Variables.tsx:82
 msgid "Add a variable..."
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:69
+#: src/components/AccountSettingsModal.tsx:83
+#: src/components/AccountSettingsModal.tsx:110
+#: src/components/AccountSettingsModal.tsx:123
+msgid "Sorry, there was an unexpected error changing your email address"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:96
+#: src/components/SignupModal.tsx:67
+msgid "Passwords don't match"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:168
+#: src/components/AccountSettingsModal.tsx:173
+#: src/components/LoginModal.tsx:106
+#: src/components/ResetPasswordModal.tsx:118
+#: src/components/SignupModal.tsx:141
+msgid "Email address"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:191
+msgid "Change email"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:205
+#: src/components/AccountSettingsModal.tsx:210
+#: src/components/LoginModal.tsx:121
+#: src/components/SignupModal.tsx:156
+msgid "Password"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:225
+#: src/components/SignupModal.tsx:171
+msgid "Confirm password"
+msgstr ""
+
+#: src/components/AccountSettingsModal.tsx:243
+msgid "Change password"
+msgstr ""
+
+#: src/components/ConstraintChooserItem.tsx:31
+msgid "Select..."
+msgstr ""
+
+#: src/components/LoginModal.tsx:66
+msgid "Login failed"
+msgstr ""
+
+#: src/components/LoginModal.tsx:131
+msgid "Forgot your password?"
+msgstr ""
+
+#: src/components/Modal.tsx:49
+#: src/components/ModalCard.tsx:46
+msgid "close"
+msgstr ""
+
+#: src/components/Navbar.tsx:28
+msgid "main navigation"
+msgstr ""
+
+#: src/components/Navbar.tsx:52
+msgid "Language"
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:52
+msgid "Sorry, there was an error resetting your password"
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:82
+msgid ""
+"An email has been sent with a link to reset your password. \n"
+"If you don't receive this email, please check your Spam folder."
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:106
+msgid ""
+"Enter your email address to receive an email with a link to reset your "
+"password."
+msgstr ""
+
+#: src/components/ResetPasswordModal.tsx:149
+msgid "Reset Password"
+msgstr ""
+
+#: src/components/SignupModal.tsx:83
+#: src/components/SignupModal.tsx:98
+msgid "There was an unexpected error while creating your account"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:9
+msgid "Or sign in with:"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:12
+msgid "Sign in using a Google account"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:15
+msgid "Sign in using a Facebook account"
+msgstr ""
+
+#: src/components/SocialLogin.tsx:18
+msgid "Sign in using a Twitter account"
+msgstr ""
+
+#: src/components/TraitStep.tsx:23
+msgid "Select traits"
+msgstr ""
+
+#: src/actions/report.ts:134
+msgid "Error creating report"
+msgstr ""
+
+#: src/actions/report.ts:135
+msgid "Sorry, there was an error creating the report."
+msgstr ""
+
+#: src/actions/report.ts:182
+msgid "Processing error"
+msgstr ""
+
+#: src/actions/report.ts:182
+msgid "Sorry, processing failed."
+msgstr ""
+
+#: src/containers/VariableStep.tsx:74
+msgid "or"
+msgstr ""
+
+#: src/config.ts:209
+#: src/config.ts:309
+msgctxt "Abbreviation of 'Celsius'"
+msgid "C"
+msgstr ""
+
+#: src/config.ts:216
+#: src/config.ts:315
+msgctxt "Abbreviation of 'Fahrenheit'"
+msgid "F"
+msgstr ""
+
+#: src/config.ts:226
+msgctxt "Abbreviation of 'millimeters'"
+msgid "mm"
+msgstr ""
+
+#: src/config.ts:232
+msgctxt "Abbreviation of 'inches'"
+msgid "in"
+msgstr ""
+
+#: src/config.ts:575
+msgctxt "Western United States"
+msgid "Western US"
+msgstr ""
+
+#: src/config.ts:583
+msgctxt "Central United States"
+msgid "Central US"
+msgstr ""
+
+#: src/config.ts:591
+msgctxt "Eastern United States"
+msgid "Eastern US"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:224
+#: src/containers/Comparisons.tsx:236
+#: src/containers/Comparisons.tsx:373
+msgctxt "Not Applicable"
+msgid "N/A"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:271
+msgctxt "abbreviation of 'Latitude'"
+msgid "Lat"
+msgstr ""
+
+#: src/containers/Comparisons.tsx:284
+msgctxt "abbreviation of 'Longitud''"
+msgid "Lon"
 msgstr ""
 
 #: src/containers/ConstraintStep.tsx:27
@@ -679,7 +1028,7 @@ msgid "ft"
 msgstr ""
 
 #: src/containers/ErrorModal.tsx:25
-msgctxt "reportAnIssue"
+msgctxt "This is the value of 'reportAnIssue'"
 msgid "report an issue"
 msgstr ""
 
@@ -688,34 +1037,14 @@ msgctxt "Abbreviation of 'North'"
 msgid "N"
 msgstr ""
 
-#: src/containers/LocationStep.tsx:35
-msgctxt "siteLabel"
+#: src/containers/LocationStep.tsx:29
+msgctxt "This is one possible value of 'siteLabel'"
 msgid "seedlot (its climatic center)"
 msgstr ""
 
-#: src/containers/LocationStep.tsx:35
-msgctxt "siteLabel"
+#: src/containers/LocationStep.tsx:30
+msgctxt "This is one possible value of 'siteLabel'"
 msgid "planting site"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:36
-msgctxt "locationLabel"
-msgid "Seedlots"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:36
-msgctxt "locationLabel"
-msgid "Planting Sites"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:69
-msgctxt "plotLabel"
-msgid "planting sites"
-msgstr ""
-
-#: src/containers/LocationStep.tsx:69
-msgctxt "plotLabel"
-msgid "seedlots"
 msgstr ""
 
 #: src/containers/LongitudeConstraint.tsx:16
@@ -729,7 +1058,6 @@ msgid "Match"
 msgstr ""
 
 #: src/containers/Map.tsx:721
-#: src/containers/UserSites.tsx:49
 msgctxt "i.e., Not Applicable"
 msgid "N/A"
 msgstr ""
@@ -810,28 +1138,8 @@ msgid "May"
 msgstr ""
 
 #: src/containers/SavedRun.tsx:57
-msgctxt "e.g., Load configuration"
+msgctxt "e.g., Load file"
 msgid "Load"
-msgstr ""
-
-#: src/containers/VariableStep.tsx:70
-msgctxt "e.g., this OR that"
-msgid "OR"
-msgstr ""
-
-#: src/components/AddUserSite.tsx:29
-msgctxt "Abbreviation of 'Latitude'"
-msgid "Lat"
-msgstr ""
-
-#: src/components/AddUserSite.tsx:40
-msgctxt "Abbreviation of 'Longitude'"
-msgid "Lon"
-msgstr ""
-
-#: src/components/AddUserSite.tsx:76
-msgctxt "e.g., 'Add to list'"
-msgid "Add"
 msgstr ""
 
 #: src/components/ResetPasswordModal.tsx:136

@@ -22,7 +22,7 @@ const ErrorModal = ({ show, title, message, debugInfo, onHide }: ErrorModalProps
   if (debugInfo !== null) {
     const reportAnIssue = (
       <a href="https://github.com/consbio/seedsource/issues" target="_blank" rel="noreferrer">
-        {c('reportAnIssue').t`report an issue`}
+        {c("This is the value of 'reportAnIssue'").t`report an issue`}
       </a>
     )
 

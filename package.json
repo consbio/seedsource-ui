@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && copyfiles -u 1 src/**/*.jison lib/",
     "start": "tsc -w -p tsconfig.json",
-    "localize": "ttag update locales/es/seedsource-ui.po src"
+    "extract-messages": "ttag update locales/es_MX/seedsource-ui.po src"
   },
   "author": "Conservation Biology Institute",
   "license": "MIT",

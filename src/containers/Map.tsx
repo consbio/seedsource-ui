@@ -32,9 +32,9 @@ type PopupInfo = {
   content: HTMLElement
 }
 
-const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png')
-const iconUrl = require('leaflet/dist/images/marker-icon.png')
-const shadowUrl = require('leaflet/dist/images/marker-shadow.png')
+const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png').default
+const iconUrl = require('leaflet/dist/images/marker-icon.png').default
+const shadowUrl = require('leaflet/dist/images/marker-shadow.png').default
 
 /* This is a workaround for a webpack-leaflet incompatibility (https://github.com/PaulLeCam/react-leaflet/issues/255)w */
 delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -696,13 +696,13 @@ class Map extends React.Component<MapProps> {
               <div className="map-info-popup">
                 <div className="columns is-mobile">
                   <div className="column">
-                    <div>Location</div>
+                    <div>{t`Location`}</div>
                     <div className="has-text-weight-bold">
                       {point.y.toFixed(2)}, {point.x.toFixed(2)}
                     </div>
                   </div>
                   <div className="column">
-                    <div>Elevation</div>
+                    <div>{t`Elevation`}</div>
                     <div className="has-text-weight-bold">
                       {`${Math.round(elevation / 0.3048)} ${c("Abbreviation of 'feet' (measurement)")
                         .t`ft`} (${Math.round(elevation)} ${c("Abbreviation of 'meters'").t`m`})`}
@@ -778,7 +778,7 @@ class Map extends React.Component<MapProps> {
                     }
                   }}
                 >
-                  {mode === 'add_sites' ? 'Add Location' : 'Set Point'}
+                  {mode === 'add_sites' ? t`Add Location` : t`Set Point`}
                 </button>
               </div>
             </>,

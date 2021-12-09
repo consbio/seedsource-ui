@@ -155,7 +155,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
         ref={input => {
           this.modal = input
         }}
-        title="Account Settings"
+        title={t`Account Settings`}
       >
         <form
           onSubmit={e => {
@@ -165,7 +165,7 @@ class AccountSettingsModal extends React.Component<AccountSettingsModalProps, Ac
         >
           {emailErrorNode}
           <div className="field">
-            <label className="label">Email address</label>
+            <label className="label">{t`Email address`}</label>
             <div className="control">
               <input
                 className={`${emailError !== null ? 'is-danger' : ''} input`}

@@ -54,7 +54,7 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
           }}
           className="button is-primary"
         >
-          <span className="icon-load-12" aria-hidden="true" /> {c('e.g., Load configuration').t`Load`}
+          <span className="icon-load-12" aria-hidden="true" /> {c('e.g., Load file').t`Load`}
         </button>
         <button
           type="button"

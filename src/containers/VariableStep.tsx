@@ -70,8 +70,8 @@ const VariableStep = ({ number, active, variables, method, setDefaultVariables }
 
       {flag && defaultVariables && !variables.length && (
         <>
-          <div className="hr-label" style={{ margin: '10px 0' }}>
-            {c('e.g., this OR that').t`OR`}
+          <div className="hr-label" style={{ margin: '10px 0', textTransform: 'uppercase' }}>
+            {t`or`}
           </div>
           <button
             type="button"

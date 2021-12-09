@@ -10,6 +10,7 @@ interface RuntimeConfig {
   title: string
   staticRoot: string
   mbtileserverRoot: string
+  languageCode?: string
 }
 
 export interface DefaultVariable {
@@ -18,6 +19,7 @@ export interface DefaultVariable {
 }
 
 export interface Config {
+  languages?: { [name: string]: string }
   apiRoot: string
   logo: string
   navbarClass: string
@@ -32,6 +34,7 @@ export interface Config {
 }
 
 export interface PartialConfig {
+  languages?: { [name: string]: string }
   apiRoot: string
   logo?: string
   navbarClass?: string

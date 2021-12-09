@@ -25,7 +25,9 @@ const LocationStep = ({ objective, number, elevation }: LocationStepProps) => {
     )
 
   const siteLabel =
-    objective === 'sites' ? c('siteLabel').t`seedlot (its climatic center)` : c('siteLabel').t`planting site`
+    objective === 'sites'
+      ? c("This is one possible value of 'siteLabel'").t`seedlot (its climatic center)`
+      : c("This is one possible value of 'siteLabel'").t`planting site`
 
   return (
     <ConfigurationStep

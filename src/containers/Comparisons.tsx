@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import stringify from 'csv-stringify'
-import { t } from 'ttag'
+import { t, c } from 'ttag'
 import parse from 'csv-parse'
 import { UserSite } from '../reducers/runConfiguration'
 import { addUserSite, addUserSites, removeUserSite, setUserSiteLabel, setActiveUserSite } from '../actions/point'
@@ -85,7 +85,7 @@ const Comparisons = ({
                     setProcessingCSV(false)
                   } else {
                     if (!rows.length) {
-                      setCSVError('The file is empty.')
+                      setCSVError(t`The file is empty.`)
                       setProcessingCSV(false)
                       return
                     }
@@ -98,7 +98,7 @@ const Comparisons = ({
                     const labelCol = columns.find(name => ['name', 'label'].includes(name.toLowerCase().trim()))
 
                     if (!(xCol && yCol)) {
-                      setCSVError('The CSV has no latitude and/or longitude column.')
+                      setCSVError(t`The CSV has no latitude and/or longitude column.`)
                       setProcessingCSV(false)
                       return
                     }
@@ -139,9 +139,9 @@ const Comparisons = ({
             <thead>
               <tr>
                 <th> </th>
-                <th>Location</th>
-                <th style={{ minWidth: '200px' }}>Name</th>
-                <th>Match</th>
+                <th>{t`Location`}</th>
+                <th style={{ minWidth: '200px' }}>{t`Name`}</th>
+                <th>{t`Match`}</th>
                 {siteVariables.map(variable => (
                   <th>&Delta; {variable}</th>
                 ))}
@@ -164,7 +164,7 @@ const Comparisons = ({
                       type="button"
                       className="delete"
                       onClick={() => removeSite(index)}
-                      aria-label="Remove site"
+                      aria-label={t`Remove site`}
                     />
                   </td>
                   <td>{`${site.lat.toFixed(2)}, ${site.lon.toFixed(2)}`}</td>
@@ -217,11 +217,11 @@ const Comparisons = ({
                           className="button is-plain is-italic has-text-grey-light"
                           onClick={() => setActiveEdit({ lat: site.lat, lon: site.lon, label: '' })}
                         >
-                          click to add
+                          {t`click to add`}
                         </button>
                       ))}
                   </td>
-                  <td>{site.score !== undefined ? `${site.score}%` : 'N/A'}</td>
+                  <td>{site.score !== undefined ? `${site.score}%` : c('Not Applicable').t`N/A`}</td>
                   {siteVariables.map(variable => {
                     if (site.deltas) {
                       let value = site.deltas[variable]
@@ -233,7 +233,7 @@ const Comparisons = ({
                       return <td>{Number(value.toFixed(1))}</td>
                     }
 
-                    return <td>N/A</td>
+                    return <td>{c('Not Applicable').t`N/A`}</td>
                   })}
                 </tr>
               )
@@ -268,7 +268,7 @@ const Comparisons = ({
                       >
                         <div className="columns" style={{ textAlign: 'left', alignItems: 'flex-end' }}>
                           <label className="column">
-                            <div>Lat</div>
+                            <div>{c("abbreviation of 'Latitude'").t`Lat`}</div>
 
                             {/* eslint-disable jsx-a11y/no-autofocus */}
                             <input
@@ -281,7 +281,7 @@ const Comparisons = ({
                             {/* eslint-enable */}
                           </label>
                           <label className="column">
-                            <div>Lon</div>
+                            <div>{c("abbreviation of 'Longitud''").t`Lon`}</div>
                             <input
                               className="input is-inline is-small"
                               style={{ width: '80px', textAlign: 'right' }}
@@ -290,7 +290,7 @@ const Comparisons = ({
                             />
                           </label>
                           <label className="column">
-                            <div>Name</div>
+                            <div>{t`Name`}</div>
                             <input
                               className="input is-inline is-small"
                               value={newSite.label}
@@ -307,14 +307,14 @@ const Comparisons = ({
                               className="button is-plain is-small"
                               style={{ verticalAlign: 'bottom', marginRight: '10px' }}
                             >
-                              cancel
+                              {t`cancel`}
                             </button>
                             <button
                               type="submit"
                               className="button is-small is-primary"
                               style={{ verticalAlign: 'bottom' }}
                             >
-                              Add
+                              {t`Add`}
                             </button>
                           </div>
                         </div>
@@ -337,7 +337,7 @@ const Comparisons = ({
                           style={{ marginLeft: '20px' }}
                           onClick={() => fileInputRef.current?.click()}
                         >
-                          Upload CSV
+                          {t`Upload CSV`}
                         </button>
                         {userSites.length ? (
                           <button
@@ -348,11 +348,11 @@ const Comparisons = ({
                               const deltaKeys = userSites[0].deltas ? Object.keys(userSites[0].deltas) : []
                               const data = [
                                 [
-                                  'Latitude',
-                                  'Longitude',
-                                  'Label',
-                                  'Climate Match %',
-                                  ...deltaKeys.map(k => `(delta) ${k}`),
+                                  t`Latitude`,
+                                  t`Longitude`,
+                                  t`Label`,
+                                  `${t`Climate Match`}%`,
+                                  ...deltaKeys.map(k => `(${t`delta`}) ${k}`),
                                 ],
                                 ...userSites.map(({ lat, lon, label, score, deltas }) => [
                                   lat,
@@ -370,7 +370,7 @@ const Comparisons = ({
                                       return value
                                     }
 
-                                    return 'N/A'
+                                    return c('Not Applicable').t`N/A`
                                   }),
                                 ]),
                               ]
@@ -396,7 +396,7 @@ const Comparisons = ({
                               })
                             }}
                           >
-                            Download CSV
+                            {t`Download CSV`}
                           </button>
                         ) : null}
                       </>
@@ -413,7 +413,7 @@ const Comparisons = ({
       {(processingCSV || csvError) && (
         <>
           <ModalCard
-            title="Uploading CSV"
+            title={t`Uploading CSV`}
             active
             footer={
               csvError && (
@@ -426,7 +426,7 @@ const Comparisons = ({
                     }}
                     className="button is-primary is-pulled-right"
                   >
-                    Done
+                    {t`Done`}
                   </button>
                 </div>
               )
@@ -436,7 +436,7 @@ const Comparisons = ({
               <div>{csvError}</div>
             ) : (
               <>
-                <div>Uploading CSV data...</div>
+                <div>{t`Uploading CSV data...`}</div>
                 <progress />
               </>
             )}

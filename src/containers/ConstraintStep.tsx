@@ -38,7 +38,13 @@ const ConstraintStep = ({ number, constraints, onChange }: ConstraintStepProps) 
   }
 
   return (
-    <ConfigurationStep title="Apply constraints" number={number} name="constraints" active className="constraint-step">
+    <ConfigurationStep
+      title={t`Apply constraints`}
+      number={number}
+      name="constraints"
+      active
+      className="constraint-step"
+    >
       {table}
       <ConstraintChooser onAdd={onChange} />
     </ConfigurationStep>

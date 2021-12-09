@@ -140,7 +140,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
     const { previewModal, processingCsv, csvError } = this.state
 
     return (
-      <ConfigurationStep title="Map your Results" number={number} name="run" active={false}>
+      <ConfigurationStep title={t`Map your Results`} number={number} name="run" active={false}>
         {(processingCsv || csvError) && (
           <>
             <ModalCard

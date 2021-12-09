@@ -2,6 +2,7 @@ import React from 'react'
 import { t } from 'ttag'
 import config from '../config'
 import AccountMenu from '../containers/AccountMenu'
+import NavItemDropdown from './NavItemDropdown'
 
 type NavbarState = {
   isActive: boolean
@@ -46,6 +47,24 @@ class Navbar extends React.Component<{}, NavbarState> {
           <div className="navbar-end">
             {children}
             <AccountMenu />
+
+            {config.languages && (
+              <NavItemDropdown title={t`Language`}>
+                {Object.entries(config.languages).map(([name, label]) => (
+                  <button
+                    type="button"
+                    className="navbar-item"
+                    key={name}
+                    onClick={() => {
+                      document.cookie = `django_language=${name}; secure; samesite=lax`
+                      window.location.reload()
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </NavItemDropdown>
+            )}
           </div>
         </div>
       </nav>

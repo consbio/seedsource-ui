@@ -1,3 +1,4 @@
+import { t } from 'ttag'
 import { post, executeGPTask } from '../io'
 import { setError } from './error'
 import { dumpConfiguration } from './saves'
@@ -130,8 +131,8 @@ export const createReport = (name: string) => {
       .catch(err => {
         dispatch(
           setError(
-            'Error creating report',
-            'Sorry, there was an error creating the report.',
+            t`Error creating report`,
+            t`Sorry, there was an error creating the report.`,
             JSON.stringify(
               {
                 action: 'createReport',
@@ -154,6 +155,10 @@ export const runTIFJob = () => {
 
     const inputs = {
       service_id: getState().job.serviceId,
+    } as any
+
+    if (config.runtime.languageCode) {
+      inputs.language_code = config.runtime.languageCode
     }
 
     return executeGPTask('write_tif', inputs)
@@ -174,7 +179,7 @@ export const runTIFJob = () => {
         }
 
         dispatch(failReport())
-        dispatch(setError('Processing error', 'Sorry, processing failed.', JSON.stringify(data, null, 2)))
+        dispatch(setError(t`Processing error`, t`Sorry, processing failed.`, JSON.stringify(data, null, 2)))
       })
   }
 }

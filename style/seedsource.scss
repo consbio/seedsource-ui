@@ -158,6 +158,20 @@ button.is-link {
   width: 100%;
 }
 
+button.navbar-item {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background: whitesmoke !important;
+  }
+}
+
 @include touch {
   .navbar.is-active {
     position: fixed;

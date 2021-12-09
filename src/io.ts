@@ -28,15 +28,23 @@ export const post = (url: string, data: any, options: { [key: string]: string } 
   if (!method) {
     method = 'POST'
   }
+  const cookies = getCookies()
+
+  // Accept-Language
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json, */*',
+    'X-CSRFToken': getCookies().csrftoken,
+  } as any
+
+  if (cookies.django_language) {
+    headers['Accept-Language'] = cookies.django_language
+  }
 
   return fetch(url, {
     method,
     credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json, */*',
-      'X-CSRFToken': getCookies().csrftoken,
-    },
+    headers,
     body: data ? JSON.stringify(data) : data,
   })
 }

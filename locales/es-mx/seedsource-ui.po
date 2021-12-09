@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Plural-Forms: nplurals = 2; plural = (n != 1);\n"
-"Language: es_MX\n"
+"Language: es-mx\n"
 "mime-version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -794,6 +794,10 @@ msgstr ""
 msgid "Imperial"
 msgstr ""
 
+#: src/containers/VariableStep.tsx:74
+msgid "or"
+msgstr ""
+
 #: src/containers/VariableStep.tsx:82
 msgid "Choose automatically"
 msgstr ""
@@ -940,10 +944,6 @@ msgstr ""
 
 #: src/actions/report.ts:182
 msgid "Sorry, processing failed."
-msgstr ""
-
-#: src/containers/VariableStep.tsx:74
-msgid "or"
 msgstr ""
 
 #: src/config.ts:209

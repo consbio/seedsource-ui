@@ -32,9 +32,9 @@ type PopupInfo = {
   content: HTMLElement
 }
 
-const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png').default
-const iconUrl = require('leaflet/dist/images/marker-icon.png').default
-const shadowUrl = require('leaflet/dist/images/marker-shadow.png').default
+const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png')
+const iconUrl = require('leaflet/dist/images/marker-icon.png')
+const shadowUrl = require('leaflet/dist/images/marker-shadow.png')
 
 /* This is a workaround for a webpack-leaflet incompatibility (https://github.com/PaulLeCam/react-leaflet/issues/255)w */
 delete (L.Icon.Default.prototype as any)._getIconUrl

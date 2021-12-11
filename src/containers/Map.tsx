@@ -985,7 +985,7 @@ class Map extends React.Component<MapProps> {
           <div className="time-overlay">
             <span className="icon-clock-16" />
             <span>&nbsp;</span>
-            Showing: {label}
+            {t`Showing`}: {label}
           </div>
         )
       }

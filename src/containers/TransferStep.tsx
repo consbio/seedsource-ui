@@ -79,7 +79,7 @@ const TransferStep = ({ number, active, objective, method, center, onCenterChang
   const hasFunctions = !!config.functions && config.functions.length > 0
 
   return (
-    <ConfigurationStep title="Select transfer limit method" number={number} name="transfer" active>
+    <ConfigurationStep title={t`Select transfer limit method`} number={number} name="transfer" active>
       <div className="tabs is-toggle is-small">
         <ul>
           <MethodButton name="custom">{t`Custom`}</MethodButton>

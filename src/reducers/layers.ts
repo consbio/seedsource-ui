@@ -1,3 +1,4 @@
+import { t } from 'ttag'
 import config, { variables as allVariables } from '../config'
 import { REMOVE_VARIABLE, SET_VARIABLES_REGION } from '../actions/variables'
 import { FINISH_JOB, START_JOB } from '../actions/job'
@@ -85,7 +86,7 @@ export default (state: [any?] = [], action: any) => {
       return [
         {
           name: 'results',
-          label: 'Last Run',
+          label: t`Last Run`,
           type: 'raster',
           urlTemplate: '{serviceId}',
           zIndex: 2,

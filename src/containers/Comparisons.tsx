@@ -92,9 +92,11 @@ const Comparisons = ({
 
                     const columns = Object.keys(rows[0])
                     const xCol = columns.find(name =>
-                      ['x', 'lon', 'long', 'longitude'].includes(name.toLowerCase().trim()),
+                      ['x', 'lon', 'long', 'longitude', 'longitud'].includes(name.toLowerCase().trim()),
                     )
-                    const yCol = columns.find(name => ['y', 'lat', 'latitude'].includes(name.toLowerCase().trim()))
+                    const yCol = columns.find(name =>
+                      ['y', 'lat', 'latitude', 'latitud'].includes(name.toLowerCase().trim()),
+                    )
                     const labelCol = columns.find(name => ['name', 'label'].includes(name.toLowerCase().trim()))
 
                     if (!(xCol && yCol)) {
@@ -351,7 +353,7 @@ const Comparisons = ({
                                   t`Latitude`,
                                   t`Longitude`,
                                   t`Label`,
-                                  `${t`Climate Match`}%`,
+                                  `${t`Climate Match`} %`,
                                   ...deltaKeys.map(k => `(${t`delta`}) ${k}`),
                                 ],
                                 ...userSites.map(({ lat, lon, label, score, deltas }) => [

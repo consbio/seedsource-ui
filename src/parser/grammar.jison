@@ -3,11 +3,11 @@
 %%
 \s+						/* skip whitespace */
 [0-9]+("."[0-9]+)?\b  	return 'NUMBER';
+'**'					return 'POWER';
 "*"						return 'TIMES';
 "/"						return 'SLASH';
 '-'						return 'MINUS';
 '+'						return 'PLUS';
-'^'						return 'POWER';
 '('						return 'LPAREN';
 ')'						return 'RPAREN';
 [a-zA-Z_][a-zA-Z0-9_]*	return 'ID';

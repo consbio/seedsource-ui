@@ -119,10 +119,18 @@ export default (store: any) => {
   resync(store, transferSelect, (state, io, dispatch, previousState) => {
     const flag = (window as any).waffle.flag_is_active('default-vars')
 
-    const { method, point, zone, year, region, useDefaultVariables } = state
+    const { method, point, zone, year, useDefaultVariables } = state
+
     const pointIsValid = point !== null && point.x && point.y
     const { runConfiguration } = store.getState()
     let { variables } = runConfiguration
+    const { validRegions } = runConfiguration
+
+    if (!validRegions.length) {
+      return
+    }
+
+    const region = validRegions[0]
 
     if (!(pointIsValid && method === 'seedzone')) {
       if (pointIsValid && region && useDefaultVariables) {

@@ -1,288 +1,284 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
-"Plural-Forms: nplurals = 2; plural = (n != 1);\n"
-"Language: es_MX\n"
-"mime-version: 1.0\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 2; plural = (n != 1);\nLanguage: es_MX\nmime-version: 1.0\nContent-Transfer-Encoding: 8bit\n"
 
 #: src/config.ts:137
 msgid "Geographic"
-msgstr ""
+msgstr "Geográfico"
 
 #: src/config.ts:143
 #: src/containers/ElevationConstraint.tsx:21
 #: src/containers/Map.tsx:705
 msgid "Elevation"
-msgstr ""
+msgstr "Elevación"
 
 #: src/config.ts:148
 #: src/containers/PhotoperiodConstraint.tsx:119
 msgid "Photoperiod"
-msgstr ""
+msgstr "Fotoperiodo"
 
 #: src/config.ts:153
 #: src/containers/Comparisons.tsx:351
 #: src/containers/LatitudeConstraint.tsx:16
 msgid "Latitude"
-msgstr ""
+msgstr "Latitud"
 
 #: src/config.ts:158
 #: src/containers/Comparisons.tsx:352
 #: src/containers/LongitudeConstraint.tsx:16
 msgid "Longitude"
-msgstr ""
+msgstr "Longitud"
 
 #: src/config.ts:163
 #: src/containers/DistanceConstraint.tsx:20
 msgid "Distance"
-msgstr ""
+msgstr "Distancia"
 
 #: src/config.ts:241
 #: src/config.ts:247
 msgid "days"
-msgstr ""
+msgstr "días"
 
 #: src/config.ts:287
 msgid "Mean annual temperature"
-msgstr ""
+msgstr "Temperatura media anual"
 
 #: src/config.ts:293
 msgid "Mean warmest month temperature"
-msgstr ""
+msgstr "Temperatura media del mes más cálido"
 
 #: src/config.ts:299
 msgid "Mean coldest month temperature"
-msgstr ""
+msgstr "Temperatura media del mes más frío"
 
 #: src/config.ts:324
 msgid "Mean annual precipitation"
-msgstr ""
+msgstr "Precipitación media anual"
 
 #: src/config.ts:330
 msgid "Mean summer precipitation, May to September"
-msgstr ""
+msgstr "Precipitación media en verano, de mayo a septiembre"
 
 #: src/config.ts:336
 msgid "Annual heat-moisture index"
-msgstr ""
+msgstr "Índice de calor-humedad anual"
 
 #: src/config.ts:342
 msgid "Summer heat-moisture index"
-msgstr ""
+msgstr "Índice de calor-humedad en verano"
 
 #: src/config.ts:348
 msgid "Degree-days below 0° C"
-msgstr ""
+msgstr "Grados/días por debajo de 0 °C"
 
 #: src/config.ts:354
 msgid "Degree-days above 5° C"
-msgstr ""
+msgstr "Grados/días-grado por encima de 5 °C"
 
 #: src/config.ts:360
 msgid "Frost-free period"
-msgstr ""
+msgstr "Periodo sin escarcha"
 
 #: src/config.ts:366
 msgid "Precipitation as snow, August to July"
-msgstr ""
+msgstr "Precipitación en forma de nieve, de agosto a julio"
 
 #: src/config.ts:372
 msgid "Extreme minimum temperature over 30 years"
-msgstr ""
+msgstr "Temperatura mínima extrema durante 30 años"
 
 #: src/config.ts:378
 msgid "Extreme maximum temperature over 30 years"
-msgstr ""
+msgstr "Temperatura máxima extrema durante 30 años"
 
 #: src/config.ts:384
 msgid "Hargreaves reference evaporation"
-msgstr ""
+msgstr "Evaporación de referencia de Hargreaves"
 
 #: src/config.ts:390
 msgid "Hargreaves climatic moisture deficit"
-msgstr ""
+msgstr "Déficit de humedad climática de Hargreaves"
 
 #: src/config.ts:399
 msgid "Douglas-fir"
-msgstr ""
+msgstr "Douglas-fir"
 
 #: src/config.ts:403
 msgid "Lodgepole pine"
-msgstr ""
+msgstr "Lodgepole pine"
 
 #: src/config.ts:407
 msgid "Jack pine"
-msgstr ""
+msgstr "Jack pine"
 
 #: src/config.ts:411
 msgid "Ponderosa pine"
-msgstr ""
+msgstr "Ponderosa pine"
 
 #: src/config.ts:415
 msgid "Black spruce"
-msgstr ""
+msgstr "Black spruce"
 
 #: src/config.ts:419
 #: src/config.ts:487
 msgid "Western red cedar"
-msgstr ""
+msgstr "Western red cedar"
 
 #: src/config.ts:423
 msgid "Western white pine"
-msgstr ""
+msgstr "Western white pine"
 
 #: src/config.ts:427
 msgid "Pacific silver fir"
-msgstr ""
+msgstr "Pacific silver fir"
 
 #: src/config.ts:431
 msgid "White fir"
-msgstr ""
+msgstr "White fir"
 
 #: src/config.ts:435
 #: src/config.ts:439
 msgid "Grand fir"
-msgstr ""
+msgstr "Grand fir"
 
 #: src/config.ts:443
 msgid "Shasta red fir"
-msgstr ""
+msgstr "Shasta red fir"
 
 #: src/config.ts:447
 msgid "Red alder"
-msgstr ""
+msgstr "Red alder"
 
 #: src/config.ts:451
 msgid "Incense cedar"
-msgstr ""
+msgstr "Incense cedar"
 
 #: src/config.ts:455
 msgid "Port orford cedar"
-msgstr ""
+msgstr "Port orford cedar"
 
 #: src/config.ts:459
 msgid "Alaska yellow cedar"
-msgstr ""
+msgstr "Alaska yellow cedar"
 
 #: src/config.ts:463
 msgid "Western larch"
-msgstr ""
+msgstr "Western larch"
 
 #: src/config.ts:467
 msgid "Whitebark pine"
-msgstr ""
+msgstr "Whitebark pine"
 
 #: src/config.ts:471
 msgid "Engelmann spruce"
-msgstr ""
+msgstr "Engelmann spruce"
 
 #: src/config.ts:475
 msgid "Jeffrey pine"
-msgstr ""
+msgstr "Jeffrey pine"
 
 #: src/config.ts:479
 msgid "Sugar pine"
-msgstr ""
+msgstr "Sugar pine"
 
 #: src/config.ts:483
 msgid "Pacific yew"
-msgstr ""
+msgstr "Pacific yew"
 
 #: src/config.ts:491
 msgid "Mountain hemlock"
-msgstr ""
+msgstr "Mountain hemlock"
 
 #: src/config.ts:571
 msgid "Alaska"
-msgstr ""
+msgstr "Alaska"
 
 #: src/config.ts:579
 msgid "North Central"
-msgstr ""
+msgstr "Región Septentrional Central"
 
 #: src/config.ts:587
 msgid "North East"
-msgstr ""
+msgstr "Región Noreste"
 
 #: src/config.ts:595
 msgid "Mexico"
-msgstr ""
+msgstr "México"
 
 #: src/components/SignupModal.tsx:124
 #: src/components/SignupModal.tsx:189
 #: src/containers/AccountMenu.tsx:59
 msgid "Create Account"
-msgstr ""
+msgstr "Crear cuenta"
 
 #: src/components/LoginModal.tsx:89
 #: src/components/LoginModal.tsx:143
 #: src/containers/AccountMenu.tsx:62
 msgid "Sign In"
-msgstr ""
+msgstr "Registrarse"
 
 #: src/components/AccountSettingsModal.tsx:158
 #: src/containers/AccountMenu.tsx:72
 msgid "Account Settings"
-msgstr ""
+msgstr "Configuración de la cuenta"
 
 #: src/containers/AccountMenu.tsx:75
 msgid "Sign Out"
-msgstr ""
+msgstr "Salir"
 
 #: src/containers/AccountMenu.tsx:110
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #: src/containers/ClimateStep.tsx:31
 msgid "Seedlot climate:"
-msgstr ""
+msgstr "Clima del lote de semillas:"
 
 #: src/containers/ClimateStep.tsx:35
 msgid "Planting site climate:"
-msgstr ""
+msgstr "Clima del sitio de plantación:"
 
 #: src/containers/ClimateStep.tsx:104
 msgid "Select climate scenarios"
-msgstr ""
+msgstr "Seleccionar escenarios climáticos"
 
 #: src/containers/ClimateStep.tsx:105
 msgid "Which climate are the seedlots adapted to?"
-msgstr ""
+msgstr "¿A qué clima están adaptados los lotes de semillas?"
 
 #: src/containers/ClimateStep.tsx:106
 msgid "When should trees be best adapted to the planting site?"
-msgstr ""
+msgstr "¿Cuándo se adaptarán mejor los árboles al sitio de plantación?"
 
 #: src/containers/Comparisons.tsx:88
 msgid "The file is empty."
-msgstr ""
+msgstr "El archivo está vacío."
 
 #: src/containers/Comparisons.tsx:101
 msgid "The CSV has no latitude and/or longitude column."
-msgstr ""
+msgstr "El archivo CSV no tiene columnas de latitud ni longitud."
 
 #: src/containers/Comparisons.tsx:133
 msgid "Compare Seedlots"
-msgstr ""
+msgstr "Comparar lotes de semillas"
 
 #: src/containers/Comparisons.tsx:133
 msgid "Compare Planting Sites"
-msgstr ""
+msgstr "Comparar sitios de plantación"
 
 #: src/containers/Comparisons.tsx:134
 msgid "Click to hide"
-msgstr ""
+msgstr "Haga clic para ocultar"
 
 #: src/containers/Comparisons.tsx:134
 msgid "Click to show"
-msgstr ""
+msgstr "Haga clic para mostrar"
 
 #: src/containers/Comparisons.tsx:142
 #: src/containers/LocationStep.tsx:42
 #: src/containers/Map.tsx:699
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #: src/containers/Comparisons.tsx:143
 #: src/containers/Comparisons.tsx:293
@@ -290,356 +286,345 @@ msgstr ""
 #: src/containers/Traits.tsx:41
 #: src/containers/Variables.tsx:54
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: src/containers/Comparisons.tsx:144
 msgid "Match"
-msgstr ""
+msgstr "Coincidencia"
 
 #: src/containers/Comparisons.tsx:167
 msgid "Remove site"
-msgstr ""
+msgstr "Eliminar el sitio"
 
 #: src/containers/Comparisons.tsx:220
 msgid "click to add"
-msgstr ""
+msgstr "Haga clic para añadir"
 
 #: src/containers/Comparisons.tsx:310
 msgid "cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/containers/Comparisons.tsx:317
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 #: src/containers/Comparisons.tsx:332
 msgid "Add Seedlot"
-msgstr ""
+msgstr "Añadir lote de semillas"
 
 #: src/containers/Comparisons.tsx:332
 msgid "Add Planting Site"
-msgstr ""
+msgstr "Añadir sitio de plantación"
 
 #: src/containers/Comparisons.tsx:340
 msgid "Upload CSV"
-msgstr ""
+msgstr "Cargar CSV"
 
 #: src/containers/Comparisons.tsx:353
 msgid "Label"
-msgstr ""
+msgstr "Etiqueta"
 
 #: src/containers/Comparisons.tsx:354
 msgid "Climate Match"
-msgstr ""
+msgstr "Coincidencia de clima"
 
 #: src/containers/Comparisons.tsx:355
 msgid "delta"
-msgstr ""
+msgstr "Delta"
 
 #: src/containers/Comparisons.tsx:399
 msgid "Download CSV"
-msgstr ""
+msgstr "Descargar CSV"
 
 #: src/containers/Comparisons.tsx:416
 msgid "Uploading CSV"
-msgstr ""
+msgstr "Cargando CSV"
 
 #: src/containers/Comparisons.tsx:429
 msgid "Done"
-msgstr ""
+msgstr "Listo"
 
 #: src/containers/Comparisons.tsx:439
 msgid "Uploading CSV data..."
-msgstr ""
+msgstr "Cargando datos de CSV…"
 
 #: src/containers/ConstraintStep.tsx:26
 #: src/containers/Traits.tsx:42
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: src/containers/ConstraintStep.tsx:42
 msgid "Apply constraints"
-msgstr ""
+msgstr "Aplicar limitaciones"
 
 #: src/containers/ErrorModal.tsx:31
 #, javascript-format
-msgid ""
-"If the problem persists, please ${ reportAnIssue } and include the "
-"following information:"
-msgstr ""
+msgid "If the problem persists, please ${ reportAnIssue } and include the following information:"
+msgstr "Si el problema persiste, ${ reportAnIssue } e incluya la siguiente información:"
 
 #: src/containers/Layers.tsx:55
 msgid "Results"
-msgstr ""
+msgstr "Resultados"
 
 #: src/containers/Layers.tsx:55
 msgid "Run the tool to view results"
-msgstr ""
+msgstr "Ejecute la herramienta para ver los resultados"
 
 #: src/containers/Layers.tsx:57
 msgid "Variables"
-msgstr ""
+msgstr "Variables"
 
 #: src/containers/Layers.tsx:59
 msgid "Select a region and climate scenario to view variables"
-msgstr ""
+msgstr "Seleccione una región y un escenario climático para ver las variables"
 
 #: src/containers/Layers.tsx:61
 msgid "Seed Zones"
-msgstr ""
+msgstr "Zonas de origen de las semillas"
 
 #: src/containers/Layers.tsx:62
 #: src/containers/Sidebar.tsx:41
 msgid "Layers"
-msgstr ""
+msgstr "Capas"
 
 #: src/containers/LocationStep.tsx:20
 msgid "Elevation:"
-msgstr ""
+msgstr "Elevación:"
 
 #: src/containers/LocationStep.tsx:34
 msgid "Select planting site location"
-msgstr ""
+msgstr "Seleccione la ubicación del sitio de plantación"
 
 #: src/containers/LocationStep.tsx:34
 msgid "Select seedlot location"
-msgstr ""
+msgstr "Seleccione la ubicación del lote de semillas"
 
 #: src/containers/LocationStep.tsx:45
 #, javascript-format
 msgid "Locate your ${ siteLabel } by using the map or entering coordinates."
-msgstr ""
+msgstr "Localice su ${ siteLabel } en el mapa o introduciendo las coordenadas."
 
 #: src/containers/Map.tsx:715
 msgid "Climate"
-msgstr ""
+msgstr "Clima"
 
 #: src/containers/Map.tsx:753
 msgid "Available Zones"
-msgstr ""
+msgstr "Zonas disponibles"
 
 #: src/containers/Map.tsx:781
 msgid "Add Location"
-msgstr ""
+msgstr "Añadir ubicación"
 
 #: src/containers/Map.tsx:781
 msgid "Set Point"
-msgstr ""
+msgstr "Punto de ajuste"
 
 #: src/containers/ObjectiveStep.tsx:21
 #: src/containers/ObjectiveStep.tsx:28
 msgid "Select objective"
-msgstr ""
+msgstr "Seleccionar objetivo"
 
 #: src/containers/ObjectiveStep.tsx:22
 #: src/containers/ObjectiveStep.tsx:31
 msgid "Find seedlots"
-msgstr ""
+msgstr "Buscar lotes de semillas"
 
 #: src/containers/ObjectiveStep.tsx:22
 #: src/containers/ObjectiveStep.tsx:32
 msgid "Find planting sites"
-msgstr ""
+msgstr "Buscar sitios de plantación"
 
 #: src/containers/PhotoperiodConstraint.tsx:77
 #, javascript-format
 msgid "${ numberOfHours } hours"
-msgstr ""
+msgstr "${ numberOfHours } horas"
 
 #: src/containers/PhotoperiodConstraint.tsx:123
 msgid "hours"
-msgstr ""
+msgstr "horas"
 
 #: src/containers/RegionStep.tsx:32
 msgid "Automatic"
-msgstr ""
+msgstr "Automático"
 
 #: src/containers/RegionStep.tsx:33
 #: src/containers/TransferStep.tsx:85
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #: src/containers/RegionStep.tsx:41
 #: src/containers/RegionStep.tsx:48
 msgid "Select region"
-msgstr ""
+msgstr "Seleccionar región"
 
 #: src/containers/RegionStep.tsx:43
 #: src/containers/RegionStep.tsx:52
 msgid "Region:"
-msgstr ""
+msgstr "Región:"
 
 #: src/containers/RunConfiguration.tsx:14
 msgid "Calculating scores..."
-msgstr ""
+msgstr "Calculando puntuaciones…"
 
 #: src/containers/RunConfiguration.tsx:19
 msgid "Waiting for other jobs to finish..."
-msgstr ""
+msgstr "En espera de que concluyan otros trabajos…"
 
 #: src/containers/RunConfiguration.tsx:21
-msgid ""
-"Another job is currently running. Your job is queued and will run as soon "
-"as other jobs are finished."
-msgstr ""
+msgid "Another job is currently running. Your job is queued and will run as soon as other jobs are finished."
+msgstr "En este momento, se está ejecutando otro trabajo. Su trabajo entró en cola y se ejecutará en cuanto terminen los otros trabajos."
 
 #: src/containers/RunStep.tsx:59
 #: src/containers/RunStep.tsx:69
 #: src/containers/Variables.tsx:24
 msgid "Configuration error"
-msgstr ""
+msgstr "Error de configuración"
 
 #: src/containers/RunStep.tsx:60
-msgid ""
-"Cannot calculate scores: one or more of your variables has no transfer "
-"limit, or a limit of 0."
-msgstr ""
+msgid "Cannot calculate scores: one or more of your variables has no transfer limit, or a limit of 0."
+msgstr "No es posible calcular puntuaciones: una o más de las variables no tienen límite de transferencia o su límite es 0."
 
 #: src/containers/RunStep.tsx:70
 msgid "Cannot calculate scores: one or more of your constraints is missing a value."
-msgstr ""
+msgstr "No es posible calcular puntuaciones: a una o más de sus limitaciones le falta un valor."
 
 #: src/containers/RunStep.tsx:81
 msgid "Login required"
-msgstr ""
+msgstr "Es necesario iniciar sesión"
 
 #: src/containers/RunStep.tsx:81
 msgid "Please login to save your run."
-msgstr ""
+msgstr "Inicie sesión para guardar la ejecución."
 
 #: src/containers/RunStep.tsx:143
 msgid "Map your Results"
-msgstr ""
+msgstr "Mapear sus resultados"
 
 #: src/containers/RunStep.tsx:186
 msgid "Run Tool"
-msgstr ""
+msgstr "Ejecute la Herramienta"
 
 #: src/containers/RunStep.tsx:200
 msgid "Save Last Run"
-msgstr ""
+msgstr "Guardar la última ejecución"
 
 #: src/containers/RunStep.tsx:205
 msgid "Export As..."
-msgstr ""
+msgstr "Exportar como…"
 
 #: src/containers/RunStep.tsx:230
 msgid "GeoTIFF"
-msgstr ""
+msgstr "GeoTIFF"
 
 #: src/containers/RunStep.tsx:240
 msgid "Position Map"
-msgstr ""
+msgstr "Mapa de posición"
 
 #: src/containers/RunStep.tsx:258
 msgid "Move and zoom the map to set how it will appear in the report."
-msgstr ""
+msgstr "Mueva y amplíe el mapa para definir cómo aparecerá en el informe."
 
 #: src/containers/SaveModal.tsx:8
 msgid "January"
-msgstr ""
+msgstr "Enero"
 
 #: src/containers/SaveModal.tsx:9
 msgid "February"
-msgstr ""
+msgstr "Febrero"
 
 #: src/containers/SaveModal.tsx:13
 msgid "June"
-msgstr ""
+msgstr "Junio"
 
 #: src/containers/SaveModal.tsx:14
 msgid "July"
-msgstr ""
+msgstr "Julio"
 
 #: src/containers/SaveModal.tsx:15
 msgid "August"
-msgstr ""
+msgstr "Agosto"
 
 #: src/containers/SaveModal.tsx:16
 msgid "September"
-msgstr ""
+msgstr "Septiembre"
 
 #: src/containers/SaveModal.tsx:17
 msgid "October"
-msgstr ""
+msgstr "Octubre"
 
 #: src/containers/SaveModal.tsx:18
 msgid "November"
-msgstr ""
+msgstr "Noviembre"
 
 #: src/containers/SaveModal.tsx:19
 msgid "December"
-msgstr ""
+msgstr "Diciembre"
 
 #: src/containers/SaveModal.tsx:67
 msgid "Saved run"
-msgstr ""
+msgstr "Se guardó la ejecución"
 
 #: src/containers/SaveModal.tsx:95
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: src/containers/SaveModal.tsx:113
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: src/containers/SaveModal.tsx:122
 #, javascript-format
-msgid ""
-"Do you want to update the current configuration, ${ saveTitle }, or save as "
-"a new configuration?"
-msgstr ""
+msgid "Do you want to update the current configuration, ${ saveTitle }, or save as a new configuration?"
+msgstr "¿Desea actualizar la configuración actual, ${ saveTitle }, o guardarla como una nueva configuración?"
 
 #: src/containers/SaveModal.tsx:133
 msgid "Save as new"
-msgstr ""
+msgstr "Guardar como nueva"
 
 #: src/containers/SaveModal.tsx:143
 msgid "Update current"
-msgstr ""
+msgstr "Actualizar la actual"
 
 #: src/containers/SaveModal.tsx:152
 msgid "Save Run Configuration"
-msgstr ""
+msgstr "Guardar la configuración de ejecución"
 
 #: src/containers/SavedRun.tsx:51
 msgid "Load this saved configuration? This will replace your current settings."
-msgstr ""
+msgstr "¿Cargar esta configuración guardada? Esto reemplazará la configuración actual."
 
 #: src/containers/SavedRun.tsx:62
 msgid "Delete this saved configuration?"
-msgstr ""
+msgstr "¿Eliminar esta configuración guardada?"
 
 #: src/containers/SavedRun.tsx:68
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: src/containers/SavedRun.tsx:73
 msgid "Last modified:"
-msgstr ""
+msgstr "Modificación más reciente:"
 
 #: src/containers/SavedRuns.tsx:55
-msgid ""
-"You may create an account to save and retrieve your runs. \n"
-"Click on the \"Account\" tab in the upper right to login or create an "
-"account.."
+msgid "You may create an account to save and retrieve your runs. \nClick on the \"Account\" tab in the upper right to login or create an account.."
 msgstr ""
 
 #: src/containers/SavedRuns.tsx:63
 msgid "You currently have no saved runs."
-msgstr ""
+msgstr "En este momento, no tiene ejecuciones guardadas."
 
 #: src/containers/SeedZoneChooser.tsx:44
 msgid "No zones at this location..."
-msgstr ""
+msgstr "No hay zonas en esta ubicación…"
 
 #: src/containers/SeedZoneChooser.tsx:44
 msgid "Select a location..."
-msgstr ""
+msgstr "Seleccione una ubicación…"
 
 #: src/containers/SeedZoneChooser.tsx:77
 msgid "Select zone"
-msgstr ""
+msgstr "Seleccionar zona"
 
 #: src/containers/ShapefileUpload.tsx:58
 #: src/containers/ShapefileUpload.tsx:70
@@ -647,190 +632,184 @@ msgstr ""
 #: src/containers/ShapefileUpload.tsx:136
 #: src/containers/ShapefileUpload.tsx:142
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: src/containers/ShapefileUpload.tsx:58
 msgid "Cannot process shapefiles larger than 2MB"
-msgstr ""
+msgstr "No se pueden procesar archivos shapefile de más de 2 MB"
 
 #: src/containers/ShapefileUpload.tsx:70
 #: src/containers/ShapefileUpload.tsx:84
 msgid "Could not read the zip file"
-msgstr ""
+msgstr "No se pudo leer el archivo zip"
 
 #: src/containers/ShapefileUpload.tsx:115
-msgid ""
-"No projection file found. Assuming WGS84. \n"
-"If you see the wrong projection, try including the prj file."
-msgstr ""
+msgid "No projection file found. Assuming WGS84. \nIf you see the wrong projection, try including the prj file."
+msgstr "No se encontró ningún archivo de proyección. Suponiendo WGS84. \nSi ve una proyección incorrecta, intente incluir el archivo prj."
 
 #: src/containers/ShapefileUpload.tsx:128
 msgid "Warning"
-msgstr ""
+msgstr "Advertencia"
 
 #: src/containers/ShapefileUpload.tsx:136
 msgid "Shapefile not loaded"
-msgstr ""
+msgstr "El archivo shapefile no se cargó"
 
 #: src/containers/ShapefileUpload.tsx:142
 msgid "File not supported"
-msgstr ""
+msgstr "El archivo no es compatible"
 
 #: src/containers/ShapefileUpload.tsx:155
 msgid "Processing..."
-msgstr ""
+msgstr "Procesando…"
 
 #: src/containers/Sidebar.tsx:31
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: src/containers/Sidebar.tsx:38
 msgid "Tool"
-msgstr ""
+msgstr "Herramienta"
 
 #: src/containers/Sidebar.tsx:44
 msgid "Saved Runs"
-msgstr ""
+msgstr "Ejecuciones guardadas"
 
 #: src/containers/Sidebar.tsx:47
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: src/containers/SpeciesChooser.tsx:44
 #, javascript-format
 msgid "Select a ${ label }"
-msgstr ""
+msgstr "Seleccionar un ${ label }"
 
 #: src/containers/SpeciesChooser.tsx:53
 msgid "Generic"
-msgstr ""
+msgstr "Genérico"
 
 #: src/containers/Trait.tsx:60
 #: src/containers/Variable.tsx:206
 msgid "Value at point:"
-msgstr ""
+msgstr "Valor en el punto:"
 
 #: src/containers/Trait.tsx:66
 #: src/containers/Variable.tsx:209
 msgid "Transfer limit (+/-):"
-msgstr ""
+msgstr "Límite de transferencia (+/-):"
 
 #: src/containers/Traits.tsx:43
 msgid "Transfer Limit (+/-)"
-msgstr ""
+msgstr "Límite de transferencia (+/-)"
 
 #: src/containers/Traits.tsx:60
 msgid "Add a trait..."
-msgstr ""
+msgstr "Añada una característica…"
 
 #: src/containers/TransferStep.tsx:36
-msgid ""
-"Transfer limits based on seed zone, climatic center based on the selected "
-"location"
-msgstr ""
+msgid "Transfer limits based on seed zone, climatic center based on the selected location"
+msgstr "Límites de transferencia según la zona de origen de las semillas; centro climático según la ubicación seleccionada"
 
 #: src/containers/TransferStep.tsx:39
 msgid "Transfer limits and climatic center based on seed zone"
-msgstr ""
+msgstr "Límites de transferencia y centro climático según la zona de origen de las semillas"
 
 #: src/containers/TransferStep.tsx:42
 msgid "Custom transfer limits, climatic center based on the selected location"
-msgstr ""
+msgstr "Límites de transferencia personalizados; centro climático según la ubicación seleccionada"
 
 #: src/containers/TransferStep.tsx:46
 msgid "Select transfer limit method"
-msgstr ""
+msgstr "Seleccione el método de límite de transferencia"
 
 #: src/containers/TransferStep.tsx:58
 msgid "Which should be used as the climatic center?"
-msgstr ""
+msgstr "¿Qué se debe usar como centro climático?"
 
 #: src/containers/TransferStep.tsx:64
 msgid "The value at the selected location"
-msgstr ""
+msgstr "El valor en la ubicación seleccionada"
 
 #: src/containers/TransferStep.tsx:70
 msgid "The climatic center of the zone"
-msgstr ""
+msgstr "El centro climático de la zona"
 
 #: src/containers/TransferStep.tsx:86
 msgid "Zone"
-msgstr ""
+msgstr "Zona"
 
 #: src/containers/TransferStep.tsx:87
 msgid "Function"
-msgstr ""
+msgstr "Función"
 
 #: src/containers/Variable.tsx:157
 msgid "Zone climatic center:"
-msgstr ""
+msgstr "Centro climático de la zona:"
 
 #: src/containers/Variable.tsx:211
 msgid "modified"
-msgstr ""
+msgstr "modificado"
 
 #: src/containers/Variable.tsx:215
 msgid "Avg.transfer limit for zone set:"
-msgstr ""
+msgstr "Límite de transferencia promedio para la configuración de zona:"
 
 #: src/containers/VariableStep.tsx:42
 msgid "Click to add variables"
-msgstr ""
+msgstr "Haga clic para añadir variables"
 
 #: src/containers/VariableStep.tsx:51
 #: src/containers/VariableStep.tsx:58
 msgid "Select climate variables"
-msgstr ""
+msgstr "Seleccionar variables climáticas"
 
 #: src/containers/VariableStep.tsx:60
 msgid "Units:"
-msgstr ""
+msgstr "Unidades:"
 
 #: src/containers/VariableStep.tsx:63
 msgid "Metric"
-msgstr ""
+msgstr "Métricas"
 
 #: src/containers/VariableStep.tsx:64
 msgid "Imperial"
-msgstr ""
+msgstr "Imperiales"
 
 #: src/containers/VariableStep.tsx:74
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #: src/containers/VariableStep.tsx:82
 msgid "Choose automatically"
-msgstr ""
+msgstr "Elegir de modo automático"
 
 #: src/containers/Variables.tsx:25
-msgid ""
-"You may only add 6 variables to your configuration. \n"
-"Please remove an exiting variable before adding another."
-msgstr ""
+msgid "You may only add 6 variables to your configuration. \nPlease remove an exiting variable before adding another."
+msgstr "Solo puede añadir 6 variables a su configuración. \nElimine una variable saliente antes de añadir otra."
 
 #: src/containers/Variables.tsx:56
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 #: src/containers/Variables.tsx:57
 msgid "Transfer limit (+/-)"
-msgstr ""
+msgstr "Límite de transferencia (+/-)"
 
 #: src/containers/Variables.tsx:82
 msgid "Add a variable..."
-msgstr ""
+msgstr "Añadir una variable…"
 
 #: src/components/AccountSettingsModal.tsx:69
 #: src/components/AccountSettingsModal.tsx:83
 #: src/components/AccountSettingsModal.tsx:110
 #: src/components/AccountSettingsModal.tsx:123
 msgid "Sorry, there was an unexpected error changing your email address"
-msgstr ""
+msgstr "Disculpe, hubo un error inesperado al cambiar su dirección de correo electrónico"
 
 #: src/components/AccountSettingsModal.tsx:96
 #: src/components/SignupModal.tsx:67
 msgid "Passwords don't match"
-msgstr ""
+msgstr "Las contraseñas no coinciden"
 
 #: src/components/AccountSettingsModal.tsx:168
 #: src/components/AccountSettingsModal.tsx:173
@@ -838,311 +817,307 @@ msgstr ""
 #: src/components/ResetPasswordModal.tsx:118
 #: src/components/SignupModal.tsx:141
 msgid "Email address"
-msgstr ""
+msgstr "Dirección de correo electrónico"
 
 #: src/components/AccountSettingsModal.tsx:191
 msgid "Change email"
-msgstr ""
+msgstr "Cambiar de correo electrónico"
 
 #: src/components/AccountSettingsModal.tsx:205
 #: src/components/AccountSettingsModal.tsx:210
 #: src/components/LoginModal.tsx:121
 #: src/components/SignupModal.tsx:156
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: src/components/AccountSettingsModal.tsx:225
 #: src/components/SignupModal.tsx:171
 msgid "Confirm password"
-msgstr ""
+msgstr "Confirmar contraseña"
 
 #: src/components/AccountSettingsModal.tsx:243
 msgid "Change password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
 #: src/components/ConstraintChooserItem.tsx:31
 msgid "Select..."
-msgstr ""
+msgstr "Seleccionar…"
 
 #: src/components/LoginModal.tsx:66
 msgid "Login failed"
-msgstr ""
+msgstr "Error de inicio de sesión"
 
 #: src/components/LoginModal.tsx:131
 msgid "Forgot your password?"
-msgstr ""
+msgstr "¿Olvidó su contraseña?"
 
 #: src/components/Modal.tsx:49
 #: src/components/ModalCard.tsx:46
 msgid "close"
-msgstr ""
+msgstr "Cerrar"
 
 #: src/components/Navbar.tsx:28
 msgid "main navigation"
-msgstr ""
+msgstr "Navegación principal"
 
 #: src/components/Navbar.tsx:52
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: src/components/ResetPasswordModal.tsx:52
 msgid "Sorry, there was an error resetting your password"
-msgstr ""
+msgstr "Lo sentimos, hubo un error al restablecer su contraseña"
 
 #: src/components/ResetPasswordModal.tsx:82
-msgid ""
-"An email has been sent with a link to reset your password. \n"
-"If you don't receive this email, please check your Spam folder."
-msgstr ""
+msgid "An email has been sent with a link to reset your password. \nIf you don't receive this email, please check your Spam folder."
+msgstr "Se envió un correo electrónico con un enlace para restablecer su contraseña. \nSi no recibe este correo electrónico, revise su carpeta de correo no deseado (spam)."
 
 #: src/components/ResetPasswordModal.tsx:106
-msgid ""
-"Enter your email address to receive an email with a link to reset your "
-"password."
-msgstr ""
+msgid "Enter your email address to receive an email with a link to reset your password."
+msgstr "Introduzca su dirección de correo electrónico para recibir un correo electrónico con el enlace necesario para restablecer su contraseña."
 
 #: src/components/ResetPasswordModal.tsx:149
 msgid "Reset Password"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: src/components/SignupModal.tsx:83
 #: src/components/SignupModal.tsx:98
 msgid "There was an unexpected error while creating your account"
-msgstr ""
+msgstr "Hubo un error inesperado al crear su cuenta"
 
 #: src/components/SocialLogin.tsx:9
 msgid "Or sign in with:"
-msgstr ""
+msgstr "O regístrese con:"
 
 #: src/components/SocialLogin.tsx:12
 msgid "Sign in using a Google account"
-msgstr ""
+msgstr "Regístrese con una cuenta de Google"
 
 #: src/components/SocialLogin.tsx:15
 msgid "Sign in using a Facebook account"
-msgstr ""
+msgstr "Regístrese con una cuenta de Facebook"
 
 #: src/components/SocialLogin.tsx:18
 msgid "Sign in using a Twitter account"
-msgstr ""
+msgstr "Regístrese con una cuenta de Twitter"
 
 #: src/components/TraitStep.tsx:23
 msgid "Select traits"
-msgstr ""
+msgstr "Seleccionar características"
 
 #: src/actions/report.ts:134
 msgid "Error creating report"
-msgstr ""
+msgstr "Error al crear el informe"
 
 #: src/actions/report.ts:135
 msgid "Sorry, there was an error creating the report."
-msgstr ""
+msgstr "Lo sentimos, hubo un error al crear el informe."
 
 #: src/actions/report.ts:182
 msgid "Processing error"
-msgstr ""
+msgstr "Error de procesamiento"
 
 #: src/actions/report.ts:182
 msgid "Sorry, processing failed."
-msgstr ""
+msgstr "Lo sentimos, hubo un error durante el procesamiento."
 
 #: src/config.ts:209
 #: src/config.ts:309
 msgctxt "Abbreviation of 'Celsius'"
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: src/config.ts:216
 #: src/config.ts:315
 msgctxt "Abbreviation of 'Fahrenheit'"
 msgid "F"
-msgstr ""
+msgstr "F"
 
 #: src/config.ts:226
 msgctxt "Abbreviation of 'millimeters'"
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: src/config.ts:232
 msgctxt "Abbreviation of 'inches'"
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: src/config.ts:575
 msgctxt "Western United States"
 msgid "Western US"
-msgstr ""
+msgstr "Oeste de los Estados Unidos"
 
 #: src/config.ts:583
 msgctxt "Central United States"
 msgid "Central US"
-msgstr ""
+msgstr "Centro de los Estados Unidos"
 
 #: src/config.ts:591
 msgctxt "Eastern United States"
 msgid "Eastern US"
-msgstr ""
+msgstr "Este de los Estados Unidos"
 
 #: src/containers/Comparisons.tsx:224
 #: src/containers/Comparisons.tsx:236
 #: src/containers/Comparisons.tsx:373
 msgctxt "Not Applicable"
 msgid "N/A"
-msgstr ""
+msgstr "N/C"
 
 #: src/containers/Comparisons.tsx:271
 msgctxt "abbreviation of 'Latitude'"
 msgid "Lat"
-msgstr ""
+msgstr "Lat."
 
 #: src/containers/Comparisons.tsx:284
 msgctxt "abbreviation of 'Longitud''"
 msgid "Lon"
-msgstr ""
+msgstr "Long."
 
 #: src/containers/ConstraintStep.tsx:27
 msgctxt "i.e., Range of values (e.g., from 5 to 10)"
 msgid "Range (+/-)"
-msgstr ""
+msgstr "Rango (+/-)"
 
 #: src/containers/DistanceConstraint.tsx:17
 msgctxt "Abbreviation of 'kilometer'"
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #: src/containers/DistanceConstraint.tsx:17
 msgctxt "Abbreviation of 'mile'"
 msgid "mi"
-msgstr ""
+msgstr "mi"
 
 #: src/containers/ElevationConstraint.tsx:18
 #: src/containers/Map.tsx:708
 msgctxt "Abbreviation of 'meters'"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: src/containers/ElevationConstraint.tsx:18
 #: src/containers/Map.tsx:707
 msgctxt "Abbreviation of 'feet' (measurement)"
 msgid "ft"
-msgstr ""
+msgstr "pies"
 
 #: src/containers/ErrorModal.tsx:25
 msgctxt "This is the value of 'reportAnIssue'"
 msgid "report an issue"
-msgstr ""
+msgstr "Reportar un problema"
 
 #: src/containers/LatitudeConstraint.tsx:16
 msgctxt "Abbreviation of 'North'"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: src/containers/LocationStep.tsx:29
 msgctxt "This is one possible value of 'siteLabel'"
 msgid "seedlot (its climatic center)"
-msgstr ""
+msgstr "Lote de semillas (su centro climático)"
 
 #: src/containers/LocationStep.tsx:30
 msgctxt "This is one possible value of 'siteLabel'"
 msgid "planting site"
-msgstr ""
+msgstr "Sitio de plantación"
 
 #: src/containers/LongitudeConstraint.tsx:16
 msgctxt "Abbreviation of 'East'"
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: src/containers/Map.tsx:582
 msgctxt "as in same or similar objects"
 msgid "Match"
-msgstr ""
+msgstr "Coincidencia"
 
 #: src/containers/Map.tsx:721
 msgctxt "i.e., Not Applicable"
 msgid "N/A"
-msgstr ""
+msgstr "N/C"
 
 #: src/containers/PhotoperiodConstraint.tsx:9
 msgctxt "January"
 msgid "Jan"
-msgstr ""
+msgstr "ENE"
 
 #: src/containers/PhotoperiodConstraint.tsx:10
 msgctxt "February"
 msgid "Feb"
-msgstr ""
+msgstr "FEB"
 
 #: src/containers/PhotoperiodConstraint.tsx:11
 msgctxt "March (month)"
 msgid "Mar"
-msgstr ""
+msgstr "MAR"
 
 #: src/containers/PhotoperiodConstraint.tsx:12
 msgctxt "April (month)"
 msgid "Apr"
-msgstr ""
+msgstr "ABR"
 
 #: src/containers/PhotoperiodConstraint.tsx:13
 msgctxt "May (month)"
 msgid "May"
-msgstr ""
+msgstr "MAY"
 
 #: src/containers/PhotoperiodConstraint.tsx:14
 msgctxt "June"
 msgid "Jun"
-msgstr ""
+msgstr "JUN"
 
 #: src/containers/PhotoperiodConstraint.tsx:15
 msgctxt "July"
 msgid "Jul"
-msgstr ""
+msgstr "JUL"
 
 #: src/containers/PhotoperiodConstraint.tsx:16
 msgctxt "August"
 msgid "Aug"
-msgstr ""
+msgstr "AGO"
 
 #: src/containers/PhotoperiodConstraint.tsx:17
 msgctxt "September"
 msgid "Sep"
-msgstr ""
+msgstr "SEP"
 
 #: src/containers/PhotoperiodConstraint.tsx:18
 msgctxt "October"
 msgid "Oct"
-msgstr ""
+msgstr "OCT"
 
 #: src/containers/PhotoperiodConstraint.tsx:19
 msgctxt "November"
 msgid "Nov"
-msgstr ""
+msgstr "NOV"
 
 #: src/containers/PhotoperiodConstraint.tsx:20
 msgctxt "December"
 msgid "Dec"
-msgstr ""
+msgstr "DIC"
 
 #: src/containers/SaveModal.tsx:10
 msgctxt "month"
 msgid "March"
-msgstr ""
+msgstr "Marzo"
 
 #: src/containers/SaveModal.tsx:11
 msgctxt "month"
 msgid "April"
-msgstr ""
+msgstr "Abril"
 
 #: src/containers/SaveModal.tsx:12
 msgctxt "month"
 msgid "May"
-msgstr ""
+msgstr "Mayo"
 
 #: src/containers/SavedRun.tsx:57
 msgctxt "e.g., Load file"
 msgid "Load"
-msgstr ""
+msgstr "Cargar"
 
 #: src/components/ResetPasswordModal.tsx:136
 msgctxt "i.e., hyperlink"
 msgid "Send link"
-msgstr ""
+msgstr "Enviar enlace"

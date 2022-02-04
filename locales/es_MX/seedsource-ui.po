@@ -359,7 +359,9 @@ msgstr "Aplicar limitaciones"
 
 #: src/containers/ErrorModal.tsx:31
 #, javascript-format
-msgid "If the problem persists, please ${ reportAnIssue } and include the following information:"
+msgid ""
+"If the problem persists, please ${ reportAnIssue } and include  the "
+"following information:"
 msgstr "Si el problema persiste, ${ reportAnIssue } e incluya la siguiente información:"
 
 #: src/containers/Layers.tsx:55
@@ -472,7 +474,9 @@ msgid "Waiting for other jobs to finish..."
 msgstr "En espera de que concluyan otros trabajos…"
 
 #: src/containers/RunConfiguration.tsx:21
-msgid "Another job is currently running. Your job is queued and will run as soon as other jobs are finished."
+msgid ""
+"Another job is currently running. Your job is queued and will run as soon "
+"as other jobs are finished."
 msgstr "En este momento, se está ejecutando otro trabajo. Su trabajo entró en cola y se ejecutará en cuanto terminen los otros trabajos."
 
 #: src/containers/RunStep.tsx:59
@@ -482,7 +486,9 @@ msgid "Configuration error"
 msgstr "Error de configuración"
 
 #: src/containers/RunStep.tsx:60
-msgid "Cannot calculate scores: one or more of your variables has no transfer limit, or a limit of 0."
+msgid ""
+"Cannot calculate scores: one or more of your variables has no transfer "
+"limit, or a limit of 0."
 msgstr "No es posible calcular puntuaciones: una o más de las variables no tienen límite de transferencia o su límite es 0."
 
 #: src/containers/RunStep.tsx:70
@@ -575,7 +581,9 @@ msgstr "Guardar"
 
 #: src/containers/SaveModal.tsx:122
 #, javascript-format
-msgid "Do you want to update the current configuration, ${ saveTitle }, or save as a new configuration?"
+msgid ""
+"Do you want to update the current configuration, ${ saveTitle }, or save as "
+"a new configuration?"
 msgstr "¿Desea actualizar la configuración actual, ${ saveTitle }, o guardarla como una nueva configuración?"
 
 #: src/containers/SaveModal.tsx:133
@@ -607,8 +615,11 @@ msgid "Last modified:"
 msgstr "Modificación más reciente:"
 
 #: src/containers/SavedRuns.tsx:55
-msgid "You may create an account to save and retrieve your runs. \nClick on the \"Account\" tab in the upper right to login or create an account.."
-msgstr ""
+msgid ""
+"You may create an account to save and retrieve your runs. \n"
+"Click on the \"Account\" tab in the upper right to login or create an "
+"account.."
+msgstr "Puede crear una cuenta para guardar y recuperar las corridas. \n Haga clic en la pestaña \"Cuenta\", en la parte superior derecha, para iniciar sesión o crear una cuenta."
 
 #: src/containers/SavedRuns.tsx:63
 msgid "You currently have no saved runs."
@@ -644,7 +655,9 @@ msgid "Could not read the zip file"
 msgstr "No se pudo leer el archivo zip"
 
 #: src/containers/ShapefileUpload.tsx:115
-msgid "No projection file found. Assuming WGS84. \nIf you see the wrong projection, try including the prj file."
+msgid ""
+"No projection file found. Assuming WGS84. \n"
+"If you see the wrong projection, try including the prj file."
 msgstr "No se encontró ningún archivo de proyección. Suponiendo WGS84. \nSi ve una proyección incorrecta, intente incluir el archivo prj."
 
 #: src/containers/ShapefileUpload.tsx:128
@@ -707,7 +720,9 @@ msgid "Add a trait..."
 msgstr "Añada una característica…"
 
 #: src/containers/TransferStep.tsx:36
-msgid "Transfer limits based on seed zone, climatic center based on the selected location"
+msgid ""
+"Transfer limits based on seed zone, climatic center based on the selected "
+"location"
 msgstr "Límites de transferencia según la zona de origen de las semillas; centro climático según la ubicación seleccionada"
 
 #: src/containers/TransferStep.tsx:39
@@ -784,7 +799,9 @@ msgid "Choose automatically"
 msgstr "Elegir de modo automático"
 
 #: src/containers/Variables.tsx:25
-msgid "You may only add 6 variables to your configuration. \nPlease remove an exiting variable before adding another."
+msgid ""
+"You may only add 6 variables to your configuration. \n"
+"Please remove an exiting variable before adding another."
 msgstr "Solo puede añadir 6 variables a su configuración. \nElimine una variable saliente antes de añadir otra."
 
 #: src/containers/Variables.tsx:56
@@ -869,11 +886,15 @@ msgid "Sorry, there was an error resetting your password"
 msgstr "Lo sentimos, hubo un error al restablecer su contraseña"
 
 #: src/components/ResetPasswordModal.tsx:82
-msgid "An email has been sent with a link to reset your password. \nIf you don't receive this email, please check your Spam folder."
+msgid ""
+"An email has been sent with a link to reset your password. \n"
+"If you don't receive this email, please check your Spam folder."
 msgstr "Se envió un correo electrónico con un enlace para restablecer su contraseña. \nSi no recibe este correo electrónico, revise su carpeta de correo no deseado (spam)."
 
 #: src/components/ResetPasswordModal.tsx:106
-msgid "Enter your email address to receive an email with a link to reset your password."
+msgid ""
+"Enter your email address to receive an email with a link to reset your "
+"password."
 msgstr "Introduzca su dirección de correo electrónico para recibir un correo electrónico con el enlace necesario para restablecer su contraseña."
 
 #: src/components/ResetPasswordModal.tsx:149

@@ -87,13 +87,12 @@ class Layers extends React.Component<LayersProps> {
                     padding: '1px 0 0px 6px',
                     borderRadius: '100%',
                     border: '1px solid #505050',
+                    marginRight: '10px',
                   }}
                 >
                   +
                 </div>
-                &nbsp;&nbsp;
-                {/* do not localize "shapefile" */}
-                {t`Upload a`} shapefile
+                {t`Upload a shapefile`}
               </div>
             </ShapefileUpload>
           </div>,

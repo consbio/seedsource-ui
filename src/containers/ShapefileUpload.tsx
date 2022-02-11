@@ -1,8 +1,11 @@
-import React, {ReactChild, ReactChildren, ReactNode} from 'react'
+import React, { ReactChild } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import shp from 'shpjs'
 import { t } from 'ttag'
-import { GeoJSON } from 'geojson'
+
+// eslint-disable-next-line import/no-unresolved
+import { FeatureCollection, GeoJSON } from 'geojson'
+
 import { updateConstraintValues as updateConstraintValuesConnect } from '../actions/constraints'
 import { setError } from '../actions/error'
 import { addCustomLayer as addCustomLayerConnect } from '../actions/customLayers'
@@ -79,15 +82,16 @@ class ShapefileUpload extends React.Component<ShapefileUploadProps, ShapefileUpl
       }
       reader.onload = (e: any) => {
         shp(e.target.result)
-          .then(geojson => {
+          .then((features: FeatureCollection | FeatureCollection[]) => {
             const { index, storeTo, updateConstraintValues, addCustomLayer } = this.props
+            const feature = Array.isArray(features) ? features[0] : features
 
             this.setState({ isLoading: false })
             if (storeTo === 'constraints') {
-              updateConstraintValues(index!, geojson, zipFile.name)
+              updateConstraintValues(index!, feature, zipFile.name)
             }
             if (storeTo === 'customLayers') {
-              addCustomLayer(geojson as GeoJSON, zipFile.name)
+              addCustomLayer(feature, zipFile.name)
             }
           })
           .catch(error => {

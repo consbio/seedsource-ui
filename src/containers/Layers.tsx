@@ -4,9 +4,13 @@ import { t } from 'ttag'
 import config from '../config'
 import { get } from '../io'
 import { toggleLayer, loadTiles } from '../actions/layers'
+import ShapefileUpload from './ShapefileUpload'
+import { CustomLayer } from '../reducers/customLayers'
+import CustomLayerListItem from './CustomLayerListItem'
 
 type LayersProps = {
   layers: any[]
+  customLayers: CustomLayer[]
   onToggleLayer: (name: string) => any
   onLoadTiles: (tiles: any) => any
 }
@@ -20,6 +24,8 @@ class Layers extends React.Component<LayersProps> {
       variables: true,
       seedzones: false,
       layers: false,
+      custom: true,
+      showColorPicker: '',
     }
   }
 
@@ -48,7 +54,7 @@ class Layers extends React.Component<LayersProps> {
   }
 
   render() {
-    const { onToggleLayer, layers } = this.props
+    const { onToggleLayer, layers, customLayers } = this.props
     const { state }: { state: any } = this
 
     const categories: any = {
@@ -60,10 +66,52 @@ class Layers extends React.Component<LayersProps> {
       },
       seedZones: { name: t`Seed Zones`, urlIdentifier: 'seedzones', awayMessage: null },
       layers: { name: t`Layers`, urlIdentifier: 'layers', awayMessage: null },
+      custom: {
+        name: t`Custom`,
+        urlIdentifier: 'custom',
+        awayMessage: null,
+      },
     }
 
-    const layerList = (urlIdentifier: string) =>
-      layers
+    const layerList = (urlIdentifier: string) => {
+      if (urlIdentifier === 'custom') {
+        return [
+          <div className="layer-list" key="shapeUpload">
+            <ShapefileUpload storeTo="customLayers">
+              <div className="is-clickable" tabIndex={0} role="button">
+                <div
+                  style={{
+                    display: 'inline-block',
+                    height: '25px',
+                    width: '25px',
+                    padding: '1px 0 0px 6px',
+                    borderRadius: '100%',
+                    border: '1px solid #505050',
+                    marginRight: '10px',
+                  }}
+                >
+                  +
+                </div>
+                {t`Upload a shapefile`}
+              </div>
+            </ShapefileUpload>
+          </div>,
+          customLayers.map(layer => (
+            <CustomLayerListItem
+              layer={layer}
+              key={`${layer.id}`}
+              showColorPicker={state.showColorPicker === layer.id}
+              toggleColorPicker={layerId => {
+                if (state.showColorPicker === layerId) {
+                  return this.setState({ showColorPicker: '' })
+                }
+                this.setState({ showColorPicker: layerId })
+              }}
+            />
+          )),
+        ]
+      }
+      return layers
         .filter(layer => layer.urlTemplate.includes(urlIdentifier))
         .map(layer => {
           return (
@@ -73,6 +121,7 @@ class Layers extends React.Component<LayersProps> {
             </li>
           )
         })
+    }
 
     const sections = Object.keys(categories).map((key: string) => {
       if (layerList(categories[key].urlIdentifier).length < 1 && categories[key].awayMessage === null) {
@@ -110,16 +159,15 @@ class Layers extends React.Component<LayersProps> {
 
 export default connect(
   (state: any) => {
-    const { layers } = state
+    const { layers, customLayers } = state
 
-    return { layers }
+    return { layers, customLayers }
   },
   (dispatch: (action: any) => any) => {
     return {
       onToggleLayer: (name: string) => {
         dispatch(toggleLayer(name))
       },
-
       onLoadTiles: (tiles: any) => {
         dispatch(loadTiles(tiles))
       },

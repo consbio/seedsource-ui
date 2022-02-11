@@ -5,6 +5,7 @@ import traits from './traits'
 import zones from './zones'
 import climate from './climate'
 import constraints from './constraints'
+import customLayers from './customLayers'
 import { SELECT_OBJECTIVE } from '../actions/objectives'
 import {
   SET_LATITUDE,
@@ -53,6 +54,7 @@ const defaultConfiguration = {
   userSites: [] as UserSite[],
   activeUserSite: null,
   uploadedPoints: null,
+  customLayers: [],
 }
 
 export default (state: any = defaultConfiguration, action: any) => {
@@ -194,6 +196,7 @@ export default (state: any = defaultConfiguration, action: any) => {
     zones: zones(newState.zones || undefined, action),
     climate: climate(newState.climate || undefined, action),
     constraints: constraints(newState.constraints, action),
+    customLayers: customLayers(newState.customLayers, action)
   }
 }
 

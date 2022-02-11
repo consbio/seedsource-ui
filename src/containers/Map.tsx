@@ -25,6 +25,8 @@ import { setPoint, addUserSite } from '../actions/point'
 import { LegendControl, ButtonControl } from '../leaflet-controls'
 
 import 'leaflet.vectorgrid'
+import { GeoJSON } from 'geojson'
+import { CustomLayer } from '../reducers/customLayers'
 
 type PopupInfo = {
   popup: Popup
@@ -46,7 +48,7 @@ L.Icon.Default.mergeOptions({
 
 const connector = connect(
   (state: any) => {
-    const { runConfiguration, map, job, legends, popup, lastRun, layers } = state
+    const { runConfiguration, map, job, legends, popup, lastRun, layers, customLayers } = state
     const { opacity, center, zoom, mode } = map
     const {
       objective,
@@ -87,6 +89,7 @@ const connector = connect(
       resultRegion,
       shapefileConstraints,
       layers,
+      customLayers,
       userSites,
       activeUserSite,
       mode,
@@ -174,9 +177,9 @@ class Map extends React.Component<MapProps> {
 
   mapIsMoving: boolean
 
-  shpConstraintLayers: any[]
+  shpLayers: L.GeoJSON[]
 
-  shpConstraintData: any[]
+  shpData: GeoJSON[]
 
   displayedRasterLayers: any[]
 
@@ -210,8 +213,8 @@ class Map extends React.Component<MapProps> {
     this.boundaryName = null
     this.popup = null
     this.mapIsMoving = false
-    this.shpConstraintLayers = []
-    this.shpConstraintData = []
+    this.shpLayers = []
+    this.shpData = []
     this.displayedRasterLayers = []
     this.displayedVectorLayers = []
     this.userSitesLayer = null
@@ -658,22 +661,28 @@ class Map extends React.Component<MapProps> {
     }
   }
 
-  updateShapefileLayer(constraints: any[]) {
-    const data = constraints.map(cn => cn.values.geoJSON).filter(geojson => !!geojson)
-    if (JSON.stringify(data) === JSON.stringify(this.shpConstraintData)) {
+  updateShapefileLayer(constraints: any[], custom: CustomLayer[]) {
+    const constraintData = constraints.map(cn => cn.values.geoJSON).filter(geojson => !!geojson)
+    const customData = custom.filter(cl => !!cl.geoJSON && cl.displayed).map(cl => ({ ...cl.geoJSON, color: cl.color }))
+    const data = [...constraintData, ...customData]
+    if (JSON.stringify(data) === JSON.stringify(this.shpData)) {
       return
     }
 
     // Create new layers for each feature, even if they already exist...
-    const layers = data.map(geojson =>
+    const constraintLayers = constraintData.map(geojson =>
       L.geoJSON(geojson, { style: { fill: false, color: '#a50f15', weight: 1.5 } }).addTo(this.map),
     )
+    const customLayers = customData.map(datum =>
+      L.geoJSON(datum, { style: { fill: false, color: datum.color, weight: 1.5 } }).addTo(this.map),
+    )
+    const layers = [...constraintLayers, ...customLayers]
 
     // ... then delete the old layers
-    this.shpConstraintLayers.forEach(layer => this.map.removeLayer(layer))
+    this.shpLayers.forEach(layer => this.map.removeLayer(layer))
 
-    this.shpConstraintLayers = layers
-    this.shpConstraintData = data
+    this.shpLayers = layers
+    this.shpData = data
   }
 
   updatePopup(popup: any, unit: any) {
@@ -943,6 +952,7 @@ class Map extends React.Component<MapProps> {
         region,
         shapefileConstraints,
         layers,
+        customLayers,
         zoom,
         userSites,
         activeUserSite,
@@ -959,7 +969,7 @@ class Map extends React.Component<MapProps> {
       this.updatePopup(popup, unit)
       this.updateMapCenter(center)
       this.updateMapZoom(zoom)
-      this.updateShapefileLayer(shapefileConstraints)
+      this.updateShapefileLayer(shapefileConstraints, customLayers)
       this.updateUserSites(userSites, activeUserSite)
 
       // Update cursor

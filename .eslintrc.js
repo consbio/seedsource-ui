@@ -17,7 +17,7 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
       },
     },
   },
@@ -49,6 +49,7 @@ module.exports = {
     'func-names': 'off',
     'no-alert': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'consistent-return': 'off',
 
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',

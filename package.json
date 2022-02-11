@@ -12,6 +12,7 @@
   "author": "Conservation Biology Institute",
   "license": "MIT",
   "devDependencies": {
+    "@types/geojson": "^7946.0.8",
     "@types/isomorphic-fetch": "0.0.35",
     "@types/leaflet": "^1.5.17",
     "@types/node": "^14.11.8",
@@ -32,12 +33,12 @@
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.0.0",
     "prettier": "^2.1.2",
-    "ttag-cli": "^1.9.0",
     "react": "16.9.x",
     "react-dom": "16.9.x",
     "react-redux": "7.2.x",
     "redux": "4.0.x",
     "redux-thunk": "2.3.x",
+    "ttag-cli": "^1.9.0",
     "typescript": "^4.0.3"
   },
   "dependencies": {

@@ -52,8 +52,18 @@ export default (state: any = [], action: any) => {
     case REMOVE_VARIABLE:
       return state.slice(0, action.index).concat(state.slice(action.index + 1))
 
-    case MODIFY_VARIABLE:
-      return updateVariable(action.variable, { transfer: action.transfer, transferIsModified: true })
+    case MODIFY_VARIABLE: {
+      const { transfer, value } = action.modifications
+      const modifications = {} as any
+      if (transfer !== undefined) {
+        modifications.transfer = transfer
+        modifications.transferIsModified = true
+      }
+      if (value !== undefined) {
+        modifications.value = value
+      }
+      return updateVariable(action.variable, modifications)
+    }
 
     case RESET_TRANSFER:
       variable = getVariable(action.variable)

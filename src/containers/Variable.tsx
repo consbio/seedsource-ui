@@ -11,7 +11,7 @@ const connector = connect(
   (state: any, { variable }: { variable: any }) => {
     const { layers, runConfiguration } = state
     const active = !!layers.find((layer: any) => layer.name === variable.name && layer.displayed === true)
-    const { objective, unit, method, center } = runConfiguration
+    const { objective, unit, method, center, customMode } = runConfiguration
     const variableConfig = allVariables.find(item => item.name === variable.name)
     let { value, zoneCenter, transfer, avgTransfer, transferIsModified } = variable
     const { name } = variable
@@ -65,7 +65,8 @@ const connector = connect(
     value = convert(value)
     zoneCenter = convert(zoneCenter)
 
-    const centerValue = method === 'seedzone' && center === 'zone' && objective === 'sites' ? zoneCenter : value
+    const centerValue =
+      method === 'seedzone' && center === 'zone' && objective === 'sites' && !customMode ? zoneCenter : value
 
     return {
       active,
@@ -80,6 +81,7 @@ const connector = connect(
       units,
       method,
       centerValue,
+      customMode,
     }
   },
   (dispatch: (action: any) => any, { variable, index }: { variable: any; index: number }) => {
@@ -99,13 +101,34 @@ const connector = connect(
           const variableConfig = allVariables.find(item => item.name === variable.name)
 
           if (variableConfig) {
-            dispatch(modifyVariable(variable.name, value * variableConfig.multiplier))
+            dispatch(modifyVariable(variable.name, { transfer: value * variableConfig.multiplier }))
           }
         }
       },
 
       onResetTransfer: () => {
         dispatch(resetTransfer(variable.name))
+      },
+
+      onCenterChange: (value: string, unit: string, units: any) => {
+        let val = parseFloat(value)
+
+        // TODO: Review (copied from `onTransferChange`)
+        if (!Number.isNaN(val)) {
+          if (unit === 'imperial' && units !== null) {
+            if (units.metric.convertTransfer) {
+              val = units.metric.convertTransfer(val)
+            } else if (units.metric.convert !== null) {
+              val = units.metric.convert(val)
+            }
+          }
+
+          const variableConfig = allVariables.find(item => item.name === variable.name)
+
+          if (variableConfig) {
+            dispatch(modifyVariable(variable.name, { value: val * variableConfig.multiplier }))
+          }
+        }
       },
 
       onToggle: () => {
@@ -137,6 +160,8 @@ const Variable = (props: ConnectedProps<typeof connector>) => {
     onResetTransfer,
     onToggle,
     onRemove,
+    customMode,
+    onCenterChange,
   } = props
 
   let center
@@ -178,7 +203,15 @@ const Variable = (props: ConnectedProps<typeof connector>) => {
         <div className={`modify-status ${transferIsModified ? 'modified' : ''}`}>&nbsp;</div>
         <strong>{name}</strong>
       </td>
-      <td>{center}</td>
+      <td>
+        {customMode ? (
+          <EditableLabel value={centerValue} onChange={newValue => onCenterChange(newValue, unit, units)}>
+            &nbsp;{units[unit].label}
+          </EditableLabel>
+        ) : (
+          center
+        )}
+      </td>
       <td>
         {transferIsModified && method ? (
           <div className="transfer-reset" onClick={() => onResetTransfer()}>
@@ -203,7 +236,8 @@ const Variable = (props: ConnectedProps<typeof connector>) => {
             {name}: {label}
           </h5>
           <div>
-            <span className="tooltip-label">{t`Value at point:`}</span> <strong>{value}</strong>
+            <span className="tooltip-label">{customMode ? t`Custom value:` : t`Value at point:`}</span>{' '}
+            <strong>{value}</strong>
           </div>
           <div>
             <span className="tooltip-label">{t`Transfer limit (+/-):`}</span>

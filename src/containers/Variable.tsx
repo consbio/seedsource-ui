@@ -13,7 +13,7 @@ const connector = connect(
     const active = !!layers.find((layer: any) => layer.name === variable.name && layer.displayed === true)
     const { objective, unit, method, center, customMode } = runConfiguration
     const variableConfig = allVariables.find(item => item.name === variable.name)
-    let { value, zoneCenter, transfer, avgTransfer, transferIsModified } = variable
+    let { value, zoneCenter, transfer, avgTransfer, transferIsModified, customCenter } = variable
     const { name } = variable
     const { label, multiplier, units } = variableConfig as any
 
@@ -64,9 +64,12 @@ const connector = connect(
     avgTransfer = convertTransfer(avgTransfer)
     value = convert(value)
     zoneCenter = convert(zoneCenter)
+    customCenter = convert(customCenter)
 
-    const centerValue =
-      method === 'seedzone' && center === 'zone' && objective === 'sites' && !customMode ? zoneCenter : value
+    let centerValue = method === 'seedzone' && center === 'zone' && objective === 'sites' ? zoneCenter : value
+    if (customMode) {
+      centerValue = customCenter
+    }
 
     return {
       active,
@@ -110,23 +113,19 @@ const connector = connect(
         dispatch(resetTransfer(variable.name))
       },
 
-      onCenterChange: (value: string, unit: string, units: any) => {
-        let val = parseFloat(value)
+      onCenterChange: (center: string, unit: string, units: any) => {
+        let value = parseFloat(center)
 
-        // TODO: Review (copied from `onTransferChange`)
-        if (!Number.isNaN(val)) {
+        if (!Number.isNaN(value)) {
           if (unit === 'imperial' && units !== null) {
-            if (units.metric.convertTransfer) {
-              val = units.metric.convertTransfer(val)
-            } else if (units.metric.convert !== null) {
-              val = units.metric.convert(val)
+            if (units.metric.convert !== null) {
+              value = units.metric.convert(value)
             }
           }
-
           const variableConfig = allVariables.find(item => item.name === variable.name)
 
           if (variableConfig) {
-            dispatch(modifyVariable(variable.name, { value: val * variableConfig.multiplier }))
+            dispatch(modifyVariable(variable.name, { customCenter: value * variableConfig.multiplier }))
           }
         }
       },
@@ -205,7 +204,7 @@ const Variable = (props: ConnectedProps<typeof connector>) => {
       </td>
       <td>
         {customMode ? (
-          <EditableLabel value={centerValue} onChange={newValue => onCenterChange(newValue, unit, units)}>
+          <EditableLabel value={centerValue || '--'} onChange={newValue => onCenterChange(newValue, unit, units)}>
             &nbsp;{units[unit].label}
           </EditableLabel>
         ) : (

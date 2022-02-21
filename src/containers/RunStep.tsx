@@ -51,7 +51,7 @@ const connector = connect(
   },
   (dispatch: (event: any) => any) => ({
     onRun: (configuration: any) => {
-      const { variables, constraints } = configuration
+      const { variables, constraints, customMode } = configuration
 
       if (variables.some((item: any) => item.transfer === null)) {
         dispatch(
@@ -61,6 +61,19 @@ const connector = connect(
           ),
         )
         return
+      }
+
+      if (customMode) {
+        if (variables.some((item: any) => item.customCenter === null)) {
+          dispatch(
+            setError(
+              t`Configuration error`,
+              t`Cannot calculate scores: Custom center is enabled and one or more of your variables has no custom 
+              center.`,
+            ),
+          )
+          return
+        }
       }
 
       if (constraints.some((item: any) => Object.keys(item.values).some(key => item.values[key] === null))) {

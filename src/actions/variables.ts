@@ -62,7 +62,7 @@ export const removeVariable = (variable: string, index: number) => {
   }
 }
 
-export const modifyVariable = (variable: string, modifications: { transfer?: number; value?: number }) => {
+export const modifyVariable = (variable: string, modifications: { transfer?: number; customCenter?: number }) => {
   return {
     type: MODIFY_VARIABLE,
     variable,

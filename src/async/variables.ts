@@ -26,7 +26,7 @@ const transferSelect = ({ runConfiguration }: any) => {
 
 const valueSelect = ({ runConfiguration }: any) => {
   let { point } = runConfiguration
-  const { objective, climate, variables, validRegions } = runConfiguration
+  const { objective, climate, variables, validRegions, customMode } = runConfiguration
 
   if (point) {
     point = { x: point.x, y: point.y }
@@ -38,6 +38,7 @@ const valueSelect = ({ runConfiguration }: any) => {
     climate,
     variables: variables.map((item: any) => item.name),
     validRegions,
+    customMode
   }
 }
 
@@ -183,9 +184,9 @@ export default (store: any) => {
 
   // Values at point (for variables list)
   resync(store, valueSelect, (state, io, dispatch, previousState) => {
-    const { validRegions } = state
+    const { validRegions, customMode } = state
 
-    if (validRegions.length) {
+    if (validRegions.length && !customMode) {
       const requests = fetchValues(store, state, io, dispatch, previousState, validRegions[0])
 
       requests.forEach((request: any) => {

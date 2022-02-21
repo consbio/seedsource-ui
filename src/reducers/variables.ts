@@ -46,6 +46,7 @@ export default (state: any = [], action: any) => {
           transferIsModified: false,
           isFetching: false,
           isFetchingTransfer: false,
+          customCenter: null,
         })),
       ]
 
@@ -53,14 +54,14 @@ export default (state: any = [], action: any) => {
       return state.slice(0, action.index).concat(state.slice(action.index + 1))
 
     case MODIFY_VARIABLE: {
-      const { transfer, value } = action.modifications
+      const { transfer, customCenter } = action.modifications
       const modifications = {} as any
       if (transfer !== undefined) {
         modifications.transfer = transfer
         modifications.transferIsModified = true
       }
-      if (value !== undefined) {
-        modifications.value = value
+      if (customCenter !== undefined) {
+        modifications.customCenter = customCenter
       }
       return updateVariable(action.variable, modifications)
     }

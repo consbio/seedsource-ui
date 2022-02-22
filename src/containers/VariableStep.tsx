@@ -79,15 +79,15 @@ const VariableStep = ({
 
       <div className="margin-bottom-10">
         <input
-          className="is-checkradio is-rtl is-info"
+          className="is-checkradio is-info"
           id="customMode"
           type="checkbox"
           name="customMode"
           checked={customMode}
           onChange={() => onCustomModeChange(!customMode)}
         />
-        <label htmlFor="customMode" className="ml-0">
-          <strong>{t`Custom center`} </strong>(advanced users)<strong>:</strong>
+        <label htmlFor="customMode">
+          <strong>{t`Custom climate values`} </strong>(advanced users)<strong>:</strong>
         </label>
       </div>
 

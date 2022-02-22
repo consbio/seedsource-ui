@@ -56,10 +56,7 @@ export const runJob = (configuration: any) => {
       model: year === '1961_1990' || year === '1981_2010' ? undefined : selectedClimate.model,
       variables: variables.map((item: any) => {
         const { name, transfer, customCenter } = item
-        let { value } = item
-        if (customMode) {
-          value = customCenter
-        }
+        const value = customMode ? customCenter : item.value
         return {
           name,
           limit: { min: value - transfer, max: value + transfer },

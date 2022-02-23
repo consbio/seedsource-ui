@@ -5,6 +5,7 @@ import LatitudeConstraint from './containers/LatitudeConstraint'
 import LongitudeConstraint from './containers/LongitudeConstraint'
 import DistanceConstraint from './containers/DistanceConstraint'
 import ShapefileConstraint from './containers/ShapefileConstraint'
+import { getServiceName } from './utils'
 
 interface RuntimeConfig {
   title: string
@@ -16,6 +17,22 @@ interface RuntimeConfig {
 export interface DefaultVariable {
   variable: string
   getValue: (dispatch: (action: any) => any, point: { x: number; y: number }, region: string) => any
+}
+
+export interface LayerConfig {
+  type: 'raster' | 'vector'
+  label: string
+  show: (state: any) => boolean
+  url: string | ((state: any) => string)
+  style?: any
+  zIndex?: number
+}
+
+export interface LayerCategory {
+  label: string
+  show: (state: any) => boolean | string
+  layers: string[]
+  showByDefault?: boolean
 }
 
 export interface Config {
@@ -30,6 +47,8 @@ export interface Config {
   defaultVariables: DefaultVariable[]
   text: any
   constraints: { objects: any; categories: any }
+  layers: { [id: string]: LayerConfig }
+  layerCategories: LayerCategory[]
   runtime: RuntimeConfig
 }
 
@@ -44,6 +63,8 @@ export interface PartialConfig {
   species: any[]
   defaultVariables?: DefaultVariable[]
   constraints: { objects: any; categories: any }
+  layers?: { [id: string]: LayerConfig }
+  layerCategories?: LayerCategory[]
   runtime?: RuntimeConfig
 }
 
@@ -51,158 +72,6 @@ interface Window {
   SS_CONFIG: RuntimeConfig
   SEEDSOURCE_UI_CONFIG: Config
 }
-
-declare const window: Window
-
-if (!window.SEEDSOURCE_UI_CONFIG) {
-  window.SEEDSOURCE_UI_CONFIG = {
-    apiRoot: '/sst/',
-    logo: '',
-    navbarClass: '',
-    speciesLabel: 'species',
-    labels: [],
-    functions: [],
-    species: [],
-    defaultVariables: [],
-    text: {},
-    constraints: {
-      objects: {
-        elevation: {
-          component: ElevationConstraint,
-          constraint: 'elevation',
-          values: { range: 0 },
-          serialize: (configuration: any, values: any) => {
-            const { elevation } = configuration.point
-            const { range } = values
-
-            return { min: elevation - range, max: elevation + range }
-          },
-        },
-        photoperiod: {
-          component: PhotoperiodConstraint,
-          constraint: 'photoperiod',
-          values: {
-            hours: 0,
-            month: 1,
-            day: 1,
-            year: 1961,
-          },
-          serialize: (configuration: any, values: any) => {
-            const { x, y } = configuration.point
-            return { ...values, lon: x, lat: y }
-          },
-        },
-        latitude: {
-          component: LatitudeConstraint,
-          constraint: 'latitude',
-          values: { range: 0 },
-          serialize: (configuration: any, { range }: { range: any }) => {
-            const { y } = configuration.point
-            return { min: y - range, max: y + range }
-          },
-        },
-        longitude: {
-          component: LongitudeConstraint,
-          constraint: 'longitude',
-          values: { range: 0 },
-          serialize: (configuration: any, { range }: { range: any }) => {
-            const { x } = configuration.point
-            return { min: x - range, max: x + range }
-          },
-        },
-        distance: {
-          component: DistanceConstraint,
-          constraint: 'distance',
-          values: { range: 0 },
-          serialize: (configuration: any, { range }: { range: any }) => {
-            const { x, y } = configuration.point
-            return { lat: y, lon: x, distance: range }
-          },
-        },
-        shapefile: {
-          component: ShapefileConstraint,
-          constraint: 'shapefile',
-          values: {
-            geoJSON: null,
-            filename: null,
-          },
-          serialize: (_: any, { geoJSON }: { geoJSON: any }) => {
-            return { geoJSON }
-          },
-        },
-      },
-      categories: [
-        {
-          name: 'geographic',
-          label: t`Geographic`,
-          type: 'category',
-          items: [
-            {
-              type: 'constraint',
-              name: 'elevation',
-              label: t`Elevation`,
-            },
-            {
-              type: 'constraint',
-              name: 'photoperiod',
-              label: t`Photoperiod`,
-            },
-            {
-              type: 'constraint',
-              name: 'latitude',
-              label: t`Latitude`,
-            },
-            {
-              type: 'constraint',
-              name: 'longitude',
-              label: t`Longitude`,
-            },
-            {
-              type: 'constraint',
-              name: 'distance',
-              label: t`Distance`,
-            },
-            {
-              type: 'constraint',
-              name: 'shapefile',
-              label: 'Shapefile', // Do not localize
-            },
-          ],
-        },
-      ],
-    },
-
-    runtime: window.SS_CONFIG,
-  }
-}
-
-const config: Config = window.SEEDSOURCE_UI_CONFIG
-
-export default config
-export const reports: { name: string; label: string; url: string }[] = []
-
-export const updateConfig = (newConfig: PartialConfig) => {
-  Object.assign(config, newConfig)
-
-  const { apiRoot } = config
-
-  reports.push(
-    ...[
-      {
-        name: 'pdf',
-        label: 'PDF',
-        url: `${apiRoot}create-pdf/`,
-      },
-      {
-        name: 'pptx',
-        label: 'PPT',
-        url: `${apiRoot}create-ppt/`,
-      },
-    ],
-  )
-}
-
-export const collapsibleSteps = false
 
 const celsiusUnits = {
   metric: {
@@ -392,6 +261,197 @@ export const variables = [
     units: mmUnits,
   },
 ]
+
+declare const window: Window
+
+if (!window.SEEDSOURCE_UI_CONFIG) {
+  window.SEEDSOURCE_UI_CONFIG = {
+    apiRoot: '/sst/',
+    logo: '',
+    navbarClass: '',
+    speciesLabel: 'species',
+    labels: [],
+    functions: [],
+    species: [],
+    defaultVariables: [],
+    text: {},
+    constraints: {
+      objects: {
+        elevation: {
+          component: ElevationConstraint,
+          constraint: 'elevation',
+          values: { range: 0 },
+          serialize: (configuration: any, values: any) => {
+            const { elevation } = configuration.point
+            const { range } = values
+
+            return { min: elevation - range, max: elevation + range }
+          },
+        },
+        photoperiod: {
+          component: PhotoperiodConstraint,
+          constraint: 'photoperiod',
+          values: {
+            hours: 0,
+            month: 1,
+            day: 1,
+            year: 1961,
+          },
+          serialize: (configuration: any, values: any) => {
+            const { x, y } = configuration.point
+            return { ...values, lon: x, lat: y }
+          },
+        },
+        latitude: {
+          component: LatitudeConstraint,
+          constraint: 'latitude',
+          values: { range: 0 },
+          serialize: (configuration: any, { range }: { range: any }) => {
+            const { y } = configuration.point
+            return { min: y - range, max: y + range }
+          },
+        },
+        longitude: {
+          component: LongitudeConstraint,
+          constraint: 'longitude',
+          values: { range: 0 },
+          serialize: (configuration: any, { range }: { range: any }) => {
+            const { x } = configuration.point
+            return { min: x - range, max: x + range }
+          },
+        },
+        distance: {
+          component: DistanceConstraint,
+          constraint: 'distance',
+          values: { range: 0 },
+          serialize: (configuration: any, { range }: { range: any }) => {
+            const { x, y } = configuration.point
+            return { lat: y, lon: x, distance: range }
+          },
+        },
+        shapefile: {
+          component: ShapefileConstraint,
+          constraint: 'shapefile',
+          values: {
+            geoJSON: null,
+            filename: null,
+          },
+          serialize: (_: any, { geoJSON }: { geoJSON: any }) => {
+            return { geoJSON }
+          },
+        },
+      },
+      categories: [
+        {
+          name: 'geographic',
+          label: t`Geographic`,
+          type: 'category',
+          items: [
+            {
+              type: 'constraint',
+              name: 'elevation',
+              label: t`Elevation`,
+            },
+            {
+              type: 'constraint',
+              name: 'photoperiod',
+              label: t`Photoperiod`,
+            },
+            {
+              type: 'constraint',
+              name: 'latitude',
+              label: t`Latitude`,
+            },
+            {
+              type: 'constraint',
+              name: 'longitude',
+              label: t`Longitude`,
+            },
+            {
+              type: 'constraint',
+              name: 'distance',
+              label: t`Distance`,
+            },
+            {
+              type: 'constraint',
+              name: 'shapefile',
+              label: 'Shapefile', // Do not localize
+            },
+          ],
+        },
+      ],
+    },
+
+    layers: {
+      results: {
+        type: 'raster',
+        label: 'Last Run',
+        show: ({ job: { serviceId } }) => !!serviceId,
+        url: ({ job: { serviceId } }) => `/tiles/${serviceId}/{z}/{x}/{y}.png`,
+        zIndex: 10,
+      },
+      ...Object.fromEntries(
+        variables.map(({ name, label }) => {
+          return [
+            `variable-${name}`,
+            {
+              type: 'raster',
+              label,
+              show: () => true,
+              url: ({ runConfiguration: { region, objective, climate } }) =>
+                `/tiles/${getServiceName(name, objective, climate, region)}/{z}/{x}/{y}.png`,
+            },
+          ]
+        }),
+      ),
+    },
+
+    layerCategories: [
+      {
+        label: 'Results',
+        show: ({ job: { serviceId } }) => !!serviceId || t`Run the tool to view results`,
+        layers: ['results'],
+        showByDefault: true,
+      },
+      {
+        label: 'Variables',
+        show: ({ runConfiguration: { region } }) =>
+          !!region || t`Select a region and climate scenario to view variables`,
+        layers: variables.map(({ name }) => `variable-${name}`),
+      },
+    ],
+
+    runtime: window.SS_CONFIG,
+  }
+}
+
+const config: Config = window.SEEDSOURCE_UI_CONFIG
+
+export default config
+export const reports: { name: string; label: string; url: string }[] = []
+
+export const updateConfig = (newConfig: PartialConfig) => {
+  Object.assign(config, newConfig)
+
+  const { apiRoot } = config
+
+  reports.push(
+    ...[
+      {
+        name: 'pdf',
+        label: 'PDF',
+        url: `${apiRoot}create-pdf/`,
+      },
+      {
+        name: 'pptx',
+        label: 'PPT',
+        url: `${apiRoot}create-ppt/`,
+      },
+    ],
+  )
+}
+
+export const collapsibleSteps = false
 
 export const species = [
   {

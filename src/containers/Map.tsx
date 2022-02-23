@@ -16,7 +16,7 @@ import 'leaflet-range/L.Control.Range'
 import { t, c } from 'ttag'
 
 import * as io from '../io'
-import { getLayerUrl, isClose, getZoneLabel } from '../utils'
+import { isClose, getZoneLabel } from '../utils'
 import config, { variables as allVariables, timeLabels, regions, regionsBoundariesUrl } from '../config'
 import { setMapOpacity, setBasemap, setZoom, setMapCenter, setMapMode } from '../actions/map'
 import { toggleLayer } from '../actions/layers'
@@ -93,6 +93,7 @@ const connector = connect(
       userSites,
       activeUserSite,
       mode,
+      state,
     }
   },
   dispatch => {
@@ -524,15 +525,17 @@ class Map extends React.Component<MapProps> {
     this.displayedRasterLayers.forEach(layer => layer.setOpacity(opacity))
   }
 
-  updateVisibilityButton(layers: any[]) {
+  updateVisibilityButton(layers: string[], state: any) {
     if (this.simple) {
       return
     }
 
-    const resultsLayer = layers.find(item => item.name === 'results')
+    const resultsLayer = config.layers.results
+    const showResultsLayer = resultsLayer.show(state)
+    const visible = layers.includes('results')
 
-    if (resultsLayer !== undefined) {
-      const icon = resultsLayer.displayed ? 'eye-closed' : 'eye'
+    if (showResultsLayer) {
+      const icon = visible ? 'eye-closed' : 'eye'
 
       if (this.visibilityButton === null) {
         this.visibilityButton = new ButtonControl({ icon } as any)
@@ -671,10 +674,10 @@ class Map extends React.Component<MapProps> {
 
     // Create new layers for each feature, even if they already exist...
     const constraintLayers = constraintData.map(geojson =>
-      L.geoJSON(geojson, { style: { fill: false, color: '#a50f15', weight: 1.5 } }).addTo(this.map),
+      L.geoJSON(geojson, { style: { fill: false, color: '#a50f15', weight: 1.5 } }).addTo(this.map).setZIndex(15),
     )
     const customLayers = customData.map(datum =>
-      L.geoJSON(datum, { style: { fill: false, color: datum.color, weight: 1.5 } }).addTo(this.map),
+      L.geoJSON(datum, { style: { fill: false, color: datum.color, weight: 1.5 } }).addTo(this.map).setZIndex(15),
     )
     const layers = [...constraintLayers, ...customLayers]
 
@@ -824,19 +827,17 @@ class Map extends React.Component<MapProps> {
     }
   }
 
-  updateRasterLayers(layers: any[]) {
+  updateRasterLayers(layers: string[], state: any) {
     const numLayersToAdd = layers.length - this.displayedRasterLayers.length
-    const { objective, climate, region, job } = this.props
-    const { serviceId } = job
 
     if (numLayersToAdd > 0) {
       this.displayedRasterLayers.push(
         ...Array(numLayersToAdd)
           .fill(0)
           .map((_, index) => {
-            const layer = layers[this.displayedRasterLayers.length + index]
-            const url = getLayerUrl(layer, serviceId, objective, climate, region)
-            return L.tileLayer(`/tiles/${url}/{z}/{x}/{y}.png`, { zIndex: 1, opacity: 1 }).addTo(this.map)
+            const layer = config.layers[layers[this.displayedRasterLayers.length + index]]
+            const url = typeof layer.url === 'string' ? layer.url : layer.url(state)
+            return L.tileLayer(url, { zIndex: 1, opacity: 1 }).addTo(this.map)
           }),
       )
     } else if (numLayersToAdd < 0) {
@@ -845,18 +846,28 @@ class Map extends React.Component<MapProps> {
         .forEach(layer => this.map.removeLayer(layer))
     }
 
-    layers.forEach((layer, index) => {
-      const url = `/tiles/${getLayerUrl(layer, serviceId, objective, climate, region)}/{z}/{x}/{y}.png`
-      if (url !== this.displayedRasterLayers[index]._url) {
-        this.displayedRasterLayers[index].setUrl(url).setZIndex(layers[index].zIndex)
+    layers.forEach((l, index) => {
+      const layer = config.layers[l]
+      const url = typeof layer.url === 'string' ? layer.url : layer.url(state)
+      const rasterLayer = this.displayedRasterLayers[index]
+      if (url !== rasterLayer._url) {
+        rasterLayer.setUrl(url)
+      }
+      if (layer.zIndex !== undefined && layer.zIndex !== rasterLayer.zIndex) {
+        rasterLayer.setZIndex(layer.zIndex)
       }
     })
   }
 
-  updateVectorLayers(layers: any[]) {
+  updateVectorLayers(layers: string[], state: any) {
     if (
       this.displayedVectorLayers.map(layer => layer._url).toString() ===
-      layers.map(layer => layer.urlTemplate).toString()
+      layers
+        .map(l => {
+          const layer = config.layers[l]
+          return typeof layer.url === 'string' ? layer.url : layer.url(state)
+        })
+        .toString()
     ) {
       return
     }
@@ -868,9 +879,10 @@ class Map extends React.Component<MapProps> {
         ...Array(numLayersToAdd)
           .fill(0)
           .map((_, i) => {
-            const layer = layers[this.displayedVectorLayers.length + i]
+            const layer = config.layers[layers[this.displayedVectorLayers.length + i]]
+            const url = typeof layer.url === 'string' ? layer.url : layer.url(state)
             return (L as any).vectorGrid
-              .protobuf(layer.urlTemplate, {
+              .protobuf(url, {
                 zIndex: 1,
                 opacity: 1,
                 vectorTileLayerStyles: layer.style,
@@ -884,20 +896,22 @@ class Map extends React.Component<MapProps> {
         .forEach(layer => this.map.removeLayer(layer))
     }
 
-    layers.forEach((layer, index) => {
+    layers.forEach((l, index) => {
+      const layer = config.layers[l]
+      const url = typeof layer.url === 'string' ? layer.url : layer.url(state)
       const displayedLayer = this.displayedVectorLayers[index]
-      if (displayedLayer.url !== layer.urlTemplate) {
+      if (displayedLayer.url !== url) {
         this.displayedVectorLayers[index].options.vectorTileLayerStyles.data = { ...layer.style }
-        this.displayedVectorLayers[index].setUrl(layer.urlTemplate)
+        this.displayedVectorLayers[index].setUrl(url)
       }
     })
   }
 
-  updateLayers(layers: any[]) {
-    const rasterLayers = layers.filter(layer => layer.type === 'raster' && layer.displayed === true)
-    const vectorLayers = layers.filter(layer => layer.type === 'vector' && layer.displayed === true)
-    this.updateRasterLayers(rasterLayers)
-    this.updateVectorLayers(vectorLayers)
+  updateLayers(layers: string[], state: any) {
+    const rasterLayers = layers.filter(l => config.layers[l].type === 'raster')
+    const vectorLayers = layers.filter(l => config.layers[l].type === 'vector')
+    this.updateRasterLayers(rasterLayers, state)
+    this.updateVectorLayers(vectorLayers, state)
   }
 
   updateUserSites(userSites: { lat: number; lon: number }[], activeSite: number) {
@@ -957,12 +971,13 @@ class Map extends React.Component<MapProps> {
         userSites,
         activeUserSite,
         mode,
+        state,
       } = this.props
 
-      this.updateLayers(layers)
+      this.updateLayers(layers, state)
       this.updatePointMarker(point)
       this.updateBoundaryLayer(region)
-      this.updateVisibilityButton(layers)
+      this.updateVisibilityButton(layers, state)
       this.updateOpacity(opacity)
       this.updateLegends(legends, layers, unit)
       this.updateZoneLayer(method, zone, zoneConfig, geometry)
@@ -980,7 +995,7 @@ class Map extends React.Component<MapProps> {
       }
 
       // Time overlay
-      if (layers.find((layer: any) => layer.urlTemplate.includes('{region}_{modelTime}') && layer.displayed === true)) {
+      if (layers.find((layer: string) => layer.startsWith('variable-'))) {
         const selectedClimate = objective === 'seedlots' ? climate.site : climate.seedlot
         const { time, model } = selectedClimate
         let labelKey = time
@@ -989,13 +1004,13 @@ class Map extends React.Component<MapProps> {
           labelKey += model
         }
 
-        const label = timeLabels[labelKey]
+        const climateLabel = timeLabels[labelKey]
 
         timeOverlay = (
           <div className="time-overlay">
             <span className="icon-clock-16" />
             <span>&nbsp;</span>
-            {t`Showing`}: {label}
+            {t`Showing climate for ${climateLabel}`}
           </div>
         )
       }

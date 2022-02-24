@@ -408,13 +408,13 @@ if (!window.SEEDSOURCE_UI_CONFIG) {
 
     layerCategories: [
       {
-        label: 'Results',
+        label: t`Results`,
         show: ({ job: { serviceId } }) => !!serviceId || t`Run the tool to view results`,
         layers: ['results'],
         showByDefault: true,
       },
       {
-        label: 'Variables',
+        label: t`Variables`,
         show: ({ runConfiguration: { region } }) =>
           !!region || t`Select a region and climate scenario to view variables`,
         layers: variables.map(({ name }) => `variable-${name}`),

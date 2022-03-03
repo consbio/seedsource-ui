@@ -12,8 +12,22 @@ import { showSaveModal } from '../actions/saves'
 import { createReport, runTIFJob } from '../actions/report'
 import { reports } from '../config'
 
-const configurationCanRun = ({ point, variables, traits }: { point: any; variables: any[]; traits: any[] }) => {
+const configurationCanRun = ({
+  point,
+  variables,
+  traits,
+  customMode,
+}: {
+  point: any
+  variables: any[]
+  traits: any[]
+  customMode: boolean
+}) => {
   if (point === null || point.x === null || point.y === null) {
+    return false
+  }
+
+  if (customMode && variables.length > 0 && variables.some(item => item.customCenter === null)) {
     return false
   }
 
@@ -51,7 +65,7 @@ const connector = connect(
   },
   (dispatch: (event: any) => any) => ({
     onRun: (configuration: any) => {
-      const { variables, constraints, customMode } = configuration
+      const { variables, constraints } = configuration
 
       if (variables.some((item: any) => item.transfer === null)) {
         dispatch(
@@ -61,19 +75,6 @@ const connector = connect(
           ),
         )
         return
-      }
-
-      if (customMode) {
-        if (variables.some((item: any) => item.customCenter === null)) {
-          dispatch(
-            setError(
-              t`Configuration error`,
-              t`Cannot calculate scores: Custom center is enabled and one or more of your variables has no custom 
-              center.`,
-            ),
-          )
-          return
-        }
       }
 
       if (constraints.some((item: any) => Object.keys(item.values).some(key => item.values[key] === null))) {

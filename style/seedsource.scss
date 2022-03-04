@@ -555,7 +555,7 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
     }
 
     &.full-height {
-      min-height: calc(100vh - #{$header-height});
+      min-height: 100%;
     }
 
     .expand-button {

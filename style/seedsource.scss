@@ -601,7 +601,11 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
           }
 
           &.active {
-            outline: 1px dashed gold;
+            outline: 1px dashed orange;
+          }
+
+          &:hover {
+            outline: 1px solid orange;
           }
         }
       }

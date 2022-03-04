@@ -56,16 +56,6 @@ const VariableStep = ({ number, active, variables, method, setDefaultVariables }
 
   return (
     <ConfigurationStep title={t`Select climate variables`} number={number} name="variables" active>
-      <div className="margin-bottom-10">
-        <strong>{t`Units:`} </strong>
-        <div className="tabs is-toggle is-inline-block is-small align-middle">
-          <ul>
-            <UnitButton name="metric">{t`Metric`}</UnitButton>
-            <UnitButton name="imperial">{t`Imperial`}</UnitButton>
-          </ul>
-        </div>
-      </div>
-
       <Variables edit />
 
       {flag && defaultVariables && !variables.length && (

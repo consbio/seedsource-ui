@@ -793,4 +793,20 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
   }
 }
 
+.setup {
+  position: relative;
+  margin: 10px 0 17px 13px;
+  padding: 20px 22px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+
+  .label {
+    position: absolute;
+    top: -11px;
+    background: white;
+    font-size: .8rem;
+    font-weight: 500;
+  }
+}
+
 

@@ -63,7 +63,15 @@ const defaultConfiguration = {
   uploadedPoints: null,
   customLayers: [],
   customMode: false,
+  version: 2, // Next version should be +1 of current version. Add a migration function to `migrations` below.
 }
+
+const migrations: { version: number; migrate: (configuration: any) => { configuration: any } }[] = [
+  {
+    version: 1,
+    migrate: (configuration: any) => ({ ...configuration, customMode: false, version: 2 }),
+  },
+]
 
 export default (state: any = defaultConfiguration, action: any) => {
   const runConfiguration = () => {
@@ -187,8 +195,20 @@ export default (state: any = defaultConfiguration, action: any) => {
       case RESET_CONFIGURATION:
         return defaultConfiguration
 
-      case LOAD_CONFIGURATION:
-        return { ...defaultConfiguration, ...action.configuration }
+      case LOAD_CONFIGURATION: {
+        const version = action.configuration.version || 1
+        let updatedConfiguration = { ...action.configuration }
+
+        if (version < defaultConfiguration.version) {
+          for (let i = version; i < defaultConfiguration.version; i += 1) {
+            const migration = migrations.find(m => m.version === i)
+            if (migration) {
+              updatedConfiguration = migration.migrate(updatedConfiguration)
+            }
+          }
+        }
+        return { ...defaultConfiguration, ...updatedConfiguration }
+      }
 
       case SET_CUSTOM_MODE:
         return {

@@ -5,13 +5,13 @@ import ConfigurationStep from './ConfigurationStep'
 import UnitButton from './UnitButton'
 import Variables from './Variables'
 import config from '../config'
-import { addVariables, setDefaultVariables } from '../actions/variables'
+import { addVariables, setCustomMode, setDefaultVariables } from '../actions/variables'
 
 const connector = connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
-    const { variables, method } = runConfiguration
+    const { variables, method, customMode } = runConfiguration
 
-    return { variables, method }
+    return { variables, method, customMode }
   },
   dispatch => ({
     setDefaultVariables: () => {
@@ -19,6 +19,9 @@ const connector = connect(
 
       dispatch(addVariables(defaultVariables.map(({ variable }) => variable)))
       dispatch(setDefaultVariables(true))
+    },
+    onCustomModeChange: (customMode: boolean) => {
+      dispatch(setCustomMode(customMode))
     },
   }),
 )
@@ -28,7 +31,15 @@ type VariableStepProps = ConnectedProps<typeof connector> & {
   active: boolean
 }
 
-const VariableStep = ({ number, active, variables, method, setDefaultVariables }: VariableStepProps) => {
+const VariableStep = ({
+  number,
+  active,
+  variables,
+  method,
+  customMode,
+  onCustomModeChange,
+  setDefaultVariables,
+}: VariableStepProps) => {
   if (method === 'function') {
     return null
   }
@@ -64,6 +75,20 @@ const VariableStep = ({ number, active, variables, method, setDefaultVariables }
             <UnitButton name="imperial">{t`Imperial`}</UnitButton>
           </ul>
         </div>
+      </div>
+
+      <div className="margin-bottom-10">
+        <input
+          className="is-checkradio is-info"
+          id="customMode"
+          type="checkbox"
+          name="customMode"
+          checked={customMode}
+          onChange={() => onCustomModeChange(!customMode)}
+        />
+        <label htmlFor="customMode">
+          <strong>{t`Custom climate values`} </strong>(advanced users)<strong>:</strong>
+        </label>
       </div>
 
       <Variables edit />

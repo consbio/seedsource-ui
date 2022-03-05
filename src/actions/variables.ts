@@ -12,6 +12,7 @@ export const RECEIVE_TRANSFER = 'RECEIVE_TRANSFER'
 export const REQUEST_TRANSFER = 'REQUEST_TRANSFER'
 export const SET_VARIABLES_REGION = 'SET_VARIABLES_REGION'
 export const SET_DEFAULT_VARIABLES = 'SET_DEFAULT_VARIABLES'
+export const SET_CUSTOM_MODE = 'SET_CUSTOM_MODE'
 
 export const selectUnit = (unit: string) => {
   return {
@@ -61,11 +62,11 @@ export const removeVariable = (variable: string, index: number) => {
   }
 }
 
-export const modifyVariable = (variable: string, transfer: number) => {
+export const modifyVariable = (variable: string, modifications: { transfer?: number; customCenter?: number }) => {
   return {
     type: MODIFY_VARIABLE,
     variable,
-    transfer,
+    modifications,
   }
 }
 
@@ -129,5 +130,12 @@ export const setDefaultVariables = (useDefault: boolean) => {
   return {
     type: SET_DEFAULT_VARIABLES,
     useDefault,
+  }
+}
+
+export const setCustomMode = (customMode: boolean) => {
+  return {
+    type: SET_CUSTOM_MODE,
+    customMode,
   }
 }

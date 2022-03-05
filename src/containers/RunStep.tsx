@@ -12,8 +12,22 @@ import { showSaveModal } from '../actions/saves'
 import { createReport, runTIFJob } from '../actions/report'
 import { reports } from '../config'
 
-const configurationCanRun = ({ point, variables, traits }: { point: any; variables: any[]; traits: any[] }) => {
+const configurationCanRun = ({
+  point,
+  variables,
+  traits,
+  customMode,
+}: {
+  point: any
+  variables: any[]
+  traits: any[]
+  customMode: boolean
+}) => {
   if (point === null || point.x === null || point.y === null) {
+    return false
+  }
+
+  if (customMode && variables.length > 0 && variables.some(item => item.customCenter === null)) {
     return false
   }
 

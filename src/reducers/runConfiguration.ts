@@ -187,9 +187,8 @@ export default (state: any = defaultConfiguration, action: any) => {
       case RESET_CONFIGURATION:
         return defaultConfiguration
 
-      case LOAD_CONFIGURATION: {
+      case LOAD_CONFIGURATION:
         return { ...defaultConfiguration, ...action.configuration }
-      }
 
       case SET_CUSTOM_MODE:
         return {

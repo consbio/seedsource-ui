@@ -39,16 +39,16 @@ const RunConfiguration = ({ job, children = null }: RunConfigurationProps) => {
     <div>
       {overlay}
 
-      <div className="setup">
-        <div className="label">{t`Setup`}</div>
-        <div>
-          <strong>{t`Units`}</strong>
-        </div>
-        <div className="tabs is-toggle is-inline-block is-small align-middle">
-          <ul>
-            <UnitButton name="metric">{t`Metric`}</UnitButton>
-            <UnitButton name="imperial">{t`Imperial`}</UnitButton>
-          </ul>
+      <div className="level mb-0">
+        <div className="level-left" />
+        <div className="level-right">
+          <strong>{t`Units:`} </strong>
+          <div className="tabs is-toggle is-inline-block is-small align-middle">
+            <ul>
+              <UnitButton name="metric">{t`Metric`}</UnitButton>
+              <UnitButton name="imperial">{t`Imperial`}</UnitButton>
+            </ul>
+          </div>
         </div>
       </div>
 

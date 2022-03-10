@@ -51,7 +51,9 @@ const Comparisons = ({
   onMouseOverSite,
   onSetMapMode,
 }: ComparisonsProps) => {
-  const [active, setActive] = React.useState(false)
+  const [expandLevel, setExpandLevel] = React.useState(0)
+  const expandClasses = ['', 'preview', 'full-height']
+  const expandMessages = [t`Click to show`, t`Click for full height`, t`Click to hide`]
   const [newSite, setNewSite] = React.useState({ lat: '', lon: '', label: '' })
   const [activeEdit, setActiveEdit] = React.useState(null as { lat: number; lon: number; label: string } | null)
   const [processingCSV, setProcessingCSV] = React.useState(false)
@@ -64,7 +66,7 @@ const Comparisons = ({
   }
 
   return (
-    <div className={`comparisons ${active ? 'active' : ''}`}>
+    <div className={`comparisons ${expandClasses[expandLevel]}`}>
       <input
         type="file"
         className="is-hidden"
@@ -131,9 +133,20 @@ const Comparisons = ({
           }
         }}
       />
-      <button type="button" className="expand-button" onClick={() => setActive(!active)}>
+      <button type="button" className="expand-button" onClick={() => setExpandLevel((expandLevel + 1) % 3)}>
         <div>{objective === 'seedlots' ? t`Compare Seedlots` : t`Compare Planting Sites`}</div>
-        <div className="expand-message">{active ? t`Click to hide` : t`Click to show`}</div>
+        <div className="expand-message">{expandMessages[expandLevel]}</div>
+        <div className="expand-icons">
+          {expandClasses.map((className, idx) => (
+            <div
+              className={`expand-icon ${className} ${expandLevel === idx ? 'active' : ''}`}
+              onClick={e => {
+                e.stopPropagation()
+                setExpandLevel(idx)
+              }}
+            />
+          ))}
+        </div>
       </button>
       <div className="scroll-table">
         <table className="table is-hoverable">

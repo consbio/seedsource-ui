@@ -19,7 +19,14 @@ import {
   SET_ACTIVE_USER_SITE,
 } from '../actions/point'
 import { SELECT_SPECIES, RECEIVE_AVAILABLE_SPECIES } from '../actions/species'
-import { SELECT_UNIT, SELECT_METHOD, SELECT_CENTER, REMOVE_VARIABLE, SET_DEFAULT_VARIABLES } from '../actions/variables'
+import {
+  SELECT_UNIT,
+  SELECT_METHOD,
+  SELECT_CENTER,
+  REMOVE_VARIABLE,
+  SET_DEFAULT_VARIABLES,
+  SET_CUSTOM_MODE,
+} from '../actions/variables'
 import { LOAD_CONFIGURATION, RESET_CONFIGURATION } from '../actions/saves'
 import { FINISH_JOB } from '../actions/job'
 import { SELECT_STEP } from '../actions/step'
@@ -55,6 +62,7 @@ const defaultConfiguration = {
   activeUserSite: null,
   uploadedPoints: null,
   customLayers: [],
+  customMode: false,
 }
 
 export default (state: any = defaultConfiguration, action: any) => {
@@ -182,6 +190,12 @@ export default (state: any = defaultConfiguration, action: any) => {
       case LOAD_CONFIGURATION:
         return { ...defaultConfiguration, ...action.configuration }
 
+      case SET_CUSTOM_MODE:
+        return {
+          ...state,
+          customMode: action.customMode,
+        }
+
       default:
         return state
     }
@@ -196,7 +210,7 @@ export default (state: any = defaultConfiguration, action: any) => {
     zones: zones(newState.zones || undefined, action),
     climate: climate(newState.climate || undefined, action),
     constraints: constraints(newState.constraints, action),
-    customLayers: customLayers(newState.customLayers, action)
+    customLayers: customLayers(newState.customLayers, action),
   }
 }
 

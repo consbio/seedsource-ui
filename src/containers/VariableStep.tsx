@@ -68,16 +68,6 @@ const VariableStep = ({
   return (
     <ConfigurationStep title={t`Select climate variables`} number={number} name="variables" active>
       <div className="margin-bottom-10">
-        <strong>{t`Units:`} </strong>
-        <div className="tabs is-toggle is-inline-block is-small align-middle">
-          <ul>
-            <UnitButton name="metric">{t`Metric`}</UnitButton>
-            <UnitButton name="imperial">{t`Imperial`}</UnitButton>
-          </ul>
-        </div>
-      </div>
-
-      <div className="margin-bottom-10">
         <input
           className="is-checkradio is-info"
           id="customMode"
@@ -90,7 +80,7 @@ const VariableStep = ({
           <strong>{t`Custom climate values`} </strong>(advanced users)<strong>:</strong>
         </label>
       </div>
-
+      
       <Variables edit />
 
       {flag && defaultVariables && !variables.length && (

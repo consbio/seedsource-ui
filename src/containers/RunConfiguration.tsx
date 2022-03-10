@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
 import { t } from 'ttag'
+import UnitButton from './UnitButton'
 
 type RunConfigurationProps = {
   job: any
@@ -37,6 +38,19 @@ const RunConfiguration = ({ job, children = null }: RunConfigurationProps) => {
   return (
     <div>
       {overlay}
+
+      <div className="level mb-0">
+        <div className="level-left" />
+        <div className="level-right">
+          <strong>{t`Units:`} </strong>
+          <div className="tabs is-toggle is-inline-block is-small align-middle">
+            <ul>
+              <UnitButton name="metric">{t`Metric`}</UnitButton>
+              <UnitButton name="imperial">{t`Imperial`}</UnitButton>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       {children}
     </div>

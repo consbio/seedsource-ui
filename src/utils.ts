@@ -110,14 +110,12 @@ export const getZoneLabel = (zone?: any) => {
 }
 
 export const migrateConfiguration = (configuration: any, version: number) => {
-  let updatedConfiguration = { ...configuration }
+  let updatedConfiguration = configuration
 
-  if (version < saveVersion) {
-    for (let i = version; i < saveVersion; i += 1) {
-      const migration = migrations.find(m => m.version === i)
-      if (migration) {
-        updatedConfiguration = migration.migrate(updatedConfiguration)
-      }
+  for (let i = version; i < saveVersion; i += 1) {
+    const migration = migrations.find(m => m.version === i)
+    if (migration) {
+      updatedConfiguration = migration.migrate(updatedConfiguration)
     }
   }
   return updatedConfiguration

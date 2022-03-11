@@ -1,6 +1,6 @@
 import { get, post, put, ioDelete } from '../io'
 import { setError } from './error'
-import config from '../config'
+import config, { saveVersion } from '../config'
 
 export const SHOW_SAVE_MODAL = 'SHOW_SAVE_MODAL'
 export const HIDE_SAVE_MODAL = 'HIDE_SAVE_MODAL'
@@ -117,6 +117,7 @@ export const createSave = (configuration: any, title: string) => {
   return (dispatch: (event: any) => any) => {
     const data = {
       title,
+      version: saveVersion,
       configuration: JSON.stringify(dumpConfiguration(configuration)),
     }
 
@@ -161,6 +162,7 @@ export const updateSave = (configuration: any, lastSave: any) => {
   return (dispatch: (event: any) => any) => {
     const data = {
       title: lastSave.title,
+      version: saveVersion,
       configuration: JSON.stringify(dumpConfiguration(configuration)),
     }
 

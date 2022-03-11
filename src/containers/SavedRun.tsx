@@ -2,6 +2,7 @@ import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { t, c } from 'ttag'
 import { loadConfiguration, resetConfiguration, deleteSave } from '../actions/saves'
+import { migrateConfiguration } from '../utils'
 
 const connector = connect(null, (dispatch: (event: any) => any, { onClick }: { onClick: () => any }) => {
   return {
@@ -11,11 +12,12 @@ const connector = connect(null, (dispatch: (event: any) => any, { onClick }: { o
 
     onLoad: (save: any) => {
       dispatch(resetConfiguration())
+      const migratedConfiguration = migrateConfiguration(save.configuration, save.version)
 
       /* In some cases where the loaded configuration is similar to the previous one, certain events aren't
        * fired if the event is dispatched in the same event cycle as the reset event
        */
-      setTimeout(() => dispatch(loadConfiguration(save.configuration, save)), 0)
+      setTimeout(() => dispatch(loadConfiguration(migratedConfiguration, save)), 0)
     },
 
     onDelete: (saveId: string) => {

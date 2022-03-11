@@ -657,3 +657,14 @@ export const regions = [
 ]
 
 export const regionsBoundariesUrl = '/static/geometry/regions.topojson'
+
+export const saveVersion = 2 // Next version should add +1 (must be a larger integer). When updating save version,
+// also add to `migrations` below.
+
+// `version` is the version you are migrating *from*.
+export const migrations: { version: number; migrate: (configuration: any) => { configuration: any } }[] = [
+  {
+    version: 1,
+    migrate: (configuration: any) => ({ ...configuration, customMode: false }),
+  },
+]

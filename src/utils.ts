@@ -1,3 +1,5 @@
+import { saveVersion, migrations } from './config'
+
 declare const document: any
 
 export const getLayerUrl = (layer: any, serviceId: string, objective: string, climate: any, region: string) => {
@@ -105,4 +107,16 @@ export const getZoneLabel = (zone?: any) => {
   }
 
   return label
+}
+
+export const migrateConfiguration = (configuration: any, version: number) => {
+  let updatedConfiguration = configuration
+
+  for (let i = version; i < saveVersion; i += 1) {
+    const migration = migrations.find(m => m.version === i)
+    if (migration) {
+      updatedConfiguration = migration.migrate(updatedConfiguration)
+    }
+  }
+  return updatedConfiguration
 }

@@ -11,6 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals = 2; plural = (n != 1);\n"
 "mime-version: 1.0\n"
+"x-generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: src/config.ts:347
@@ -26,12 +27,12 @@ msgstr "Elevación"
 msgid "Photoperiod"
 msgstr "Fotoperiodo"
 
-#: src/config.ts:363 src/containers/Comparisons.tsx:353
+#: src/config.ts:363 src/containers/Comparisons.tsx:366
 #: src/containers/LatitudeConstraint.tsx:16
 msgid "Latitude"
 msgstr "Latitud"
 
-#: src/config.ts:368 src/containers/Comparisons.tsx:354
+#: src/config.ts:368 src/containers/Comparisons.tsx:367
 #: src/containers/LongitudeConstraint.tsx:16
 msgid "Longitude"
 msgstr "Longitud"
@@ -250,98 +251,98 @@ msgstr "¿A qué clima están adaptados los lotes de semillas?"
 msgid "When should trees be best adapted to the planting site?"
 msgstr "¿Cuándo se adaptarán mejor los árboles al sitio de plantación?"
 
-#: src/containers/Comparisons.tsx:88
+#: src/containers/Comparisons.tsx:90
 msgid "The file is empty."
 msgstr "El archivo está vacío."
 
-#: src/containers/Comparisons.tsx:103
+#: src/containers/Comparisons.tsx:105
 msgid "The CSV has no latitude and/or longitude column."
 msgstr "El archivo CSV no tiene columnas de latitud ni longitud."
 
-#: src/containers/Comparisons.tsx:135
+#: src/containers/Comparisons.tsx:137
 msgid "Compare Seedlots"
 msgstr "Comparar lotes de semillas"
 
-#: src/containers/Comparisons.tsx:135
+#: src/containers/Comparisons.tsx:137
 msgid "Compare Planting Sites"
 msgstr "Comparar sitios de plantación"
 
-#: src/containers/Comparisons.tsx:136
+#: src/containers/Comparisons.tsx:56
 msgid "Click to hide"
 msgstr "Haga clic para ocultar"
 
-#: src/containers/Comparisons.tsx:136
+#: src/containers/Comparisons.tsx:56
 msgid "Click to show"
 msgstr "Haga clic para mostrar"
 
-#: src/containers/Comparisons.tsx:144 src/containers/LocationStep.tsx:42
+#: src/containers/Comparisons.tsx:157 src/containers/LocationStep.tsx:42
 #: src/containers/Map.tsx:711
 msgid "Location"
 msgstr "Ubicación"
 
-#: src/containers/Comparisons.tsx:145 src/containers/Comparisons.tsx:295
+#: src/containers/Comparisons.tsx:158 src/containers/Comparisons.tsx:308
 #: src/containers/ConstraintStep.tsx:25 src/containers/Traits.tsx:41
 #: src/containers/Variables.tsx:54
 msgid "Name"
 msgstr "Nombre"
 
-#: src/containers/Comparisons.tsx:146
+#: src/containers/Comparisons.tsx:159
 msgid "Match"
 msgstr "Coincidencia"
 
-#: src/containers/Comparisons.tsx:169
+#: src/containers/Comparisons.tsx:182
 msgid "Remove site"
 msgstr "Eliminar el sitio"
 
-#: src/containers/Comparisons.tsx:222
+#: src/containers/Comparisons.tsx:235
 msgid "click to add"
 msgstr "Haga clic para añadir"
 
-#: src/containers/Comparisons.tsx:312
+#: src/containers/Comparisons.tsx:325
 msgid "cancel"
 msgstr "Cancelar"
 
-#: src/containers/Comparisons.tsx:319
+#: src/containers/Comparisons.tsx:332
 msgid "Add"
 msgstr "Añadir"
 
-#: src/containers/Comparisons.tsx:334
+#: src/containers/Comparisons.tsx:347
 msgid "Add Seedlot"
 msgstr "Añadir lote de semillas"
 
-#: src/containers/Comparisons.tsx:334
+#: src/containers/Comparisons.tsx:347
 msgid "Add Planting Site"
 msgstr "Añadir sitio de plantación"
 
-#: src/containers/Comparisons.tsx:342
+#: src/containers/Comparisons.tsx:355
 msgid "Upload CSV"
 msgstr "Cargar CSV"
 
-#: src/containers/Comparisons.tsx:355
+#: src/containers/Comparisons.tsx:368
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/containers/Comparisons.tsx:356
+#: src/containers/Comparisons.tsx:369
 msgid "Climate Match"
 msgstr "Coincidencia de clima"
 
-#: src/containers/Comparisons.tsx:357
+#: src/containers/Comparisons.tsx:370
 msgid "delta"
 msgstr "Delta"
 
-#: src/containers/Comparisons.tsx:401
+#: src/containers/Comparisons.tsx:414
 msgid "Download CSV"
 msgstr "Descargar CSV"
 
-#: src/containers/Comparisons.tsx:418
+#: src/containers/Comparisons.tsx:431
 msgid "Uploading CSV"
 msgstr "Cargando CSV"
 
-#: src/containers/Comparisons.tsx:431
+#: src/containers/Comparisons.tsx:444
 msgid "Done"
 msgstr "Listo"
 
-#: src/containers/Comparisons.tsx:441
+#: src/containers/Comparisons.tsx:454
 msgid "Uploading CSV data..."
 msgstr "Cargando datos de CSV…"
 
@@ -444,15 +445,15 @@ msgstr "Seleccionar región"
 msgid "Region:"
 msgstr "Región:"
 
-#: src/containers/RunConfiguration.tsx:14
+#: src/containers/RunConfiguration.tsx:15
 msgid "Calculating scores..."
 msgstr "Calculando puntuaciones…"
 
-#: src/containers/RunConfiguration.tsx:19
+#: src/containers/RunConfiguration.tsx:20
 msgid "Waiting for other jobs to finish..."
 msgstr "En espera de que concluyan otros trabajos…"
 
-#: src/containers/RunConfiguration.tsx:21
+#: src/containers/RunConfiguration.tsx:22
 msgid ""
 "Another job is currently running. Your job is queued and will run as soon as "
 "other jobs are finished."
@@ -460,12 +461,12 @@ msgstr ""
 "En este momento, se está ejecutando otro trabajo. Su trabajo entró en cola y se "
 "ejecutará en cuanto terminen los otros trabajos."
 
-#: src/containers/RunStep.tsx:59 src/containers/RunStep.tsx:69
+#: src/containers/RunStep.tsx:73 src/containers/RunStep.tsx:83
 #: src/containers/Variables.tsx:24
 msgid "Configuration error"
 msgstr "Error de configuración"
 
-#: src/containers/RunStep.tsx:60
+#: src/containers/RunStep.tsx:74
 msgid ""
 "Cannot calculate scores: one or more of your variables has no transfer limit, or "
 "a limit of 0."
@@ -473,45 +474,45 @@ msgstr ""
 "No es posible calcular puntuaciones: una o más de las variables no tienen límite "
 "de transferencia o su límite es 0."
 
-#: src/containers/RunStep.tsx:70
+#: src/containers/RunStep.tsx:84
 msgid "Cannot calculate scores: one or more of your constraints is missing a value."
 msgstr ""
 "No es posible calcular puntuaciones: a una o más de sus limitaciones le falta un "
 "valor."
 
-#: src/containers/RunStep.tsx:81
+#: src/containers/RunStep.tsx:95
 msgid "Login required"
 msgstr "Es necesario iniciar sesión"
 
-#: src/containers/RunStep.tsx:81
+#: src/containers/RunStep.tsx:95
 msgid "Please login to save your run."
 msgstr "Inicie sesión para guardar la ejecución."
 
-#: src/containers/RunStep.tsx:143
+#: src/containers/RunStep.tsx:157
 msgid "Map your Results"
 msgstr "Mapear sus resultados"
 
-#: src/containers/RunStep.tsx:186
+#: src/containers/RunStep.tsx:200
 msgid "Run Tool"
 msgstr "Ejecute la Herramienta"
 
-#: src/containers/RunStep.tsx:200
+#: src/containers/RunStep.tsx:214
 msgid "Save Last Run"
 msgstr "Guardar la última ejecución"
 
-#: src/containers/RunStep.tsx:205
+#: src/containers/RunStep.tsx:219
 msgid "Export As..."
 msgstr "Exportar como…"
 
-#: src/containers/RunStep.tsx:230
+#: src/containers/RunStep.tsx:244
 msgid "GeoTIFF"
 msgstr "GeoTIFF"
 
-#: src/containers/RunStep.tsx:240
+#: src/containers/RunStep.tsx:254
 msgid "Position Map"
 msgstr "Mapa de posición"
 
-#: src/containers/RunStep.tsx:258
+#: src/containers/RunStep.tsx:272
 msgid "Move and zoom the map to set how it will appear in the report."
 msgstr "Mueva y amplíe el mapa para definir cómo aparecerá en el informe."
 
@@ -584,20 +585,20 @@ msgstr "Actualizar la actual"
 msgid "Save Run Configuration"
 msgstr "Guardar la configuración de ejecución"
 
-#: src/containers/SavedRun.tsx:51
+#: src/containers/SavedRun.tsx:53
 msgid "Load this saved configuration? This will replace your current settings."
 msgstr ""
 "¿Cargar esta configuración guardada? Esto reemplazará la configuración actual."
 
-#: src/containers/SavedRun.tsx:62
+#: src/containers/SavedRun.tsx:64
 msgid "Delete this saved configuration?"
 msgstr "¿Eliminar esta configuración guardada?"
 
-#: src/containers/SavedRun.tsx:68
+#: src/containers/SavedRun.tsx:70
 msgid "Delete"
 msgstr "Eliminar"
 
-#: src/containers/SavedRun.tsx:73
+#: src/containers/SavedRun.tsx:75
 msgid "Last modified:"
 msgstr "Modificación más reciente:"
 
@@ -689,11 +690,11 @@ msgstr "Seleccionar un ${ label }"
 msgid "Generic"
 msgstr "Genérico"
 
-#: src/containers/Trait.tsx:60 src/containers/Variable.tsx:206
+#: src/containers/Trait.tsx:60 src/containers/Variable.tsx:238
 msgid "Value at point:"
 msgstr "Valor en el punto:"
 
-#: src/containers/Trait.tsx:66 src/containers/Variable.tsx:209
+#: src/containers/Trait.tsx:66 src/containers/Variable.tsx:242
 msgid "Transfer limit (+/-):"
 msgstr "Límite de transferencia (+/-):"
 
@@ -748,43 +749,43 @@ msgstr "Zona"
 msgid "Function"
 msgstr "Función"
 
-#: src/containers/Variable.tsx:157
+#: src/containers/Variable.tsx:181
 msgid "Zone climatic center:"
 msgstr "Centro climático de la zona:"
 
-#: src/containers/Variable.tsx:211
+#: src/containers/Variable.tsx:244
 msgid "modified"
 msgstr "modificado"
 
-#: src/containers/Variable.tsx:215
+#: src/containers/Variable.tsx:248
 msgid "Avg.transfer limit for zone set:"
 msgstr "Límite de transferencia promedio para la configuración de zona:"
 
-#: src/containers/VariableStep.tsx:42
+#: src/containers/VariableStep.tsx:53
 msgid "Click to add variables"
 msgstr "Haga clic para añadir variables"
 
-#: src/containers/VariableStep.tsx:51 src/containers/VariableStep.tsx:58
+#: src/containers/VariableStep.tsx:62 src/containers/VariableStep.tsx:69
 msgid "Select climate variables"
 msgstr "Seleccionar variables climáticas"
 
-#: src/containers/VariableStep.tsx:60
+#: src/containers/RunConfiguration.tsx:45
 msgid "Units:"
 msgstr "Unidades:"
 
-#: src/containers/VariableStep.tsx:63
+#: src/containers/RunConfiguration.tsx:48
 msgid "Metric"
 msgstr "Métricas"
 
-#: src/containers/VariableStep.tsx:64
+#: src/containers/RunConfiguration.tsx:49
 msgid "Imperial"
 msgstr "Imperiales"
 
-#: src/containers/VariableStep.tsx:74
+#: src/containers/VariableStep.tsx:89
 msgid "or"
 msgstr "o"
 
-#: src/containers/VariableStep.tsx:82
+#: src/containers/VariableStep.tsx:97
 msgid "Choose automatically"
 msgstr "Elegir de modo automático"
 
@@ -933,23 +934,20 @@ msgid "Sorry, processing failed."
 msgstr "Lo sentimos, hubo un error durante el procesamiento."
 
 #: src/containers/ColorPicker.tsx:18
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Button to select color ${ color }."
 msgstr "Botón para seleccionar color ${ color }."
 
 #: src/containers/CustomLayerListItem.tsx:30
-#, fuzzy
 msgid "Button to pick a new color for the custom layer."
 msgstr "Botón para elegir un nuevo color para la capa personalizada."
 
 #: src/containers/CustomLayerListItem.tsx:50
-#, fuzzy
 msgid "Checkbox to show or hide custom layer on map."
 msgstr ""
 "Casilla de verificación para mostrar u ocultar la capa personalizada en el mapa."
 
 #: src/containers/CustomLayerListItem.tsx:59
-#, fuzzy
 msgid "Button to delete custom layer.\""
 msgstr "Botón para eliminar la capa personalizada\"."
 
@@ -962,14 +960,28 @@ msgstr ""
 "Si el problema persiste, ${ reportAnIssue } e incluya la siguiente información:"
 
 #: src/containers/Layers.tsx:125
-#, fuzzy
 msgid "Upload a shapefile"
 msgstr "Cargar un shapefile"
 
 #: src/containers/Map.tsx:1013
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Showing climate for ${ climateLabel }"
 msgstr "Mostrando el clima para ${ climateLabel }"
+
+#: src/containers/Comparisons.tsx:56
+#, fuzzy
+msgid "Click for full height"
+msgstr "Haga clic para ver la altura completa"
+
+#: src/containers/Variable.tsx:238
+#, fuzzy
+msgid "Custom value:"
+msgstr "Valor personalizado:"
+
+#: src/containers/VariableStep.tsx:80
+#, fuzzy
+msgid "Custom climate values"
+msgstr "Valores climáticos personalizados"
 
 #: src/config.ts:78 src/config.ts:178
 msgctxt "Abbreviation of 'Celsius'"
@@ -1006,18 +1018,18 @@ msgctxt "Eastern United States"
 msgid "Eastern US"
 msgstr "Este de los Estados Unidos"
 
-#: src/containers/Comparisons.tsx:226 src/containers/Comparisons.tsx:238
-#: src/containers/Comparisons.tsx:375
+#: src/containers/Comparisons.tsx:239 src/containers/Comparisons.tsx:251
+#: src/containers/Comparisons.tsx:388
 msgctxt "Not Applicable"
 msgid "N/A"
 msgstr "N/C"
 
-#: src/containers/Comparisons.tsx:273
+#: src/containers/Comparisons.tsx:286
 msgctxt "abbreviation of 'Latitude'"
 msgid "Lat"
 msgstr "Lat."
 
-#: src/containers/Comparisons.tsx:286
+#: src/containers/Comparisons.tsx:299
 msgctxt "abbreviation of 'Longitud''"
 msgid "Lon"
 msgstr "Long."
@@ -1157,7 +1169,7 @@ msgctxt "month"
 msgid "May"
 msgstr "Mayo"
 
-#: src/containers/SavedRun.tsx:57
+#: src/containers/SavedRun.tsx:59
 msgctxt "e.g., Load file"
 msgid "Load"
 msgstr "Cargar"

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { t, c } from 'ttag'
-import { loadConfiguration, resetConfiguration, deleteSave } from '../actions/saves'
+import { loadConfiguration, resetConfiguration, deleteSave, dumpConfiguration } from '../actions/saves'
 import { migrateConfiguration } from '../utils'
+import config from '../config'
+import { post } from '../io'
 
 const connector = connect(null, (dispatch: (event: any) => any, { onClick }: { onClick: () => any }) => {
   return {
@@ -23,6 +25,28 @@ const connector = connect(null, (dispatch: (event: any) => any, { onClick }: { o
     onDelete: (saveId: string) => {
       dispatch(deleteSave(saveId))
     },
+
+    onGetURL: (configuration: any, version: number) => {
+      const url = `${config.apiRoot}share-url/`
+      const data = {
+        configuration: JSON.stringify(dumpConfiguration(configuration)),
+        version,
+      }
+      post(url, data)
+        .then(response => {
+          const { status } = response
+          console.log('response', response)
+          if (status >= 200 && status < 300) {
+            return response.json()
+          }
+
+          throw new Error(`Bad status creating save: ${response.status}`)
+        })
+        .then(json => {
+          console.log('json', json)
+          // setUrl(json)
+        })
+    },
   }
 })
 
@@ -31,9 +55,10 @@ type SavedRunProps = ConnectedProps<typeof connector> & {
   save: any
 }
 
-const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) => {
+const SavedRun = ({ active, save, onClick, onLoad, onDelete, onGetURL }: SavedRunProps) => {
   let className = 'configuration-item'
   const { modified, title } = save
+  const [url, setUrl] = useState('')
 
   if (active) {
     className += ' focused'
@@ -46,7 +71,11 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
         onClick()
       }}
     >
-      <div className="is-pulled-right buttons">
+      <div className="save-title">{title}</div>
+      <div className="save-date">
+        {t`Last modified:`} {modified.getMonth() + 1}/{modified.getDate()}/{modified.getYear()}
+      </div>
+      <div className="buttons">
         <button
           type="button"
           onClick={() => {
@@ -56,7 +85,10 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
           }}
           className="button is-primary"
         >
-          <span className="icon-load-12" aria-hidden="true" /> {c('e.g., Load file').t`Load`}
+          <span className="icon-load-12" aria-hidden="true" /> &nbsp;{c('e.g., Load file').t`Load`}
+        </button>
+        <button type="button" onClick={() => onGetURL(save.configuration, save.version)} className="button is-warning">
+          <span className="icon-share-12" aria-hidden="true" /> &nbsp;{t`Get URL`}
         </button>
         <button
           type="button"
@@ -67,14 +99,9 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
           }}
           className="button is-danger"
         >
-          <span className="icon-trash-12" aria-hidden="true" /> {t`Delete`}
+          <span className="icon-trash-12" aria-hidden="true" /> &nbsp;{t`Delete`}
         </button>
       </div>
-      <div className="save-title">{title}</div>
-      <div className="save-date">
-        {t`Last modified:`} {modified.getMonth() + 1}/{modified.getDate()}/{modified.getYear()}
-      </div>
-      <div className="clear-fix" />
     </div>
   )
 }

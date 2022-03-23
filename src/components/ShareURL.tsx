@@ -109,7 +109,7 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
       >
         {url ? <a href={url}>{url}</a> : t`Loading Url...`}
       </ModalCard>
-      <button type="button" onClick={onFetchURL} className="button">
+      <button type="button" onClick={onFetchURL} className="button is-dark">
         <span className="icon-share-12" aria-hidden="true" /> &nbsp;{t`Get URL`}
       </button>
     </>

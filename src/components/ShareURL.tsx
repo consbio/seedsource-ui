@@ -1,10 +1,12 @@
 import { t } from 'ttag'
 import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { useDispatch } from 'react-redux'
 import ModalCard from './ModalCard'
 import config from '../config'
 import { dumpConfiguration } from '../actions/saves'
 import { post } from '../io'
+import { setError } from '../actions/error'
 
 type ShareURLProps = {
   configuration: any
@@ -12,15 +14,14 @@ type ShareURLProps = {
 }
 
 const ShareURL = ({ configuration, version }: ShareURLProps) => {
+  const dispatch = useDispatch()
   const [url, setUrl] = useState('')
   const [fetchingUrl, setFetchingUrl] = useState(false)
-  const [urlError, setUrlError] = useState('')
   const [urlCopied, setUrlCopied] = useState(false)
 
   const resetState = () => {
     setUrl('')
     setFetchingUrl(false)
-    setUrlError('')
     setUrlCopied(false)
   }
 
@@ -34,37 +35,57 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
     }
     post(shareUrl, data)
       .then(response => {
-        const { status } = response
+        const { status, statusText } = response
         if (status >= 200 && status < 300) {
-          return response.json()
+          response.json().then(hash => {
+            const { location } = window
+            const { protocol, host, pathname } = location
+            setUrl(`${protocol}//${host + pathname}?s=${hash}`)
+          })
+        } else {
+          const dispatchError = (body: any) => {
+            const errorMessage = (
+              <>
+                <div>
+                  <strong>What was happening:</strong> Creating share url
+                </div>
+                <div>
+                  <strong>Status:</strong> {status}
+                </div>
+                <div>
+                  <strong>Status text:</strong> {statusText}
+                </div>
+                <div>
+                  <div>
+                    <strong>Response body:</strong>
+                  </div>
+                  <div>{body}</div>
+                </div>
+              </>
+            )
+            dispatch(setError('Error', 'There was a problem creating your url', errorMessage))
+          }
+          response
+            .text()
+            .then(body => {
+              dispatchError(body)
+            })
+            .catch(() => {
+              dispatchError(null)
+            })
         }
-        setUrlError(`There was a problem creating your url: ${response.status}`)
-      })
-      .then(json => {
-        const { location } = window
-        const { protocol, host, pathname } = location
-        setUrl(`${protocol}//${host + pathname}?s=${json.hash}`)
       })
       .finally(() => {
         setFetchingUrl(false)
       })
   }
 
-  const modalContent = () => {
-    if (url) {
-      return <a href={url}>{url}</a>
-    }
-    if (urlError) {
-      return urlError
-    }
-    return 'Loading Url...'
-  }
-
   return (
     <>
       <ModalCard
+        onHide={() => !fetchingUrl && resetState()}
         title="Share URL"
-        active={fetchingUrl || !!url || !!urlError}
+        active={fetchingUrl || !!url}
         footer={(
           <div style={{ textAlign: 'right', width: '100%' }}>
             {urlCopied && <p style={{ color: 'red', display: 'inline-block', padding: '8px' }}>{t`Copied`}</p>}
@@ -75,13 +96,18 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
                 </button>
               </CopyToClipboard>
             )}
-            <button type="button" onClick={resetState} className="button is-primary is-pulled-right">
+            <button
+              type="button"
+              onClick={resetState}
+              className="button is-primary is-pulled-right"
+              disabled={fetchingUrl}
+            >
               {t`Done`}
             </button>
           </div>
         )}
       >
-        {modalContent()}
+        {url ? <a href={url}>{url}</a> : t`Loading Url...`}
       </ModalCard>
       <button type="button" onClick={onFetchURL} className="button">
         <span className="icon-share-12" aria-hidden="true" /> &nbsp;{t`Get URL`}

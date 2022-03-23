@@ -46,6 +46,9 @@ export default (state: any = defaultState, action: any) => {
       return { ...state, isFetching: false }
 
     case LOAD_CONFIGURATION:
+      if (!action.save) {
+        return state
+      }
       return { ...state, lastSave: { title: action.save.title, saveId: action.save.uuid } }
 
     case REMOVE_SAVE:

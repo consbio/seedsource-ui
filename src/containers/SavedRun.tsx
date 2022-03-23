@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux'
 import { t, c } from 'ttag'
 import { loadConfiguration, resetConfiguration, deleteSave } from '../actions/saves'
 import { migrateConfiguration } from '../utils'
-import SaveURL from '../components/SaveURL'
+import ShareURL from '../components/ShareURL'
 
 const connector = connect(null, (dispatch: (event: any) => any, { onClick }: { onClick: () => any }) => {
   return {
@@ -63,7 +63,7 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
         >
           <span className="icon-load-12" aria-hidden="true" /> &nbsp;{c('e.g., Load file').t`Load`}
         </button>
-        <SaveURL configuration={save.configuration} version={save.version} />
+        <ShareURL configuration={save.configuration} version={save.version} />
         <button
           type="button"
           onClick={() => {

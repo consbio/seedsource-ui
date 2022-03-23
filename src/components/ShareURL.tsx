@@ -6,12 +6,12 @@ import config from '../config'
 import { dumpConfiguration } from '../actions/saves'
 import { post } from '../io'
 
-type SaveURLProps = {
+type ShareURLProps = {
   configuration: any
   version: number
 }
 
-const SaveURL = ({ configuration, version }: SaveURLProps) => {
+const ShareURL = ({ configuration, version }: ShareURLProps) => {
   const [url, setUrl] = useState('')
   const [fetchingUrl, setFetchingUrl] = useState(false)
   const [urlError, setUrlError] = useState('')
@@ -27,7 +27,7 @@ const SaveURL = ({ configuration, version }: SaveURLProps) => {
   const onFetchURL = () => {
     resetState()
     setFetchingUrl(true)
-    const shareUrl = `${config.apiRoot}share-url/`
+    const shareUrl = `${config.apiRoot}share-urls/`
     const data = {
       configuration: JSON.stringify(dumpConfiguration(configuration)),
       version,
@@ -90,4 +90,4 @@ const SaveURL = ({ configuration, version }: SaveURLProps) => {
   )
 }
 
-export default SaveURL
+export default ShareURL

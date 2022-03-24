@@ -43,32 +43,24 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
             setUrl(`${protocol}//${host + pathname}?s=${hash}`)
           })
         } else {
-          const dispatchError = (body: any) => {
-            const errorMessage = (
+          const dispatchError = (text: any) => {
+            const debugInfo = (
               <>
+                <div><strong>What was happening:</strong> Creating share URL</div>
+                <div><strong>Status:</strong> {status}</div>
+                <div><strong>Status text:</strong> {statusText}</div>
                 <div>
-                  <strong>What was happening:</strong> Creating share url
-                </div>
-                <div>
-                  <strong>Status:</strong> {status}
-                </div>
-                <div>
-                  <strong>Status text:</strong> {statusText}
-                </div>
-                <div>
-                  <div>
-                    <strong>Response body:</strong>
-                  </div>
-                  <div>{body}</div>
+                  <div><strong>Response body:</strong></div>
+                  <div>{text}</div>
                 </div>
               </>
             )
-            dispatch(setError('Error', 'There was a problem creating your url', errorMessage))
+            dispatch(setError('Error', 'There was a problem creating your URL.', debugInfo))
           }
           response
             .text()
-            .then(body => {
-              dispatchError(body)
+            .then(text => {
+              dispatchError(text)
             })
             .catch(() => {
               dispatchError(null)

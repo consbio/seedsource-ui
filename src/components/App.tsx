@@ -9,6 +9,7 @@ import { loadConfiguration } from '../actions/saves'
 import { migrateConfiguration } from '../utils'
 import { get } from '../io'
 import config from '../config'
+import { setError } from '../actions/error'
 
 const App = ({
   navContent,
@@ -25,19 +26,41 @@ const App = ({
     const params = new URLSearchParams(window.location.search)
     const save = params.get('s')
     if (save) {
-      get(`${config.apiRoot}share-urls/${save}`)
-        .then(response => {
-          const { status } = response
-          if (status >= 200 && status < 300) {
-            return response.json()
+      get(`${config.apiRoot}share-urls/${save}`).then(response => {
+        const { status, statusText } = response
+        if (status >= 200 && status < 300) {
+          response.json().then(json => {
+            const configuration = JSON.parse(json.configuration)
+            const migratedConfiguration = migrateConfiguration(configuration, json.version)
+            dispatch(loadConfiguration(migratedConfiguration, null))
+          })
+        } else {
+          const dispatchError = (text: any) => {
+            const debugInfo = (
+              <>
+                <div><strong>What was happening:</strong> Retrieving share URL</div>
+                <div><strong>Status:</strong> {status}</div>
+                <div><strong>Status text:</strong> {statusText}</div>
+                <div>
+                  <div><strong>Response body:</strong></div>
+                  <div>{text}</div>
+                </div>
+              </>
+            )
+            dispatch(setError('Error', 'There was a problem loading state from your URL.', debugInfo))
           }
-        })
-        .then(json => {
-          const configuration = JSON.parse(json.configuration)
-          const migratedConfiguration = migrateConfiguration(configuration, json.version)
-          dispatch(loadConfiguration(migratedConfiguration, null))
-        })
+          response
+            .text()
+            .then(text => {
+              dispatchError(text)
+            })
+            .catch(() => {
+              dispatchError(null)
+            })
+        }
+      })
     }
+    // eslint-disable-next-line
   }, [])
 
   return (

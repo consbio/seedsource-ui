@@ -26,39 +26,22 @@ const App = ({
     const params = new URLSearchParams(window.location.search)
     const save = params.get('s')
     if (save) {
-      get(`${config.apiRoot}share-urls/${save}`).then(response => {
-        const { status, statusText } = response
-        if (status >= 200 && status < 300) {
-          response.json().then(json => {
-            const configuration = JSON.parse(json.configuration)
-            const migratedConfiguration = migrateConfiguration(configuration, json.version)
-            dispatch(loadConfiguration(migratedConfiguration, null))
-          })
-        } else {
-          const dispatchError = (text: any) => {
-            const debugInfo = (
-              <>
-                <div><strong>What was happening:</strong> Retrieving share URL</div>
-                <div><strong>Status:</strong> {status}</div>
-                <div><strong>Status text:</strong> {statusText}</div>
-                <div>
-                  <div><strong>Response body:</strong></div>
-                  <div>{text}</div>
-                </div>
-              </>
-            )
-            dispatch(setError('Error', 'There was a problem loading state from your URL.', debugInfo))
+      get(`${config.apiRoot}share-urls/${save}`)
+        .then(response => {
+          const { status } = response
+          if (status < 200 || status >= 300) {
+            throw new Error(`There was an unexpected error retrieving the share URL. Status: ${status}`)
+          } else {
+            response.json().then(json => {
+              const configuration = JSON.parse(json.configuration)
+              const migratedConfiguration = migrateConfiguration(configuration, json.version)
+              dispatch(loadConfiguration(migratedConfiguration, null))
+            })
           }
-          response
-            .text()
-            .then(text => {
-              dispatchError(text)
-            })
-            .catch(() => {
-              dispatchError(null)
-            })
-        }
-      })
+        })
+        .catch(e => {
+          dispatch(setError('Error', 'There was a problem loading state from your URL.', e.message))
+        })
     }
     // eslint-disable-next-line
   }, [])

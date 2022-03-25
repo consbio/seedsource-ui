@@ -35,37 +35,19 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
     }
     post(shareUrl, data)
       .then(response => {
-        const { status, statusText } = response
-        if (status >= 200 && status < 300) {
+        const { status } = response
+        if (status < 200 || status >= 300) {
+          throw new Error(`There was an unexpected error creating the share URL. Status: ${status}`)
+        } else {
           response.json().then(hash => {
-            const { location } = window
-            const { protocol, host, pathname } = location
+            const {location} = window
+            const {protocol, host, pathname} = location
             setUrl(`${protocol}//${host + pathname}?s=${hash}`)
           })
-        } else {
-          const dispatchError = (text: any) => {
-            const debugInfo = (
-              <>
-                <div><strong>What was happening:</strong> Creating share URL</div>
-                <div><strong>Status:</strong> {status}</div>
-                <div><strong>Status text:</strong> {statusText}</div>
-                <div>
-                  <div><strong>Response body:</strong></div>
-                  <div>{text}</div>
-                </div>
-              </>
-            )
-            dispatch(setError('Error', 'There was a problem creating your URL.', debugInfo))
-          }
-          response
-            .text()
-            .then(text => {
-              dispatchError(text)
-            })
-            .catch(() => {
-              dispatchError(null)
-            })
         }
+      })
+      .catch(e => {
+        dispatch(setError('Error', 'There was a problem creating your URL.', e.message))
       })
       .finally(() => {
         setFetchingUrl(false)

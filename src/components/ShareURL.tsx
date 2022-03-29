@@ -39,9 +39,9 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
         if (status < 200 || status >= 300) {
           throw new Error(`There was an unexpected error creating the share URL. Status: ${status}`)
         } else {
-          response.json().then(hash => {
-            const {location} = window
-            const {protocol, host, pathname} = location
+          response.json().then(shareURL => {
+            const { hash } = shareURL
+            const { protocol, host, pathname } = window.location
             setUrl(`${protocol}//${host + pathname}?s=${hash}`)
           })
         }

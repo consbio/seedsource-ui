@@ -37,7 +37,7 @@ $spacings: 5 10 15;
 }
 
 $icon-sizes: 12 16 18;
-$icons: eye eye-closed crop contrast save load file trash clock chevron-top chevron-bottom;
+$icons: eye eye-closed crop contrast save load file trash clock chevron-top chevron-bottom share;
 
 @each $icon in $icons {
   @each $size in $icon-sizes {
@@ -479,53 +479,84 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
   border-top: 1px solid #D8D8D8;
   height: 45px;
   cursor: pointer;
-}
-
-.configuration-item:first-child {
-  border-top: 0px;
-}
-
-.configuration-item.focused {
-  background-color: #D9D9D9;
-}
-
-.configuration-item .save-title {
-  font-weight: bold;
-}
-
-.configuration-item .save-date {
-  font-style: italic;
-  font-size: 0.8em;
-}
-
-.configuration-item .buttons {
-  box-shadow: -2px 0px 5px -2px;
-  width: 0px;
-  transition: width .5s;
   overflow: hidden;
-}
 
-.configuration-item.focused .buttons {
-  width: 80px;
-}
+  &.focused {
+    background-color: #D9D9D9;
+    height: 84px;
+    transition: height .5s;
 
-.configuration-item .buttons .button {
-  display: block;
-  border: 0px;
-  text-align: left;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  width: 80px;
-  height: 22.5px;
-  padding: 0px 0px 0px 5px;
-  border-radius: 0;
-  margin: 0;
-
-  &:not(:last-child) {
-    margin: 0;
+    .buttons {
+      opacity: 1;
+    }
   }
+
+  &:first-child {
+    border-top: 0px;
+  }
+
+  .save-title {
+    font-weight: bold;
+  }
+
+  .save-date {
+    font-style: italic;
+    font-size: 0.8em;
+  }
+
+  .buttons {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 8px 0 0;
+
+    .button {
+      text-align: left;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      height: 25px;
+    }
+  }
+}
+
+.share-container {
+  display: flex;
+  margin-top: 20px;
+
+  .share-input-container {
+    display: flex;
+    border: 1px solid $grey-dark;
+    border-radius: 6px;
+    background: $grey-lightest;
+
+    .link-icon {
+      height: 32px;
+      width: 32px;
+      margin: 4px 10px 4px 10px;
+    }
+
+    .share-input {
+      width: 325px;
+      border-radius: 0px 5px 5px 0px;
+      border: none;
+    }
+  }
+
+  .clipboard-icon {
+    height: 32px;
+    width: 32px;
+    margin: 4px 0 0 5px;
+    display: inline-block;
+  }
+}
+
+.clipboard-text {
+  padding-top: 6px;
+  height: 20px;
+  color: red;
 }
 
 .map-container {

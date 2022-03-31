@@ -3,6 +3,7 @@ import { connect, ConnectedProps } from 'react-redux'
 import { t, c } from 'ttag'
 import { loadConfiguration, resetConfiguration, deleteSave } from '../actions/saves'
 import { migrateConfiguration } from '../utils'
+import ShareURL from '../components/ShareURL'
 
 const connector = connect(null, (dispatch: (event: any) => any, { onClick }: { onClick: () => any }) => {
   return {
@@ -46,35 +47,38 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
         onClick()
       }}
     >
-      <div className="is-pulled-right buttons">
-        <button
-          type="button"
-          onClick={() => {
-            if (window.confirm(t`Load this saved configuration? This will replace your current settings.`)) {
-              onLoad(save)
-            }
-          }}
-          className="button is-primary"
-        >
-          <span className="icon-load-12" aria-hidden="true" /> {c('e.g., Load file').t`Load`}
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            if (window.confirm(t`Delete this saved configuration?`)) {
-              onDelete(save.uuid)
-            }
-          }}
-          className="button is-danger"
-        >
-          <span className="icon-trash-12" aria-hidden="true" /> {t`Delete`}
-        </button>
-      </div>
       <div className="save-title">{title}</div>
       <div className="save-date">
         {t`Last modified:`} {modified.getMonth() + 1}/{modified.getDate()}/{modified.getYear()}
       </div>
-      <div className="clear-fix" />
+      <div className="buttons">
+        <ShareURL configuration={save.configuration} version={save.version} />
+
+        <div>
+          <button
+            type="button"
+            onClick={() => {
+              if (window.confirm(t`Load this saved configuration? This will replace your current settings.`)) {
+                onLoad(save)
+              }
+            }}
+            className="button is-primary"
+          >
+            <span className="icon-load-12" aria-hidden="true" /> &nbsp;{c('e.g., Load file').t`Load`}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (window.confirm(t`Delete this saved configuration?`)) {
+                onDelete(save.uuid)
+              }
+            }}
+            className="button is-danger"
+          >
+            <span className="icon-trash-12" aria-hidden="true" /> &nbsp;{t`Delete`}
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

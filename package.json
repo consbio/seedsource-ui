@@ -42,6 +42,7 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {
+    "@types/react-copy-to-clipboard": "^5.0.2",
     "bulma": "^0.9.1",
     "bulma-checkradio": "^1.1.1",
     "csv-parse": "^4.15.3",
@@ -57,6 +58,7 @@
     "leaflet.vectorgrid": "^1.3.0",
     "lethargy": "^1.0.9",
     "prop-types": "^15.7.2",
+    "react-copy-to-clipboard": "^5.0.4",
     "react-tooltip": "^4.2.10",
     "shpjs": "^3.6.0",
     "ttag": "^1.7.23",

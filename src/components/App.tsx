@@ -22,11 +22,14 @@ const App = ({
 }) => {
   const dispatch = useDispatch()
   const params = new URLSearchParams(window.location.search)
-  const save = params.get('s')
+  let save = params.get('s')
+  if (save) {
+    save = save.replace('/', '')
+  }
 
   useEffect(() => {
     if (save) {
-      get(`${config.apiRoot}share-urls/${save}`)
+      get(`${config.apiRoot}share-urls/${save}/`)
         .then(response => {
           const { status } = response
           if (status < 200 || status >= 300) {

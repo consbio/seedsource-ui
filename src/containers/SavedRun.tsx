@@ -52,29 +52,32 @@ const SavedRun = ({ active, save, onClick, onLoad, onDelete }: SavedRunProps) =>
         {t`Last modified:`} {modified.getMonth() + 1}/{modified.getDate()}/{modified.getYear()}
       </div>
       <div className="buttons">
-        <button
-          type="button"
-          onClick={() => {
-            if (window.confirm(t`Load this saved configuration? This will replace your current settings.`)) {
-              onLoad(save)
-            }
-          }}
-          className="button is-primary"
-        >
-          <span className="icon-load-12" aria-hidden="true" /> &nbsp;{c('e.g., Load file').t`Load`}
-        </button>
         <ShareURL configuration={save.configuration} version={save.version} />
-        <button
-          type="button"
-          onClick={() => {
-            if (window.confirm(t`Delete this saved configuration?`)) {
-              onDelete(save.uuid)
-            }
-          }}
-          className="button is-danger"
-        >
-          <span className="icon-trash-12" aria-hidden="true" /> &nbsp;{t`Delete`}
-        </button>
+
+        <div>
+          <button
+            type="button"
+            onClick={() => {
+              if (window.confirm(t`Load this saved configuration? This will replace your current settings.`)) {
+                onLoad(save)
+              }
+            }}
+            className="button is-primary"
+          >
+            <span className="icon-load-12" aria-hidden="true" /> &nbsp;{c('e.g., Load file').t`Load`}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (window.confirm(t`Delete this saved configuration?`)) {
+                onDelete(save.uuid)
+              }
+            }}
+            className="button is-danger"
+          >
+            <span className="icon-trash-12" aria-hidden="true" /> &nbsp;{t`Delete`}
+          </button>
+        </div>
       </div>
     </div>
   )

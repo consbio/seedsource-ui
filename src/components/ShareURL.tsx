@@ -7,6 +7,8 @@ import config from '../config'
 import { dumpConfiguration } from '../actions/saves'
 import { post } from '../io'
 import { setError } from '../actions/error'
+import LinkIcon from '../../images/icon-link.svg'
+import ClipboardIcon from '../../images/icon-clipboard.svg'
 
 type ShareURLProps = {
   configuration: any
@@ -39,12 +41,13 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
         if (status < 200 || status >= 300) {
           throw new Error(`There was an unexpected error creating the share URL. Status: ${status}`)
         } else {
-          response.json().then(shareURL => {
-            const { hash } = shareURL
-            const { protocol, host, pathname } = window.location
-            setUrl(`${protocol}//${host + pathname}?s=${hash}`)
-          })
+          return response.json()
         }
+      })
+      .then(shareURL => {
+        const { hash } = shareURL
+        const { protocol, host, pathname } = window.location
+        setUrl(`${protocol}//${host + pathname}?s=${hash}/`)
       })
       .catch(e => {
         dispatch(setError('Error', 'There was a problem creating your URL.', e.message))
@@ -62,14 +65,6 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
         active={fetchingUrl || !!url}
         footer={(
           <div style={{ textAlign: 'right', width: '100%' }}>
-            {urlCopied && <p style={{ color: 'red', display: 'inline-block', padding: '8px' }}>{t`Copied`}</p>}
-            {url && (
-              <CopyToClipboard text={url} onCopy={() => setUrlCopied(true)}>
-                <button type="button" className="button" disabled={urlCopied}>
-                  {t`Copy to clipboard`}
-                </button>
-              </CopyToClipboard>
-            )}
             <button
               type="button"
               onClick={resetState}
@@ -81,7 +76,25 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
           </div>
         )}
       >
-        {url ? <a href={url}>{url}</a> : t`Loading Url...`}
+        <p>
+          {t`Share your saved run with others by sending them this link (your saved run will load when anyone visits 
+          this link). Click the clipboard to copy the link.`}
+        </p>
+        <div className="share-container">
+          <span className="share-input-container">
+            <img src={LinkIcon} alt={t`Link icon`} className="link-icon" />
+            <input className="input share-input" value={url || t`Loading Url...`} readOnly />
+          </span>
+          <CopyToClipboard text={url} onCopy={() => url && setUrlCopied(true)}>
+            <img
+              src={ClipboardIcon}
+              alt={t`Clipboard icon`}
+              className="clipboard-icon"
+              style={{ opacity: url ? 1 : 0.5, cursor: url ? 'pointer' : 'not-allowed' }}
+            />
+          </CopyToClipboard>
+        </div>
+        <div className="clipboard-text">{urlCopied && <p>{t`Copied to clipboard`}</p>}</div>
       </ModalCard>
       <button type="button" onClick={onFetchURL} className="button is-dark">
         <span className="icon-share-12" aria-hidden="true" /> &nbsp;{t`Get URL`}

@@ -21,10 +21,10 @@ const App = ({
   className?: string
 }) => {
   const dispatch = useDispatch()
+  const params = new URLSearchParams(window.location.search)
+  const save = params.get('s')
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const save = params.get('s')
     if (save) {
       get(`${config.apiRoot}share-urls/${save}`)
         .then(response => {
@@ -32,19 +32,19 @@ const App = ({
           if (status < 200 || status >= 300) {
             throw new Error(`There was an unexpected error retrieving the share URL. Status: ${status}`)
           } else {
-            response.json().then(json => {
-              const configuration = JSON.parse(json.configuration)
-              const migratedConfiguration = migrateConfiguration(configuration, json.version)
-              dispatch(loadConfiguration(migratedConfiguration, null))
-            })
+            return response.json()
           }
+        })
+        .then(json => {
+          const configuration = JSON.parse(json.configuration)
+          const migratedConfiguration = migrateConfiguration(configuration, json.version)
+          dispatch(loadConfiguration(migratedConfiguration, null))
         })
         .catch(e => {
           dispatch(setError('Error', 'There was a problem loading state from your URL.', e.message))
         })
     }
-    // eslint-disable-next-line
-  }, [])
+  }, [save, dispatch])
 
   return (
     <div className={`seedsource-app ${className}`}>

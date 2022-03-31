@@ -508,8 +508,8 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
     opacity: 0;
     transition: opacity 0.5s ease-in;
     display: flex;
-    justify-content: center;
-    margin-top: 8px;
+    justify-content: space-between;
+    margin: 8px 8px 0 0;
 
     .button {
       text-align: left;
@@ -520,6 +520,43 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
       height: 25px;
     }
   }
+}
+
+.share-container {
+  display: flex;
+  margin-top: 20px;
+
+  .share-input-container {
+    display: flex;
+    border: 1px solid $grey-dark;
+    border-radius: 6px;
+    background: $grey-lightest;
+
+    .link-icon {
+      height: 32px;
+      width: 32px;
+      margin: 4px 10px 4px 10px;
+    }
+
+    .share-input {
+      width: 325px;
+      border-radius: 0px 5px 5px 0px;
+      border: none;
+    }
+  }
+
+  .clipboard-icon {
+    height: 32px;
+    width: 32px;
+    margin: 4px 0 0 5px;
+    display: inline-block;
+  }
+}
+
+.clipboard-text {
+  padding-top: 6px;
+  height: 20px;
+  color: red;
 }
 
 .map-container {

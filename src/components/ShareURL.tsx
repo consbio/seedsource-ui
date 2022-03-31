@@ -47,7 +47,7 @@ const ShareURL = ({ configuration, version }: ShareURLProps) => {
       .then(shareURL => {
         const { hash } = shareURL
         const { protocol, host, pathname } = window.location
-        setUrl(`${protocol}//${host + pathname}?s=${hash}/`)
+        setUrl(`${protocol}//${host + pathname}?s=${hash}`)
       })
       .catch(e => {
         dispatch(setError('Error', 'There was a problem creating your URL.', e.message))

@@ -22,10 +22,7 @@ const App = ({
 }) => {
   const dispatch = useDispatch()
   const params = new URLSearchParams(window.location.search)
-  let save = params.get('s')
-  if (save) {
-    save = save.replace('/', '')
-  }
+  const save = params.get('s')
 
   useEffect(() => {
     if (save) {

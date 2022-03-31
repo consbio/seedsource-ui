@@ -36,8 +36,8 @@ const App = ({
           }
         })
         .then(json => {
-          const configuration = JSON.parse(json.configuration)
-          const migratedConfiguration = migrateConfiguration(configuration, json.version)
+          const { configuration, version } = json
+          const migratedConfiguration = migrateConfiguration(configuration, version)
           dispatch(loadConfiguration(migratedConfiguration, null))
         })
         .catch(e => {

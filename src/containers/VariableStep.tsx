@@ -40,7 +40,7 @@ const VariableStep = ({
   onCustomModeChange,
   setDefaultVariables,
 }: VariableStepProps) => {
-  if (method === 'function') {
+  if (method !== 'seedzone' && method !== 'custom') {
     return null
   }
 
@@ -80,7 +80,7 @@ const VariableStep = ({
           <strong>{t`Custom climate values`} </strong>(advanced users)<strong>:</strong>
         </label>
       </div>
-      
+
       <Variables edit />
 
       {flag && defaultVariables && !variables.length && (

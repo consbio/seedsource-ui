@@ -84,11 +84,12 @@ const TransferStep = ({ number, active, objective, method, center, onCenterChang
         <ul>
           <MethodButton name="custom">{t`Custom`}</MethodButton>
           <MethodButton name="seedzone">{t`Zone`}</MethodButton>
-          {hasFunctions ? <MethodButton name="function">{t`Function`}</MethodButton> : null}
+          {hasFunctions ? <MethodButton name="trait">{t`Trait`}</MethodButton> : null}
+          <MethodButton name="function">{t`Function`}</MethodButton>
         </ul>
       </div>
       {centerNode}
-      {method !== 'custom' ? <SpeciesChooser generic={method !== 'function'} /> : null}
+      {method === 'seedzone' || method === 'trait' ? <SpeciesChooser generic={method === 'seedzone'} /> : null}
       <div style={{ height: '10px' }} />
       {method === 'seedzone' ? <SeedZoneChooser /> : null}
     </ConfigurationStep>

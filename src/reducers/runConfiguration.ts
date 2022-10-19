@@ -6,6 +6,7 @@ import zones from './zones'
 import climate from './climate'
 import constraints from './constraints'
 import customLayers from './customLayers'
+import customFunctions from './customFunctions'
 import { SELECT_OBJECTIVE } from '../actions/objectives'
 import {
   SET_LATITUDE,
@@ -72,7 +73,7 @@ export default (state: any = defaultConfiguration, action: any) => {
 
       if (action.method === 'seedzone' && !state.availableSpecies.includes(state.species)) {
         newState.species = 'generic'
-      } else if (action.method === 'function') {
+      } else if (action.method === 'trait') {
         let functionSpecies
         if (config.functions.length === 1) {
           functionSpecies = config.functions[0].species
@@ -211,6 +212,7 @@ export default (state: any = defaultConfiguration, action: any) => {
     climate: climate(newState.climate || undefined, action),
     constraints: constraints(newState.constraints, action),
     customLayers: customLayers(newState.customLayers, action),
+    customFunctions: customFunctions(newState.customFunctions, action),
   }
 }
 

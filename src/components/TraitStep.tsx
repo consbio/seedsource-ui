@@ -15,7 +15,7 @@ type TraitStepProps = ConnectedProps<typeof connector> & {
 }
 
 const TraitStep = ({ number, method }: TraitStepProps) => {
-  if (method !== 'function') {
+  if (method !== 'trait') {
     return null
   }
 
@@ -26,6 +26,6 @@ const TraitStep = ({ number, method }: TraitStepProps) => {
   )
 }
 
-TraitStep.shouldRender = ({ runConfiguration }: { runConfiguration: any }) => runConfiguration.method === 'function'
+TraitStep.shouldRender = ({ runConfiguration }: { runConfiguration: any }) => runConfiguration.method === 'trait'
 
 export default connector(TraitStep)

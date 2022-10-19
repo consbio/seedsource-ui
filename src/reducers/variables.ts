@@ -98,7 +98,7 @@ export default (state: any = [], action: any) => {
 
     case SELECT_ZONE:
     case SELECT_METHOD:
-      if (action.method === 'function') {
+      if (action.method === 'trait' || action.method === 'function') {
         return []
       }
 

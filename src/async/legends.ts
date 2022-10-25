@@ -19,7 +19,7 @@ const layerLegendSelect = ({ layers, runConfiguration, job }: any) => {
 
 export default (store: any) => {
   // Layers legend
-  resync(store, layerLegendSelect, ({ layers, serviceId, objective, climate, region }, io, dispatch) => {
+  resync(store, layerLegendSelect, ({ layers }, io, dispatch) => {
     if (layers.length) {
       const legendLayers = layers.filter((layer: any) => typeof config.layers[layer].show === 'boolean' ? config.layers[layer].show : config.layers[layer].show(store.getState()) && config.layers[layer].type !== 'vector')
 

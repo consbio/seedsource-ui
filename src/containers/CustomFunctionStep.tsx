@@ -1,8 +1,8 @@
 import React from 'react'
 import { t } from 'ttag'
 import { connect, ConnectedProps } from 'react-redux'
-import ConfigurationStep from '../containers/ConfigurationStep'
-import CustomFunctions from '../containers/CustomFunctions'
+import ConfigurationStep from './ConfigurationStep'
+import CustomFunctions from './CustomFunctions'
 
 const connector = connect(({ runConfiguration }: { runConfiguration: any }) => {
   const { method } = runConfiguration
@@ -26,7 +26,7 @@ const CustomFunctionStep = ({ number, method }: CustomFunctionProps) => {
   )
 }
 
-// TODO: What does `shouldRender` do???
-CustomFunctionStep.shouldRender = ({ runConfiguration }: { runConfiguration: any }) => runConfiguration.method === 'function'
+CustomFunctionStep.shouldRender = ({ runConfiguration }: { runConfiguration: any }) =>
+  runConfiguration.method === 'function'
 
 export default connector(CustomFunctionStep)

@@ -13,41 +13,41 @@ export const createFunction = (name: string, func: string) => {
   }
 }
 
-export const deleteFunction = (index: number) => {
+export const deleteFunction = (id: string) => {
   return {
     type: DELETE_FUNCTION,
-    index,
+    id,
   }
 }
 
-export const toggleFunction = (index: number) => {
+export const toggleFunction = (id: string) => {
   return {
     type: TOGGLE_FUNCTION,
-    index,
+    id,
   }
 }
 
-export const setFunction = (index: number, name: string, func: string) => {
+export const setFunction = (id: string, name: string, func: string) => {
   return {
     type: SET_FUNCTION,
-    index,
+    id,
     name,
     func,
   }
 }
 
-export const setFunctionTransfer = (index: number, transfer: number) => {
+export const setFunctionTransfer = (id: string, transfer: number) => {
   return {
     type: SET_FUNCTION_TRANSFER,
-    index,
+    id,
     transfer,
   }
 }
 
-export const setFunctionValue = (index: number, value: number | null) => {
+export const setFunctionValue = (id: string, value: number | null) => {
   return {
     type: SET_FUNCTION_VALUE,
-    index,
+    id,
     value,
   }
 }

@@ -4,6 +4,7 @@ import { setError } from './error'
 import { selectTab } from './tabs'
 import { UserSite } from '../reducers/runConfiguration'
 import { setUserSiteScore } from './point'
+import type { CustomFunction } from '../reducers/customFunctions'
 
 export const START_JOB = 'START_JOB'
 export const FAIL_JOB = 'FAIL_JOB'
@@ -42,7 +43,17 @@ export const runJob = (configuration: any) => {
   const { functions, constraints: constraintsConfig } = config
 
   return (dispatch: (action: any) => any) => {
-    const { variables, traits, objective, climate, region, constraints, userSites, customMode } = configuration
+    const {
+      variables,
+      traits,
+      objective,
+      climate,
+      region,
+      constraints,
+      userSites,
+      customMode,
+      customFunctions,
+    } = configuration
 
     /* Run the tool against the seedlot climate when looking for seedlots, otherwise run against the
      * planting site climate.
@@ -73,11 +84,30 @@ export const runJob = (configuration: any) => {
           limit: { min: value - transfer, max: value + transfer },
         }
       }),
+      customFunctions: customFunctions
+        .filter((cf: CustomFunction) => cf.selected && cf.value && cf.transfer)
+        .map((cf: CustomFunction) => {
+          const { name, func: fn, value, transfer } = cf
+          return {
+            name,
+            fn,
+            // @ts-ignore (chained filter function above addresses error)
+            limit: { min: value - transfer, max: value + transfer },
+          }
+        }),
       constraints: constraints.map(({ name, values }: { name: any; values: any }) => {
         const { constraint, serialize } = constraintsConfig.objects[name]
         return { name: constraint, args: serialize(configuration, values) }
       }),
-    } as { region: string; year: string; variables: any; traits: any; constraints: any; points?: any }
+    } as {
+      region: string
+      year: string
+      variables: any
+      traits: any
+      constraints: any
+      points?: any
+      customFunctions: CustomFunction[]
+    }
 
     if (userSites.length) {
       inputs.points = {

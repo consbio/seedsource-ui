@@ -6,6 +6,7 @@ import SaveModal from './SaveModal'
 import ModalCard from '../components/ModalCard'
 import Dropdown from '../components/Dropdown'
 import Map from './Map'
+import type { CustomFunction } from '../reducers/customFunctions'
 import { setError } from '../actions/error'
 import { runJob } from '../actions/job'
 import { showSaveModal } from '../actions/saves'
@@ -17,11 +18,13 @@ const configurationCanRun = ({
   variables,
   traits,
   customMode,
+  customFunctions,
 }: {
   point: any
   variables: any[]
   traits: any[]
   customMode: boolean
+  customFunctions: CustomFunction[]
 }) => {
   if (point === null || point.x === null || point.y === null) {
     return false
@@ -34,8 +37,10 @@ const configurationCanRun = ({
   const variablesComplete =
     variables.length > 0 && variables.every(item => item.value !== null && item.isFetching === false)
   const traitsComplete = traits.length > 0 && traits.every(item => item.value !== null)
+  const customFunctionsComplete =
+    customFunctions.length > 0 && customFunctions.some(cf => cf.selected && cf.value && cf.transfer)
 
-  return variablesComplete || traitsComplete
+  return variablesComplete || traitsComplete || customFunctionsComplete
 }
 
 const connector = connect(
@@ -252,7 +257,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                   this.setState({ previewModal: false })
                 }}
                 title={t`Position Map`}
-                footer={(
+                footer={
                   <button
                     type="button"
                     onClick={() => {
@@ -265,7 +270,7 @@ class RunStep extends React.Component<RunStepProps, RunStepState> {
                   >
                     Export
                   </button>
-                )}
+                }
               >
                 <div className="map preview-map">
                   <div style={{ margin: '10px' }}>

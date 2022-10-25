@@ -11,17 +11,17 @@ const connector = connect(
     return { customFunctions }
   },
   (dispatch: (action: any) => any) => {
-    return { onToggleFunction: (value: string) => dispatch(toggleFunction(parseInt(value, 10))) }
+    return { onToggleFunction: (value: string) => dispatch(toggleFunction(value)) }
   },
 )
 
 const CustomFunctions = (props: ConnectedProps<typeof connector>) => {
   const { customFunctions, onToggleFunction } = props
   const [modalActive, setModalActive] = useState(false)
-  const [modalIndex, setModalIndex] = React.useState(-1)
+  const [modalId, setModalId] = React.useState('newFunction')
   const onChange = (value: string) => {
-    if (value === 'addNew') {
-      setModalIndex(-1)
+    if (value === 'newFunction') {
+      setModalId('newFunction')
       setModalActive(true)
       return
     }
@@ -30,7 +30,12 @@ const CustomFunctions = (props: ConnectedProps<typeof connector>) => {
 
   return (
     <>
-      {modalActive && <CustomFunctionModal index={modalIndex} deactivateModal={() => setModalActive(false)} />}
+      {modalActive && (
+        <CustomFunctionModal
+          customFunction={customFunctions.find(cf => cf.id === modalId)}
+          deactivateModal={() => setModalActive(false)}
+        />
+      )}
       <table className="table is-fullwidth">
         <thead className="align-bottom is-size-7 has-text-weight-bold">
           <tr>
@@ -38,22 +43,22 @@ const CustomFunctions = (props: ConnectedProps<typeof connector>) => {
             <th>{t`Name`}</th>
             <th>{t`Value`}</th>
             <th>{t`Transfer Limit (+/-)`}</th>
+            <td />
           </tr>
         </thead>
         <tbody>
-          {customFunctions.map((func, index: number) =>
-            func.selected ? (
+          {customFunctions
+            .filter(cf => cf.selected)
+            .map(cf => (
               <CustomFunction
-                key={func.name}
-                index={index}
-                customFunction={func}
+                key={cf.id}
+                customFunction={cf}
                 activateModal={() => {
-                  setModalIndex(index)
+                  setModalId(cf.id)
                   setModalActive(true)
                 }}
               />
-            ) : null,
-          )}
+            ))}
         </tbody>
       </table>
       <div className="select is-fullwidth">
@@ -64,15 +69,15 @@ const CustomFunctions = (props: ConnectedProps<typeof connector>) => {
             onChange(e.target.value)
           }}
         >
-          <option />
-          <option value="addNew">{t`Add a custom function...`}</option>
-          {customFunctions.map((f, index) =>
-            f.selected ? null : (
-              <option value={index} key={`${f.name}_${f.index}`}>
-                {f.name}
+          <option>{t`Select`}...</option>
+          {customFunctions
+            .filter(cf => !cf.selected)
+            .map(cf => (
+              <option value={cf.id} key={cf.id}>
+                {cf.name}
               </option>
-            ),
-          )}
+            ))}
+          <option value="newFunction">{t`Add a custom function...`}</option>
         </select>
       </div>
     </>

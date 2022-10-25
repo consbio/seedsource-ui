@@ -18,7 +18,7 @@ const valueSelect = ({ runConfiguration }: any) => {
     climate,
     region,
     point,
-    customFunctions: customFunctions.map((cf: any) => ({ func: cf.func, selected: cf.selected })),
+    customFunctions: customFunctions.map((cf: any) => ({ id: cf.id, func: cf.func, selected: cf.selected })),
   }
 }
 
@@ -31,28 +31,25 @@ export default (store: any) => {
       return
     }
 
-    customFunctions = customFunctions.map((cf: any, i: number) => ({ ...cf, index: i }))
-
     // If the only change is to customFunctions, we only need to fetch values for changed customFunctions
     const customFunctionsOnly =
       JSON.stringify({ ...state, customFunctions: null }) ===
       JSON.stringify({ ...previousState, customFunctions: null })
     if (customFunctionsOnly) {
-      const previousCustomFunctions = previousState.customFunctions.map((cf: any) =>
-        JSON.stringify(cf),
-      )
       customFunctions = customFunctions.filter((cf: any) => {
         if (cf.func && cf.selected) {
-          const customFunc = JSON.stringify({ func: cf.func, selected: cf.selected })
-          return !previousCustomFunctions.includes(customFunc)
+          const prevFunc = previousState.customFunctions.find((pf: any) => pf.id === cf.id)
+          if (prevFunc) {
+            const { id, func, selected } = cf
+            return JSON.stringify(prevFunc) !== JSON.stringify({ id, func, selected })
+          }
         }
         return false
       })
     }
 
     customFunctions.forEach((cf: any) => {
-      console.log('updating this custom function: ', cf)
-      dispatch(setFunctionValue(cf.index, null))
+      dispatch(setFunctionValue(cf.id, null))
 
       const variables = getNames(cf.func)
       Promise.all(
@@ -81,10 +78,10 @@ export default (store: any) => {
           values.forEach(([variable, value]) => {
             context[variable] = value
           })
-          dispatch(setFunctionValue(cf.index, parser(cf.func, context)))
+          dispatch(setFunctionValue(cf.id, parser(cf.func, context)))
         })
         .catch(() => {
-          dispatch(setFunctionValue(cf.index, null))
+          dispatch(setFunctionValue(cf.id, null))
         })
     })
   })

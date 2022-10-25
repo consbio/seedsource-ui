@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
+import React, { Component, createRef } from 'react'
+import { connect } from 'react-redux'
 import { t } from 'ttag'
 import { variables } from '../config'
 import ModalCard from '../components/ModalCard'
@@ -8,100 +8,205 @@ import {
   deleteFunction as deleteFunctionConnect,
   setFunction as setFunctionConnect,
 } from '../actions/customFunctions'
-import { getNames } from '../parser'
+import parser, { getNames } from '../parser'
+import type { CustomFunction } from '../reducers/customFunctions'
 
-const connector = connect(
-  ({ runConfiguration }: { runConfiguration: { customFunctions: any[] } }, { index }: { index: number }) => {
-    const { customFunctions } = runConfiguration
-    const customFunction = customFunctions[index]
-    return { customFunction }
-  },
-  (dispatch: (action: any) => any) => {
-    return {
-      createFunction: (name: string, func: string) => dispatch(createFunctionConnect(name, func)),
-      setFunction: (index: number, name: string, func: string) => dispatch(setFunctionConnect(index, name, func)),
-      deleteFunction: (index: number) => dispatch(deleteFunctionConnect(index)),
+interface CustomFunctionModalProps {
+  customFunction: CustomFunction
+  deactivateModal: () => void
+  createFunction: (name: string, func: string) => void
+  setFunction: (id: string, name: string, func: string) => void
+  deleteFunction: (id: string) => void
+}
+
+interface CustomFunctionModalState {
+  name: string
+  func: string
+  nameError: string
+  funcError: string
+}
+
+class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunctionModalState> {
+  nameRef: React.RefObject<HTMLInputElement>
+
+  funcRef: React.RefObject<HTMLTextAreaElement>
+
+  constructor(props: CustomFunctionModalProps) {
+    super(props)
+    const { customFunction: cf } = this.props
+
+    this.nameRef = createRef()
+    this.funcRef = createRef()
+    this.state = {
+      name: cf ? cf.name : '',
+      func: cf ? cf.func : '',
+      nameError: '',
+      funcError: '',
     }
-  },
-)
+  }
 
-const CustomFunctionModal = (
-  props: ConnectedProps<typeof connector> & { index: number; deactivateModal: () => void },
-) => {
-  const { index, customFunction, deactivateModal, createFunction, setFunction, deleteFunction } = props
-  const [name, setName] = useState(customFunction ? customFunction.name : '')
-  const [func, setFunc] = useState(customFunction ? customFunction.func : '')
-  const validateName = () => {
+  componentDidMount() {
+    if (this.nameRef.current) {
+      this.nameRef.current.focus()
+    }
+  }
+
+  validateName = () => {
+    const { name } = this.state
     if (!name) {
-      alert('Please name your function')
+      this.setState({ nameError: t`Please name your function` })
       return false
     }
     return true
   }
 
-  const validateFunc = () => {
-    const functionVariables = getNames(func)
+  validateFunc = () => {
+    const { func } = this.state
+    let functionVariables: string[] = []
+    const setGenericError = () => this.setState({ funcError: t`There was an error with your function.` })
+
+    try {
+      functionVariables = getNames(func)
+    } catch (err) {
+      console.error(err)
+      setGenericError()
+      return false
+    }
+
+    if (functionVariables.length === 0) {
+      this.setState({ funcError: t`You need to include at least one variable in your function.` })
+      return false
+    }
+
     const variableNames = variables.map(v => v.name)
     const invalidVariables: string[] = []
     functionVariables.forEach(v => {
-      if (![...variableNames, 'math_e'].includes(v)) {
+      if (![...variableNames, 'math_e', ...invalidVariables].includes(v)) {
         invalidVariables.push(v)
       }
     })
-    if (invalidVariables.length > 0) {
-      alert(`The following variables are not valid: ${invalidVariables.join(', ')}`)
+    if (invalidVariables.length === 1) {
+      this.setState({ funcError: `"${invalidVariables[0]}" ${t`is not a known variable`}` })
       return false
     }
+    if (invalidVariables.length > 1) {
+      this.setState({ funcError: `"${invalidVariables.join(', ')}" ${t`are not known variables`}` })
+      return false
+    }
+
+    // sets each variable to `2` and parses function to catch parsing errors
+    try {
+      const context: any = {}
+      functionVariables.forEach(variable => {
+        context[variable] = 2
+      })
+      parser(func, context)
+    } catch (err) {
+      console.error(err)
+      setGenericError()
+      return false
+    }
+
     return true
   }
 
-  const onSave = () => {
-    if (!validateName()) {
+  onSave = () => {
+    const { customFunction, deactivateModal, createFunction, setFunction } = this.props
+    const { validateName, validateFunc } = this
+    const { name, func } = this.state
+
+    if (!validateName() || !validateFunc()) {
       return
     }
-    if (!validateFunc()) {
-      return
-    }
-    if (index === -1) {
+
+    if (!customFunction) {
       createFunction(name, func)
     } else {
-      setFunction(index, name, func)
+      setFunction(customFunction.id, name, func)
     }
+
     deactivateModal()
   }
 
-  const footer = (
-    <div className="buttons">
-      {index === -1 ? (
-        <div />
-      ) : (
-        <button type="button" className="button is-danger" onClick={() => deleteFunction(index)}>{t`Delete`}</button>
-      )}
-      <span className="button-group">
-        <button type="button" className="button is-dark" onClick={deactivateModal}>{t`Cancel`}</button>
-        <button type="button" className="button is-primary" onClick={onSave}>{t`Save`}</button>
-      </span>
-    </div>
-  )
+  onDelete = () => {
+    const { customFunction, deactivateModal, deleteFunction } = this.props
 
-  return (
-    <ModalCard
-      title={t`Add Function`}
-      footer={footer}
-      className="custom-function-modal"
-      onHide={deactivateModal}
-      active
-    >
-      <label>
-        {t`Name`}
-        <input value={name} onChange={e => setName(e.target.value)} />
-      </label>
-      <label>
-        {t`Function`}
-        <textarea value={func} onChange={e => setFunc(e.target.value)} />
-      </label>
-    </ModalCard>
-  )
+    deleteFunction(customFunction.id)
+    deactivateModal()
+  }
+
+  render() {
+    const { name, func, nameError, funcError } = this.state
+    const { customFunction, deactivateModal } = this.props
+    const { onSave, onDelete } = this
+
+    const footer = (
+      <div className="buttons">
+        {customFunction && customFunction.id ? (
+          <button type="button" className="button is-danger" onClick={onDelete}>{t`Delete`}</button>
+        ) : (
+          <div />
+        )}
+        <span className="button-group">
+          <button type="button" className="button is-dark" onClick={deactivateModal}>{t`Cancel`}</button>
+          <button type="button" className="button is-primary" onClick={onSave}>{t`Save`}</button>
+        </span>
+      </div>
+    )
+
+    return (
+      <ModalCard
+        title={t`Add Function`}
+        footer={footer}
+        className="custom-function-modal"
+        onHide={deactivateModal}
+        active
+      >
+        <label>
+          {t`Name`}
+          <div className="error">{nameError}</div>
+          <input
+            value={name}
+            ref={this.nameRef}
+            onChange={e => {
+              this.setState({ name: e.target.value })
+              this.setState({ nameError: '' })
+            }}
+            onKeyPress={e => {
+              if (e.key === 'Enter' && this.funcRef.current) {
+                this.funcRef.current.focus()
+              }
+            }}
+          />
+        </label>
+        <label>
+          {t`Function`}
+          <div className="error">{funcError}</div>
+          <textarea
+            value={func}
+            ref={this.funcRef}
+            onChange={e => {
+              // strips everything not understood by the parser except spaces
+              const formatted = e.target.value.replace(/[^A-Za-z0-9 */_+\-(.)]/g, '')
+              this.setState({ func: formatted })
+            }}
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                return onSave()
+              }
+              this.setState({ funcError: '' })
+            }}
+          />
+        </label>
+      </ModalCard>
+    )
+  }
 }
 
-export default connector(CustomFunctionModal)
+export default connect(null, (dispatch: (action: any) => any) => {
+  return {
+    createFunction: (name: string, func: string) => dispatch(createFunctionConnect(name, func)),
+    setFunction: (id: string, name: string, func: string) => dispatch(setFunctionConnect(id, name, func)),
+    deleteFunction: (id: string) => dispatch(deleteFunctionConnect(id)),
+  }
+})(CustomFunctionModal)

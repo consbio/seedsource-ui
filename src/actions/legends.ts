@@ -18,7 +18,7 @@ export const receiveLayersLegend = (json: any) => {
   const { legend } = json.layers[0]
   const values = legend.map((element: any) => {
     return Number.parseFloat(element.label)
-  })
+  }).filter((number: any) => !Number.isNaN(number))
 
   return {
     type: RECEIVE_LAYERS_LEGEND,
@@ -26,9 +26,9 @@ export const receiveLayersLegend = (json: any) => {
       const number = Number.parseFloat(element.label)
       let label = ''
 
-      if (number === Math.min(values)) {
+      if (number === Math.min(...values)) {
         label = 'Low'
-      } else if (number === Math.max(values)) {
+      } else if (number === Math.max(...values)) {
         label = 'High'
       }
 

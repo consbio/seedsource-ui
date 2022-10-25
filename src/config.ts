@@ -5,7 +5,7 @@ import LatitudeConstraint from './containers/LatitudeConstraint'
 import LongitudeConstraint from './containers/LongitudeConstraint'
 import DistanceConstraint from './containers/DistanceConstraint'
 import ShapefileConstraint from './containers/ShapefileConstraint'
-import {getLayerUrl, getServiceName} from './utils'
+import {getServiceName} from './utils'
 
 interface RuntimeConfig {
   title: string

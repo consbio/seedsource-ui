@@ -1,6 +1,5 @@
 import resync from '../resync'
 import { requestLayersLegend, receiveLayersLegend, resetLegends } from '../actions/legends'
-import { getLayerUrl } from '../utils'
 import config from '../config'
 
 // Possibly add: `legends`

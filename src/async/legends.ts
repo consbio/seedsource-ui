@@ -21,13 +21,27 @@ export default (store: any) => {
   // Layers legend
   resync(store, layerLegendSelect, ({ layers }, io, dispatch) => {
     if (layers.length) {
-      const legendLayers = layers.filter((layer: any) => typeof config.layers[layer].show === 'boolean' ? config.layers[layer].show : config.layers[layer].show(store.getState()) && config.layers[layer].type !== 'vector')
+      const legendLayers = layers.filter((layer: any) =>
+        typeof config.layers[layer].show === 'boolean'
+          ? config.layers[layer].show
+          : config.layers[layer].show(store.getState()) && config.layers[layer].type !== 'vector',
+      )
 
       dispatch(resetLegends())
       legendLayers.forEach((layer: string) => {
         dispatch(requestLayersLegend())
-        const { legendUrl = '' } = config.layers[layer];
-        const url = typeof legendUrl === 'string' ? legendUrl : legendUrl(store.getState())
+        const { legendUrl } = config.layers[layer]
+        let url
+        switch (typeof legendUrl) {
+          case 'undefined':
+            url = ''
+            break
+          case 'string':
+            url = legendUrl
+            break
+          default:
+            url = legendUrl(store.getState())
+        }
         return io
           .get(url)
           .then(response => response.json())

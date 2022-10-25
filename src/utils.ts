@@ -2,30 +2,6 @@ import { saveVersion, migrations } from './config'
 
 declare const document: any
 
-export const getLayerUrl = (layer: any, serviceId: string, objective: string, climate: any, region: string) => {
-  const generateModelTimeString = () => {
-    let modelTimeString = ''
-    const selectedClimate = objective === 'seedlots' ? climate.site : climate.seedlot
-    const { time, model } = selectedClimate
-
-    if (time === '1961_1990' || time === '1981_2010') {
-      modelTimeString += time
-    } else {
-      modelTimeString += `${model}_${time}`
-    }
-    return modelTimeString
-  }
-  const modelTime = generateModelTimeString()
-  const varsObj = { serviceId, region, modelTime }
-  let newrl = layer.urlTemplate
-
-  Object.entries(varsObj).forEach(([key, value]) => {
-    newrl = newrl.replace(`{${key}}`, value)
-  })
-
-  return newrl
-}
-
 export const getServiceName = (variable: string, objective: string, climate: any, region: string) => {
   let serviceName = `${region}_`
 

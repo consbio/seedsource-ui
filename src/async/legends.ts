@@ -1,6 +1,7 @@
 import resync from '../resync'
 import { requestLayersLegend, receiveLayersLegend, resetLegends } from '../actions/legends'
 import { getLayerUrl } from '../utils'
+import config from '../config'
 
 // Possibly add: `legends`
 const layerLegendSelect = ({ layers, runConfiguration, job }: any) => {
@@ -21,12 +22,13 @@ export default (store: any) => {
   // Layers legend
   resync(store, layerLegendSelect, ({ layers, serviceId, objective, climate, region }, io, dispatch) => {
     if (layers.length) {
-      const legendLayers = layers.filter((layer: any) => layer.displayed === true && layer.type !== 'vector')
+      const legendLayers = layers.filter((layer: any) => typeof config.layers[layer].show === 'boolean' ? config.layers[layer].show : config.layers[layer].show(store.getState()) && config.layers[layer].type !== 'vector')
+
       dispatch(resetLegends())
-      legendLayers.forEach((layer: any) => {
+      legendLayers.forEach((layer: string) => {
         dispatch(requestLayersLegend())
-        const newrl = getLayerUrl(layer, serviceId, objective, climate, region)
-        const url = `/arcgis/rest/services/${newrl}/MapServer/legend`
+        const { legendUrl = '' } = config.layers[layer];
+        const url = typeof legendUrl === 'string' ? legendUrl : legendUrl(store.getState())
         return io
           .get(url)
           .then(response => response.json())

@@ -553,7 +553,7 @@ class Map extends React.Component<MapProps> {
     }
   }
 
-  updateLegends(legends: any, layers: any[], unit: string) {
+  updateLegends(legends: any, layers: any[], unit: string, state: any) {
     if (this.simple) {
       return
     }
@@ -589,11 +589,10 @@ class Map extends React.Component<MapProps> {
         elements: legend.legend,
       }
     })
-
     const legendOrder = layers
-      .filter(layer => layer.displayed === true)
+      .filter(layer => typeof config.layers[layer].show === 'boolean' ? config.layers[layer].show : config.layers[layer].show(state))
       .map(layer => {
-        return layer.name
+        return layer.replace( "variable-", "" )
       })
 
     const orderedMapLegends = legendOrder
@@ -979,7 +978,7 @@ class Map extends React.Component<MapProps> {
       this.updateBoundaryLayer(region)
       this.updateVisibilityButton(layers, state)
       this.updateOpacity(opacity)
-      this.updateLegends(legends, layers, unit)
+      this.updateLegends(legends, layers, unit, state)
       this.updateZoneLayer(method, zone, zoneConfig, geometry)
       this.updatePopup(popup, unit)
       this.updateMapCenter(center)

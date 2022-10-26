@@ -131,7 +131,7 @@ const connector = connect(
       },
 
       onToggle: () => {
-        dispatch(toggleLayer(variable.name))
+        dispatch(toggleLayer(`variable-${variable.name}`))
       },
 
       onRemove: () => {

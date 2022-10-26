@@ -73,28 +73,30 @@ export const runJob = (configuration: any) => {
           limit: { min: value - transfer, max: value + transfer },
         }
       }),
-      traits: traits.map((item: any) => {
-        const { name, value, transfer: customTransfer } = item
-        const traitConfig = functions.find((trait: any) => trait.name === name)
-        const { transfer: defaultTransfer, fn } = traitConfig
-        const transfer = customTransfer === null ? defaultTransfer : customTransfer
-        return {
-          name,
-          fn,
-          limit: { min: value - transfer, max: value + transfer },
-        }
-      }),
-      customFunctions: customFunctions
-        .filter((cf: CustomFunction) => cf.selected && cf.value && cf.transfer)
-        .map((cf: CustomFunction) => {
-          const { name, func: fn, value, transfer } = cf
+      functions: [
+        ...customFunctions
+          .filter((cf: CustomFunction) => cf.selected && cf.value && cf.transfer)
+          .map((cf: CustomFunction) => {
+            const { name, func: fn, value, transfer } = cf
+            return {
+              name,
+              fn,
+              // @ts-ignore (chained filter function above addresses error)
+              limit: { min: value - transfer, max: value + transfer },
+            }
+          }),
+        ...traits.map((item: any) => {
+          const { name, value, transfer: customTransfer } = item
+          const traitConfig = functions.find((trait: any) => trait.name === name)
+          const { transfer: defaultTransfer, fn } = traitConfig
+          const transfer = customTransfer === null ? defaultTransfer : customTransfer
           return {
             name,
             fn,
-            // @ts-ignore (chained filter function above addresses error)
             limit: { min: value - transfer, max: value + transfer },
           }
         }),
+      ],
       constraints: constraints.map(({ name, values }: { name: any; values: any }) => {
         const { constraint, serialize } = constraintsConfig.objects[name]
         return { name: constraint, args: serialize(configuration, values) }
@@ -103,10 +105,9 @@ export const runJob = (configuration: any) => {
       region: string
       year: string
       variables: any
-      traits: any
+      functions: any
       constraints: any
       points?: any
-      customFunctions: CustomFunction[]
     }
 
     if (userSites.length) {

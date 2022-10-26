@@ -589,11 +589,9 @@ class Map extends React.Component<MapProps> {
         elements: legend.legend,
       }
     })
-    const legendOrder = layers
-      .filter(layer => typeof config.layers[layer].show === 'boolean' ? config.layers[layer].show : config.layers[layer].show(state))
-      .map(layer => {
-        return layer.replace( "variable-", "" )
-      })
+    const legendOrder = layers.map(layer => {
+      return layer.replace('variable-', '')
+    })
 
     const orderedMapLegends = legendOrder
       .map(name => mapLegends.find((el: any) => el.label === name || (el.label === 'Match' && name === 'results')))
@@ -673,10 +671,14 @@ class Map extends React.Component<MapProps> {
 
     // Create new layers for each feature, even if they already exist...
     const constraintLayers = constraintData.map(geojson =>
-      L.geoJSON(geojson, { style: { fill: false, color: '#a50f15', weight: 1.5 } }).addTo(this.map).setZIndex(15),
+      L.geoJSON(geojson, { style: { fill: false, color: '#a50f15', weight: 1.5 } })
+        .addTo(this.map)
+        .setZIndex(15),
     )
     const customLayers = customData.map(datum =>
-      L.geoJSON(datum, { style: { fill: false, color: datum.color, weight: 1.5 } }).addTo(this.map).setZIndex(15),
+      L.geoJSON(datum, { style: { fill: false, color: datum.color, weight: 1.5 } })
+        .addTo(this.map)
+        .setZIndex(15),
     )
     const layers = [...constraintLayers, ...customLayers]
 

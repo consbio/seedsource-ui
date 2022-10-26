@@ -5,7 +5,7 @@ import LatitudeConstraint from './containers/LatitudeConstraint'
 import LongitudeConstraint from './containers/LongitudeConstraint'
 import DistanceConstraint from './containers/DistanceConstraint'
 import ShapefileConstraint from './containers/ShapefileConstraint'
-import {getServiceName} from './utils'
+import { getServiceName } from './utils'
 
 interface RuntimeConfig {
   title: string
@@ -26,7 +26,7 @@ export interface LayerConfig {
   url: string | ((state: any) => string)
   style?: any
   zIndex?: number
-  legendUrl?: string | ((state: any) => string)
+  legendUrl?: (state: any) => string
 }
 
 export interface LayerCategory {
@@ -402,7 +402,8 @@ if (!window.SEEDSOURCE_UI_CONFIG) {
               show: () => true,
               url: ({ runConfiguration: { region, objective, climate } }) =>
                 `/tiles/${getServiceName(name, objective, climate, region)}/{z}/{x}/{y}.png`,
-              legendUrl: ({ runConfiguration: { region, objective, climate } }) => `/arcgis/rest/services/${getServiceName(name, objective, climate, region)}/MapServer/legend`,
+              legendUrl: ({ runConfiguration: { region, objective, climate } }) =>
+                `/arcgis/rest/services/${getServiceName(name, objective, climate, region)}/MapServer/legend`,
             },
           ]
         }),

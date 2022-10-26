@@ -589,13 +589,9 @@ class Map extends React.Component<MapProps> {
         elements: legend.legend,
       }
     })
-    const legendOrder = layers
-      .filter(layer =>
-        typeof config.layers[layer].show === 'boolean' ? config.layers[layer].show : config.layers[layer].show(state),
-      )
-      .map(layer => {
-        return layer.replace('variable-', '')
-      })
+    const legendOrder = layers.map(layer => {
+      return layer.replace('variable-', '')
+    })
 
     const orderedMapLegends = legendOrder
       .map(name => mapLegends.find((el: any) => el.label === name || (el.label === 'Match' && name === 'results')))

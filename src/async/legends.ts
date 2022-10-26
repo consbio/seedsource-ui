@@ -30,16 +30,10 @@ export default (store: any) => {
           let url
           switch (typeof legendUrl) {
             case 'undefined':
-              url = ''
-              break
-            case 'string':
-              url = legendUrl
-              break
+              return
             default:
               url = legendUrl(store.getState())
           }
-
-          if (url === '') return
 
           return io
             .get(url)

@@ -26,7 +26,7 @@ export interface LayerConfig {
   url: string | ((state: any) => string)
   style?: any
   zIndex?: number
-  legendUrl?: string | ((state: any) => string)
+  legendUrl?: (state: any) => string
 }
 
 export interface LayerCategory {

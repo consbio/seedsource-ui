@@ -36,6 +36,4 @@ const ObjectiveStep = ({ number, active, objective }: ObjectiveStepProps) => {
   )
 }
 
-ObjectiveStep.shouldRender = () => true
-
 export default connector(ObjectiveStep)

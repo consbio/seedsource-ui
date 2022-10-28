@@ -106,8 +106,6 @@ ClimateStep.defaultProps = {
   siteHelpText: t`When should trees be best adapted to the planting site?`,
 }
 
-ClimateStep.shouldRender = () => true
-
 export default connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
     const { climate } = runConfiguration

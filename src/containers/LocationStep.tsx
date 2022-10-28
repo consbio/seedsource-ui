@@ -54,8 +54,6 @@ const LocationStep = ({ objective, number, elevation }: LocationStepProps) => {
   )
 }
 
-LocationStep.shouldRender = () => true
-
 LocationStep.defaultProps = {
   elevation: null,
 }

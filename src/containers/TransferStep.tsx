@@ -95,6 +95,4 @@ const TransferStep = ({ number, active, objective, method, center, onCenterChang
   )
 }
 
-TransferStep.shouldRender = () => true
-
 export default connector(TransferStep)

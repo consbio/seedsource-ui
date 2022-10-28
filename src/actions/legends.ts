@@ -23,15 +23,11 @@ export const receiveLayersLegend = (json: any) => {
     })
     .filter((number: any) => !Number.isNaN(number))
 
-  const action = {
-    type: RECEIVE_LAYERS_LEGEND,
-    legend: json.layers[0].legend,
-    layerName: json.layers[0].layerName,
-  }
+  const { layerName } = json.layers[0]
 
-  action.legend = json.layers[0].legend.map((element: any) => {
+  const legend = json.layers[0].legend.map((element: any) => {
     const number = Number.parseFloat(element.label)
-    const variableConfig = variables.find(variable => variable.name === action.layerName)
+    const variableConfig = variables.find(variable => variable.name === layerName)
     let label = ''
     if (json.layers[0].layerName === 'data') {
       if (number === Math.min(...values)) {
@@ -49,5 +45,9 @@ export const receiveLayersLegend = (json: any) => {
     }
   })
 
-  return action
+  return {
+    type: REQUEST_LAYERS_LEGEND,
+    legend,
+    layerName,
+  }
 }

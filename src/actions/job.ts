@@ -81,8 +81,7 @@ export const runJob = (configuration: any) => {
             return {
               name,
               fn,
-              // @ts-ignore (chained filter function above addresses error)
-              limit: { min: value - transfer, max: value + transfer },
+              limit: { min: value! - transfer!, max: value! + transfer! },
             }
           }),
         ...traits.map((item: any) => {

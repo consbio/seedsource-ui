@@ -46,9 +46,7 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
   }
 
   componentDidMount() {
-    if (this.nameRef.current) {
-      this.nameRef.current.focus()
-    }
+    this.nameRef.current?.focus()
   }
 
   validateName = () => {
@@ -112,10 +110,9 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
 
   onSave = () => {
     const { customFunction, deactivateModal, createFunction, setFunction } = this.props
-    const { validateName, validateFunc } = this
     const { name, func } = this.state
 
-    if (!validateName() || !validateFunc()) {
+    if (!this.validateName() || !this.validateFunc()) {
       return
     }
 
@@ -188,13 +185,7 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
             onChange={e => {
               // strips everything not understood by the parser except spaces
               const formatted = e.target.value.replace(/[^A-Za-z0-9 */_+\-(.)]/g, '')
-              this.setState({ func: formatted })
-            }}
-            onKeyPress={e => {
-              if (e.key === 'Enter') {
-                return onSave()
-              }
-              this.setState({ funcError: '' })
+              this.setState({ func: formatted, funcError: '' })
             }}
           />
         </label>

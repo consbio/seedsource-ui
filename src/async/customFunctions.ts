@@ -4,6 +4,7 @@ import { setFunctionValue } from '../actions/customFunctions'
 import parser, { getNames } from '../parser'
 import { getServiceName } from '../utils'
 import { urlEncode } from '../io'
+import { CustomFunction } from '../reducers/customFunctions'
 
 const valueSelect = ({ runConfiguration }: any) => {
   const { customFunctions, objective, climate, region } = runConfiguration
@@ -18,7 +19,7 @@ const valueSelect = ({ runConfiguration }: any) => {
     climate,
     region,
     point,
-    customFunctions: customFunctions.map((cf: any) => ({ id: cf.id, func: cf.func, selected: cf.selected })),
+    customFunctions: customFunctions.map((cf: CustomFunction) => ({ id: cf.id, func: cf.func, selected: cf.selected })),
   }
 }
 

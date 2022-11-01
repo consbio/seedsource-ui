@@ -71,8 +71,6 @@ const RegionStep = ({ number, region, regionMethod, onChange }: RegionStepProps)
   )
 }
 
-RegionStep.shouldRender = () => true
-
 const container = connector(RegionStep)
 
 export default container

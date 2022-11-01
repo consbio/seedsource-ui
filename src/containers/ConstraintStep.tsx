@@ -51,8 +51,6 @@ const ConstraintStep = ({ number, constraints, onChange }: ConstraintStepProps) 
   )
 }
 
-ConstraintStep.shouldRender = () => true
-
 export default connect(
   ({ runConfiguration }: { runConfiguration: any }) => {
     const { constraints } = runConfiguration

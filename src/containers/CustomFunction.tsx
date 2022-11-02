@@ -35,7 +35,7 @@ const Function = ({ customFunction, activateModal, onTransferChange, onToggleFun
       <td>
         <a
           type="button"
-          className="icon-more-18"
+          className="icon-pencil-18"
           style={{ marginTop: '3px' }}
           onClick={e => {
             e.stopPropagation()

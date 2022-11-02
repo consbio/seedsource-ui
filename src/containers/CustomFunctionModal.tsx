@@ -23,7 +23,7 @@ interface CustomFunctionModalState {
   name: string
   func: string
   nameError: string
-  funcError: string
+  funcError: any
 }
 
 class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunctionModalState> {
@@ -62,12 +62,31 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
     const { func } = this.state
     let functionVariables: string[] = []
     const setGenericError = () => this.setState({ funcError: t`There was an error with your function.` })
+    const setParsedError = (err: string) => {
+      const errorLines = err.split('\n')
+      if (errorLines.length >= 3) {
+        const errorText = errorLines[1]
+        const errorStart = errorLines[2].length
+        return this.setState({
+          funcError: (
+            <span>
+              {t`Error begins at the underlined character`}:&nbsp;
+              {errorText.slice(0, errorStart - 1)}
+              <strong>
+                <u className="error">{errorText.slice(errorStart - 1, errorStart)}</u>
+              </strong>
+              {errorText.slice(errorStart)}
+            </span>
+          ),
+        })
+      }
+      setGenericError()
+    }
 
     try {
       functionVariables = getNames(func)
     } catch (err) {
-      console.error(err)
-      setGenericError()
+      setParsedError(err.message)
       return false
     }
 
@@ -100,8 +119,7 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
       })
       parser(func, context)
     } catch (err) {
-      console.error(err)
-      setGenericError()
+      setParsedError(err.message)
       return false
     }
 
@@ -159,9 +177,9 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
         onHide={deactivateModal}
         active
       >
+        <div className="error">{nameError}</div>
         <label>
           {t`Name`}
-          <div className="error">{nameError}</div>
           <input
             value={name}
             ref={this.nameRef}
@@ -176,15 +194,15 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
             }}
           />
         </label>
+        <div className="error">{funcError}</div>
         <label>
           {t`Function`}
-          <div className="error">{funcError}</div>
           <textarea
             value={func}
             ref={this.funcRef}
             onChange={e => {
               // strips everything not understood by the parser except spaces
-              const formatted = e.target.value.replace(/[^A-Za-z0-9 */_+\-(.)]/g, '')
+              const formatted = e.target.value.replace(/[^A-Za-z0-9 */_+\-\n(.)]/g, '')
               this.setState({ func: formatted, funcError: '' })
             }}
           />

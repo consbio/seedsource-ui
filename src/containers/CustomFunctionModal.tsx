@@ -38,14 +38,20 @@ class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunc
     this.nameRef = createRef()
     this.funcRef = createRef()
     this.state = {
-      name: cf ? cf.name : '',
-      func: cf ? cf.func : '',
+      name: '',
+      func: '',
       nameError: '',
       funcError: '',
     }
   }
 
   componentDidMount() {
+    const { customFunction } = this.props
+    if (customFunction) {
+      const { name, func } = customFunction
+      this.setState({ name, func })
+    }
+
     this.nameRef.current?.focus()
   }
 

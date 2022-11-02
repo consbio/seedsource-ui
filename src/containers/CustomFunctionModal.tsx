@@ -27,31 +27,18 @@ interface CustomFunctionModalState {
 }
 
 class CustomFunctionModal extends Component<CustomFunctionModalProps, CustomFunctionModalState> {
-  nameRef: React.RefObject<HTMLInputElement>
+  nameRef: React.RefObject<HTMLInputElement> = createRef()
 
-  funcRef: React.RefObject<HTMLTextAreaElement>
+  funcRef: React.RefObject<HTMLTextAreaElement> = createRef()
 
-  constructor(props: CustomFunctionModalProps) {
-    super(props)
-    const { customFunction: cf } = this.props
-
-    this.nameRef = createRef()
-    this.funcRef = createRef()
-    this.state = {
-      name: '',
-      func: '',
-      nameError: '',
-      funcError: '',
-    }
+  state = {
+    name: this.props.customFunction?.name || '',
+    func: this.props.customFunction?.func || '',
+    nameError: '',
+    funcError: '',
   }
 
   componentDidMount() {
-    const { customFunction } = this.props
-    if (customFunction) {
-      const { name, func } = customFunction
-      this.setState({ name, func })
-    }
-
     this.nameRef.current?.focus()
   }
 

@@ -36,7 +36,7 @@ export const setFunction = (id: string, name: string, func: string) => {
   }
 }
 
-export const setFunctionTransfer = (id: string, transfer: number) => {
+export const setFunctionTransfer = (id: string, transfer: number | null) => {
   return {
     type: SET_FUNCTION_TRANSFER,
     id,

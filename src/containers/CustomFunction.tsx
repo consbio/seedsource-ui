@@ -7,7 +7,7 @@ import { setFunctionTransfer, toggleFunction } from '../actions/customFunctions'
 
 const connector = connect(null, (dispatch: (action: any) => any) => {
   return {
-    onTransferChange: (id: string, transfer: string) => dispatch(setFunctionTransfer(id, parseFloat(transfer))),
+    onTransferChange: (id: string, transfer: number | null) => dispatch(setFunctionTransfer(id, transfer)),
     onToggleFunction: (id: string) => dispatch(toggleFunction(id)),
   }
 })
@@ -30,7 +30,16 @@ const Function = ({ customFunction, activateModal, onTransferChange, onToggleFun
       </td>
       <td>{value ? parseFloat(value).toFixed(2) : ''}</td>
       <td>
-        <EditableLabel value={transfer || '--'} onChange={(newValue: string) => onTransferChange(id, newValue)} />
+        <EditableLabel
+          value={transfer || '--'}
+          onChange={(newValue) => {
+            const trnsfr = parseFloat(newValue)
+            if (Number.isNaN(trnsfr)) {
+              return onTransferChange(id, null)
+            }
+            onTransferChange(id, trnsfr)
+          }}
+        />
       </td>
       <td>
         <a

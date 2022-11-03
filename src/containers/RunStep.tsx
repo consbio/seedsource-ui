@@ -38,7 +38,9 @@ const configurationCanRun = ({
     variables.length > 0 && variables.every(item => item.value !== null && item.isFetching === false)
   const traitsComplete = traits.length > 0 && traits.every(item => item.value !== null)
   const customFunctionsComplete =
-    customFunctions.length > 0 && customFunctions.some(cf => cf.selected && cf.value && cf.transfer)
+    customFunctions.length > 0 &&
+    customFunctions.some(cf => cf.selected) &&
+    customFunctions.every(cf => (cf.selected ? cf.value && cf.transfer : true))
 
   return variablesComplete || traitsComplete || customFunctionsComplete
 }

@@ -26,6 +26,4 @@ const TraitStep = ({ number, method }: TraitStepProps) => {
   )
 }
 
-TraitStep.shouldRender = ({ runConfiguration }: { runConfiguration: any }) => runConfiguration.method === 'trait'
-
 export default connector(TraitStep)

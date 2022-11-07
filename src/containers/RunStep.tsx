@@ -128,8 +128,6 @@ type RunStepState = {
 }
 
 class RunStep extends React.Component<RunStepProps, RunStepState> {
-  static shouldRender = () => true
-
   fileInputRef?: RefObject<HTMLInputElement>
 
   constructor(props: RunStepProps) {

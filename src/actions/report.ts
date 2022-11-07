@@ -50,6 +50,7 @@ export const createReport = (name: string) => {
           defaultTransfer: traitConfig.transfer,
         })
       }),
+      customFunctions: configuration.customFunctions.filter((cf: any) => cf.selected),
     })
 
     const data = {

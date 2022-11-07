@@ -10,7 +10,7 @@ const connector = connect(
     let { availableSpecies } = runConfiguration
     const { species, method } = runConfiguration
 
-    if (method === 'function') {
+    if (method === 'trait') {
       let functionSpecies: any[]
       if (functions.length === 1) {
         functionSpecies = functions[0].species

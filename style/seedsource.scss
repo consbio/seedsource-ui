@@ -37,7 +37,7 @@ $spacings: 5 10 15;
 }
 
 $icon-sizes: 12 16 18;
-$icons: eye eye-closed crop contrast save load file trash clock chevron-top chevron-bottom share;
+$icons: eye eye-closed crop contrast save load file trash clock chevron-top chevron-bottom share pencil;
 
 @each $icon in $icons {
   @each $size in $icon-sizes {
@@ -859,6 +859,38 @@ tr.visible .visibility-toggle, .visibility-toggle:hover {
     transform: scale(1.08);
     transition: transform 0.1s ease-in-out;
   }
+}
+
+.custom-function-modal {
+  label {
+    line-height: 32px;
+  }
+
+  input, textarea {
+    display: block;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  textarea {
+    height: 160px;
+  }
+
+  input {
+    height: 28px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.error {
+  color: red;
 }
 
 

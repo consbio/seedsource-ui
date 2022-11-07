@@ -28,6 +28,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'after-used' }],
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'error',
+    'react/state-in-constructor': 'off',
+    'react/destructuring-assignment': ['error', 'always', { ignoreClassFields: true }],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'error',
     'no-unused-expressions': 'off',

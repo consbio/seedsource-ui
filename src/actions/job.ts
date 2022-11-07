@@ -4,6 +4,7 @@ import { setError } from './error'
 import { selectTab } from './tabs'
 import { UserSite } from '../reducers/runConfiguration'
 import { setUserSiteScore } from './point'
+import type { CustomFunction } from '../reducers/customFunctions'
 
 export const START_JOB = 'START_JOB'
 export const FAIL_JOB = 'FAIL_JOB'
@@ -42,7 +43,17 @@ export const runJob = (configuration: any) => {
   const { functions, constraints: constraintsConfig } = config
 
   return (dispatch: (action: any) => any) => {
-    const { variables, traits, objective, climate, region, constraints, userSites, customMode } = configuration
+    const {
+      variables,
+      traits,
+      objective,
+      climate,
+      region,
+      constraints,
+      userSites,
+      customMode,
+      customFunctions,
+    } = configuration
 
     /* Run the tool against the seedlot climate when looking for seedlots, otherwise run against the
      * planting site climate.
@@ -62,22 +73,41 @@ export const runJob = (configuration: any) => {
           limit: { min: value - transfer, max: value + transfer },
         }
       }),
-      traits: traits.map((item: any) => {
-        const { name, value, transfer: customTransfer } = item
-        const traitConfig = functions.find((trait: any) => trait.name === name)
-        const { transfer: defaultTransfer, fn } = traitConfig
-        const transfer = customTransfer === null ? defaultTransfer : customTransfer
-        return {
-          name,
-          fn,
-          limit: { min: value - transfer, max: value + transfer },
-        }
-      }),
+      functions: [
+        ...customFunctions
+          .filter((cf: CustomFunction) => cf.selected && cf.value && cf.transfer)
+          .map((cf: CustomFunction) => {
+            const { name, func: fn, value, transfer } = cf
+            return {
+              name,
+              fn,
+              limit: { min: value! - transfer!, max: value! + transfer! },
+            }
+          }),
+        ...traits.map((item: any) => {
+          const { name, value, transfer: customTransfer } = item
+          const traitConfig = functions.find((trait: any) => trait.name === name)
+          const { transfer: defaultTransfer, fn } = traitConfig
+          const transfer = customTransfer === null ? defaultTransfer : customTransfer
+          return {
+            name,
+            fn,
+            limit: { min: value - transfer, max: value + transfer },
+          }
+        }),
+      ],
       constraints: constraints.map(({ name, values }: { name: any; values: any }) => {
         const { constraint, serialize } = constraintsConfig.objects[name]
         return { name: constraint, args: serialize(configuration, values) }
       }),
-    } as { region: string; year: string; variables: any; traits: any; constraints: any; points?: any }
+    } as {
+      region: string
+      year: string
+      variables: any
+      functions: any
+      constraints: any
+      points?: any
+    }
 
     if (userSites.length) {
       inputs.points = {

@@ -15,7 +15,7 @@ type TraitStepProps = ConnectedProps<typeof connector> & {
 }
 
 const TraitStep = ({ number, method }: TraitStepProps) => {
-  if (method !== 'function') {
+  if (method !== 'trait') {
     return null
   }
 

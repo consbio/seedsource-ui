@@ -22,10 +22,5 @@ export default (expr: string, context: any = {}) => {
     ...context,
     math_e: Math.E,
   }
-  console.log('...')
-  console.log('parser.yy.context', parser.yy.context)
-  console.log('???')
-  console.log('parser.parse(expr)', parser.parse(expr))
-  console.log('after parse')
   return parser.parse(expr)
 }

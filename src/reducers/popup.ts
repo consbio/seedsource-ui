@@ -67,7 +67,7 @@ export default (state: any = defaultState, action: any) => {
         values: [...state.values, ...action.variables.map((variable: string) => ({ name: variable, value: null }))],
       }
     case SELECT_METHOD:
-      if (action.method === 'function') {
+      if (action.method !== 'seedzone' && action.method !== 'custom') {
         return { ...state, values: [] }
       }
       return state

@@ -8,7 +8,7 @@ import {
   RECEIVE_POPUP_REGION,
   RECEIVE_POPUP_ZONES,
 } from '../actions/popup'
-import { REMOVE_VARIABLE, ADD_VARIABLES } from '../actions/variables'
+import { REMOVE_VARIABLE, ADD_VARIABLES, SELECT_METHOD } from '../actions/variables'
 import { LOAD_CONFIGURATION } from '../actions/saves'
 
 const defaultState = {
@@ -66,6 +66,11 @@ export default (state: any = defaultState, action: any) => {
         ...state,
         values: [...state.values, ...action.variables.map((variable: string) => ({ name: variable, value: null }))],
       }
+    case SELECT_METHOD:
+      if (action.method !== 'seedzone' && action.method !== 'custom') {
+        return { ...state, values: [] }
+      }
+      return state
 
     case RECEIVE_POPUP_ELEVATION:
       return { ...state, elevation: action.elevation }

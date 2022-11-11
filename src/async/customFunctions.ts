@@ -32,58 +32,58 @@ export default (store: any) => {
       return
     }
 
-    // If the only change is to customFunctions, we only need to fetch values for changed customFunctions
+    // If the only change is to customFunctions, we only need to fetch values for new or changed customFunctions
     const customFunctionsOnly =
       JSON.stringify({ ...state, customFunctions: null }) ===
       JSON.stringify({ ...previousState, customFunctions: null })
     if (customFunctionsOnly) {
       customFunctions = customFunctions.filter((cf: any) => {
-        if (cf.func && cf.selected) {
-          const prevFunc = previousState.customFunctions.find((pf: any) => pf.id === cf.id)
-          if (prevFunc) {
-            const { id, func, selected } = cf
-            return JSON.stringify(prevFunc) !== JSON.stringify({ id, func, selected })
-          }
+        const prevFunc = previousState.customFunctions.find((pf: any) => pf.id === cf.id)
+        if (prevFunc) {
+          const { id, func, selected } = cf
+          return JSON.stringify(prevFunc) !== JSON.stringify({ id, func, selected })
         }
-        return false
+        return true
       })
     }
 
     customFunctions.forEach((cf: any) => {
       dispatch(setFunctionValue(cf.id, null))
 
-      const variables = getNames(cf.func)
-      Promise.all(
-        variables.map(variable => {
-          if (variable === 'LAT') {
-            return Promise.resolve([variable, point.y])
-          }
+      if (cf.selected) {
+        const variables = getNames(cf.func)
+        Promise.all(
+          variables.map(variable => {
+            if (variable === 'LAT') {
+              return Promise.resolve([variable, point.y])
+            }
 
-          const serviceName = getServiceName(variable, objective, climate, region)
-          const url = `/arcgis/rest/services/${serviceName}/MapServer/identify/?${urlEncode({
-            f: 'json',
-            tolerance: 2,
-            imageDisplay: '1600,1031,96',
-            geometryType: 'esriGeometryPoint',
-            mapExtent: '0,0,0,0',
-            geometry: JSON.stringify(point),
-          })}`
-          return io
-            .get(url)
-            .then(response => response.json())
-            .then(json => [variable, json.results[0].attributes['Pixel value']])
-        }),
-      )
-        .then(values => {
-          const context: any = {}
-          values.forEach(([variable, value]) => {
-            context[variable] = value
+            const serviceName = getServiceName(variable, objective, climate, region)
+            const url = `/arcgis/rest/services/${serviceName}/MapServer/identify/?${urlEncode({
+              f: 'json',
+              tolerance: 2,
+              imageDisplay: '1600,1031,96',
+              geometryType: 'esriGeometryPoint',
+              mapExtent: '0,0,0,0',
+              geometry: JSON.stringify(point),
+            })}`
+            return io
+              .get(url)
+              .then(response => response.json())
+              .then(json => [variable, json.results[0].attributes['Pixel value']])
+          }),
+        )
+          .then(values => {
+            const context: any = {}
+            values.forEach(([variable, value]) => {
+              context[variable] = value
+            })
+            dispatch(setFunctionValue(cf.id, parser(cf.func, context)))
           })
-          dispatch(setFunctionValue(cf.id, parser(cf.func, context)))
-        })
-        .catch(() => {
-          dispatch(setFunctionValue(cf.id, null))
-        })
+          .catch(() => {
+            dispatch(setFunctionValue(cf.id, null))
+          })
+      }
     })
   })
 }

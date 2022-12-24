@@ -1,6 +1,6 @@
 {
   "name": "seedsource-ui",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "React component library for seedsource-based applications (e.g., Seedlot Selection Tool)",
   "module": "./lib/index.js",
   "main": "./lib/index.js",

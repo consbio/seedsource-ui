@@ -902,7 +902,7 @@ class Map extends React.Component<MapProps> {
       const url = typeof layer.url === 'string' ? layer.url : layer.url(state)
       const displayedLayer = this.displayedVectorLayers[index]
       if (displayedLayer.url !== url) {
-        this.displayedVectorLayers[index].options.vectorTileLayerStyles.data = { ...layer.style }
+        this.displayedVectorLayers[index].options.vectorTileLayerStyles = { ...layer.style }
         this.displayedVectorLayers[index].setUrl(url)
       }
     })
